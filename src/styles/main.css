@@ -1,3 +1,12 @@
 #site {
-  background: #ade6d0;
+  background: #f5e3e3;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #292828;
+}
+#site #navbar {
+  background: #0d7ac4;
+  border-color: #1579bb;
+}
+#site #navbar a {
+  color: white;
 }
