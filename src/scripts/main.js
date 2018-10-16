@@ -15,6 +15,14 @@ function fillContent() {
         $('#content').load('src/html/partials/home.html');
     } else if(containsSubstring(path, 'games.html')) {
         $('#content').load('src/html/partials/games-list.html')
+    } else if(containsSubstring(path, 'contact.html')) {
+        $('#content').load('src/html/partials/contact-info.html');
+    } else if(containsSubstring(path, 'about-me.html')) {
+
+    } else if(containsSubstring(path, 'music.html')) {
+
+    } else if(containsSubstring(path, 'projects.html')) {
+        
     }
 }
 
