@@ -3,7 +3,21 @@ $(document).ready(function () {
 });
 
 function init() {
-    console.log('Main');
+    console.log('Main loaded');
     $('#navigation').load('src/html/partials/nav.html');
-    $('#content').load('src/html/partials/home.html');
+    fillContent();
+
+}
+
+function fillContent() {
+    var path = window.location.pathname;
+    if(containsSubstring(path, 'index.html')) {
+        $('#content').load('src/html/partials/home.html');
+    } else if(containsSubstring(path, 'games.html')) {
+        
+    }
+}
+
+function containsSubstring(container, substring) {
+    return container.indexOf(substring) !== -1;
 }
