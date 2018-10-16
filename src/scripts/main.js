@@ -11,10 +11,10 @@ function init() {
 
 function fillContent() {
     var path = window.location.pathname;
-    if(containsSubstring(path, 'index.html')) {
+    if(containsSubstring(path, 'index.html') || path === '/') {
         $('#content').load('src/html/partials/home.html');
     } else if(containsSubstring(path, 'games.html')) {
-        
+        $('#content').load('src/html/partials/games-list.html')
     }
 }
 
