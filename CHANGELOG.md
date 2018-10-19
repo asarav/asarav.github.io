@@ -1,3 +1,6 @@
+# Version 0.1.0
+* Add games and links to site. Add additional pages for projects and information.
+
 # Version 0.0.1
 * Add changelog and start using npm for dev dependencies.
 * Update styles to use less. Compile less files into css.
