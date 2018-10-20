@@ -51,7 +51,7 @@
         color: white;
         margin-top: -20px;
         &:hover {
-            opacity: 0.9;
+            opacity: 1;
             transition: opacity 0.5s ease-in;
         }
         .under-construction {
@@ -65,13 +65,26 @@
     .tile-list {
         .tile {
             background-size: 100% 100%;
-            opacity: 0.5;
+            opacity: 0.75;
             text-align: center;
+            height: 400px;
+            margin-top: 1px;
+            margin-bottom: 1px;
             &:hover {
                 opacity: 1;
+                height: 405px;
+                transition: opacity 0.5s ease-in-out, height 0.8s ease-in-out, border 0.5s ease-in-out;
+                border: 2px solid black;
+            }
+            .tile-content {
+                label {
+                    font-size: 18px;
+                    color: white;
+                    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                }
             }
             &.games-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpeg')
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpg')
             }
             &.contact-tile {
                 background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpeg')
