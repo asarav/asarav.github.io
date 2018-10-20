@@ -67,6 +67,12 @@
 #site .tile-list .tile:hover {
   opacity: 1;
 }
+#site .tile-list .tile.games-tile {
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpeg');
+}
+#site .tile-list .tile.contact-tile {
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpeg');
+}
 #site #footer {
   background-image: linear-gradient(to left, #0f6b5c, #085c3c);
   border-color: #0d5f96;
