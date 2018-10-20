@@ -70,6 +70,7 @@
             height: 400px;
             margin-top: 1px;
             margin-bottom: 1px;
+            text-decoration: none;
             &:hover {
                 opacity: 1;
                 height: 405px;
@@ -77,10 +78,11 @@
                 border: 2px solid black;
             }
             .tile-content {
-                label {
-                    font-size: 18px;
-                    color: white;
-                    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                font-size: 20px;
+                color: white;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                .tile-explanation {
+                    font-size: 14px;
                 }
             }
             &.games-tile {
@@ -100,5 +102,6 @@
         position: fixed;
         width: 100%;
         bottom: 0;
+        opacity: 0.95;
     }
 }

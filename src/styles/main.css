@@ -66,6 +66,7 @@
   height: 400px;
   margin-top: 1px;
   margin-bottom: 1px;
+  text-decoration: none;
 }
 #site .tile-list .tile:hover {
   opacity: 1;
@@ -73,10 +74,13 @@
   transition: opacity 0.5s ease-in-out, height 0.8s ease-in-out, border 0.5s ease-in-out;
   border: 2px solid black;
 }
-#site .tile-list .tile .tile-content label {
-  font-size: 18px;
+#site .tile-list .tile .tile-content {
+  font-size: 20px;
   color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#site .tile-list .tile .tile-content .tile-explanation {
+  font-size: 14px;
 }
 #site .tile-list .tile.games-tile {
   background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpg');
@@ -92,4 +96,5 @@
   position: fixed;
   width: 100%;
   bottom: 0;
+  opacity: 0.95;
 }
