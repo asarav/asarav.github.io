@@ -1,18 +1,23 @@
 #site {
     background-image: url("https://asarav.github.io/src/images/wood-background.jpeg");
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(41, 40, 40);
+    color: rgb(222, 242, 243);
 
     #navbar {
         background-image: linear-gradient(to right, rgb(17, 53, 47),rgb(7, 49, 25));
         border-color: rgb(7, 49, 25);
-        opacity: 0.9;
+        border-radius: 1px;
+        opacity: 0.85;
         .container-fluid {
             padding-right: 0px;
             .navbar-header {
                 font-family: Brush Script MT, Brush Script Std, cursive;
                 .navbar-brand {
                     font-size: 40px;
+                    &:hover {
+                        color: rgb(168, 177, 218);
+                        transition: color 0.5s ease-in;
+                    }
                 }
             }
             .navbar-collapse {
@@ -35,6 +40,41 @@
         &:hover {
             opacity: 1.0;
             transition: opacity 0.5s ease-in;
+        }
+    }
+
+    .home-top {
+        background: rgb(5, 77, 61);
+        opacity: 0.7;
+        height: 400px;
+        text-align: center;
+        color: white;
+        margin-top: -20px;
+        &:hover {
+            opacity: 0.9;
+            transition: opacity 0.5s ease-in;
+        }
+        .under-construction {
+            height: 300px;
+            background-image: url('https://ps.w.org/under-construction-page/assets/screenshot-2.png?rev=1840052');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+
+    .tile-list {
+        .tile {
+            background-size: 100% 100%;
+            opacity: 0.5;
+            text-align: center;
+            &:hover {
+                opacity: 1;
+            }
+            &.games-tile {
+            }
+            &.contact-tile {
+    
+            }
         }
     }
 
