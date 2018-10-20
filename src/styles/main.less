@@ -1,32 +1,50 @@
 #site {
-    background: rgb(245, 227, 227);
+    background-image: url("https://asarav.github.io/src/images/wood-background.jpeg");
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(41, 40, 40);
 
     #navbar {
-        background: rgb(13, 122, 196);
-        border-color: rgb(21, 121, 187);
+        background-image: linear-gradient(to right, rgb(17, 53, 47),rgb(7, 49, 25));
+        border-color: rgb(7, 49, 25);
+        opacity: 0.9;
+        .container-fluid {
+            padding-right: 0px;
+            .navbar-header {
+                font-family: Brush Script MT, Brush Script Std, cursive;
+                .navbar-brand {
+                    font-size: 40px;
+                }
+            }
+            .navbar-collapse {
+                padding-right: 0px;
+                ul {
+                    float: right;
+                    a:hover {
+                        color: white;
+                        background: rgb(50, 104, 14);
+                        border-radius: 10px;
+                        transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;                        
+                    }
+                }
+            }
+        }
         a {
             color: white;
         }
-        .navbar-collapse {
-            padding-right: 0px;
-            ul {
-                float: right;
-                a:hover {
-                    color: rgb(13, 122, 196);
-                    background: white;
-                    border-radius: 10px;
-                    transition: background 0.5s ease-in;
-                }
-            }
+
+        &:hover {
+            opacity: 1.0;
+            transition: opacity 0.5s ease-in;
         }
     }
 
     #footer {
-        background: rgb(13, 122, 196);
-        border-color: rgb(21, 121, 187);
+        background-image: linear-gradient(to left, rgb(15, 107, 92), rgb(8, 92, 60)) ;
+        border-color: rgb(13, 95, 150);
         font-size: 20px;
         color: white;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
     }
 }

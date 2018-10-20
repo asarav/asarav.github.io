@@ -1,30 +1,47 @@
 #site {
-  background: #f5e3e3;
+  background-image: url("https://asarav.github.io/src/images/wood-background.jpeg");
   font-family: Arial, Helvetica, sans-serif;
   color: #292828;
 }
 #site #navbar {
-  background: #0d7ac4;
-  border-color: #1579bb;
+  background-image: linear-gradient(to right, #11352f, #073119);
+  border-color: #073119;
+  opacity: 0.9;
+}
+#site #navbar .container-fluid {
+  padding-right: 0px;
+}
+#site #navbar .container-fluid .navbar-header {
+  font-family: Brush Script MT, Brush Script Std, cursive;
+}
+#site #navbar .container-fluid .navbar-header .navbar-brand {
+  font-size: 40px;
+}
+#site #navbar .container-fluid .navbar-collapse {
+  padding-right: 0px;
+}
+#site #navbar .container-fluid .navbar-collapse ul {
+  float: right;
+}
+#site #navbar .container-fluid .navbar-collapse ul a:hover {
+  color: white;
+  background: #32680e;
+  border-radius: 10px;
+  transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
 }
 #site #navbar a {
   color: white;
 }
-#site #navbar .navbar-collapse {
-  padding-right: 0px;
-}
-#site #navbar .navbar-collapse ul {
-  float: right;
-}
-#site #navbar .navbar-collapse ul a:hover {
-  color: #0d7ac4;
-  background: white;
-  border-radius: 10px;
-  transition: background 0.5s ease-in;
+#site #navbar:hover {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
 }
 #site #footer {
-  background: #0d7ac4;
-  border-color: #1579bb;
+  background-image: linear-gradient(to left, #0f6b5c, #085c3c);
+  border-color: #0d5f96;
   font-size: 20px;
   color: white;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
