@@ -5,6 +5,7 @@ $(document).ready(function () {
 function init() {
     console.log('Main loaded');
     $('#navigation').load('src/html/partials/nav.html');
+    $('#footer').load('src/html/partials/footer.html');
     fillContent();
 
 }
@@ -20,9 +21,9 @@ function fillContent() {
     } else if(containsSubstring(path, 'about-me.html')) {
 
     } else if(containsSubstring(path, 'music.html')) {
-
+        $('#content').load('src/html/partials/music-list.html');
     } else if(containsSubstring(path, 'projects.html')) {
-        
+        $('#content').load('src/html/partials/projects-list.html')
     }
 }
 
