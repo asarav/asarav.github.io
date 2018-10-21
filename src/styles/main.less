@@ -14,6 +14,7 @@
                 font-family: Brush Script MT, Brush Script Std, cursive;
                 .navbar-brand {
                     font-size: 40px;
+                    transition: color 0.5s ease-in;
                     &:hover {
                         color: rgb(168, 177, 218);
                         transition: color 0.5s ease-in;
@@ -24,6 +25,7 @@
                 padding-right: 0px;
                 ul {
                     float: right;
+                    transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;                        
                     a:hover {
                         color: white;
                         background: rgb(50, 104, 14);
@@ -44,13 +46,14 @@
     }
 
     .home-top {
-        background: rgb(5, 77, 61);
-        opacity: 0.7;
+        background-color: rgb(5, 77, 61);
         text-align: center;
         color: white;
         margin-bottom: 0px;
         margin-left: -15px;
         margin-right: -15px;
+        opacity: 0.95;
+        transition: opacity 0.5s ease-in;
         &:hover {
             opacity: 1;
             transition: opacity 0.5s ease-in;
@@ -67,6 +70,7 @@
             margin-top: 1px;
             margin-bottom: 1px;
             text-decoration: none;
+            transition: opacity 0.5s ease-in-out, height 0.8s ease-in-out, border 0.5s ease-in-out;
             &:hover {
                 opacity: 1;
                 height: 405px;
@@ -74,35 +78,35 @@
                 border: 2px solid black;
             }
             .tile-content {
-                font-size: 24px;
-                color: white;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                font-size: 28px;
+                color: rgb(255, 255, 255);
+                text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
                 label {
-                    margin-top: 6.5em;
+                    margin-top: 5em;
                 }
                 .tile-explanation {
-                    font-size: 14px;
+                    font-size: 16px;
                     position: absolute;
                     bottom: 0;
                 }
             }
             &.games-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpg')
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpg');
             }
             &.contact-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpeg')
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpeg');
             }
             &.about-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/about-me.jpeg') 
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/about-me.jpeg');
             }
             &.projects-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/projects.jpg')
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/projects.jpg');
             }
             &.music-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/music.png')
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/music.png');
             }
             &.consumption-tile {
-                background-image: url('https://asarav.github.io/src/images/homepage_tiles/consumption.jpg')
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/consumption.jpg');
             }
         }
     }

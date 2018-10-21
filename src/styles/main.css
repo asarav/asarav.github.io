@@ -17,6 +17,7 @@
 }
 #site #navbar .container-fluid .navbar-header .navbar-brand {
   font-size: 40px;
+  transition: color 0.5s ease-in;
 }
 #site #navbar .container-fluid .navbar-header .navbar-brand:hover {
   color: #a8b1da;
@@ -27,6 +28,7 @@
 }
 #site #navbar .container-fluid .navbar-collapse ul {
   float: right;
+  transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
 }
 #site #navbar .container-fluid .navbar-collapse ul a:hover {
   color: white;
@@ -42,13 +44,14 @@
   transition: opacity 0.5s ease-in;
 }
 #site .home-top {
-  background: #054d3d;
-  opacity: 0.7;
+  background-color: #054d3d;
   text-align: center;
   color: white;
   margin-bottom: 0px;
   margin-left: -15px;
   margin-right: -15px;
+  opacity: 0.95;
+  transition: opacity 0.5s ease-in;
 }
 #site .home-top:hover {
   opacity: 1;
@@ -65,6 +68,7 @@
   margin-top: 1px;
   margin-bottom: 1px;
   text-decoration: none;
+  transition: opacity 0.5s ease-in-out, height 0.8s ease-in-out, border 0.5s ease-in-out;
 }
 #site .tile-list .tile:hover {
   opacity: 1;
@@ -73,15 +77,15 @@
   border: 2px solid black;
 }
 #site .tile-list .tile .tile-content {
-  font-size: 24px;
-  color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 28px;
+  color: #ffffff;
+  text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
 }
 #site .tile-list .tile .tile-content label {
-  margin-top: 6.5em;
+  margin-top: 5em;
 }
 #site .tile-list .tile .tile-content .tile-explanation {
-  font-size: 14px;
+  font-size: 16px;
   position: absolute;
   bottom: 0;
 }
