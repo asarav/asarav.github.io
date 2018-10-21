@@ -1,5 +1,5 @@
 #site #content .games-list .game {
-  background-image: linear-gradient(#007780, #015e64);
+  background-image: url('https://asarav.github.io/src/images/games/game-background.jpg');
   border: solid 5px black;
   border-radius: 2px;
   padding-left: 10px;
