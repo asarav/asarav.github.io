@@ -1,3 +1,6 @@
+# Version 0.2.0
+* Update home page style. Add tiles for all pages. Update theme to be more modern.
+
 # Version 0.1.0
 * Add games and links to site. Add additional pages for projects and information.
 
