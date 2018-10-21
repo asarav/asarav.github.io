@@ -94,6 +94,9 @@
 #site .tile-list .tile.about-tile {
   background-image: url('https://asarav.github.io/src/images/homepage_tiles/about-me.jpeg');
 }
+#site .tile-list .tile.projects-tile {
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/projects.jpg');
+}
 #site #footer {
   background-image: linear-gradient(to left, #0f6b5c, #085c3c);
   border-color: #0d5f96;
