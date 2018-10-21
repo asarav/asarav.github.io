@@ -58,6 +58,7 @@
     }
 
     .tile-list {
+        margin-bottom: 20px;
         .tile {
             background-size: 100% 100%;
             opacity: 0.75;
@@ -76,8 +77,13 @@
                 font-size: 20px;
                 color: white;
                 text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                label {
+                    margin-top: 7em;
+                }
                 .tile-explanation {
                     font-size: 14px;
+                    position: absolute;
+                    bottom: 0;
                 }
             }
             &.games-tile {
@@ -85,6 +91,9 @@
             }
             &.contact-tile {
                 background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpeg')
+            }
+            &.about-tile {
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/about-me.jpeg') 
             }
         }
     }
