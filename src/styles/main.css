@@ -97,6 +97,12 @@
 #site .tile-list .tile.projects-tile {
   background-image: url('https://asarav.github.io/src/images/homepage_tiles/projects.jpg');
 }
+#site .tile-list .tile.music-tile {
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/music.png');
+}
+#site .tile-list .tile.consumption-tile {
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/consumption.jpg');
+}
 #site #footer {
   background-image: linear-gradient(to left, #0f6b5c, #085c3c);
   border-color: #0d5f96;
