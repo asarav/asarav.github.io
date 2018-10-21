@@ -1,0 +1,11 @@
+#site #content .games-list .game {
+  background-image: linear-gradient(#007780, #015e64);
+  border: solid 5px black;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+#site #content .games-list .game .screenshots img {
+  height: 200px;
+}
