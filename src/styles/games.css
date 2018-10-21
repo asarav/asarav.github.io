@@ -1,10 +1,15 @@
 #site #content .games-list .game {
-  background-image: url('https://asarav.github.io/src/images/games/game-background.jpg');
   border: solid 5px black;
   border-radius: 2px;
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 10px;
+}
+#site #content .games-list .game.light {
+  background-image: url('https://asarav.github.io/src/images/games/game-background-light.jpg');
+}
+#site #content .games-list .game.medium-light {
+  background-image: url('https://asarav.github.io/src/images/games/game-background-medium-light.jpg');
 }
 #site #content .games-list .game .screenshots img {
   height: 200px;
