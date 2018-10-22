@@ -1,10 +1,11 @@
 #site {
   background-image: url("https://asarav.github.io/src/images/rain-background.jpeg");
+  background-size: 100% 100%;
   font-family: Arial, Helvetica, sans-serif;
   color: #def2f3;
 }
 #site #navbar {
-  background-image: linear-gradient(to right, #11352f, #073119);
+  background-image: linear-gradient(to right, #506980, #11418a);
   border-color: #073119;
   border-radius: 1px;
   opacity: 0.85;
@@ -33,7 +34,8 @@
 }
 #site #navbar .container-fluid .navbar-collapse ul a:hover {
   color: white;
-  background: #32680e;
+  background: black;
+  border: grey;
   border-radius: 10px;
   transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
 }
@@ -45,18 +47,45 @@
   transition: opacity 0.5s ease-in;
 }
 #site .home-top {
-  background-color: #054d3d;
+  background-image: url("https://asarav.github.io/src/images/rain-background-2.jpeg");
+  background-size: 100% 100%;
   text-align: center;
-  color: white;
-  margin-bottom: 0px;
-  margin-left: -15px;
-  margin-right: -15px;
-  opacity: 0.95;
+  color: #d14949;
+  margin: -20px -15px -1px -15px;
+  padding-top: 60px;
+  height: 650px;
+  opacity: 0.9;
+  border-radius: 0px;
   transition: opacity 0.5s ease-in;
+}
+#site .home-top h1 {
+  font-weight: 700;
+  font-size: 70px;
+  font-family: 'Montserrat Black', sans-serif;
+  font-stretch: condensed;
+}
+#site .home-top .left {
+  text-align: left;
+}
+#site .home-top .right {
+  text-align: right;
 }
 #site .home-top:hover {
   opacity: 1;
   transition: opacity 0.5s ease-in;
+}
+#site .home-top .glyphicon-chevron-down {
+  padding-top: 40px;
+  font-size: 45px;
+  transition: padding-top 0.3s ease-in;
+  cursor: pointer;
+}
+#site .home-top .glyphicon-chevron-down:hover {
+  padding-top: 50px;
+  transition: padding-top 0.3s ease-in;
+}
+#site .home-top p {
+  color: #ebe7d5;
 }
 #site .tile-list {
   margin-bottom: 20px;
@@ -80,7 +109,7 @@
 #site .tile-list .tile .tile-content {
   font-size: 28px;
   color: #ffffff;
-  text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+  text-shadow: -1.5px 0 #131212, 0 1.5px #1d1c1c, 1.5px 0 #131212, 0 -1.5px #1d1c1c;
 }
 #site .tile-list .tile .tile-content label {
   margin-top: 5em;
@@ -109,10 +138,10 @@
   background-image: url('https://asarav.github.io/src/images/homepage_tiles/consumption.jpg');
 }
 #site #footer {
-  background-image: linear-gradient(to left, #0f6b5c, #085c3c);
-  border-color: #0d5f96;
+  background-image: linear-gradient(to left, #497da7, #1c527e);
+  border-color: #0b3857;
   font-size: 20px;
-  color: white;
+  color: #ffffff;
   position: fixed;
   width: 100%;
   bottom: 0;

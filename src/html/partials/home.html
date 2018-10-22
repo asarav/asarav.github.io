@@ -2,11 +2,15 @@
 <base href="https://asarav.github.io/" />
 <!-- <base href="http://localhost/asarav.github.io/" /> -->
 <div class="jumbotron home-top">
-    <h1>Avinash Saravanan</h1>
-    <p>Software Engineer</p>
+    <h1>AVINASH SARAVANAN</h1>
+    <p class="left">Software Engineer</p>
+    <p class="right">Hobby Electric Guitarist</p>
+    <p class="left">Globalization Enthusiast</p>
+    <p class="right">Film Lover</p>
     <p>This website is still under construction</p>
+    <div id="down" class="glyphicon glyphicon-chevron-down"></div>
 </div>
-<div class="tile-list">
+<div class="tile-list" id="tile-list">
     <div class="row">
         <a class="col-xs-6 tile projects-tile" href="src/html/projects.html">
             <div class="tile-content">
@@ -63,3 +67,10 @@
         </a>
     </div>
 </div>
+<script>
+    $("#down").click(function() {
+        $('html,body').animate({
+            scrollTop: $(".tile-list").offset().top
+        }, 'slow');
+    });
+</script>
