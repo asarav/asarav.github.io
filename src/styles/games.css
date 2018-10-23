@@ -1,3 +1,6 @@
+#site #content .jumbotron {
+  background-image: url('https://asarav.github.io/src/images/games/games-top.jpg');
+}
 #site #content .games-list .game {
   border: solid 5px black;
   border-radius: 2px;
@@ -12,6 +15,26 @@
 #site #content .games-list .game.medium-dark {
   background-image: url('https://asarav.github.io/src/images/games/game-background-medium-dark.jpg');
 }
+#site #content .games-list .game .screenshots {
+  margin-bottom: 20px;
+}
 #site #content .games-list .game .screenshots img {
   height: 200px;
+}
+#site #content .games-list .game .game-header {
+  font-size: 30px;
+}
+#site #content .games-list .game .play-now {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  background-image: linear-gradient(#086aeb, #0c59bd);
+  padding: 5px 10px 5px 10px;
+  float: right;
+  margin: 10px 15px 10px 15px;
+}
+#site #content .games-list .game .explanation {
+  background: black;
+  margin-left: -14px;
+  margin-right: -14px;
 }

@@ -46,7 +46,7 @@
   opacity: 1;
   transition: opacity 0.5s ease-in;
 }
-#site .home-top {
+#site .page-top {
   background-image: url("https://asarav.github.io/src/images/rain-background-2.jpeg");
   background-size: 100% 100%;
   text-align: center;
@@ -58,33 +58,34 @@
   border-radius: 0px;
   transition: opacity 0.5s ease-in;
 }
-#site .home-top h1 {
+#site .page-top h1 {
   font-weight: 700;
   font-size: 70px;
   font-family: 'Montserrat Black', sans-serif;
   font-stretch: condensed;
 }
-#site .home-top .left {
+#site .page-top .left {
   text-align: left;
 }
-#site .home-top .right {
+#site .page-top .right {
   text-align: right;
 }
-#site .home-top:hover {
+#site .page-top:hover {
   opacity: 1;
   transition: opacity 0.5s ease-in;
 }
-#site .home-top .glyphicon-chevron-down {
+#site .page-top .glyphicon-chevron-down {
   padding-top: 40px;
   font-size: 45px;
   transition: padding-top 0.3s ease-in;
+  top: 40px;
   cursor: pointer;
 }
-#site .home-top .glyphicon-chevron-down:hover {
+#site .page-top .glyphicon-chevron-down:hover {
   padding-top: 50px;
   transition: padding-top 0.3s ease-in;
 }
-#site .home-top p {
+#site .page-top p {
   color: #ebe7d5;
 }
 #site .tile-list {
