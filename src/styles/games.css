@@ -1,5 +1,6 @@
-#site #content .jumbotron {
+#site #content .jumbotron .page-list {
   background-image: url('https://asarav.github.io/src/images/games/games-top.jpg');
+  height: 350px;
 }
 #site #content .games-list .game {
   border: solid 5px black;
