@@ -16,6 +16,9 @@
 #site #content .games-list .game.light {
   background-image: url('https://asarav.github.io/src/images/games/game-background-light.jpg');
 }
+#site #content .games-list .game.medium-light {
+  background-image: url('https://asarav.github.io/src/images/games/game-background-medium-light.jpg');
+}
 #site #content .games-list .game.medium-dark {
   background-image: url('https://asarav.github.io/src/images/games/game-background-medium-dark.jpg');
 }
