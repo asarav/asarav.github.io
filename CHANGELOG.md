@@ -1,3 +1,6 @@
+# Version 0.3.0
+* Finish first version of games page.
+
 # Version 0.2.0
 * Update home page style. Add tiles for all pages. Update theme to be more modern.
 
