@@ -19,7 +19,7 @@ function fillContent() {
     } else if(containsSubstring(path, 'contact.html')) {
         $('#content').load('src/html/partials/contact-info.html');
     } else if(containsSubstring(path, 'about-me.html')) {
-
+        $('#content').load('src/html/partials/about-info.html');
     } else if(containsSubstring(path, 'music.html')) {
         $('#content').load('src/html/partials/music-list.html');
     } else if(containsSubstring(path, 'projects.html')) {
