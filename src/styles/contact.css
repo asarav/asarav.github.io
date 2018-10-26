@@ -1,4 +1,14 @@
+#site #content {
+  color: white;
+}
 #site #content .jumbotron.page-top {
   background-image: url('https://asarav.github.io/src/images/contact/contact-top.jpg');
   height: 350px;
+}
+#site #content .bright {
+  background-image: #122841;
+}
+#site #content .contact-section {
+  height: 200px;
+  font-size: 24px;
 }
