@@ -24,6 +24,8 @@ function fillContent() {
         $('#content').load('src/html/partials/music-list.html');
     } else if(containsSubstring(path, 'projects.html')) {
         $('#content').load('src/html/partials/projects-list.html')
+    } else if(containsSubstring(path, 'consumption.html')) {
+        $('#content').load('src/html/partials/consumption-list.html');
     }
 }
 
