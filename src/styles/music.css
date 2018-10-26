@@ -1,0 +1,10 @@
+#site {
+  background: #1e1e1f;
+}
+#site #content {
+  color: white;
+}
+#site #content .jumbotron.page-top {
+  background-image: url('https://asarav.github.io/src/images/music/music-top.jpg');
+  height: 350px;
+}
