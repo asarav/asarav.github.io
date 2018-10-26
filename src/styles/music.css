@@ -8,3 +8,6 @@
   background-image: url('https://asarav.github.io/src/images/music/music-top.jpg');
   height: 350px;
 }
+#site #content .jumbotron.page-top .music-explanation {
+  color: grey;
+}
