@@ -3,6 +3,7 @@
 }
 #site #content {
   color: white;
+  margin-bottom: 30px;
 }
 #site #content .jumbotron.page-top {
   background-image: url('https://asarav.github.io/src/images/projects/projects-top.jpg');
@@ -16,6 +17,9 @@
 #site #content section th,
 #site #content section td {
   border: 2px solid white;
+}
+#site #content section table {
+  width: 100%;
 }
 #site #content section table th {
   padding-right: 5px;
