@@ -8,3 +8,8 @@
   background-image: url('https://asarav.github.io/src/images/projects/projects-top.jpg');
   height: 350px;
 }
+#site #content section table,
+#site #content section th,
+#site #content section td {
+  border: 2px solid white;
+}
