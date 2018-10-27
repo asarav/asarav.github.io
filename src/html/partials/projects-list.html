@@ -17,13 +17,13 @@
         <p>What I tried to do was create a python impelmentation of <a href="https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/" target="_blank">Roger Johansson's polygonal approximation program.</a></p>
     </div>
     <div class="row">
-        <p>The program will receive an image as input. It will then try to approximate the image using a limited number of polygons.</p>
-        <p> In the case of my implementation, I used 100 polygons instead of the 50 used in Roger Johansson's program.</p>
-        <p>A genetic algorithm essentially immitates evolution. Each "generation" in the program represents a set of polygons with different colors, alpha values, and dimensions.</p>
-        <p>This set is then filtered down to the top performing individuals within the generation. In this case, the top performing individuals represent the images that are most like the image provided as input.</p>
-        <p>For every generation, I perform two operations that introduce diversity within the population. The first is the introduction of random mutations that will slightly modify the color, alpha values and dimension of individuals.</p>
-        <p>The next operation is reproduction. I create the individuals who will form the next generation by taking half the traits from a high performing individual and taking half of the traits from another highly fit individual from the previous generation.</p>
-        <p>This process continues for a certain number of generations (iterations). Eventually, the generated image will fall into a local maximum and stagnate at that maximum.</p>
+        <p class="col-xs-12">The program will receive an image as input. It will then try to approximate the image using a limited number of polygons.
+        In the case of my implementation, I used 100 polygons instead of the 50 used in Roger Johansson's program.
+        A genetic algorithm essentially immitates evolution. Each "generation" in the program represents a set of polygons with different colors, alpha values, and dimensions.
+        This set is then filtered down to the top performing individuals within the generation. In this case, the top performing individuals represent the images that are most like the image provided as input.
+        For every generation, I perform two operations that introduce diversity within the population. The first is the introduction of random mutations that will slightly modify the color, alpha values and dimension of individuals.
+        The next operation is reproduction. I create the individuals who will form the next generation by taking half the traits from a high performing individual and taking half of the traits from another highly fit individual from the previous generation.
+        This process continues for a certain number of generations (iterations). Eventually, the generated image will fall into a local maximum and stagnate at that maximum.
     </div>
     <table>
         <tr>
@@ -31,16 +31,16 @@
             <th>Generated Image</th>
         </tr>
         <tr>
-            <td><img src="src/games/genetic_algorithm_project/darwin.jpg"></td>
-            <td><img src="src/games/genetic_algorithm_project/Darwin.gif"></td>
+            <td><img src="src/images/genetic_algorithm_project/darwin.jpg"></td>
+            <td><img src="src/images/genetic_algorithm_project/Darwin.gif"></td>
         </tr>
         <tr>
-            <td><img src="src/games/genetic_algorithm_project/ferrari.jpg"></td>
-            <td><img src="src/games/genetic_algorithm_project/Ferrari.gif"></td>
+            <td><img src="src/images/genetic_algorithm_project/ferrari.jpg"></td>
+            <td><img src="src/images/genetic_algorithm_project/Ferrari.gif"></td>
         </tr>
         <tr>
-            <td><img src="src/games/genetic_algorithm_project/hal9000.jpg"></td>
-            <td><img src="src/games/genetic_algorithm_project/Hal 9000.gif"></td>
+            <td><img src="src/images/genetic_algorithm_project/hal9000.jpg"></td>
+            <td><img src="src/images/genetic_algorithm_project/Hal 9000.gif"></td>
         </tr>
     </table>
 </section>
