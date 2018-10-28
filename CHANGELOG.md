@@ -1,3 +1,9 @@
+# Version 0.7.0
+* Finished first version of Contact page
+* Finished first version of projects page
+* Finished first version of about me page
+* Finished general layout of music page.
+
 # Version 0.3.0
 * Finish first version of games page.
 
