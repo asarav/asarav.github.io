@@ -11,3 +11,17 @@
 #site #content .jumbotron.page-top .music-explanation p {
   color: darkred;
 }
+#site #content .song {
+  border: 1px solid #e7cdcd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 5px 5px 5px 5px;
+}
+#site #content .song audio {
+  width: 100%;
+  border: 1px solid gray;
+}
+#site #content .song .title {
+  font-weight: bold;
+  font-size: 18px;
+}
