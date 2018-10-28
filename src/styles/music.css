@@ -20,6 +20,7 @@
 #site #content .song audio {
   width: 100%;
   border: 1px solid gray;
+  border-radius: 20px;
 }
 #site #content .song .title {
   font-weight: bold;
