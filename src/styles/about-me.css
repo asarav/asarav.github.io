@@ -1,3 +1,15 @@
 #site {
   background: #1e1e1f;
+  margin-bottom: 30px;
+}
+#site #content section {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+#site #content section .heading {
+  font-size: 24px;
+  color: orange;
+}
+#site #content section p {
+  margin-left: 15px;
 }
