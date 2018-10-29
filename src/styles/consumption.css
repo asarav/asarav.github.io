@@ -1,5 +1,6 @@
 #site {
-  background: #1e1e1f;
+  background-image: linear-gradient(to right, #1e1e1f, transparent);
+  background-color: #111e38;
 }
 #site #content {
   color: white;

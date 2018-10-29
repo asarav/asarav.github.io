@@ -1,3 +1,6 @@
+# Version 0.8.0
+* Finished general layout of consumption page.
+
 # Version 0.7.0
 * Finished first version of Contact page
 * Finished first version of projects page
