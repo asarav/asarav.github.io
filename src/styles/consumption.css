@@ -32,12 +32,12 @@
 }
 @media only screen and (max-width: 900px) {
   #site #content .consumption-list .item .content {
-    height: 300px;
+    height: 350px;
   }
 }
 @media only screen and (max-width: 768px) {
   #site #content .consumption-list .item .content {
-    height: 350px;
+    height: 425px;
   }
 }
 #site #content .consumption-list .item .content .header a {
