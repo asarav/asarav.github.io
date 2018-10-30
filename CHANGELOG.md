@@ -1,3 +1,7 @@
+# Version 0.9.0
+* Updated titles for all pages.
+* Implement initial version of website. Next updates will probably involve content, UI strategy updates, and SEO through Jekyll.
+
 # Version 0.8.0
 * Finished general layout of consumption page.
 
