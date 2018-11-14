@@ -1,3 +1,10 @@
+# Version 1.0.0
+* Added meta tags.
+* Added content for all pages.
+* Updated consumption list up to November of 2018.
+* Update text on menu page.
+* Finalize first version of website.
+
 # Version 0.9.0
 * Updated titles for all pages.
 * Implement initial version of website. Next updates will probably involve content, UI strategy updates, and SEO through Jekyll.
