@@ -73,3 +73,7 @@
     margin-left: 48%;
   }
 }
+#site #content .consumption-list .item.video .image {
+  padding-top: 15px;
+  padding-right: 5%;
+}
