@@ -30,14 +30,29 @@
     height: 250px;
   }
 }
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
   #site #content .consumption-list .item .content {
     height: 375px;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
   #site #content .consumption-list .item .content {
-    height: 500px;
+    height: 450px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #site #content .consumption-list .item .content {
+    height: 575px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  #site #content .consumption-list .item .content {
+    height: 700px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #site #content .consumption-list .item .content {
+    height: 825px;
   }
 }
 #site #content .consumption-list .item .content .header a {
