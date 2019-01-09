@@ -1,5 +1,5 @@
 #site {
-  background-image: url("https://asarav.github.io/src/images/rain-background.jpeg");
+  background-image: url("https://asarav.github.io/src/images/rain-background.jpg");
   background-size: 100% 100%;
   font-family: Arial, Helvetica, sans-serif;
   color: #def2f3;
@@ -47,7 +47,7 @@
   transition: opacity 0.5s ease-in;
 }
 #site .page-top {
-  background-image: url("https://asarav.github.io/src/images/rain-background-2.jpeg");
+  background-image: url("https://asarav.github.io/src/images/rain-background-2.jpg");
   background-size: 100% 100%;
   text-align: center;
   color: #d14949;
@@ -124,10 +124,10 @@
   background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpg');
 }
 #site .tile-list .tile.contact-tile {
-  background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpeg');
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/contact.jpg');
 }
 #site .tile-list .tile.about-tile {
-  background-image: url('https://asarav.github.io/src/images/homepage_tiles/about-me.jpeg');
+  background-image: url('https://asarav.github.io/src/images/homepage_tiles/about-me.jpg');
 }
 #site .tile-list .tile.projects-tile {
   background-image: url('https://asarav.github.io/src/images/homepage_tiles/projects.jpg');
