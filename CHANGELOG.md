@@ -1,3 +1,9 @@
+# Version 1.1.0
+* Update consumption list up to January of 2019.
+* Fixed typos.
+* Decreased file sizes for images and videos.
+* Completed Arduino section of projects list.
+
 # Version 1.0.0
 * Added meta tags.
 * Added content for all pages.
