@@ -27,3 +27,6 @@
 #site #content section table td {
   text-align: center;
 }
+#site #content section .minimized-image-height {
+  max-height: 350px;
+}
