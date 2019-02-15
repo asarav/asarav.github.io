@@ -1,0 +1,8 @@
+#original {
+  background-color: #EEE;
+  padding: 4px 0px 4px 4px
+}
+#prediction {
+  background-color: #CCC;
+  padding: 4px 0px 4px 0px
+}
