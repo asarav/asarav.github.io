@@ -19,10 +19,14 @@
             <link rel="stylesheet" type="text/css" href="src/styles/main.css">
         </head>
         <body id="site" class="site">
-            {% include nav.html %}
+            {% if page.nav %}
+                {% include {{ page.nav }} %}
+            {% endif %}
             <div id="content" class="container-fluid">
                 {{ content }}
             </div>
-            {% include footer.html %}
+            {% if page.footer %}
+                {% include {{ page.footer }} %}
+            {% endif %}
         </body>
 	</html>
