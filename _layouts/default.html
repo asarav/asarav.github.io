@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 	<html>
         <head>
-            <title>{{ page.title }}</title>
+            <title>asarav~ {{ page.title }}</title>
             <meta name="description" content="Avinash Saravanan. (2016) Software Engineer. (2016) Novice Dancer. (2012) Globalization Enthusiast. (2012) Hobby Electric Guitarist/Shredder. (2010) Film Lover. This site is a continuously updated documentation of my progress as an individual.">
             <meta name="author" content="Avinash Saravanan">
             <meta name="keywords" content="Avinash,Saravanan,Software,Engineer,Guitar,Games,Music,Dance,AI,Badass,asarav,Developer,Programmer">
             <meta name="google-site-verification" content="pgJJ8njw6GLljKN4caY8Xtz5zoMPTyBsdpK6CMRhNBM" />
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="shortcut icon" href="favicon.png">
+            <link rel="shortcut icon" href="{{ 'favicon.png' | relative_url }}">
             <!--Scripts -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script src ="src/scripts/main.js"></script>
             <!--Stylesheets -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
-            <link rel="stylesheet" type="text/css" href="src/styles/main.css">
+            <link rel="stylesheet" type="text/css" href="{{ 'src/styles/main.css' | relative_url }}">
         </head>
         <body id="site" class="site">
             {% if page.nav %}

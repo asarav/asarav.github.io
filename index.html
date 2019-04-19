@@ -1,5 +1,81 @@
 ---
 layout: default
-title: asarav~ Avinash Saravanan
+title: Avinash Saravanan
 footer: footer.html
 ---
+
+<!-- Implement minimalist navigation panel -->
+<div class="jumbotron page-top">
+    <h1>AVINASH SARAVANAN</h1>
+    <p class="left">(2016) Software Engineer</p>
+    <p class="right">(2016) Novice Dancer</p>
+    <p class="left">(2012) Globalization Enthusiast</p>
+    <p class="right">(2012) Hobby Electric Guitarist/Shredder</p>
+    <p class="left">(2010) Film Lover</p>
+    <p>This site is a continuously updated documentation of my progress as an individual.</p>
+    <div id="down" class="glyphicon glyphicon-chevron-down"></div>
+</div>
+<div class="tile-list" id="tile-list">
+    <div class="row">
+        <a class="col-xs-6 tile projects-tile" href="src/html/projects.html">
+            <div class="tile-content">
+                <label>Projects</label>
+                <div class="tile-explanation">
+                    <p>Some Projects I have worked on.</p>
+                </div>
+            </div>
+        </a>
+        <a class="col-xs-6 tile games-tile" href="src/html/games.html">
+            <div class="tile-content">
+                <label>Games</label>
+                <div class="tile-explanation">
+                    <p>Games and Prototypes I have developed.</p>
+                </div>
+            </div>
+        </a>
+
+    </div>
+    <div class="row">
+        <a class="col-xs-6 tile music-tile" href="src/html/music.html">
+            <div class="tile-content">
+                <label>Music</label>
+                <div class="tile-explanation">
+                    <p>Music and Tracks that I created with a DAW</p>
+                </div>
+            </div>
+        </a>
+        <a class="col-xs-6 tile consumption-tile" href="src/html/consumption.html">
+            <div class="tile-content">
+                <label>Media Consumption List</label>
+                <div class="tile-explanation">
+                    <p>What I'm reading. What I'm watching. What I'm playing</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a class="col-xs-6 tile about-tile" href="src/html/about-me.html">
+            <div class="tile-content">
+                <label>About Me</label>
+                <div class="tile-explanation">
+                    <p>Who I am. What I do. Modus operandi.</p>
+                </div>
+            </div>
+        </a>
+        <a class="col-xs-6 tile contact-tile" href="src/html/contact.html">
+            <div class="tile-content">
+                <label>Contact Me</label>
+                <div class="tile-explanation">
+                    <p>Avenues for Contact</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    $("#down").click(function() {
+        $('html,body').animate({
+            scrollTop: $(".tile-list").offset().top
+        }, 'slow');
+    });
+</script>
