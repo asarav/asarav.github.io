@@ -1,3 +1,7 @@
+# Version 2.1.0
+* Update music to use yml for song listings.
+* Set up consumption list to begin using yml.
+
 # Version 2.0.0
 * Update consumption list up to April of 2019.
 * Make website work with Jekyll.
