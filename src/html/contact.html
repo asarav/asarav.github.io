@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>asarav~ Contact</title>
-        <meta name="description" content="Avinash Saravanan. Avenues for contact and where you can find me.">
-        <meta name="author" content="Avinash Saravanan">
-        <meta name="keywords" content="Avinash,Saravanan,Software,Engineer,Guitar,Games,Music,Dance,AI,Badass,asarav,Developer,Programmer">
-        <base href="https://asarav.github.io/" />
-        <!-- <base href="http://localhost/asarav.github.io/" /> -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="favicon.png">
-        <!--Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src ="src/scripts/main.js"></script>
-        <!--Stylesheets -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="src/styles/main.css">
-        <link rel="stylesheet" type="text/css" href="src/styles/contact.css">
-    </head>
-    <body id="site" class="site">
-        <div id="navigation"></div>
-        <div id="content" class="container-fluid"></div>
-        <!-- <div id="footer"></div> -->
-    </body>
-</html>
+---
+layout: default
+title: Contact
+nav: nav.html
+style: src/styles/contact.css
+---
+<div class="jumbotron page-top">
+    <div class="contact-preamble">
+        <h1 class="text-center">Avenues for Contact</h1>
+    </div>
+    <div class="contact-explanation">
+        <p>Also where you can find me.</p>
+    </div>
+</div>
+<div class="row bright contact-section">
+    <a class="col-xs-6" href="mailto:asarav@umich.edu"><span class="glyphicon glyphicon-envelope"></span> Email</a>
+    <a class="col-xs-6" href="https://github.com/asarav" target="_blank"><img src="{{ 'src/assets/GitHub-Mark/GitHub-Mark/PNG/GitHub-Mark-32px.png' | relative_url' }}" height="33" width="33"> Github</a>
+</div>
+<div class="row dark contact-section">
+    <a class="col-xs-6" href="https://www.linkedin.com/in/avinash-saravanan-profile/" target="_blank"><img src="{{ 'src/assets/linkedin-in-for-screen/LinkedIn_in_for_Screen/2-Color/In-2C-21px-R.png' | relative_url }}" height="30" width="45"> LinkedIn</a>
+    <a class="col-xs-6" href="https://www.hackerrank.com/asarav?hr_r=1" target="_blank"><img src="{{ 'src/assets/Hackerrank/hackerrank-logo.svg' | relative_url }}" height="33" width="33"> Hackerrank</a>
+</div>
+<div class="row bright contact-section">
+    <a class="col-xs-6" href="https://www.khanacademy.org/profile/asarav/" target="_blank"><img src="{{ 'src/assets/Khan Academy/khan-academy-logo-svg-vector.svg' | relative_url }}" height="33" width="33"> Khan Academy</a></a>
+</div>
+<div class="row dark contact-section">
+    <p class="col-xs-12">If you wish to contact me for consulting, web development, translations, etc., email is the most preferred method. Please do not contact me with unsolicited services or offers</p>
+</div>
