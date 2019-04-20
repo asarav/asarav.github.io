@@ -1,3 +1,7 @@
+# Version 2.0.0
+* Update consumption list up to April of 2019.
+* Make website work with Jekyll.
+
 # Version 1.1.0
 * Update consumption list up to January of 2019.
 * Fixed typos.
