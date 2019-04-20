@@ -4,6 +4,42 @@ title: Music
 nav: nav.html
 footer: footer.html
 style: src/styles/music.css
+songs:
+  - title: Music Box
+    src: src/music/Music Box.mp3
+    explanation: > 
+        I started making this song with the intention of learning how to create dubstep before realizing halfway through that the structure of the song didn't properly create the setup for a decent bass drop.
+        I originally wanted to just trash the song, but decided to at least reach something resembling completion.
+        I figured out how to create wubs, but I did not include them in the song. This song includes some of my forays into the world of sound engineering. There are sound effects and synths.
+        Working on this song allowed for me to learn about waves and oscillators.
+
+  - title: Power Ballad Backing Track Jam
+    src: src/music/Power Ballad Backing Track Jam.mp3
+    explanation: > 
+        Me jamming to <a href="https://youtu.be/hgDsTS5IcTg" target="_blank">this</a> backing track. Showcases some of my improvisational ability. Added some minor mixing to allow for my guitar to stand out a little bit better.
+
+  - title: Going Off
+    src: src/music/Going Off.mp3
+    explanation: > 
+        A solo that I challenged myself to come up with and record in one take. It's not very musical, but it exhibits some of my technical abilities in electric guitar.
+        I imagine if I had to do a solo live in front of a large audience in a stadium, it would be very similar to this. That said, if I do make it that big, I'm sure I'll have some noise reduction pedals to clean up the static and extraneous noise.
+
+  - title: Music Signature
+    src: src/music/Music Signature.mp3
+    explanation: >
+        An audio signature to use at the beginning of videos
+
+  - title: The Plains of LEO
+    src: src/music/The Plains of LEO.mp3
+    explanation: >
+        A song I created in 1 hour. The intention was to see whether I could use automation and the piano roll to quickly construct a song.
+        The end result ended up sounding like program music for a concert.
+  
+  - title: Robocopter V1
+    src: src/music/Robocopter v1.mp3
+    explanation: >
+        The first song I ever recorded. Complete with guitars and synths.
+        It's not exactly a full song, but it's long enough to be used for the the menu music of a game or the intro of a video.
 ---
 
 <div class="jumbotron page-top">
@@ -16,121 +52,22 @@ style: src/styles/music.css
     </div>
 </div>
 <div class="music-list">
-    <div class="song">
-        <div class="row audio">
-            <div class="col-xs-6 title">
-                Music Box
+    {% for song in page.songs %}
+        <div class="song">
+            <div class="row audio">
+                <div class="col-xs-6 title">
+                    {{ song.title }}
+                </div>
+                <div class="col-xs-6">
+                    <audio controls>
+                        <source src="{{ song.src | relative_url }}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <audio controls>
-                    <source src="{{ 'src/music/Music Box.mp3' | relative_url }}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="row song-explanation">
-            <div class="col-xs-12">
-                <p>I started making this song with the intention of learning how to create dubstep before realizing halfway through that the structure of the song didn't properly create the setup for a decent bass drop.
-                    I originally wanted to just trash the song, but decided to at least reach something resembling completion.
-                    I figured out how to create wubs, but I did not include them in the song. This song includes some of my forays into the world of sound engineering. There are sound effects and synths.
-                    Working on this song allowed for me to learn about waves and oscillators.
-                </p>
+            <div class="row song-explanation">
+                <div class="col-xs-12">{{ song.explanation | markdownify }}</div>
             </div>
         </div>
-    </div>
-    <div class="song">
-        <div class="row audio">
-            <div class="col-xs-6 title">
-                Power Ballad Backing Track Jam
-            </div>
-            <div class="col-xs-6">
-                <audio controls>
-                    <source src="{{ 'src/music/Power Ballad Backing Track Jam.mp3' | relative_url }}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="row song-explanation">
-            <div class="col-xs-12">
-                <p>Me jamming to <a href="https://youtu.be/hgDsTS5IcTg" target="_blank">this</a> backing track. Showcases some of my improvisational ability. Added some minor mixing to allow for my guitar to stand out a little bit better.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="song">
-        <div class="row audio">
-            <div class="col-xs-6 title">
-                Going Off
-            </div>
-            <div class="col-xs-6">
-                <audio controls>
-                    <source src="{{ 'src/music/Going Off.mp3' | relative_url }}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="row song-explanation">
-            <div class="col-xs-12">
-                <p>A solo that I challenged myself to come up with and record in one take. It's not very musical, but it exhibits some of my technical abilities in electric guitar.
-                    I imagine if I had to do a solo live in front of a large audience in a stadium, it would be very similar to this. That said, if I do make it that big, I'm sure I'll have some noise reduction pedals to clean up the static and extraneous noise.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="song">
-        <div class="row audio">
-            <div class="col-xs-6 title">
-                Music Signature
-            </div>
-            <div class="col-xs-6">
-                <audio controls>
-                    <source src="{{ 'src/music/Music Signature.mp3' | relative_url }}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="row song-explanation">
-            <div class="col-xs-12">
-                <p>An audio signature to use at the beginning of videos</p>
-            </div>
-        </div>
-    </div>
-    <div class="song">
-        <div class="row audio">
-            <div class="col-xs-6 title">
-                The Plains of LEO
-            </div>
-            <div class="col-xs-6">
-                <audio controls>
-                    <source src="{{ 'src/music/The Plains of LEO.mp3' | relative_url }}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="row song-explanation">
-            <div class="col-xs-12">
-                <p>A song I created in 1 hour. The intention was to see whether I could use automation and the piano roll to quickly construct a song.
-                The end result ended up sounding like program music for a concert.</p>
-            </div>
-        </div>
-    </div>
-    <div class="song">
-        <div class="row audio">
-            <div class="col-xs-6 title">
-                Robocopter V1
-            </div>
-            <div class="col-xs-6">
-                <audio controls>
-                    <source src="{{ 'src/music/Robocopter v1.mp3' | relative_url }}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="row song-explanation">
-            <div class="col-xs-12 ">
-                <p>The first song I ever recorded. Complete with guitars and synths.
-                It's not exactly a full song, but it's long enough to be used for the the menu music of a game or the intro of a video.</p>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
