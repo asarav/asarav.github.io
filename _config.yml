@@ -1,3 +1,5 @@
+name: Avinash Saravanan, asarav
+markdown: kramdown
 # This will require each of these plugins automatically.
 plugins:
   - jekyll-seo-tag
