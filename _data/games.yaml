@@ -1,0 +1,52 @@
+- title: Apple Picker Prototype
+  style: light
+  link: src/games/Apple_Picker_Prototype/index.html
+  images:
+    - src: src/games/Apple_Picker_Prototype/Screenshots/Capture.PNG
+    - src: src/games/Apple_Picker_Prototype/Screenshots/Capture 2.PNG
+  explanation: >
+    A game that I created to teach myself the basics of Unity
+- title: Space SHMUP Prototype
+  style: dark
+  link: src/games/Space_SHMUP_Prototype/index.html
+  images:
+    - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture.PNG
+    - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture 2.PNG
+  explanation: >
+    A simple space shooter game to test parallax and 2d Unity
+- title: Metroid in Unity
+  style: dark
+  link: src/games/Metroid_in_Unity/index.html
+  images:
+    - src: src/games/Metroid_in_Unity/Screenshots/Capture.PNG
+    - src: src/games/Metroid_in_Unity/Screenshots/Capture 2.PNG
+    - src: src/games/Metroid_in_Unity/Screenshots/Capture 3.PNG
+  explanation: >
+    Recreated a portion of Metroid in the Unity game engine
+- title: Commuter North
+  style: medium-light
+  link: src/games/Commuter_North/index.html
+  images:
+    - src: src/games/Commuter_North/Screenshots/Commuter North 1.PNG
+    - src: src/games/Commuter_North/Screenshots/Commuter North 2.PNG
+    - src: src/games/Commuter_North/Screenshots/Commuter North 3.PNG
+  explanation: >
+    A walking simulator that places you in an invisible maze. Move from point A to point B while trying to navigate through the fog.</p>
+    <p>Note: This game was created with an older version of unity, and as a result, some of the effects like the fog do not render properly on Web.</p>
+- title: Switcheroo
+  style: dark
+  link: src/games/Switcheroo/index.html
+  images:
+    - src: src/games/Switcheroo/Screenshots/Switcheroo 1.PNG
+    - src: src/games/Switcheroo/Screenshots/Switcheroo 3.PNG
+  explanation: >
+    A fast paced platformer where you can switch places with anything on the map. Use this mechanic to make it to the goal in time.
+- title: Rebel Knight
+  style: light
+  link: src/games/Rebel_Knight/index.html
+  images:
+    - src: src/games/Rebel_Knight/Screenshots/Rebel_Knight_1.png
+    - src: src/games/Rebel_Knight/Screenshots/Rebel_Knight_2.png
+    - src: src/games/Rebel_Knight/Screenshots/Rebel_Knight_3.png
+  explanation: >
+    An endless-runner type game, taking a lot of inspiration from the running stages of Platinum Games's The Legend of Korra videogame.
