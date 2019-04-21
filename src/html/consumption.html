@@ -4,17 +4,37 @@ title: Media Consumption
 nav: nav.html
 footer: footer.html
 style: src/styles/consumption.css
-consumptionItems: 
-  - title: Soldier of Orange
+consumptionItems:
+  - title: "Kara no Kyoukai: Mirai Fukuin"
+    type: anime
+    completionDate: Apr 21, 2019
+    sourceDateAndInfo: Sep 28, 2013
+    source: https://myanimelist.net/anime/14807/Kara_no_Kyoukai__Mirai_Fukuin
+    image: https://cdn.myanimelist.net/images/anime/6/56621.jpg
+    explanation: >
+        Kara no Kyoukai was a highly influential work for me, and I am glad that I can finally view the final movie in the series.
+        The film covers the nature of the future and how prediction may be a less magical phenomenon than may appear at first glance.
+        Like the other movies in the series, due to the achronological nature of the series as a whole, this film manages to not only tell a compelling, though provoking story, but also provides what can be seen as a great conclusion or continuation of the series.
+  - title: "Soldier of Orange"
     type: movie
-    completionDate: Apr 20, 2019,
+    completionDate: Apr 20, 2019
     sourceDateAndInfo: Sep 22, 1977
     source: https://www.imdb.com/title/tt0076734/
     image: https://m.media-amazon.com/images/M/MV5BOTUzYjI1NWEtZjkxZC00NjQ0LWEwNjAtZjViOWQ0ZjA0ZDBhXkEyXkFqcGdeQXVyMTE2OTg4Mjg@._V1_UX182_CR0,0,182,268_AL_.jpg
     explanation: >
         I'm not a big fan of Paul Verhoeven's Hollywood films, but this has all the makings of a classic.
         While Paul Verhoeven is unable to do subtlety all that well like usual, this has a story that has enough momentum to avoid stumbling over the mistakes that it might make.
-        Camera work and scenes are shot very well. All in all, it is a solid film that displays much of what makes the Dutch people who they are today.
+        Camera work and scenes are shot very well. All in all, it is a solid film that displays much of what makes the Dutch people who they are today and offers a good explanation of the resistance movements in the Netherlands during Nazi occupation.
+  - title: "The Only Grammar Book You'll Ever Need: A One-Stop Source for Every Writing Assignment"
+    type: book
+    completionDate: Apr 19, 2019,
+    sourceDateAndInfo: Susan Thurman, May 1, 2003
+    source: https://www.goodreads.com/book/show/633971.The_Only_Grammar_Book_You_ll_Ever_Need
+    image: https://images.gr-assets.com/books/1348885364l/633971.jpg
+    explanation: >
+        It's not often that I read what is essentially a text book from cover to cover, but I wanted to improve my skills as a writer so I picked this up.
+        Topics are covered in simple and digestible pieces. This made it easy to comprehend and made the grammar rules presented easier to remember.
+        This book not only helps with grammar, but also covers what makes one's writing more effective.
 ---
 <div class="jumbotron page-top">
     <div class="consumption-preamble">
@@ -25,10 +45,10 @@ consumptionItems:
     </div>
 </div>
 <div class="consumption-list">
-    {% for item in page.consumptionItems %}
-        <div class="row item">
-            <label class="col-xs-2">Date of Viewing/Completion</label>
-        </div>
+    <div class="row item">
+        <label class="col-xs-2">Date of Viewing/Completion</label>
+    </div>
+    {% for item in site.data.consumption %}
         <div class="row item {{ item.type }}">
             <div class="col-xs-2 date text-center">{{ item.completionDate }}</div>
             <div class="content col-lg-8 col-md-7 col-sm-6 col-xs-5">
@@ -48,63 +68,6 @@ consumptionItems:
             </div>
         </div>
     {% endfor %}
-    <!--  The Only Grammar Book You'll Ever Need  -->
-    <div class="row item book">
-        <div class="col-xs-2 date text-center">
-            Apr 19, 2019
-        </div>
-        <div class="content col-lg-8 col-md-7 col-sm-6 col-xs-5">
-            <div class="row">
-                <div class="col-xs-12 header">
-                    <a href="https://www.goodreads.com/book/show/633971.The_Only_Grammar_Book_You_ll_Ever_Need" target="_blank">The Only Grammar Book You'll Ever Need: A One-Stop Source for Every Writing Assignment</a>
-                    <sub>Susan Thurman, May 1, 2003</sub>
-                </div>
-            </div>
-            <hr>
-            <div class="row explanation">
-                <div class="col-xs-12">
-                    <p>It's not often that I read what is essentially a text book from cover to cover, but I wanted to improve my skills as a writer so I picked this up.
-                    Topics are covered in simple and digestible pieces. This made it easy to comprehend and made the grammar rules presented easier to remember.
-                    This book not only helps with grammar, but also covers what makes one's writing more effective.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-2 image">
-            <img src="https://images.gr-assets.com/books/1348885364l/633971.jpg">
-        </div>
-    </div>
-    <!--  The Iliad  -->
-    <div class="row item book">
-        <div class="col-xs-2 date text-center">
-            Apr 16, 2019
-        </div>
-        <div class="content col-lg-8 col-md-7 col-sm-6 col-xs-5">
-            <div class="row">
-                <div class="col-xs-12 header">
-                    <a href="https://www.goodreads.com/book/show/44233971-the-iliad-of-homer" target="_blank">The Iliad</a>
-                    <sub>Homer, Alexander Pope</sub>
-                </div>
-            </div>
-            <hr>
-            <div class="row explanation">
-                <div class="col-xs-12">
-                    <p>Oh boy, I have a lot to say about this one. First, where is my Trojan Horse? I read the Alexander Pope translation which made the read a struggle in the beginning.
-                    Luckily, I have read The Rape of the Lock before, so I gradually got over the difficult English and began to appreciate the masterful usage of the English language to maintain the poetic qualities of the epic.
-                    Roman and Greek names are used interchangeably which caused much confusion as well.
-                    The actual story is bloody, and sometimes nonsensical.
-                    The gods don't always behave rationally, and sometimes they can be bested in battle by mortals.
-                    The fact that Achilles pretty much singlehandedly turned the tide of battle towards the later part of the story made for a very strangely paced work.
-                    There are many characters and not all of them are introduced. You really need to read the rest of the Epic Cycle to truly gain a proper understanding of what is going on.
-                    Overall, it is great for a poem spread through oral tradition, but as an actual story, I found it lacking by modern standards. If you want something better, I recommend Romance of the Three Kingdoms or the Mahabharata.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-2 image">
-            <img src="https://images.gr-assets.com/books/1388188509l/1371.jpg">
-        </div>
-    </div>
     <!--  Atomic Habits  -->
     <div class="row item book">
         <div class="col-xs-2 date text-center">
