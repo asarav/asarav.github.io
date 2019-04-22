@@ -1,3 +1,11 @@
+- title: "Troy"
+  type: movie
+  completionDate: Apr 22, 2019
+  sourceDateAndInfo: May 14, 2004
+  source: https://www.imdb.com/title/tt0332452/
+  image: https://m.media-amazon.com/images/M/MV5BMTk5MzU1MDMwMF5BMl5BanBnXkFtZTcwNjczODMzMw@@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      It's not a good movie. It's not even a great one. But at least it had a Trojan horse. Other than that, it was a complete waste of 3 hours.
 - title: "Kara no Kyoukai: Mirai Fukuin"
   type: anime
   completionDate: Apr 21, 2019
@@ -43,3 +51,35 @@
     The fact that Achilles pretty much singlehandedly turned the tide of battle towards the later part of the story made for a very strangely paced work.
     There are many characters and not all of them are introduced. You really need to read the rest of the Epic Cycle to truly gain a proper understanding of what is going on.
     Overall, it is great for a poem spread through oral tradition, but as an actual story, I found it lacking by modern standards. If you want something better, I recommend Romance of the Three Kingdoms or the Mahabharata.
+- title: "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones"
+  type: book
+  completionDate: Apr 15, 2019
+  sourceDateAndInfo: James Clear, Oct 16, 2018
+  source: https://www.goodreads.com/book/show/40121378-atomic-habits
+  image: https://images.gr-assets.com/books/1535115320l/40121378.jpg
+  explanation: >
+      Atomic Habits breaks down what is needed to build positive habits and remove negative ones to reach success.
+      Everything here makes sense and is presented in a way that is easy to implement.
+      There are many important ideas presented here.
+      James Clear not only covers the compounding benefits of building habits on top of habits, but also presents the idea that systems are far more effective than goals.
+      There is a lot here that I can utilize on top of the system and process I currently use.
+- title: "Tomb Raider: Anniversary"
+  type: game
+  completionDate: Apr 14, 2019
+  sourceDateAndInfo: Jun 1, 2007
+  source: https://en.wikipedia.org/wiki/Tomb_Raider:_Anniversary
+  image: https://upload.wikimedia.org/wikipedia/en/f/f1/Tomb_Raider_-_Anniversary.png
+  explanation: >
+      Remake of the original Tomb Raider. 
+      For those who are not able to run the original Tomb Raider, this is a great alternative that fixes many of the problems in the first game.
+      Although the level design may have suffered slightly, this holds up very well. It is easy to see where Uncharted gets its inspiration from.
+      Tomb Raider is basically Uncharted with more of an emphasis on problem solving and less of an emphasis on story and cinematic thrills.
+- title: "The Hangover"
+  type: movie
+  completionDate: Apr 14, 2019
+  sourceDateAndInfo: Jun 5, 2009
+  source: https://www.imdb.com/title/tt1119646/
+  image: https://m.media-amazon.com/images/M/MV5BNGQwZjg5YmYtY2VkNC00NzliLTljYTctNzI5NmU3MjE2ODQzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      I watched this due to its cultural significance and for the memes.
+      It isn't anything groundbreaking, but I did laugh multiple times, and found it to be an above average American comedy.
