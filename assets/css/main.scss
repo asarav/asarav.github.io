@@ -93,6 +93,47 @@
         p {
             color: rgb(235, 231, 213);
         }
+        @media only screen and (max-width: 900px) {
+            height: 550px;
+            h1 {
+                font-size: 50px;
+            }
+            p {
+                font-size: 17px;
+            }
+            .glyphicon-chevron-down {
+                padding-top: 20px;
+                top: 20px;
+            }
+        }
+
+        @media only screen and (max-width: 700px) {
+            height: 450px;
+            h1 {
+                font-size: 35px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .glyphicon-chevron-down {
+                padding-top: 10px;
+                top: 0px;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            height: 475px;
+            h1 {
+                font-size: 30px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .glyphicon-chevron-down {
+                padding-top: 10px;
+                top: 0px;
+            }
+        }
     }
 
     .tile-list {
@@ -122,6 +163,19 @@
                     position: absolute;
                     bottom: 0;
                 }
+
+                @media only screen and (max-width: 900px) {
+                    font-size: 24px;
+                    label {
+                        margin-top: 4em;
+                    }
+                }
+                @media only screen and (max-width: 700px) {
+                    font-size: 20px;
+                    label {
+                        margin-top: 2em;
+                    }
+                }
             }
             &.games-tile {
                 background-image: url('https://asarav.github.io/src/images/homepage_tiles/games.jpg');
@@ -141,6 +195,21 @@
             &.consumption-tile {
                 background-image: url('https://asarav.github.io/src/images/homepage_tiles/consumption.jpg');
             }
+
+            @media only screen and (max-width: 900px) {
+                height: 300px;
+                &:hover {
+                    height: 305px;
+                }
+            }
+
+            
+            @media only screen and (max-width: 700px) {
+                height: 200px;
+                &:hover {
+                    height: 205px;
+                }
+            }
         }
     }
 
@@ -155,6 +224,27 @@
         opacity: 0.95;
         .contact {
             text-align: right;
+        }
+        .copyright {
+            position: relative;
+            float: left;
+            width: 83%;
+            @media only screen and (max-width: 900px) {
+                width: 75%;
+                font-size: 18px;
+            }
+            @media only screen and (max-width: 700px) {
+                width: 66%;
+                font-size: 16px;
+            }
+            @media only screen and (max-width: 600px) {
+                width: 60%;
+                font-size: 14px;
+            }
+            @media only screen and (max-width: 450px) {
+                width: 55%;
+                font-size: 12px;
+            }
         }
     }
 }
