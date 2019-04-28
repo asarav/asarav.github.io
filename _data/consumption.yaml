@@ -1,3 +1,26 @@
+- title: "Sleeping Beauty"
+  type: movie
+  completionDate: Apr 28, 2019
+  sourceDateAndInfo: Dec 25, 1959
+  source: https://www.imdb.com/title/tt0053285/
+  image: https://m.media-amazon.com/images/M/MV5BOTJmZjA3MjMtMWNmZS00YTliLWFhMWUtZDU2NGJhNTlmY2ZkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      Unlike Disney's offerings in the 40's, this felt a lot more polished.
+      The animation is beautiful, and I can even see great implementations of rotoscoping in character movement.
+      Any shortcomings in animation were successfully compensated by great background work.
+      Despite Sleeping Beauty being part of an oversaturated genre, I found it enjoyable, but the characters could have been given more depth.
+- title: "Better: A Surgeon's Notes on Performance"
+  type: book
+  completionDate: Apr 27, 2019
+  sourceDateAndInfo: Atul Gawande, Apr 3, 2007
+  source: https://www.goodreads.com/book/show/213233.Better
+  image: https://images.gr-assets.com/books/1437843332l/213233.jpg
+  explanation: >
+      Better is a book about the struggles and triumphs of the medical system. He not only covers how medicine and treatment works in the U.S., but also in other countries like India.
+      This provides a window into the challenges that are faced by practitioners.
+      People sometimes forget that doctors need to worry about malpractice lawsuits and that diagnosis of an illness isn't quite as straight forward as it might seem in media.
+      I found the end notes on how to be a positive deviant particularly useful.
+      If you are planning on creating a startup that is centered on improving healthcare, understanding a doctor's experience can be very valuable.
 - title: "Bambi"
   type: movie
   completionDate: Apr 27, 2019
@@ -693,3 +716,94 @@
       He also explores the topics within the context of his own life experiences and clearly outlines the differences between what one wants to do in life and what what can do in life.
       The conversation is nuanced and touches upon many different subjects and offers meaning to aspects of life that are usually never explored in depth in Japanese society.
       If you understand Japanese, I recommend taking 30 min out of your day to view this video.
+- title: "Siddhartha"
+  type: book
+  completionDate: Jan 16, 2019
+  sourceDateAndInfo: Hermann Hesse, Dec 1, 1981
+  source: https://www.goodreads.com/book/show/52036.Siddhartha
+  image: https://images.gr-assets.com/books/1428715580l/52036.jpg
+  explanation: >
+      Siddhartha is written in a lyrical style and reads very similarly to Paulo Coelho's The Alchemist.
+      One of the main themes of the novel is that wisdom cannot be taught, but that it must be gained through experience.
+      The usage of Siddhartha as a foil to Gautama's philosophy offers nuance that can provide greater insight into what Samsara and Nirvana is.
+      While it may come across as simplistic, I felt that the simple writing style allowed for better introspection.
+- title: "Jaws"
+  type: movie
+  completionDate: Jan 12, 2019
+  sourceDateAndInfo: Jun 20, 1975
+  source: https://www.imdb.com/title/tt0073195/?ref_=fn_al_tt_1
+  image: https://m.media-amazon.com/images/M/MV5BMmVmODY1MzEtYTMwZC00MzNhLWFkNDMtZjAwM2EwODUxZTA5XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      Great film and very well written. It's rated PG, but I have no idea why. Richard Dreyfuss and Robert Shaw stole the show.
+      Each of the characters were carefully considered and have unique qualities that make them memorable.
+      Compared to many of the monster movies of today, this film was well thought out and carefully planned.
+      We can see the deliberate style of Spielberg beginning to take shape here.
+- title: "Man's Search for Meaning"
+  type: book
+  completionDate: Jan 10, 2019
+  sourceDateAndInfo: Viktor E. Frankl, Jun 1, 2006
+  source: https://www.goodreads.com/book/show/4069.Man_s_Search_for_Meaning?ac=1&from_search=true
+  image: https://images.gr-assets.com/books/1535419394l/4069.jpg
+  explanation: >
+      The book is split into two parts. The first covers Viktor Frankl's time in the German concentration camps and the second covers logotherapy.
+      The usage of Viktor Frankl's experience during the Holocaust to explain the significance of meaning was very powerful.
+      I found logotherapy to be a more rational approach to psychotherapy and finding meaning to life than other approaches, but it does seem dated.
+      A more modern approach might utilize statistics and mathematics to clearly outline patterns in human behavior.
+      Overall, the way this work outlined purpose, the will to live, and the various perspectives by which to view suffering made it a useful read.
+- title: "Inside the Superhuman World of the Iceman"
+  type: video
+  completionDate: Jan 8, 2019
+  sourceDateAndInfo: Jul 16, 2015
+  source: https://youtu.be/VaMjhwFE1Zw
+  image: https://i.ytimg.com/vi/VaMjhwFE1Zw/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDEsDm-ViQ2pVplIe2T58BbenbnBg
+  explanation: >
+      An introduction to Wim Hof and the power of his breathing technique.
+      I also recommend watching his talks with Joe Rogan and his recent appearance on Impact Theory.
+      Using hypoxia to improve mental and bodily tolerances is something that I have never tried before, and the amount of added control it provides to the body makes it seem like a very valuable skill that is very similar to that which is exhibited by Shaolin monks.
+      Wim Hof's insistence on taking rigorous metrics and scientifically analyzing everything has expelled any doubts that his technique can allow for the human body to overcome various limits.
+      It's a good thing that it's Winter right now, because it's the perfect time to test myself against the cold.
+- title: "Crime and Punishment"
+  type: book
+  completionDate: Jan 6, 2019
+  sourceDateAndInfo: Fyodor Dostoyevsky, 1866
+  source: https://www.goodreads.com/book/show/7144.Crime_and_Punishment?ac=1&from_search=true
+  image: https://images.gr-assets.com/books/1382846449l/7144.jpg
+  explanation: >
+      This was not an easy book to read due to my ignorance about Russian culture and history.
+      That said, the plight of Raskolnikov was not only relatable, but it can be observed in one form or another in the lives of people today.
+      Because of this, the philosophical underpinnings were not lost in translation or lost to time.
+      The organization of the book may seem strange to some, because it switches its focus to its side characters frequently.
+      While this may be interpretted as a flaw in the novel, the treatment of the Marmeladovs and Svidrigailov gives us a more complete study of human behavior that may not be exhibited by Raskolnikov.
+      Dostoyevsky added an epilogue at the end. This, in my opinion, weakened the ending, and I recommend thoroughly skipping it.
+- title: "Joe Rogan Experience #1211 - Dr. Ben Goertzel"
+  type: video
+  completionDate: Jan 3, 2019
+  sourceDateAndInfo: Dec 4, 2018
+  source: https://youtu.be/-qfB8clUIaY
+  image: https://i.ytimg.com/vi/-qfB8clUIaY/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAxwoYN9WWsCX_EmlGxMr1TWMuUcw
+  explanation: >
+      A conversation with Ben Goertzel the founder of SingularityNET. Unlike other AI researchers, Ben does not seem quite as dismissive of ideas that have originated in science fiction and Hollywood movies.
+      As a result, the conversation reaches areas that may not be covered by other individuals who work in the field.
+      One interesting thing that Ben noted during the conversation is that the apocalypse scenario with AI seems to originate in western culture and does not seem to be recognized as much of a problem in East Asia.
+      This is a good podcast to go back to once in a while.
+- title: "Empire of the Sun"
+  type: movie
+  completionDate: Dec 30, 2018
+  sourceDateAndInfo: Dec 25, 1987
+  source: https://www.imdb.com/title/tt0092965/?ref_=nv_sr_1
+  image: https://m.media-amazon.com/images/M/MV5BMmQwNzczZDItNmI0OS00MjRmLTliYWItZWIyMjk1MTU4ZTQ4L2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      This is not Steven Spielberg's best film.
+      Although it may be lacking in terms of story and plot, the technical achievements and scale of the the set pieces are impressive.
+      The accuracy with which locations in China are presented is one of its strengths.
+      That said, the writing felt mediocre, and Christian Bale's acting could not save it. 
+      I personally did not enjoy this film or find it impressive at a critical level, but I think this may be depend on the person watching it.
+- title: "The Exorcist"
+  type: movie
+  completionDate: Dec 28, 2018
+  sourceDateAndInfo: Dec 26, 1973
+  source: https://www.imdb.com/title/tt0070047/?ref_=nv_sr_1
+  image: https://m.media-amazon.com/images/M/MV5BYjhmMGMxZDYtMTkyNy00YWVmLTgyYmUtYTU3ZjcwNTBjN2I1XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      Horror movies usually don't affect me, but I found the imagery in this film to be more effective than other entries in the genre.
+      Since this was directed by William Friedkin, great camera work is to be expected. I can see why this film had staying power more than 40 years after it was released.
