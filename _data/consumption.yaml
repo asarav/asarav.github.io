@@ -1,3 +1,15 @@
+- title: "Captain Marvel"
+  type: movie
+  completionDate: Apr 30, 2019
+  sourceDateAndInfo: Mar 8, 2019
+  source: https://www.imdb.com/title/tt4154664/
+  image: https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      Watching this before I watch Endgame. Captain Marvel is a movie that tries to do many things. It hits some notes, but it does not hit all of them.
+      There are enjoyable moments and moments where where it drags. There are great shots and scenes where the camerawork was not thought out all that well.
+      The special effects are impressive as always. The way Samuel L. Jackson was made to look younger was something that I found to be techincally notable.
+      I was skeptical of Brie Larson's casting, but she does well in her role as Carol Danvers. Overall, I liked it, but I thought it could have been better.
+      My guess is that important scenes had to be edited out for the theatrical cut, because it felt like something was missing.
 - title: "Sleeping Beauty"
   type: movie
   completionDate: Apr 28, 2019
@@ -807,3 +819,91 @@
   explanation: >
       Horror movies usually don't affect me, but I found the imagery in this film to be more effective than other entries in the genre.
       Since this was directed by William Friedkin, great camera work is to be expected. I can see why this film had staying power more than 40 years after it was released.
+- title: "Papo & Yo"
+  type: game
+  completionDate: Dec 25, 2018
+  sourceDateAndInfo: Aug 14, 2012
+  source: https://en.wikipedia.org/wiki/Papo_%26_Yo
+  image: https://upload.wikimedia.org/wikipedia/en/7/74/Papo_%26_Yo_cover.png
+  explanation: >
+      It's not the best game, but its usage of puzzles to tell a story made it entertaining.
+      The environments were beautiful and captured some of tlhe visual energy of favelas in Brazil.
+      A good showcase for Unreal Engine 3.
+- title: "Khan Academy: Matrices"
+  type: video
+  completionDate: Dec 25, 2018
+  sourceDateAndInfo:
+  source: https://www.youtube.com/watch?v=01c12NaUQDw&list=PLSQl0a2vh4HBVbBiN69qZXuiK-y9yS3zv
+  image: https://i.ytimg.com/vi/01c12NaUQDw/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCSSOjtOVXNmR9TvhDvG6jVH1jEzQ
+  explanation: >
+      Reviewed Matrices on the Khan Academy website to better improve my ability to comprehend the linear algebra lessons on Khan Academy.
+      Videos on determinants were particularly useful. I recommend completing this on the Khan Academy website rather than on youtube so that you can also practice with the online quizzes and tests.
+- title: "Upgrade"
+  type: movie
+  completionDate: Dec 24, 2018
+  sourceDateAndInfo: Jun 1, 2018
+  source: https://www.imdb.com/title/tt6499752/?ref_=nv_sr_1
+  image: https://m.media-amazon.com/images/M/MV5BMjI0NzcyMjM5Ml5BMl5BanBnXkFtZTgwMzk2NzAyNTM@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      A fun film that offers a glimpse into the future where automation, robotics, and neural interfaces are beginning to become more ubiquitous.
+      While the movie is not great, it is good. The story is thought provoking, the choreography was well organized, and it is entertaining from beginning to end.
+      If you have an hour and a half to spend, this film is a good way to spend it.
+- title: "Living with a SEAL: 31 Days Training with the Toughest Man on the Planet"
+  type: book
+  completionDate: Dec 24, 2018
+  sourceDateAndInfo: Jesse Itzler, Nov 3, 2015
+  source: https://www.goodreads.com/book/show/25066990-living-with-a-seal
+  image: https://images.gr-assets.com/books/1438693370l/25066990.jpg
+  explanation: >
+      This book went by quickly not only because it was short, but also because it was well written.
+      It provides in concrete terms the types of workouts David Goggins undergoes as well as an intro into the type of person Jesse Itzler is.
+      The book offers a clear representation of the numbers that need to be reached and the attitude with which to approach tough problems to reach the level David Goggins operates at.
+      I intend to incrementally work my way up to some of the numbers in this book and hopefully surpass them in the future.
+- title: "Spider-Man: Into the Spider-Verse"
+  type: movie
+  completionDate: Dec 23, 2018
+  sourceDateAndInfo: Dec 14, 2018
+  source: https://www.imdb.com/title/tt4633694/
+  image: https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      I was in absolute awe of the animation style the entire duration of the film.
+      The boundaries between 2d and 3d are seamlessly intertwined.
+      The hip hop soundtrack was much appreciated.
+      As someone who read many of the Spiderverse comics, I found this to be thoroughly enjoyable, and to have a great story.
+      Even if you aren't a fan of the source material, I feel that there is a lesson for everyone to take away from this movie.
+      Although this is missing characters like Silk, Anya, and Jessica Drew, I think their exclusion worked to the benefit of the film by preventing things from getting too complicated.
+      If the end credits is anything to go by, we'll have a sequel and I am looking forward to it.
+- title: "Essex County"
+  type: comic
+  completionDate: Dec 22, 2018
+  sourceDateAndInfo: Jan 14, 2009
+  source: https://comicvine.gamespot.com/essex-county/4050-27367/
+  image: https://static.comicvine.com/uploads/scale_small/9/93295/1665363-ec01_000.png
+  explanation: >
+      A trilogy of three interconnected stories that take place in Essex County in Ontario, Canada.
+      The stories are simple, somewhat surreal, and take place in different times.
+      Each deals with characters of different ages, and covers a large breadth of themes.
+      Although it doesn't tell a singular story, the comic makes up for this with compelling characters.
+- title: "Benjamin Franklin: An American Life"
+  type: book
+  completionDate: Dec 20, 2018
+  sourceDateAndInfo: Walter Isaacson, Jun 2004
+  source: https://www.goodreads.com/book/show/10883.Benjamin_Franklin
+  image: https://images.gr-assets.com/books/1397772877l/10883.jpg
+  explanation: >
+      My first Walter Isaacson biography. It covers Benjamin Franklin's life from beginning to end.
+      I found that I learned quite a bit about colonial and post independence America that I did not learn in grade school.
+      In school, our knowledge tends to be very America specific, so global events, France's involvement and Canada are covered in very little detail if any.
+      I also found the tips and tricks that Benjamin Franklin developped in regards to work to be very useful. Overall, I learned that Franklin's achievements extend past his actions during America's Revolutionary war.
+      Not only was he a politician, but he was a scientist, a printer, and a well rounded person who influenced many things we take for granted today.
+- title: "Elon Musk and Gayle King test drive his new Boring Company tunnel"
+  type: video
+  completionDate: Dec 19, 2018
+  sourceDateAndInfo: Dec 19, 2018
+  source: https://youtu.be/F0vkv-XclUg
+  image: https://i.ytimg.com/vi/F0vkv-XclUg/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBMCNdQEfpsXbjOs1n000FQMdxrhw
+  explanation: >
+      Watched the livestream on Dec 18 as well. You can find it <a href="https://youtu.be/nSIzsMlwMUY" target="_blank">here</a>. The test tunnel is very proof of concept.
+      The electric skates in the simulation are gone and replaced with a set of wheels that are attached to a Tesla.
+      The tunnel itself was disappointing, but the highlight of the show is the many-fold gains made in tunneling and boring technology.
+      I'm hoping that the actual tunnels are a far more refined and practical.
