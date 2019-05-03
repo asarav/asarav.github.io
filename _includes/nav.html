@@ -1,11 +1,17 @@
 <nav id="navbar" class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a class="navbar-brand" href="{{ '#' | relative_url }}">
                 asarav
             </a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div id="main-nav" class="collapse navbar-collapse in">
             <ul class="nav navbar-nav">
                 <li>
                     <a id="games-nav" href="{{ 'src/html/games.html' | relative_url }}">Games</a>

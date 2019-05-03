@@ -1565,3 +1565,46 @@
   explanation: >
       A film that offers subtle commentary on race relations. If you were to ignore the undertones, you will find that it is still a solid horror film.
       There are many details hidden throughout, so I recommend multiple viewings.
+- title: "Zero to One: Notes on Startups, or How to Build the Future"
+  type: book
+  completionDate: May 13, 2018
+  sourceDateAndInfo: Peter Thiel, Blake Masters, Sept 16, 2014
+  source: https://www.goodreads.com/book/show/18050143-zero-to-one?from_search=true
+  image: https://images.gr-assets.com/books/1414347376l/18050143.jpg
+  explanation: >
+      Details the challenges and what must be prioritized when starting a startup. I recommend watching the CS183B Stanford lectures after completing this.
+- title: "La La Land"
+  type: movie
+  completionDate: May 6, 2018
+  sourceDateAndInfo: Dec 25, 2016
+  source: https://www.imdb.com/title/tt3783958/
+  image: https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      Damien Chazelle delivers just like he did in Whiplash. The songs are catchy and they stick in your head days after you finish the movie.
+      Gosling's piano skills were extremely impressive and the absence of a hand double only added to its quality.
+- title: "Level Up Your Life: How to Unlock Adventure and Happiness by Becoming the Hero of Your Own Story"
+  type: book
+  completionDate: May 4, 2018
+  sourceDateAndInfo: Steve Kamb, Jan 12, 2016
+  source: https://www.goodreads.com/book/show/24615920-level-up-your-life?from_search=true
+  image: https://images.gr-assets.com/books/1445191285l/24615920.jpg
+  explanation: >
+      A well organized book about the advantages of gamification for acquiring skills and accomplishing goals.
+      It also manages to effectively explain why risks are a necessary part of the hero's journey.
+- title: "Crumb"
+  type: movie
+  completionDate: Apr 28, 2018
+  sourceDateAndInfo: April 28, 1995
+  source: https://www.imdb.com/title/tt0109508/?ref_=nv_sr_1
+  image: https://m.media-amazon.com/images/M/MV5BMjAzMzEzNzYzNV5BMl5BanBnXkFtZTcwNzQ1NzE1Mw@@._V1_.jpg
+  explanation: >
+      An interesting documentary about the cartoonist Robert Crumb.
+      Although it wasn't my cup of tea, I appreciated the how deeply the cartoonist's past and his relationship with his family was explored.
+- title: "Initial D Fourth Stage"
+  type: anime
+  completionDate: Mar 1, 2018
+  sourceDateAndInfo: Feb 18, 2006
+  source: https://myanimelist.net/anime/18/Initial_D_Fourth_Stage
+  image: https://cdn.myanimelist.net/images/anime/12/43927.jpg
+  explanation: >
+      The most refined show in the series in my opinion. The Eurobeat and the adrenaline pumping action does not let up. In addition to this, technical aspects of the mechanics of car racing are also covered in depth.
