@@ -1,3 +1,15 @@
+- title: "Fantasia"
+  type: movie
+  completionDate: May 3, 2019
+  sourceDateAndInfo: Jun 20, 1941
+  source: https://www.imdb.com/title/tt0032455/
+  image: https://m.media-amazon.com/images/M/MV5BYjhlYzNkOGEtZjNkZC00OTQ4LWJiMzEtMTM3YzBiM2FkMDUxXkEyXkFqcGdeQXVyNzY1NDgwNjQ@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      There is nothing else like it. The music was conducted by the legendary Leopold Stokowski, and the animation was on point.
+      For 1940, this level of fluidity and abstractness in an animation is absolutely mind blowing.
+      It's an experience that is unique and difficult to reproduce. It is one thing to film something and set it to music.
+      It is another to animate something to music.
+      In this work, the marriage of sound and image are treated in a highly expert fashion.
 - title: "Kaze ga Tsuyoku Fuiteiru"
   type: anime
   completionDate: May 3, 2019
@@ -1608,3 +1620,57 @@
   image: https://cdn.myanimelist.net/images/anime/12/43927.jpg
   explanation: >
       The most refined show in the series in my opinion. The Eurobeat and the adrenaline pumping action does not let up. In addition to this, technical aspects of the mechanics of car racing are also covered in depth.
+- title: "Falcon Heavy Test Flight"
+  type: video
+  completionDate: Feb 6, 2018
+  sourceDateAndInfo: Feb 6, 2018
+  source: https://www.youtube.com/watch?v=wbSwFU6tY1c
+  image: https://i.ytimg.com/vi/wbSwFU6tY1c/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC4pvZ7A0xKFwaAxNMgM31lCrM7Ww
+  explanation: >
+      One of the most memorable events of the year. I never thought the rocket would successfully take off. The climax was the simultaneous landing of the side boosters.
+      It would have been nice to see the center core land on the droneship, but 2/3 is still great. The shot of starman floating off into space was a good touch.
+      Space x's have been continuously getting better over the years and this launch proved that they could not only nail the launch, but the telemetry as well.
+- title: "Dunkirk"
+  type: movie
+  completionDate: Dec 9, 2017
+  sourceDateAndInfo: July 21, 2017
+  source: https://www.imdb.com/title/tt5013056/?ref_=nv_sr_1
+  image: https://m.media-amazon.com/images/M/MV5BN2YyZjQ0NTEtNzU5MS00NGZkLTg0MTEtYzJmMWY3MWRhZjM2XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_UX182_CR0,0,182,268_AL_.jpg"
+  explanation: >
+      Saw this in imax. Great film. Although this was not my favorite Nolan film, it easily is one of the most well made among his works.
+      The shots of the fighter planes were the most technical and impressive scenes in the film. Hans Zimmer's usage of the Shepard's tone could have been more emphasized.
+      I actually did not realize that a Shepard's tone was used until looking it up after the fact. Because of how drawn out the auditory illusion was, in many cases, it felt as if the effect of the illusion was diminished.
+- title: "Red Bull BC One World Final 2017: Amsterdam, Netherlands"
+  type: video
+  completionDate: Nov 4, 2017
+  sourceDateAndInfo: Nov 4, 2017
+  source: https://youtu.be/fHjI6u6ynR0
+  image: https://i.ytimg.com/vi/fHjI6u6ynR0/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC9wdOI9nWs2ddNgK3yal7dZVdylg
+  explanation: >
+      Menno wins again. There are some great battles in here, but it didn't feel all that satisfying. On the bright side, it did showcase the Netherland's hip hop culture which was great to see.
+- title: "Blade Runner 2049"
+  type: movie
+  completionDate: Oct 8, 2017
+  sourceDateAndInfo: Oct 6, 2017
+  source: https://www.imdb.com/title/tt1856101/?ref_=fn_al_tt_4
+  image: https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      Saw this in imax. An underrated film; just as great as the first. Probably the best experience I've had watching a film in a movie theatre. The custom Imax intro was a nice touch.
+      The sound engineering was incredible and allowed for the audience to feel the sound instead of simply hearing it. This is a movie that sticks in your head days after you see it.
+- title: "Making Life Multiplanetary"
+  type: video
+  completionDate: Sep 29, 2017
+  sourceDateAndInfo: Sep 29, 2017
+  source: https://www.youtube.com/watch?v=tdUX3ypDVwI
+  image: https://i.ytimg.com/vi/tdUX3ypDVwI/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCEwsuO6UdLMVB-AS2TUFWUB-Qgdg
+  explanation: >
+      Introduced a more realistic rendering of BFR. Also elaborated on how to improve the profitability of the new architecture.
+      Although earth to earth travel was hinted at in the 2016 IAC presentation, we were provided with more of an explanation on how it would work in this update.
+- title: "Making Humans a Multiplanetary Species "
+  type: video
+  completionDate: Sep 27, 2016
+  sourceDateAndInfo: Sep 27, 2016
+  source: https://youtu.be/H7Uyfqi_TE8
+  image: https://i.ytimg.com/vi/H7Uyfqi_TE8/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBGiSEDeDs6G_YBNvseJCYgCpRXoA
+  explanation: >
+      Introduction of Musk's plans to reach Mars. This was why Space X was created and it is great to see an actual system that has been designed to reach that goal in a realistic way.

@@ -1,3 +1,10 @@
+# Version 2.2.0
+* Update nav to be responsive.
+* Update footer to be fixed to bottom of the page.
+* Completely move consumption list over to yml.
+* Update contact section to be responsive.
+* Update about section to be more responsive.
+
 # Version 2.1.0
 * Update music to use yml for song listings.
 * Set up consumption list to begin using yml.

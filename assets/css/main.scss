@@ -25,12 +25,19 @@
                         transition: color 0.5s ease-in;
                     }
                 }
+
+                .navbar-toggle:focus, .navbar-toggle:hover {
+                    background-color: rgb(74, 125, 202);
+                }
             }
             .navbar-collapse {
                 padding-right: 0px;
                 ul {
                     float: right;
-                    transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;                        
+                    transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
+                    @media only screen and (max-width: 768px) {
+                        width: 100%;
+                    }
                     a:hover {
                         color: white;
                         background: black;
@@ -140,7 +147,6 @@
     }
 
     .tile-list {
-        margin-bottom: 20px;
         .tile {
             background-size: 100% 100%;
             opacity: 0.75;
@@ -221,7 +227,6 @@
         border-color: rgb(11, 56, 87);
         font-size: 20px;
         color: rgb(255, 255, 255);
-        position: fixed;
         width: 100%;
         bottom: 0;
         opacity: 0.95;
