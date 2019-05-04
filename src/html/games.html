@@ -23,7 +23,7 @@ style: assets/css/games.css
             </div>
             <div class="row screenshots">
                 {% for image in game.images %}
-                    <img class="col-xs-{{ 12 | divided_by: game.images.size }}" src="{{ image.src | relative_url }}">
+                    <img class="col-md-{{ 12 | divided_by: game.images.size }} col-xs-12" src="{{ image.src | relative_url }}">
                 {% endfor %}
             </div>
             <div class="row explanation">

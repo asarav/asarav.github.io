@@ -1,3 +1,6 @@
+# Version 2.2.1
+* Update games section to be more responsive.
+
 # Version 2.2.0
 * Update nav to be responsive.
 * Update footer to be fixed to bottom of the page.
