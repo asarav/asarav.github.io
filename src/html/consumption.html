@@ -13,9 +13,9 @@ style: assets/css/consumption.css
         <p>What I have read, watched or played at any particular time in the past that I considered to be of note.</p>
     </div>
 </div>
-<div class="consumption-list">
+<div class="consumption-list full-res">
     <div class="row item">
-        <label class="col-xs-2">Date of Viewing/Completion</label>
+        <label class="col-xs-12">Date of Viewing/Completion</label>
     </div>
     {% for item in site.data.consumption %}
         <div class="row item {{ item.type }}">
@@ -34,6 +34,35 @@ style: assets/css/consumption.css
             </div>
             <div class="col-xs-2 image">
                 <img src="{{ item.image }}">
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="consumption-list mobile-res">
+    {% for item in site.data.consumption %}
+        <div class="item {{ item.type }}">
+            <div class="row">
+                <div class="col-xs-12 date text-center">{{ item.completionDate }}</div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 header text-center">
+                    <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <sub>{{ item.sourceDateAndInfo }}</sub>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 image text-center">
+                    <img src="{{ item.image }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center explanation">
+                    {{ item.explanation }}
+                </div>
             </div>
         </div>
     {% endfor %}

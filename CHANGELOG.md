@@ -1,3 +1,7 @@
+# Version 2.3.0
+* Update music to be responsive.
+* Update consumption to be responsive.
+
 # Version 2.2.1
 * Update games section to be more responsive.
 

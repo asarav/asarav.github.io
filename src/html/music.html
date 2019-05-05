@@ -17,12 +17,30 @@ style: assets/css/music.css
 </div>
 <div class="music-list">
     {% for song in site.data.music %}
-        <div class="song">
+        <div class="song full-res">
             <div class="row audio">
                 <div class="col-xs-6 title">
                     {{ song.title }}
                 </div>
                 <div class="col-xs-6">
+                    <audio controls>
+                        <source src="{{ song.src | relative_url }}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+            <div class="row song-explanation">
+                <div class="col-xs-12">{{ song.explanation | markdownify }}</div>
+            </div>
+        </div>
+        <div class="song mobile-res">
+            <div class="row audio">
+                <div class="col-xs-12 title text-center">
+                    {{ song.title }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
                     <audio controls>
                         <source src="{{ song.src | relative_url }}" type="audio/mp3">
                         Your browser does not support the audio element.

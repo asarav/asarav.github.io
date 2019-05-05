@@ -16,7 +16,10 @@
     
             }
         }
-        .consumption-list {
+        .consumption-list.full-res {
+            @media only screen and (max-width: 768px) {
+                display: none;
+            }
             .item {
                 border: 4px solid rgb(6, 56, 112);
                 padding: 5px 5px 5px 5px;
@@ -41,12 +44,6 @@
                     }
                     @media only screen and (max-width: 800px) {
                         height: 575px;
-                    }
-                    @media only screen and (max-width: 700px) {
-                        height: 700px;
-                    }
-                    @media only screen and (max-width: 600px) {
-                        height: 825px;
                     }
                     .header {
                         a {
@@ -73,15 +70,49 @@
                         @media only screen and (max-width: 1100px) {
                             margin-left: 38%;
                         }
-                        @media only screen and (max-width: 768px) {
-                            margin-left: 48%;
-                        }
                     }
                 }
             }
             .item.video {
                 .image {
                   padding-top: 2px;
+                }
+            }
+        }
+
+        .consumption-list.mobile-res {
+            display: none;
+            @media only screen and (max-width: 768px) {
+                display: block;
+            }
+            .item {
+                border: 4px solid rgb(6, 56, 112);
+                margin-top: 5px;
+                .image {
+                    img {
+                        max-height: 280px;
+                        margin-top: 10px;
+                        margin-bottom: 15px;
+                    }
+                }
+                .date {
+                    font-size: 20px;
+                    margin-top: 10px;
+                    color: rgb(255, 234, 234);
+                }
+                .header {
+                    font-size: 23px;
+                }
+                .explanation {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+                hr {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    color: rgb(112, 158, 189);
+                    margin-left: 5px;
+                    margin-right: 5px;
                 }
             }
         }
