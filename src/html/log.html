@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
-    </head>
-    <body>
-        <h1>Status Log</h1>
-        <table style="width:100%">
-            <tr>
-            <th>Date:</th>
-            <th>Description:</th>
-            </tr>
-            <tr>
-            <td>5/25/18</td>
-            <td>Hold a Headstand for 1 minute</td>
-            </tr>
-        </table> 
-    </body>
-</html>
+---
+layout: default
+title: Status Log
+nav: nav.html
+footer: footer.html
+style: assets/css/log.css
+---
+<div class="jumbotron page-top">
+    <div class="log-preamble">
+        <h1 class="text-center">Status Log</h1>
+    </div>
+    <div class="log-explanation">
+        <p>Goals, Achievements, and Changes in Goals</p>
+    </div>
+</div>
+<div class="log">
+    {% for item in site.data.log %}
+        <div class="row">
+            <div class="date col-xs-12">{{ item.date }}</div>
+        </div>
+        <div class="row">
+            <div class="explanation col-xs-12">{{ item.explanation }}</div>
+        </div>
+    {% endfor %}
+</div>
