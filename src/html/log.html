@@ -15,11 +15,13 @@ style: assets/css/log.css
 </div>
 <div class="log">
     {% for item in site.data.log %}
+    <section id="{{ item.date }}">
         <div class="row">
-            <div class="date col-xs-12">{{ item.date }}</div>
+            <div class="date col-xs-12 text-center">{{ item.date }}</div>
         </div>
         <div class="row">
             <div class="explanation col-xs-12">{{ item.explanation }}</div>
         </div>
+    </section>
     {% endfor %}
 </div>

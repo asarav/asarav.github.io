@@ -10,5 +10,18 @@
             background-image: url('https://asarav.github.io/src/images/log/log.jpg');
             height: 350px;
         }
+        .log {
+            section {
+                margin-bottom: 25px;
+                .date {
+                    font-size: 22px;
+                    color: rgb(134, 201, 218);
+                    font-weight: bold;
+                }
+                .explanation {
+                    font-size: 17px;
+                }
+            }
+        }
     }
 }
