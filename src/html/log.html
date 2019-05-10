@@ -22,6 +22,10 @@ style: assets/css/log.css
         <div class="row">
             <div class="explanation col-xs-12">{{ item.explanation }}</div>
         </div>
+        <div class="row">
+            <img class="col-xs-12 col-sm-8 col-md-6" src="{{ item.image | relative_url }}">
+        </div>
     </section>
+    <hr>
     {% endfor %}
 </div>
