@@ -1,3 +1,77 @@
+- title: "Aladdin"
+  type: movie
+  completionDate: Jun 1, 2019
+  sourceDateAndInfo: Nov 25, 1992
+  source: https://www.imdb.com/title/tt0103639/
+  image: https://m.media-amazon.com/images/M/MV5BY2Q2NDI1MjUtM2Q5ZS00MTFlLWJiYWEtNTZmNjQ3OGJkZDgxXkEyXkFqcGdeQXVyNTI4MjkwNjA@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      I am gradually getting convinced that the Disney Renaissance was the best period for 2d animation at Disney.
+      Aladdin is unique in that it has a male protagonist.
+      It is set within the context of Arabian Nights, and the writers did not shy away from mentioning beheadings and the punishment of cutting off hands for stealing.
+      I found that rather interesting given that this is intended for children.
+      It is also a film that had celebrity voice actors that knocked it out of the park such as Robin Williams and Gilbert Gottfried.
+      The character design is slightly different from The Little Mermaid and Beauty and the Beast, and the animators went for a more flexible slapstick style when it came to movement.
+      CGI was also utilized during a time when the technology was still in its infancy.
+      This is definitely not a traditional Disney princess film, and it brings a lot of new things to the table.
+- title: "Learn Dutch Online: 1000 Most Common Words in Dutch"
+  type: video
+  completionDate: May 31, 2019
+  sourceDateAndInfo: 
+  source: https://youtu.be/k7t5HDxchqQ?list=PLUOa-qvvZolDeAYFOPqHRC9w8Nnx5cTcJ
+  image: https://i.ytimg.com/vi/1YJIOxOz6Oc/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBoc1Vd25ps7rOot7i_gDnKDdbOpQ
+  explanation: >
+      Pretty self explanatory. I don't remember everything, but I have a working knowledge that is close to adequate for understanding common phrases.
+      Next steps will probably involve drilling grammar or watching childrens shows.
+- title: "How to Adult- Home Economics"
+  type: video
+  completionDate: May 30, 2019
+  sourceDateAndInfo: 
+  source: https://youtu.be/xxiPG0EddoY?list=PLvdeRYvP0yPVmQLMFxIHyAfFEWUcgxcuO
+  image: https://i.ytimg.com/vi/4QxmleZeu9s/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLDyquMuAFL4t_Qq_dQJR-HtDPQ43A
+  explanation: >
+      Covers basic home economics related matters in a very accessible way.
+      Simple skills that you should learn, but don't are the point of this series.
+      While I wouldn't consider it an efficient way to cover the material, it seemed to do the job.
+- title: "The Fellowship of the Ring"
+  type: book
+  completionDate: May 30, 2019
+  sourceDateAndInfo:  J.R.R. Tolkien, Jul 29, 1954
+  source: https://www.goodreads.com/book/show/34.The_Fellowship_of_the_Ring
+  image: https://images.gr-assets.com/books/1298411339l/34.jpg
+  explanation: >
+      The level of depth in this work is incredible given how accessible the story is.
+      It does not use overly sophisticated language, but it still manages to fit in an entire universe worth of lore without coming across as overwhelming.
+      Unlike the films, there is a greater emphasis on the hobbits instead of Aragorn which seems appropriate to me because they make more suitable heroes if one is going off of Joseph Campbell's work in The Hero with a Thousand Faces.
+      One thing that I noticed here that I did not notice when watching the film was how there seemed to be a strange emphasis on race that borders on racism.
+      I don't think this is intentional, but it is noticeable.
+      Reading this gave me greater respect for the film.
+      There are parts of this that I would have thought were unadaptable, but somehow Peter Jackson managed to make it work.
+- title: "The Diamond Age: Or, A Young Lady's Illustrated Primer"
+  type: book
+  completionDate: May 28, 2019
+  sourceDateAndInfo: Neal Stephenson, Feb, 1995
+  source: https://www.goodreads.com/book/show/827.The_Diamond_Age
+  image: https://images.gr-assets.com/books/1388180931l/827.jpg
+  explanation: >
+      My first Neal Stephenson book. This comes across almost as a steampunk story where the steam is replaced with nanotechnology.
+      The oppressed groups are there, and the young child getting abused is also there (although she isn't an orphan).
+      Emotionally, this book is kind of stunted, but the world building and detail is on another level.
+      The adventures Nell goes on through the Primer are entertaining and offer a hint of what one may consider a decent education to be.
+      One complaint I have is that although Neal Stephenson has pages upon pages of great descriptive imagery, his technical descriptions are lacking in rigor.
+      Another complaint I have is pacing. The last parts of the novel came quickly and brought no closure.
+      I guess maybe the reader is supposed to figure all that out on their own, because the end comes suddenly and mercilessly without allowing the reader a chance to take it in.
+- title: "AMD Keynote at Computex 2019 in 9 minutes"
+  type: video
+  completionDate: May 27, 2019
+  sourceDateAndInfo: May 26, 2019
+  source: https://youtu.be/3qqBijKHuHM
+  image: https://i.ytimg.com/vi/3qqBijKHuHM/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCbz7X9iWvyQDCwbJwvH6H3qilLFA
+  explanation: >
+      Oh boy, does Intel and NVIDIA have competition.
+      AMD is now at 7nm while Intel is stuck at 14nm.
+      NVIDIA is currently at 12nm.
+      With updates to ZEN 2 EPYC, Ryzen processors and the introduction of NAVI, prices better be going down now on Intel and NVIDIA's side.
+      I'm really excited to see how Intel and NVIDIA fire back (if they can).
 - title: "Life Itself"
   type: movie
   completionDate: May 27, 2019
