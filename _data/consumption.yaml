@@ -1,3 +1,67 @@
+- title: "Joe Rogan Experience #1309 - Naval Ravikant"
+  type: video
+  completionDate: Jun 9, 2019
+  sourceDateAndInfo: Jun 4, 2019
+  source: https://youtu.be/3qHkcs3kG44
+  image: https://i.ytimg.com/vi/3qHkcs3kG44/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLD3Rr43k615FAvP1dU2BG0HFBxYrg
+  explanation: >
+      A thoughtful conversation with Naval Ravikant about freedom, the future of society, suffering and what is life.
+      It also covers technology and how the world will change.
+      Naval Ravikant has a libary's worth of aphorisms and quotes to offer, making his experiences very valuable for someone who is in the same places he was when he was younger.
+- title: "Chrono Trigger"
+  type: game
+  completionDate: Jun 8, 2019
+  sourceDateAndInfo: Mar 11, 1995
+  source: https://en.wikipedia.org/wiki/Chrono_Trigger
+  image: https://upload.wikimedia.org/wikipedia/en/a/a7/Chrono_Trigger.jpg
+  explanation: >
+      One of the best on the SNES. It is as great as FFVI if not better.
+      The music was iconic, the character development was well thought out and each character had weight and importance to the player.
+      The idea of a time traveling antagonist is genius. We've seen this trope more in Japanese culture, but in American films, this trope is very rare, making it feel novel.
+      Lavos is one of the best villains ever. It does not say a word, but it had presence.
+      In terms of depth, it is not as deep as FFVI, but I think that was perfectly fine because there was no grinding involved.
+      The game mechanics accomplished their goal and a great story was told.
+      The addition of the FMV's and multiple endings was much appreciated.
+      Definitely a game everyone should play once in their lives.
+      The details and complexities of the plot lead to some interesting <a href="https://youtu.be/x-Sp62q2FAY" target="_blank">theories</a> too.
+- title: "Pinocchio"
+  type: movie
+  completionDate: Jun 8, 2019
+  sourceDateAndInfo: Feb 23, 1940
+  source: https://www.imdb.com/title/tt0032910/
+  image: https://m.media-amazon.com/images/M/MV5BMTU4Mzk3ODIyOF5BMl5BanBnXkFtZTgwODgyNzk2NjE@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+      This ends my foray into Disney's 2d animation. I don't have much to say about this one other than that it seems to embody everything that Disney represents as a brand.
+      Stylistically, it is very similar to Snow Snow White and the Seven Dwarfs, but unlike that film, there are great lessons that everyone can take away from this film.
+- title: "How to Adult- Finances"
+  type: video
+  completionDate: Jun 7, 2019
+  sourceDateAndInfo: 
+  source: https://www.youtube.com/watch?v=vqbg1-2J_SQ&list=PLvdeRYvP0yPXq_XulO_dtHEAukwE_Hb-5&index=2&t=0s
+  image: https://i.ytimg.com/vi/vqbg1-2J_SQ/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLBLI-HZPEHsrHw4QvUVZDhhFrqnjw
+  explanation: >
+      Covers basic finances in the U.S. in an accessible way. Taxes, and saving cash are covered in detail.
+- title: " The Two Towers (The Lord of the Rings #2)"
+  type: book
+  completionDate: Jun 5, 2019
+  sourceDateAndInfo:  J.R.R. Tolkien, Nov 11, 1954
+  source: https://www.goodreads.com/book/show/15241.The_Two_Towers
+  image: https://images.gr-assets.com/books/1298415523l/15241.jpg
+  explanation: >
+      The second entry in the Lord of the Rings. A really great read that expands on characters in a way the movies just couldn't.
+      The lore is presented in greater detail, and it is just a fine adventure that doesn't get majorly sidetracked.
+      Only complaint I have is that sometimes it focuses too much on description instead of the actions of the characters, but this adds to the world building, so it can be easily forgiven.
+      From Helms Deep to the Ents to the taming of Smeagol, this book is just consistently high quality. For me, it was better than The Fellowship of the Ring.
+- title: "Mob Psycho 100 II"
+  type: anime
+  completionDate: Jun 2, 2019
+  sourceDateAndInfo: Apr 1, 2019
+  source: https://myanimelist.net/anime/37510/Mob_Psycho_100_II?q=mob%20psycho
+  image: https://cdn.myanimelist.net/images/anime/1918/96303.jpg
+  explanation: >
+      Mob as a middle schooler with psychic powers returns in the second season.
+      The fights are scaled up on a level that you would only see in the final battles of shounen manga.
+      Despite the scale, the work stands by its principles and keeps its comedic senses without getting too serious.
 - title: "Aladdin"
   type: movie
   completionDate: Jun 1, 2019
@@ -32,7 +96,7 @@
       Covers basic home economics related matters in a very accessible way.
       Simple skills that you should learn, but don't are the point of this series.
       While I wouldn't consider it an efficient way to cover the material, it seemed to do the job.
-- title: "The Fellowship of the Ring"
+- title: " The Fellowship of the Ring (The Lord of the Rings #1)"
   type: book
   completionDate: May 30, 2019
   sourceDateAndInfo:  J.R.R. Tolkien, Jul 29, 1954
@@ -386,7 +450,7 @@
   source: https://www.imdb.com/title/tt0332452/
   image: https://m.media-amazon.com/images/M/MV5BMTk5MzU1MDMwMF5BMl5BanBnXkFtZTcwNjczODMzMw@@._V1_UX182_CR0,0,182,268_AL_.jpg
   explanation: >
-      It's not a good movie. It's not even a great one. But at least it had a Trojan horse. Other than that, it was a complete waste of 3 hours.
+      It's not a great movie. It's not even a good one. But at least it had a Trojan horse. Other than that, it was a complete waste of 3 hours.
 - title: "Kara no Kyoukai: Mirai Fukuin"
   type: anime
   completionDate: Apr 21, 2019
@@ -1473,6 +1537,25 @@
   image: https://m.media-amazon.com/images/M/MV5BMjIxNDU2Njk0OV5BMl5BanBnXkFtZTgwODc3Njc3NjE@._V1_UY268_CR0,0,182,268_AL_.jpg
   explanation: >
      An entertaining animation that takes place during the cold war. I watched this so that I could get more of the references in Ready Player One. It's not anything ground breaking, but it was a good time. Usage of CGI was a nice touch.
+- title: "Pop Team Epic"
+  type: anime
+  completionDate: Sep 22, 2018
+  sourceDateAndInfo: Mar 25, 2018
+  source: https://myanimelist.net/anime/35330/Poputepipikku?q=pop%20team
+  image: https://cdn.myanimelist.net/images/anime/3/88816.jpg
+  explanation: >
+      A great time waster where the animators and the voice actors basically just had fun with the whole concept.
+      Episodes are about 12 minutes each, making it a nice way to fill time.
+      People just took their ideas and ran with it. It's difficult to explain, but I think most people will either enjoy it or be weirded out.
+- title: "Mob Psycho 100"
+  type: anime
+  completionDate: Sep 16, 2018
+  sourceDateAndInfo: Sep 27, 2016
+  source: https://myanimelist.net/anime/32182/Mob_Psycho_100
+  image: https://cdn.myanimelist.net/images/anime/8/80356.jpg
+  explanation: >
+      Similar to Saiki Kusuo and One Punch Man. Since it was made by the same person as One Punch Man, you will find many similarities.
+      There are comedic moments as well as highly elaborate action scenes that can take on any scale due to the combination of fluid animation and simplistic details in backgrounds.
 - title: "Khan Academy: Multivariable Calculus"
   type: video
   completionDate: Sep 15, 2018
