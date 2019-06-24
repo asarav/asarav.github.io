@@ -1,3 +1,60 @@
+- title: "Python in 1 Video"
+  type: video
+  completionDate: Jun 24, 2019
+  sourceDateAndInfo: Nov 10, 2014
+  source: https://youtu.be/N4mEzFDjqtA
+  image: https://i.ytimg.com/vi/N4mEzFDjqtA/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBJpUm83Xlc4vizIBwzf1LMbwJ5yQ
+  explanation: >
+      Covers python quickly and efficiently.
+      I personally find the syntax of python to be very infuriating despite the fact that I've used it in the past, so this review was very valuable for me.
+      Despite the video being a few years old, it thankfully does not cover the older 2.7 version.
+- title: "Structures: Or Why Things Don't Fall Down"
+  type: book
+  completionDate: Jun 24, 2019
+  sourceDateAndInfo: J.E. Gordon, Jul 10, 2003
+  source: https://www.goodreads.com/book/show/245344.Structures
+  image: https://images.gr-assets.com/books/1432906218l/245344.jpg
+  explanation: >
+      A very accessible book about structural engineering and the many considerations that go into structures.
+      It covers not only buildings, but vehicles and biological systems.
+      Readers will leave with knowledge of what stress and strain is.
+      In addition to this, aesthetic decisions and the art that goes into structures is spoken about at some length.
+      The only thing it does not cover is how materials behave at different temperatures, but it might have been intentional to leave that out due to the complexities of thermodynamics.
+- title: "Ghost in the Shell: Arise - Border:2 Ghost Whispers"
+  type: anime
+  completionDate: Jun 23, 2019
+  sourceDateAndInfo: Nov 30, 2013
+  source: https://myanimelist.net/anime/19191/Koukaku_Kidoutai_Arise__Ghost_in_the_Shell_-_Border_2_Ghost_Whispers
+  image: https://cdn.myanimelist.net/images/anime/8/52135.jpg
+  explanation: >
+      This series is starting to grow on me.
+      I find it quite a bit more enjoyable when I consider it as an episode in the context of a series instead of a standalone film.
+      This entry is bigger and more action packed than the first film.
+      Action sequences are well thought out and coordinated in a way that is only comparable to The Matrix.
+      You'd have to wonder which work drew its influence from which.
+      We also start seeing mentions of the concept of a ghost which may mean that quality will be increasing in the following films.
+      The soundtrack by Cornelius is also starting to improve.
+- title: "Coco"
+  type: movie
+  completionDate: Jun 23, 2019
+  sourceDateAndInfo: Nov 22, 2017
+  source: https://www.imdb.com/title/tt2380307/
+  image: https://m.media-amazon.com/images/M/MV5BYjQ5NjM0Y2YtNjZkNC00ZDhkLWJjMWItN2QyNzFkMDE3ZjAxXkEyXkFqcGdeQXVyODIxMzk5NjA@._V1_UY268_CR3,0,182,268_AL_.jpg
+  explanation: >
+      A solid film albeit a bit predictable.
+      From a technical standpoint, it does not disappoint.
+      Images are vibrant and movement is fluid.
+      As a guitar player, this definitely played to my tastes and some of the songs were catchy.
+      Story-wise, it does not do anything groundbreaking and I was able to figure out what would happen in the third act because it dropped too many hints.
+      Portrayals of Mexico tend to be rather negative in Hollywood, so this film with its bright colors, positive outlook on death and emphasis on family is a welcome change.
+- title: "MySQL in 1 Video"
+  type: video
+  completionDate: Jun 22, 2019
+  sourceDateAndInfo: Aug 29, 2014
+  source: https://youtu.be/yPu6qV5byu4
+  image: https://i.ytimg.com/vi/yPu6qV5byu4/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAOmnIUvHc0eE3ULjybD3jzWtGu2w
+  explanation: >
+      Overview of mysql that does not mince words. Great way to review sql and database concepts.
 - title: "Ghost in the Shell: Arise - Border 1: Ghost Pain"
   type: anime
   completionDate: Jun 17, 2019
