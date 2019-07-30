@@ -13,3 +13,5 @@ To run with live reload, use the following:
 
 To update dependencies use the following:
 ```bundle update```
+
+Note: This repo must be public for github pages to publish the pages for free. If you want to make the repo public, you must pay for the pages to publish.
