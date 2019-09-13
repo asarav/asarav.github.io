@@ -1,3 +1,35 @@
+- title: "Pokémon Detective Pikachu"
+  type: movie
+  completionDate: Sep 9, 2019
+  sourceDateAndInfo: May 10, 2019
+  source: https://www.imdb.com/title/tt5884052/
+  image: https://m.media-amazon.com/images/M/MV5BNDU4Mzc3NzE5NV5BMl5BanBnXkFtZTgwMzE1NzI1NzM@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    I enjoyed the visual style of this.
+    Story wise, it was not anything special, but I thought it was true to the spirit of the branch.
+    Ryan Reynolds was enjoyable at Detective Pikachu.
+    It was not a bad movie, but I wouldn't consider it a good one either.
+- title: "Mission: Impossible - Fallout"
+  type: movie
+  completionDate: Sep 8, 2019
+  sourceDateAndInfo: Jul 27, 2018
+  source: https://www.imdb.com/title/tt4912910/
+  image: https://m.media-amazon.com/images/M/MV5BNjRlZmM0ODktY2RjNS00ZDdjLWJhZGYtNDljNWZkMGM5MTg0XkEyXkFqcGdeQXVyNjAwMjI5MDk@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    Tom Cruise is getting older, but his stunts are getting more and more elaborate. Fallout is, in my opinion, a great example of Hollywood style action.
+    Set pieces are great and the locations are well thought out. Camera work is deliberate and everything seems to have been well thought out.
+    It works as a thriller that does almost everything right. I think the last time I was thoroughly impressed with stunt work like I've seen here was John Wick 2.
+- title: "Borderlands 2"
+  type: game
+  completionDate: Sep 7, 2019
+  sourceDateAndInfo: Sep 18, 2012
+  source: https://en.wikipedia.org/wiki/Borderlands_2
+  image: https://upload.wikimedia.org/wikipedia/en/7/77/Borderlands2boxart3.jpg
+  explanation: >
+    Probably the last game I will have the time to complete for a while. Borderlands 2 is like Borderlands 1, but it is bigger and seems to have an emphasis on coop play.
+    This can make it frustrating for anyone who is playing solo. Also, because of the lack of weapons types and abilities, it can come across as repetitive.
+    In terms of the looter shooter genre, this seems to be one of the best, but I think it was definitely made for multiplayer.
+    It has much of the same type of humor as the previous entry, but if you want to live in the world of Pandora without dealing with some of the more frustrating elements of the game, you might be better off playing Tales from the Borderlands instead.
 - title: "Orbital Rings"
   type: video
   completionDate: Aug 31, 2019
@@ -103,7 +135,7 @@
   explanation: >
       Spent over 4 months to complete this.
       This covers statistics from the basics to ANOVA. It does not cover MANOVA or other multivariate techniques, but it does cover regression techniques.
-      Also thoroughly covers combinatorics and probability theory.
+      Also thoroughly covers combinatorics and basic probability theory.
 - title: "Glory"
   type: movie
   completionDate: Aug 10, 2019
