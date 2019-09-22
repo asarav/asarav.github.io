@@ -1,3 +1,49 @@
+- title: "Unforgiven"
+  type: movie
+  completionDate: Sep 22, 2019
+  sourceDateAndInfo: Aug 7, 1992
+  source: https://www.imdb.com/title/tt0105695/
+  image: https://m.media-amazon.com/images/M/MV5BODM3YWY4NmQtN2Y3Ni00OTg0LWFhZGQtZWE3ZWY4MTJlOWU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    In the 50's and 60's, Westerns were a more romanticized genre that had a certain veneer about it. In the 60's and 70's, the western became more violent, but also more stylized.
+    This film draws from those eras, but also adds a dose of realism and cynicism to its voice.
+    In addition to being directed by Clint Eastwood, it was written by David Webb Peoples who was one of the writers of Blade Runner.
+    Unforgiven is a film that is on the level of other great Westerns like The Searchers and The Good, the Bad and the Ugly.
+    I found its third act to be particularly well done and thought the dialogue was better written than some of the classic Westerns directed by John Ford and Sergio Leone.
+- title: "The 400 Blows"
+  type: movie
+  completionDate: Sep 21, 2019
+  sourceDateAndInfo: May 4, 1959
+  source: https://www.imdb.com/title/tt0053198/
+  image: https://m.media-amazon.com/images/M/MV5BYTQ4MjA4NmYtYjRhNi00MTEwLTg0NjgtNjk3ODJlZGU4NjRkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UY268_CR10,0,182,268_AL_.jpg
+  explanation: >
+    Although this is a tale of adolescence, it doesn't fall within the traditional trope of a coming of age story.
+    In that sense, it is somewhat subversive, but the story is not the strongest point of this film.
+    The strongest aspect of this film is the camera work.
+    The way the objects inside of the frame tell the story and the way movement is used is quite different from other films during the time that played things by the book.
+    I had flashbacks to Scorsese and Kubrick films that used similar shots, but came after this film was released.
+    There is an obvious stylistic influence on directors who saw this film during their formative years and its role as a film that is representative of the French New Wave is well deserved.
+- title: "Algorithms to Live By: The Computer Science of Human Decisions"
+  type: book
+  completionDate: Sep 20, 2019
+  sourceDateAndInfo: Brian Christian, Tom Griffiths, Apr 19, 2016
+  source: https://www.goodreads.com/book/show/25666050-algorithms-to-live-by
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1454296875l/25666050.jpg
+  explanation: >
+    A great overview of how algorithms affect every part of our lives and how we can use algorithms to make life easier.
+    This covers a large amount of modern algorithms and the problems they try to solve.
+    It also explains tractable and intractable problems in simple terms without getting too mathematical.
+    I found it to be a great companion piece to the classes I am taking right now.
+- title: "Multi-Agent Hide and Seek"
+  type: video
+  completionDate: Sep 18, 2019
+  sourceDateAndInfo: Sep 17, 2019
+  source: https://youtu.be/kopoLzvh5jY
+  image: https://i.ytimg.com/vi/kopoLzvh5jY/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDS7subwzUVsyJtrZK24YcJyTeT1A
+  explanation: >
+    I just think this is cool. It shows how important an environment is for an agent to learn in addition to the actual way trials are carried out.
+    Anything that is input can become an incentive or a consequence.
+    The concluding point that simple rules can lead to high levels of intelligence makes me wonder if general AI is a significantly simpler problem than most people think.
 - title: "Pokémon Detective Pikachu"
   type: movie
   completionDate: Sep 9, 2019
