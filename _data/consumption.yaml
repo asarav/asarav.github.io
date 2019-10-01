@@ -1,3 +1,63 @@
+- title: "10 Steps to Earning Awesome Grades (While Studying Less)"
+  type: book
+  completionDate: Oct 1, 2019
+  sourceDateAndInfo: Thomas Frank, Jan 5, 2015
+  source: https://www.goodreads.com/book/show/24377513-10-steps-to-earning-awesome-grades
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1430761174l/24377513.jpg
+  explanation: >
+    A short book about useful habits and strategies to optimize the learning process to excell in classes.
+    Most of these I am already doing, but the chapters on scheduling and note taking were useful.
+    It reminded me that a purely algorithmic approach to optimize studying without taking human behavior into account will have limited results.
+- title: "Starship Update"
+  type: video
+  completionDate: Sep 29, 2019
+  sourceDateAndInfo: Sep 28, 2019
+  source: https://youtu.be/sOpMrVnjYeY
+  image: https://i.ytimg.com/vi/sOpMrVnjYeY/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCt8Gws-7fWERHgySzlzjK_WrIXxw
+  explanation: >
+    I was unable to watch this live due to the time differences.
+    Musk starts off with his usual spiel about being a multiplanetary species, but once he finishes with that, he gets down to details and presents the technical details.
+    The largest improvement in the Starship design is the usage of 301 stainless steel which is far cheaper than whatever carbon composite or aluminium composite that was being considered before.
+    This presentation also covers the design of the heat shield to prevent cracking under extreme heat.
+    Interestingly, Musk mentioned that refueling in orbit is more trivial than docking with the space station.
+    Finally, another simulation involving the Superheavy and Starship has been made with the updated designs.
+    Some of the timelines presented here are ambitious even for Musk, but if it is him, we may see a fully functional Starship Superheavy combo in 2 years.
+    On another note, I really liked what he said about schedules. If it's long, it's wrong. If it's tight, it's right.
+- title: "Matlab in 1 hour"
+  type: video
+  completionDate: Sep 28, 2019
+  sourceDateAndInfo: Dec 1, 2018
+  source: https://youtu.be/NSSTkkKRabI
+  image: https://i.ytimg.com/vi/NSSTkkKRabI/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCJF8js_iU-bE5CjJqnU9qSHNecRw
+  explanation: >
+    Matlab is a scripting language primarily used for mathematical tasks.
+    This video covers every thing from the data structures to classes and even briefly covers plotting with Matlab.
+    I don't remember everything, but I remember the quirks of the syntax and how printing works.
+    For everything else, I can just look at the documentation, so this video did its job.
+- title: "Superhot"
+  type: game
+  completionDate: Sep 28, 2019
+  sourceDateAndInfo: Feb 25, 2016
+  source: https://en.wikipedia.org/wiki/Superhot
+  image: https://steamcdn-a.akamaihd.net/steam/apps/322500/header.jpg?t=1560763199
+  explanation: >
+    A game that is short enough that I could finish it between breaks.
+    Superhot is a game that manages to do a lot with a simple premise and in the process, it ends up being very thought provoking even though the the story is rather simple.
+    The primary mechanic is that time will only flow when you move. This allows you to dodge bullets, cut bullets out of the air with a sword, and do things that wouldn't be possible with a traditional fps.
+    Later in the game, you gain the ability to transfer your conciousness to enemy characters which adds another layer of freedom to the game.
+    I found this to be very similar to the Matrix despite in being not as wordy or philosophical. Great way to let off steam.
+- title: "Essence of linear algebra"
+  type: video
+  completionDate: Sep 26, 2019
+  sourceDateAndInfo: Sep 24, 2016
+  source: https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
+  image: https://i.ytimg.com/vi/fNk_zzaMoSs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCtdfsYln8MFpBTTekqYAXqvFyuHg
+  explanation: >
+    A graphical explanation of linear algebra that can be used to build a more visual intuition of the subject.
+    I found the first few videos the most useful, but it is a solid series throughout.
+    I recommend watching it from the beginning in order to have a good understanding of the fundamentals.
+    I used it to gain a better understanding of eigenvectors and eigenvalues myself.
+    I really wish 3Blue1Brown can do videos on probability theory.
 - title: "Unforgiven"
   type: movie
   completionDate: Sep 22, 2019
