@@ -1,3 +1,57 @@
+- title: "Late Bloomers: The Power of Patience in a World Obsessed with Early Achievement"
+  type: book
+  completionDate: Oct 17, 2019
+  sourceDateAndInfo: Rich Karlgaard, Apr 16, 2019
+  source: https://www.goodreads.com/en/book/show/40597806-late-bloomers
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1544101987l/40597806.jpg
+  explanation: >
+    A book that examines society's harmful obsession with early achievement and identifies late bloomers as a large segment of the population.
+    Reading this enforced my understanding that humans are the sum of their experiences and that you can bloom not only early or late, but throughout life.
+    What matters is that you have many different experiences throughout life and a chance to explore and find out what you are good at.
+- title: "What Remains of Edith Finch"
+  type: game
+  completionDate: Oct 14, 2019
+  sourceDateAndInfo: Apr 25, 2017
+  source: https://en.wikipedia.org/wiki/What_Remains_of_Edith_Finch
+  image: https://upload.wikimedia.org/wikipedia/en/7/7c/What_Remains_of_Edith_Finch.png
+  explanation: >
+    A really short game with less than 2 hours of playtime from beginning to end.
+    Within those two hours, it managed to remind me of dreams I had as a child, and the imagination I used to have when I was younger.
+    This game successfully captures the story of an entire family while also taking a walking simulator and improving it with alternate perspectives and new approaches to exploration.
+    It is an accomplishment to show the beauty of life within two hours, and the only other games I can think of as doing the same thing are those by Jenova Chen.
+    The design and layout of the house is not only great in terms of progression, but it seems exactly like the type of house I would have loved to have lived in as a child.
+- title: "My Friend Pedro"
+  type: game
+  completionDate: Oct 11, 2019
+  sourceDateAndInfo: Jun 20, 2019
+  source: https://en.wikipedia.org/wiki/My_Friend_Pedro
+  image: https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/My_Friend_Pedro.jpg/330px-My_Friend_Pedro.jpg
+  explanation: >
+    Another short game that I could fit between breaks to take my mind off of things. I remember when My Friend Pedro was a flash game, and it is good to see it come back as a full fledged game.
+    Outside of the standard 2d side scrolling bullet time action, there are additional mechanics that are introduced to keep everything fresh.
+    It has style, but it also has substance in its gameplay.
+    Like Superhot, it has a short playthrough, but a lot of great replay value.
+- title: "Essence of calculus"
+  type: video
+  completionDate: Oct 7, 2019
+  sourceDateAndInfo: May 19, 2018
+  source: https://www.youtube.com/watch?v=WUvTyaaNkzM&list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr
+  image: https://i.ytimg.com/vi/WUvTyaaNkzM/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCJQPnlOd_TW4eYkOXsbY0HBrgzrw
+  explanation: >
+    Another series by 3Blue1Brown. This time, he uses a visual approach to calculus.
+    This is rather thorough and covers all the staples.
+    Derivatives, limits, integration, and Taylor series are each provided at least one video.
+- title: "Peter Norvig: Artificial Intelligence: A Modern Approach | Artificial Intelligence (AI) Podcast"
+  type: video
+  completionDate: Oct 5, 2019
+  sourceDateAndInfo: Sep 30, 2019
+  source: https://youtu.be/_VPxEcT_Adc
+  image: https://i.ytimg.com/vi/_VPxEcT_Adc/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAaMgm8KQRsu_4tacQKo4Lk_gqB4Q
+  explanation: >
+    I am currently using Artificial Intelligence A Modern Approach in one of my classes, so the timing of this podcast ended up working out extremely well.
+    This podcast helped me understand what Peter Norvig's priorities are and how he views education of computer science related topics.
+    It also helped to highlight some of the shortcomings of the class I am taking right now which emphasizes technique without philosophy.
+    There is a reason why his textbooks include a section on philosophy, and the fact that he made a point of that in this podcast shows that blindly using the techniques within his textbook without any considerations of implications they may bring is mistaken.
 - title: "10 Steps to Earning Awesome Grades (While Studying Less)"
   type: book
   completionDate: Oct 1, 2019
@@ -20,7 +74,7 @@
     The largest improvement in the Starship design is the usage of 301 stainless steel which is far cheaper than whatever carbon composite or aluminium composite that was being considered before.
     This presentation also covers the design of the heat shield to prevent cracking under extreme heat.
     Interestingly, Musk mentioned that refueling in orbit is more trivial than docking with the space station.
-    Finally, another simulation involving the Superheavy and Starship has been made with the updated designs.
+    Finally, another <a href="https://www.youtube.com/watch?v=wzFQJUzoUvM" target="_blank">simulation</a> involving the Superheavy and Starship has been made with the updated designs.
     Some of the timelines presented here are ambitious even for Musk, but if it is him, we may see a fully functional Starship Superheavy combo in 2 years.
     On another note, I really liked what he said about schedules. If it's long, it's wrong. If it's tight, it's right.
 - title: "Matlab in 1 hour"
