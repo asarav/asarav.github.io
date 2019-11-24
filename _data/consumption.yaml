@@ -1,3 +1,47 @@
+- title: "AlphaGo"
+  type: movie
+  completionDate: Nov 23, 2019
+  sourceDateAndInfo: Sep 29, 2017
+  source: https://www.imdb.com/title/tt6700846/
+  image: https://m.media-amazon.com/images/M/MV5BYTU3ZjUxM2MtZWQ5OS00NDQxLTlhZDMtYzY3OTE4ZDY0NWM1XkEyXkFqcGdeQXVyMTc2NDg4MTU@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    This is a good documentary that covers the five games played by AlphaGo and the preparation that occurred before the games.
+    It does not get too technical, but it does go over the three network architecture of the agent.
+    This film is more focused on the go side of things, but the opinions and commentary of Lee Sedol and Fan Hui were useful.
+    It provided an inside look that could not be seen by watching the games.
+    This was overall an enjoyable experience and made me excited to learn about reinforcement learning over the next few weeks.
+- title: "The Man from Earth: Holocene"
+  type: movie
+  completionDate: Nov 17, 2019
+  sourceDateAndInfo: Jan 15, 2018
+  source: https://www.imdb.com/title/tt5770864/
+  image: https://m.media-amazon.com/images/M/MV5BYzUxNmQxYzQtZmFmZi00MmMwLTgyM2YtMjdiNzQ4ZWJkYTg0XkEyXkFqcGdeQXVyMDgyMjg4Nw@@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    The Man from Earth was a great thought provoking film. This sequel was not that.
+    There are a few instances that felt like the first film, but this simply does not measure up due to what I can only call lazy writing.
+    I'm not sure why this movie exists.
+- title: "Let's learn D3.js - D3 for data visualization (full course)"
+  type: video
+  completionDate: Nov 17, 2019
+  sourceDateAndInfo: Apr 23, 2018
+  source: https://youtu.be/C4t6qfHZ6Tw
+  image: https://i.ytimg.com/vi/C4t6qfHZ6Tw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBWLA1Z9ItODtLjl9z35Pklbunbcw
+  explanation: >
+    I used D3 when working as an engineer, but I need a refresher since I will be taking a course in Data Visualization and the library has had some changes since.
+    Also, chances are that I will need to use more complex geometry than I did at work, so this was useful for building a good foundation.
+    This tutorial is nothing special, but it is brief.
+    Covers basic graphs, scales, and axes. Circular graphs are not covered at the level of detail I would have liked.
+- title: "Elon Musk: Neuralink, AI, Autopilot, and the Pale Blue Dot | Artificial Intelligence (AI) Podcast"
+  type: video
+  completionDate: Nov 13, 2019
+  sourceDateAndInfo: Nov 12, 2019
+  source: https://youtu.be/smK9dgdTl40
+  image: https://i.ytimg.com/vi/smK9dgdTl40/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCyZtp3N_YQEkPVtFohYivefgK1vA
+  explanation: >
+    This was a conversation about Neuralink which covered the future of human augmentation.
+    There was a bit about Tesla's work to have their cars navigate parking lots, but this podcast was mostly about Neuralink.
+    As a fan of Ghost in the Shell and Deus Ex, it is good to see efforts towards human augmentation actually being realized in some form.
+    The final note on the Pale Blue Dot was a nice way to conclude everything and remind us all of how insignificant we all truly are.
 - title: "Red Bull BC One World Final 2019"
   type: video
   completionDate: Nov 9, 2019
