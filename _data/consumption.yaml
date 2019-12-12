@@ -1,3 +1,32 @@
+- title: "What is the Minimax Algorithm? - Artificial Intelligence"
+  type: video
+  completionDate: Dec 12, 2019
+  sourceDateAndInfo: Mar 3, 2017
+  source: https://youtu.be/KU9Ch59-4vw
+  image: https://i.ytimg.com/vi/KU9Ch59-4vw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLC8xOdk7FbqccyhXF7pI_EpIKEPrw
+  explanation: >
+    A very concise and understandable explanation of the minimax algorithm for two agent games.
+- title: " A Brief History of Time"
+  type: book
+  completionDate: Dec 9, 2019
+  sourceDateAndInfo: Stephen Hawking, Apr 1 1988
+  source: https://www.goodreads.com/book/show/3869.A_Brief_History_of_Time
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1333578746l/3869.jpg
+  explanation: >
+    Finally got to the end of this. This is surprisingly dense despite the low number of pages.
+    Stephen Hawking covers much of the science that is used in modern physics today from Netownian mechanics, to quantum theory, to imaginary time.
+    Despite it being meant for a more general audience, it is not an easy read.
+    The documentary based off of this may be easier to digest, but I have not seen it.
+- title: "Dava Newman: Space Exploration, Space Suits, and Life on Mars | Artificial Intelligence (AI) Podcast"
+  type: video
+  completionDate: Nov 27, 2019
+  sourceDateAndInfo: Nov 22, 2019
+  source: https://youtu.be/2fI6bYnRgSc
+  image: https://i.ytimg.com/vi/2fI6bYnRgSc/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLD1snrcYYTlsd5memJrrjCKizzxCA
+  explanation: >
+    Dava Newman is the former deputy administrator of NASA.
+    It is interesting to hear about the research that is being done in the field and how philosophies may differ when compared to more corporate entities like SpaceX.
+    The conversations regarding space suit technology were fascinating as well given that a majority of news coverage in the space industry focuses on rockets and satellites.
 - title: "AlphaGo"
   type: movie
   completionDate: Nov 23, 2019
