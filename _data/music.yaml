@@ -1,4 +1,11 @@
-- title: Music Box
+- title: Death Stranding Inspired Track (2019)
+  src: src/music/Death Stranding Inspired Track.mp3
+  explanation: > 
+      I've been listening to the Death Stranding soundtrack and there are some interesting things in there I wanted to try for myself.
+      I threw this together in about an hour to see if I could do something similar.
+      I think at this point, I can safely say that note choice and instrument structuring is not a problem for me, but I need to learn how to structure a song, handle percussion sections, and how to handle key and time signature changes if I want to make full fledged songs on the level of what would be considered professional quality.
+
+- title: Music Box (2019)
   src: src/music/Music Box.mp3
   explanation: > 
       I started making this song with the intention of learning how to create dubstep before realizing halfway through that the structure of the song didn't properly create the setup for a decent bass drop.
@@ -6,29 +13,29 @@
       I figured out how to create wubs, but I did not include them in the song. This song includes some of my forays into the world of sound engineering. There are sound effects and synths.
       Working on this song allowed for me to learn about waves and oscillators.
 
-- title: Power Ballad Backing Track Jam
+- title: Power Ballad Backing Track Jam (2018)
   src: src/music/Power Ballad Backing Track Jam.mp3
   explanation: > 
       Me jamming to <a href="https://youtu.be/hgDsTS5IcTg" target="_blank">this</a> backing track. Showcases some of my improvisational ability. Added some minor mixing to allow for my guitar to stand out a little bit better.
 
-- title: Going Off
+- title: Going Off (2018)
   src: src/music/Going Off.mp3
   explanation: > 
       A solo that I challenged myself to come up with and record in one take. It's not very musical, but it exhibits some of my technical abilities in electric guitar.
       I imagine if I had to do a solo live in front of a large audience in a stadium, it would be very similar to this. That said, if I do make it that big, I'm sure I'll have some noise reduction pedals to clean up the static and extraneous noise.
 
-- title: Music Signature
+- title: Music Signature (2017)
   src: src/music/Music Signature.mp3
   explanation: >
       An audio signature to use at the beginning of videos
 
-- title: The Plains of LEO
+- title: The Plains of LEO (2017)
   src: src/music/The Plains of LEO.mp3
   explanation: >
       A song I created in 1 hour. The intention was to see whether I could use automation and the piano roll to quickly construct a song.
       The end result ended up sounding like program music for a concert.
 
-- title: Robocopter V1
+- title: Robocopter V1 (2016)
   src: src/music/Robocopter v1.mp3
   explanation: >
       The first song I ever recorded. Complete with guitars and synths.

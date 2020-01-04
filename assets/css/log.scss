@@ -9,6 +9,10 @@
         .jumbotron.page-top {
             background-image: url('https://asarav.github.io/src/images/log/log.jpg');
             height: 350px;
+            margin-bottom: 10px;
+            .log-explanation {
+                text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            }
         }
         .log {
             section {

@@ -1,4 +1,4 @@
-- title: Apple Picker Prototype
+- title: Apple Picker Prototype (2016)
   style: light
   link: src/games/Apple_Picker_Prototype/index.html
   images:
@@ -6,7 +6,7 @@
     - src: src/games/Apple_Picker_Prototype/Screenshots/Capture 2.PNG
   explanation: >
     A game that I created to teach myself the basics of Unity
-- title: Space SHMUP Prototype
+- title: Space SHMUP Prototype (2016)
   style: dark
   link: src/games/Space_SHMUP_Prototype/index.html
   images:
@@ -14,7 +14,7 @@
     - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture 2.PNG
   explanation: >
     A simple space shooter game to test parallax and 2d Unity
-- title: Metroid in Unity
+- title: Metroid in Unity (2016)
   style: dark
   link: src/games/Metroid_in_Unity/index.html
   images:
@@ -23,7 +23,7 @@
     - src: src/games/Metroid_in_Unity/Screenshots/Capture 3.PNG
   explanation: >
     Recreated a portion of Metroid in the Unity game engine
-- title: Commuter North
+- title: Commuter North (2016)
   style: medium-light
   link: src/games/Commuter_North/index.html
   images:
@@ -33,7 +33,7 @@
   explanation: >
     A walking simulator that places you in an invisible maze. Move from point A to point B while trying to navigate through the fog.</p>
     <p>Note: This game was created with an older version of unity, and as a result, some of the effects like the fog do not render properly on Web.</p>
-- title: Switcheroo
+- title: Switcheroo (2016)
   style: dark
   link: src/games/Switcheroo/index.html
   images:
@@ -41,7 +41,7 @@
     - src: src/games/Switcheroo/Screenshots/Switcheroo 3.PNG
   explanation: >
     A fast paced platformer where you can switch places with anything on the map. Use this mechanic to make it to the goal in time.
-- title: Rebel Knight
+- title: Rebel Knight (2016)
   style: light
   link: src/games/Rebel_Knight/index.html
   images:
