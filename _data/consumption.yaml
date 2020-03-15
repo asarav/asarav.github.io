@@ -1,3 +1,23 @@
+- title: "They Shall Not Grow Old"
+  type: movie
+  completionDate: Mar 14, 2020
+  sourceDateAndInfo: Oct 16, 2018
+  source: https://www.imdb.com/title/tt7905466/
+  image: https://m.media-amazon.com/images/M/MV5BZWI3ZThmYzUtNDJhOC00ZWY4LThiNmMtZDgxNjE3Yzk4NDU1XkEyXkFqcGdeQXVyNTk5Nzg1NjQ@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    While it may drag in the beginning, the film is breathtakingly beautiful once the sound and color enters the frame.
+    This is a film that shows World War I from the British side with no reservations.
+    The gruesome and harsh nature of the war is shown in great detail with voiceovers from soldiers during the time.
+    It really takes you back 100 years into the past.
+    I wish they used learning/AI techniques to generate more images and videos, but the final result is good, so I'm not complaining too much about the abundance of content.
+- title: "Joe Rogan Experience 1439 - Michael Osterholm"
+  type: video
+  completionDate: Mar 12, 2020
+  sourceDateAndInfo: Mar 10, 2020
+  source: https://youtu.be/E3URhJx0NSw
+  image: https://i.ytimg.com/vi/E3URhJx0NSw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDd6ALNZ3d3OQrkY2ICq3jszojsfg
+  explanation: >
+    An insightful conversation about disease control and immunology. Very relevant today with COVID-19 spreading across the world.
 - title: "Childhood's End"
   type: book
   completionDate: Mar 3, 2020
