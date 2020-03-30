@@ -1,3 +1,119 @@
+- title: "Code Emporium Deep Learning 101"
+  type: video
+  completionDate: Mar 30, 2020
+  sourceDateAndInfo: Jun 17, 2019
+  source: https://youtu.be/fkqZyYo_ebs?list=PLTl9hO2Oobd-GaTYQWIuIs2yyNy7TYbEj
+  image: https://i.ytimg.com/vi/fkqZyYo_ebs/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAoWu92ac7BThaHn7blTBwnmpRovw
+  explanation: >
+    A playlist that covers CNN's, RNN's, basic neural networks and other deep learning topics. Not an exhaustive list, but it makes for a good foundation.
+- title: "Network"
+  type: movie
+  completionDate: Mar 29, 2020
+  sourceDateAndInfo: Nov 27, 1976
+  source: https://www.imdb.com/title/tt0074958/
+  image: https://m.media-amazon.com/images/M/MV5BNmFiOWY3ZTktOTYwNy00ZTUzLTk0ODQtNzIxMzQ0ZDFjMTgyXkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    Network was a film made during a time when CNN, MSNBC, FOX, and televangelism were not available.
+    It not only covers the conflict all news faces when trying to inform and entertain, but also has larger messages about the country and state of the world.
+    Although the film focuses on television, the general messages apply, perhaps even more so, to how people consume information today.
+    While I was not a fan of the cinematography, the story is tight and well scripted.
+    Acting by Faye Dunaway and Peter Finch was top notch.
+    Like 12 Angry Men, this Sidney Lumet film is engaging.
+- title: "3Blue1Brown Simulating an epidemic"
+  type: video
+  completionDate: Mar 28, 2020
+  sourceDateAndInfo: Mar 27, 2020
+  source: https://youtu.be/gxAaO2rsdIs
+  image: https://i.ytimg.com/vi/gxAaO2rsdIs/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCnlFY_XrBFUi7Gs4Oi63FMGnPTiA
+  explanation: >
+    Covers the mathematics involved in epidemiology.
+    The math here can also be applied to robustness networks and other similarly large systems.
+    The primary mechanics analyzed are probability and the parameters that affect infection rates over time.
+    A good explanation of R values are also included.
+    I was hoping for a graph/network theory style treatment of the mathematics, but anyone who has a masters level understanding of mathematics can apply a graph like an Erdos Renyi style graph to see patterns in the mechanics of infection.
+- title: "Flirting Scholar"
+  type: movie
+  completionDate: Mar 26, 2020
+  sourceDateAndInfo: Jul 1, 1993
+  source: https://www.imdb.com/title/tt0108289/
+  image: https://m.media-amazon.com/images/M/MV5BMzE3YTNhNDctOGM2YS00NjA4LTg0Y2ItNWNlMWI5ZjZhOGMzXkEyXkFqcGdeQXVyMjQ2MTk1OTE@._V1_UY268_CR10,0,182,268_AL_.jpg
+  explanation: >
+    This is a great example of Stephen Chow's talents and Hong Kong's <a href="https://en.wikipedia.org/wiki/Mo_lei_tau" target="_blank">Mo Lei Tau</a> style of comedy.
+    When watching this, it is clear why Jackie Chan broke through to the international stage while Stephen Chow did not.
+    Jackie Chan is a martial artist that dabbles in comedy while Stephen Chow is a comedian that dabbles in martial arts.
+    Because of this, the word play and cultural references in Stephen Chow's works don't translate as well.
+    That said, if you are familiar with Hong Kong culture and Chinese scholarship in general, you will find that this is a smartly written film that has something for the literate as well as the common people.
+    There is a nice mixture of classical poetry, Chinese opera tropes with modern references that I've never seen in western cinema and was very rare in mainland Chinese fils during the time.
+    If you are looking to understand Cantonese a little better or just have an interest in historical Chinese figures like <a href="https://en.wikipedia.org/wiki/Tang_Yin" target="_blank">Tong Pak Fu</a> this will satisfy your needs.
+- title: "Attention in Neural Networks"
+  type: video
+  completionDate: Mar 21, 2020
+  sourceDateAndInfo: Mar 2, 2018
+  source: https://youtu.be/W2rWgXJBZhU
+  image: https://i.ytimg.com/vi/W2rWgXJBZhU/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBGb9xD4q1_cq7JVlwTXIiZz5mvRQ
+  explanation: >
+    A video that I referred to to get a better understanding of the following <a href="https://arxiv.org/abs/2001.04451" target="_blank">paper</a> on transformers in neural networks for natural language processing.
+    The channel associated with the video is actually fairly useful for deep learning, so I consider it to be of note because the field is still in active development and educational resources are scarce.
+- title: "The Witness"
+  type: game
+  completionDate: Mar 21, 2020
+  sourceDateAndInfo: Jan 26, 2016
+  source: https://en.wikipedia.org/wiki/The_Witness_(2016_video_game)
+  image: https://upload.wikimedia.org/wikipedia/en/f/f1/WitnessPoster.png
+  explanation: >
+    The most mentally challenging game that I ever played.
+    The puzzles were difficult and were challenging despite the commonality of drawing lines.
+    The philosophy and message of the game flew over my head in a way that I've only see happen in Shane Carruth films.
+    For many, this can be hit or miss due to the lack of a narrative and the difficulty and abundance of puzzles.
+    Despite this, I found the imagery, use of Feng Shui and Zen Buddhist ideas in combination with western philosophy and poetry to be very original.
+    This is not a game that you speed through. This is a game that takes months to complete with frequent breaks away from the screen.
+    While some of the puzzles can be brute forced, it is recomended that you focus more on pattern recognition unless you are an extremely patient person.
+- title: "3 Idiots"
+  type: movie
+  completionDate: Mar 19, 2020
+  sourceDateAndInfo: Dec 25, 2005
+  source: https://www.imdb.com/title/tt1187043/
+  image: https://m.media-amazon.com/images/M/MV5BNTkyOGVjMGEtNmQzZi00NzFlLTlhOWQtODYyMDc2ZGJmYzFhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UY268_CR2,0,182,268_AL_.jpg
+  explanation: >
+    I don't remember the last time I saw a Bollywood film if ever.
+    There was also a lot more English in this film than I was expecting which was a surprise.
+    This is a film that I think will appeal almost universally to the general audience and be received a little bit more mildly although positively by film critics.
+    One thing to note is that since it is a Bollywood film, it is very long, people will teleport to random places and start singing, and there will be instances of somewhat overacted melodrama.
+    That said, the main themes of the film such as friendship, purpose and education along with its humor and wit allow for it to be easily relatable.
+    There are many things that I did find to be rather fascinating from a cultural perspective.
+    I did not realize engineers were a big deal in India, and I did not realize that instructors had as much authority as they did in educational institutions.
+    The closest thing I can think of to this is attitudes towards education in mainland China.
+- title: "The Race To Develop A Coronavirus Vaccine"
+  type: video
+  completionDate: Mar 17, 2020
+  sourceDateAndInfo: Mar 14, 2020
+  source: https://youtu.be/ek3T8xiu1Fw
+  image: https://i.ytimg.com/vi/ek3T8xiu1Fw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBVVAH03eP4nQ_YAJxJbxXzKGIZqA
+  explanation: >
+    I'm not a big fan of CNBC because they can oversimplify content, but this manages to provide an informative overview of vaccine development from research to manufacturing and distribution that even a layman can understand.
+- title: "Kickboxer"
+  type: movie
+  completionDate: Mar 15, 2020
+  sourceDateAndInfo: Sep 8, 1989
+  source: https://www.imdb.com/title/tt0097659/
+  image: https://m.media-amazon.com/images/M/MV5BZGYzZDQ2ZWItNjE4ZS00ZTgzLTk3ZjctZjAwZDUyM2I4Nzg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTYxNjkxOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    Kickboxer is not that great of a movie. Its plot is cliche, the music is not as good as Bloodsport and the fight scenes are not as good as Bloodsport.
+    Just watch Bloodsport.
+    What this movie does offer is Jean Claude Van Damme dancing and some Muay Thai.
+    If you came for the Muay Thai, just watch Ong Bak.
+- title: "Katana Zero"
+  type: game
+  completionDate: Mar 15, 2020
+  sourceDateAndInfo: Apr 18, 2019
+  source: https://en.wikipedia.org/wiki/Katana_Zero
+  image: https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Katana_Zero_pre-release_Steam_header.jpg/330px-Katana_Zero_pre-release_Steam_header.jpg
+  explanation: >
+    A game that I basically speedran because of how immersed I was in the mechanics.
+    This is a 2d game with simple but satisfying mechanics with everything requiring only a single click.
+    There are many similarities in gameplay to Hotline Miami, but I prefer Katana Zero because of its clean art style and unwillingness to fill the screen with too many things at a time.
+    The noir style story of drugs developped by the military to slow down and replay time was very interesting and would have worked well in a comic or film.
+    Overall, very solid and watertight. I am interested in seeing the conclusion of the story.
 - title: "They Shall Not Grow Old"
   type: movie
   completionDate: Mar 14, 2020
