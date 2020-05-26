@@ -1,3 +1,39 @@
+- title: "Hypnospace Outlaw"
+  type: game
+  completionDate: May 23, 2020
+  sourceDateAndInfo: Mar 12, 2019
+  source: https://en.wikipedia.org/wiki/Hypnospace_Outlaw
+  image: https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Hypnospace_Outlaw.jpg/330px-Hypnospace_Outlaw.jpg
+  explanation: >
+    An interesting take on internet browsing from the 90's with a twist where the users are browsing the internet while they are sleeping through some sort of dream based interface.
+    The operating system of HypnOS mimics Windows 95.
+    While this can get frustrating at times, the experience feels very faithful to the experience of using a computer in the 90's from dated references to general user experience.
+    The developers manage to tell a story through the clunky interace and also show how the internet changes over the years.
+    The concept of a Hypnospace enforcer is also reminiscent of the cyber police meme.
+- title: "Ip Man 4: The Finale"
+  type: movie
+  completionDate: May 21, 2020
+  sourceDateAndInfo: Dec 20, 2019
+  source: https://www.imdb.com/title/tt2076298/
+  image: https://m.media-amazon.com/images/M/MV5BNzYyZWIwZjQtZGVjZi00NWIxLTk0ODMtNzA3YzE5MWM3OWI0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    I thought the series ended with the second movie, but then they made a third one and then a fourth one.
+    The third one felt like a decent conclusion, but this fourth did not feel like that at all.
+    Donnie Yen was good as always and Scott Adkins did well as the antagonist.
+    As is typical in these types of movies, foreign influences act as an oppressor of Chinese endeavors.
+    The writing felt weak in this one, but the technical quality is consistent with previous films.
+    Choreography is good, cinematography is decent and Kenji Kawaii's score is good as always.
+    Although the Ip Man series has a lot of fictional events, this one is the least historically accurate and it shows.
+    A good overview of the film as a whole can be found <a href="https://youtu.be/CAFMXrMl23c" target="_blank">here</a>.
+- title: "How does Netflix recommend movies? Matrix Factorization"
+  type: video
+  completionDate: May 19, 2020
+  sourceDateAndInfo: Sep 8, 2018
+  source: https://youtu.be/ZspR5PZemcs
+  image: https://i.ytimg.com/vi/ZspR5PZemcs/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBbt21mq5SowkjmSh4p0Yc_C5IPlg
+  explanation: >
+    A good introduction and explanation of matrix factorization and its use in recommendations presented within the domain of Netflix movies.
+    I doubt that Netflix actually uses matrix factorization now instead of some form of neural net, 
 - title: "Nayakan"
   type: movie
   completionDate: May 4, 2020
