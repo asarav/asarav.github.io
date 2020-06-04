@@ -1,3 +1,80 @@
+- title: "The Prophet"
+  type: book
+  completionDate: Jun 4, 2020
+  sourceDateAndInfo: Kahlil Gibran, 1923
+  source: https://www.goodreads.com/book/show/27297.The_Analects
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1355046521l/2547.jpg
+  explanation: >
+    A collection of poetic musings that are beautifully crafted and never sounds like rambling.
+    Despite covering a variety of topics like love, family, journeys, and other topics, it never seems to drag.
+- title: "The Analects"
+  type: book
+  completionDate: Jun 2, 2020
+  sourceDateAndInfo: Confucius, ~500 B.C.
+  source: https://www.goodreads.com/book/show/27297.The_Analects
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1309201523l/27297.jpg
+  explanation: >
+    One of my goals when I learn Mandarin is to be able to quote the Analects from memory.
+    This is a good initial step towards that goal, but it also allows for a deeper understanding of east Asian culture.
+    This holds many similarities to some of Plato's works and some of the Greek works that were written during the same time.
+    There are conversations between characters and anecdotes about certain characters as examples of certain principles that are emphasized in The Analects.
+    The majority of this book is about this character (usually Confucius) saying a certain thing or another character saying something else.
+    Filial piety, propriety, the branches of learning, the mandate of heaven, and other concepts that were tested within the imperial examination in ancient China are all here.
+    There are many things here that, by modern standards, will seem sexist or contradictory.
+    Overall, like many older works, this has its flaws and should be read critically.
+- title: "Crew Demo-2"
+  type: video
+  completionDate: May 30, 2020
+  sourceDateAndInfo: May 30, 2020
+  source: https://www.youtube.com/watch?v=bIZsnKGV8TE
+  image: https://i.ytimg.com/vi/bIZsnKGV8TE/hqdefault_live.jpg?sqp=CITy0vYF-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCl891UAN6i4Q8EDOalJIRygNrCYQ
+  explanation: >
+    Space X beat ULA to the ISS and successfully managed to dock. This is the first time humans were aboard a privately developed rocket.
+    Overall, the mission went smoothly, but it is not over until Crew Dragon is able to successfully land on earth.
+    With this, maybe a larger amount of focus can be directed towards Starship.
+- title: "First Man"
+  type: movie
+  completionDate: May 28, 2020
+  sourceDateAndInfo: Oct 12, 2018
+  source: https://www.imdb.com/title/tt1213641/
+  image: https://m.media-amazon.com/images/M/MV5BMDBhOTMxN2UtYjllYS00NWNiLWE1MzAtZjg3NmExODliMDQ0XkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    This is a good, but imperfect movie. Camerawork is way more shaky than is necessary.
+    The Apollo mission was pretty accurate. It matched what I saw in archival footage.
+    Although not historically accurate in every sense, it manages to tell a good story by dramatizing parts of Neil Armstrong's life despite his life already being somewhat dramatic.
+    There are some good shots in here, but this is not Damien Chazelle's best work and it did seem like he was out of his element working in a non-music related film.
+- title: "Joe Rogan Experience #1480 - Kevin Hart"
+  type: video
+  completionDate: May 27, 2020
+  sourceDateAndInfo: May 25, 2020
+  source: https://youtu.be/vzx6h2sAGTU
+  image: https://i.ytimg.com/vi/vzx6h2sAGTU/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCXsPfMHPvjmEcVvASdBA-ADajPeQ
+  explanation: >
+    Kevin Hart was in a car accident and could not walk due to major back injuries as recently as 9 months ago.
+    His recovery is on the level of Bruce Wayne in The Dark Knight Rises.
+    Overall, a fairly inspiring discussion.
+- title: "Harley Quinn"
+  type: show
+  completionDate: May 27, 2020
+  sourceDateAndInfo: Nov 29, 2019
+  source: https://www.imdb.com/title/tt7658402/
+  image: https://m.media-amazon.com/images/M/MV5BNWRhMTVhNjgtZjcyMS00N2YzLWI2N2QtNTYwMGFlOTdmMGY1XkEyXkFqcGdeQXVyMjkyNzYwMTc@._V1_UX182_CR0,0,182,268_AL_.jpg
+  explanation: >
+    I remember Suicide Squad being really bad, but this more than makes up for it. 
+    This is like an animated version of Deadpool, and it entertains throughout.
+    I don't think there was a moment that I hated.
+    It also introduces some really minor characters in the DC universe such as Kite Man which I think only comic readers would know.
+- title: "Whispers of a Machine"
+  type: game
+  completionDate: May 26, 2020
+  sourceDateAndInfo: Apr 17, 2019
+  source: https://store.steampowered.com/app/631570/Whispers_of_a_Machine/
+  image: https://steamcdn-a.akamaihd.net/steam/apps/631570/header.jpg?t=1589382006
+  explanation: >
+    This takes place in a post-apocalyptic world where AI is rejected thoroughly.
+    The science behind it is not all that well researched, but as a detective game, it is perfectly fine.
+    I don't consider this particularly novel or even something that you can get emotionally invested in, but it passes fast, so it is not as though time is being wasted.
+    In terms of story and technical achievements, this is unremarkable, but I don't consider it to be bad.
 - title: "Hypnospace Outlaw"
   type: game
   completionDate: May 23, 2020
@@ -33,7 +110,7 @@
   image: https://i.ytimg.com/vi/ZspR5PZemcs/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBbt21mq5SowkjmSh4p0Yc_C5IPlg
   explanation: >
     A good introduction and explanation of matrix factorization and its use in recommendations presented within the domain of Netflix movies.
-    I doubt that Netflix actually uses matrix factorization now instead of some form of neural net, 
+    I doubt that Netflix actually uses matrix factorization now instead of some form of neural net, so some coverage of the state of the art would have been nice.
 - title: "Nayakan"
   type: movie
   completionDate: May 4, 2020
