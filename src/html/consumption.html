@@ -16,24 +16,24 @@ style: assets/css/consumption.css
 </div>
 <div class="consumption-list full-res">
     <div class="row item">
-        <label class="col-xs-12">Date of Viewing/Completion</label>
+        <label class="col-12">Date of Viewing/Completion</label>
     </div>
     {% for item in site.data.consumption %}
         <div class="row item {{ item.type }}">
-            <div class="col-xs-2 date text-center">{{ item.completionDate }}</div>
-            <div class="content col-lg-8 col-md-7 col-sm-6 col-xs-5">
+            <div class="col-2 date text-center">{{ item.completionDate }}</div>
+            <div class="content col-lg-8 col-md-7 col-sm-6 col-5">
                 <div class="row">
-                    <div class="col-xs-12 header">
+                    <div class="col-12 header">
                         <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
                         <sub>{{ item.sourceDateAndInfo }}</sub>
                     </div>
                 </div>
                 <hr>
                 <div class="row explanation">
-                    <div class="col-xs-12">{{ item.explanation }}</div>
+                    <div class="col-12">{{ item.explanation }}</div>
                 </div>
             </div>
-            <div class="col-xs-2 image">
+            <div class="col-2 image">
                 <img src="{{ item.image }}">
             </div>
         </div>
@@ -43,25 +43,25 @@ style: assets/css/consumption.css
     {% for item in site.data.consumption %}
         <div class="item {{ item.type }}">
             <div class="row">
-                <div class="col-xs-12 date text-center">{{ item.completionDate }}</div>
+                <div class="col-12 date text-center">{{ item.completionDate }}</div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-xs-12 header text-center">
+                <div class="col-12 header text-center">
                     <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
                 </div>
-                <div class="col-xs-12 text-center">
+                <div class="col-12 text-center">
                     <sub>{{ item.sourceDateAndInfo }}</sub>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-xs-12 image text-center">
+                <div class="col-12 image text-center">
                     <img src="{{ item.image }}">
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 text-center explanation">
+                <div class="col-12 text-center explanation">
                     {{ item.explanation }}
                 </div>
             </div>

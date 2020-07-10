@@ -13,41 +13,55 @@
         border-radius: 1px;
         opacity: 0.85;
         transition: opacity 0.5s ease-in;
-        .container-fluid {
-            padding-right: 0px;
-            .navbar-header {
-                font-family: Brush Script MT, Brush Script Std, cursive;
-                .navbar-brand {
-                    font-size: 40px;
-                    transition: color 0.5s ease-in;
-                    &:hover {
-                        color: rgb(168, 177, 218);
-                        transition: color 0.5s ease-in;
-                    }
-                }
-
-                .navbar-toggle:focus, .navbar-toggle:hover {
-                    background-color: rgb(74, 125, 202);
-                }
+        padding-top: 0;
+        padding-bottom: 0;
+        .navbar-brand {
+            font-family: Brush Script MT, Brush Script Std, cursive;
+            font-size: 40px;
+            transition: color 0.5s ease-in;
+            padding: 0;
+            &:hover {
+                color: rgb(168, 177, 218);
+                transition: color 0.5s ease-in;
             }
-            .navbar-collapse {
-                padding-right: 0px;
-                ul {
-                    float: right;
-                    transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
-                    @media only screen and (max-width: 768px) {
-                        width: 100%;
-                    }
-                    a:hover {
-                        color: white;
-                        background: black;
-                        border: grey;
-                        border-radius: 10px;
-                        transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;                        
-                    }
-                    @media only screen and (max-width: 768px) {
-                        float: left;
-                    }
+        }
+
+        #navbarSupportedContent {
+            @media only screen and (max-width: 768px) {
+                height: 240px;
+            }
+        }
+
+        .nav-link {
+            margin-right: 3px;
+            margin-left: 3px;
+            padding-right: 7.5px;
+            padding-left: 7.5px;
+            float: right;
+        }
+
+        .navbar-toggler:hover {
+            transition: border-color 0.4s ease-in, color 0.4s ease-in;
+            border-color: white;
+        }
+
+        .navbar-collapse {
+            padding-right: 0px;
+            ul {
+                float: right;
+                transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
+                @media only screen and (max-width: 768px) {
+                    width: 100%;
+                }
+                a:hover {
+                    color: white;
+                    background: black;
+                    border: grey;
+                    border-radius: 15px;
+                    transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;                        
+                }
+                @media only screen and (max-width: 768px) {
+                    float: left;
                 }
             }
         }
@@ -61,13 +75,20 @@
         }
     }
 
+    //Try to mimic bootstrap 3 style
+    .jumbotron p {
+        margin-bottom: 15px;
+        font-size: 21px;
+        font-weight: 200;
+    }
+
     .page-top {
         background-image: url("https://asarav.github.io/src/images/rain-background-2.jpg");
         background-color: rgb(21, 21, 22);
         background-size: 100% 100%;
         text-align: center;
         color: rgb(209, 73, 73);
-        margin: -20px -15px -1px -15px;
+        margin: 0px -15px -1px -15px;
         padding-top: 60px;
         height: 650px;
         opacity: 0.90;
@@ -89,9 +110,9 @@
             opacity: 1;
             transition: opacity 0.5s ease-in;
         }
-        .glyphicon-chevron-down {
+        .chevron-down {
             padding-top: 40px;
-            font-size: 45px;
+            font-size: 60px;
             transition: padding-top 0.3s ease-in;
             top: 40px;
             cursor: pointer;
@@ -237,17 +258,17 @@
             position: relative;
         }
         .full-res {
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 800px) {
                 display: none;
             }
             .copyright {
                 float: left;
                 width: 83%;
-                @media only screen and (max-width: 900px) {
+                @media only screen and (max-width: 950px) {
                     width: 75%;
                     font-size: 18px;
                 }
-                @media only screen and (max-width: 700px) {
+                @media only screen and (max-width: 850px) {
                     width: 66%;
                     font-size: 16px;
                 }
@@ -255,7 +276,7 @@
         }
         .mobile-res {
             display: none;
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 800px) {
                 display: block;
             }
             .contact {

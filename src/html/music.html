@@ -19,10 +19,10 @@ style: assets/css/music.css
     {% for song in site.data.music %}
         <div class="song full-res">
             <div class="row audio">
-                <div class="col-xs-6 title">
+                <div class="col-6 title">
                     {{ song.title }}
                 </div>
-                <div class="col-xs-6">
+                <div class="col-6">
                     <audio controls>
                         <source src="{{ song.src | relative_url }}" type="audio/mp3">
                         Your browser does not support the audio element.
@@ -30,17 +30,17 @@ style: assets/css/music.css
                 </div>
             </div>
             <div class="row song-explanation">
-                <div class="col-xs-12">{{ song.explanation | markdownify }}</div>
+                <div class="col-12">{{ song.explanation | markdownify }}</div>
             </div>
         </div>
         <div class="song mobile-res">
             <div class="row audio">
-                <div class="col-xs-12 title text-center">
+                <div class="col-12 title text-center">
                     {{ song.title }}
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-12">
                     <audio controls>
                         <source src="{{ song.src | relative_url }}" type="audio/mp3">
                         Your browser does not support the audio element.
@@ -48,7 +48,7 @@ style: assets/css/music.css
                 </div>
             </div>
             <div class="row song-explanation">
-                <div class="col-xs-12">{{ song.explanation | markdownify }}</div>
+                <div class="col-12">{{ song.explanation | markdownify }}</div>
             </div>
         </div>
     {% endfor %}

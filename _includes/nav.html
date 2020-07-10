@@ -1,37 +1,31 @@
-<nav id="navbar" class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ '#' | relative_url }}">
-                asarav
-            </a>
-        </div>
-        <div id="main-nav" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a id="games-nav" href="{{ 'src/html/games.html' | relative_url }}">Games</a>
-                </li>
-                <li>
-                    <a id="projects-nav" href="{{ 'src/html/projects.html' | relative_url }}">Projects</a>    
-                </li>
-                <li>
-                    <a id="music" href="{{ 'src/html/music.html' | relative_url }}">Music</a>
-                </li>
-                <li>
-                    <a id="about" href="{{ 'src/html/consumption.html' | relative_url }}">Media Consumption List</a>    
-                </li>
-                <li>
-                    <a id="about" href="{{ 'src/html/about-me.html' | relative_url }}">About Me</a>
-                </li>
-                <li>
-                    <a id="contact-nav" href="{{ 'src/html/contact.html' | relative_url }}">Contact Me</a>
-                </li>
-            </ul>
-        </div>
+<nav id="navbar" class="navbar navbar-expand-md navbar-light">
+    <a class="navbar-brand" href="{{ '#' | relative_url }}">
+        asarav
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" id="games-nav" href="{{ 'src/html/games.html' | relative_url }}">Games</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="projects-nav" href="{{ 'src/html/projects.html' | relative_url }}">Projects</a>    
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="music" href="{{ 'src/html/music.html' | relative_url }}">Music</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="about" href="{{ 'src/html/consumption.html' | relative_url }}">Media Consumption List</a>    
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="about" href="{{ 'src/html/about-me.html' | relative_url }}">About Me</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-nav" href="{{ 'src/html/contact.html' | relative_url }}">Contact Me</a>
+            </li>
+        </ul>
     </div>
-</nav>
+  </nav>

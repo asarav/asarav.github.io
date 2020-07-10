@@ -18,16 +18,16 @@ style: assets/css/games.css
     {% for game in site.data.games %}
         <div class="game {{ game.style }}">
             <div class="row">
-                <div class="game-header col-xs-6">{{ game.title }}</div>
-                <a class="play-now" href="{{ game.link | relative_url }}">Play Now</a>
+                <div class="game-header col-6">{{ game.title }}</div>
+                <a class="ml-auto play-now" href="{{ game.link | relative_url }}">Play Now</a>
             </div>
             <div class="row screenshots">
                 {% for image in game.images %}
-                    <img class="col-md-{{ 12 | divided_by: game.images.size }} col-xs-12" src="{{ image.src | relative_url }}">
+                    <img class="col-md-{{ 12 | divided_by: game.images.size }} col-12" src="{{ image.src | relative_url }}">
                 {% endfor %}
             </div>
             <div class="row explanation">
-                <div class="col-xs-10">
+                <div class="col-10">
                     {{ game.explanation }}
                 </div>
             </div>

@@ -15,10 +15,10 @@ style: assets/css/projects.css
 </div>
 <section id="teaching-tools">
     <div class="row">
-        <h1 class="col-xs-12">Teaching Tools (2012 - )</h1>
+        <h1 class="col-12">Teaching Tools (2012 - )</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Files and examples that I have created to teach concepts to myself and others. Includes templates and walkthroughs for html, LaTeX, some programming concepts, and a number of files about different aspects of python.
             Can be found <a href="https://github.com/asarav/Educational-Tools" target="_blank">here</a> and <a href="https://github.com/asarav/Learning-Python" target="_blank">here</a></p>
         </div>
@@ -26,16 +26,16 @@ style: assets/css/projects.css
 </section>
 <section id="genetic-algorithm">
     <div class="row">
-        <h1 class="col-xs-12">Genetic Algorithm (2015)</h1>
+        <h1 class="col-12">Genetic Algorithm (2015)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>A project I worked on for Intro to AI at University of Michigan.</p>
             <p>What I tried to do was create a python implementation of <a href="https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/" target="_blank">Roger Johansson's polygonal approximation program.</a></p>
         </div>
     </div>
     <div class="row">
-        <p class="col-xs-12">The program will receive an image as input. It will then try to approximate the image using a limited number of polygons.
+        <p class="col-12">The program will receive an image as input. It will then try to approximate the image using a limited number of polygons.
         In the case of my implementation, I used 100 polygons instead of the 50 used in Roger Johansson's program.
         A genetic algorithm essentially immitates evolution. Each "generation" in the program represents a set of polygons with different colors, alpha values, and dimensions.
         This set is then filtered down to the top performing individuals within the generation. In this case, the top performing individuals represent the images that are most like the image provided as input.
@@ -68,61 +68,63 @@ style: assets/css/projects.css
 </section>
 <section id="user-styles">
     <div class="row">
-        <h1 class="col-xs-12">User Styles (2016 - )</h1>
+        <h1 class="col-12">User Styles (2016 - )</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>A collection of custom stylings for many different websites that can be used through an extension like Stylus or Stylish.
                 Nothing groundbreaking. I just like having a darkmode for many of the websites I visit.</p>
             <p>You can find the source code <a href="https://github.com/asarav/User-Styles" target="_blank">here</a></p>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             Some examples:
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             Joe Rogan Podcasts
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             Before
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             After
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             <img src="{{ 'src/images/projects/user-styles/joe-rogan-before.PNG' | relative_url }}" height="100%" width="100%">
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             <img src="{{ 'src/images/projects/user-styles/joe-rogan-after.PNG' | relative_url }}" height="100%" width="100%">
         </div>
     </div>
 </section>
 <section id="personal-website">
     <div class="row">
-        <h1 class="col-xs-12">!This Website! (2018 - )</h1>
+        <h1 class="col-12">!This Website! (2018 - )</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>I've always wanted to create a personal website, so I decided to finally make one. This site will continuously be updated with new information.
-                It is currently a static website with lessc and javascript to add bells and whistles. Dependencies are brought in through npm.
+                It is currently a static website with sass and javascript to add bells and whistles. Dependencies are brought in through Jekyll.
+                This site has gone through a few major changes over the years.
+                The move to use Jekyll has allowed for pages to be quickly expanded with content without the need for major updating of html.
+                There has also been a move to a newer version of Bootstrap (v3 to v4) and a few artifacts of that migration may be left over.
                 I intend to eventually make the underlying infrastructure more sophisticated, update the UI/UX strategy, compress and reduce file sizes for better load times, switch gifs to video for better load times, improve responsiveness or create a mobile version, add SEO, and maybe expand the scope of the project.
-                I would also like to update to the latest version of bootstrap.
                 This may take some time, however, because I don't intend to spend a single cent on the maintenance of this website.
             </p>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             <img src="{{ 'src/images/projects/personal-website/Capture.PNG' | relative_url }}" height="100%" width="100%">
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             <video autoplay loop muted playsinline width="90%">
                 <source src="{{ 'src/videos/projects/personal-website/personal-website-2020.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
@@ -132,37 +134,37 @@ style: assets/css/projects.css
 </section>
 <section id="deep-traffic">
     <div class="row">
-        <h1 class="col-xs-12">MIT 6.S094 Deep Traffic (2018)</h1>
+        <h1 class="col-12">MIT 6.S094 Deep Traffic (2018)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>My most recent solution to the Deep Traffic deep reinforcement learning competition. More of a mini-project than an actual project. Details can be found <a href="https://selfdrivingcars.mit.edu/deeptraffic/" target="_blank">here</a>. It averages about 66mph. The car can travel at a max speed of 80mph.</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             Most recent submission.
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <img src="{{ 'src/images/projects/deep-traffic/deep-traffic-submission.PNG' | relative_url }}" height="112" width="590">
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             Screen capture of the solution after training for 10000 iterations.
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             Visualization of my submission provided by the course.
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             <img src="{{ 'src/images/projects/deep-traffic/deep-traffic.gif' | relative_url }}" height="80%" width="80%">
         </div>
-        <div clas="col-xs-6">
-            <video width="50%" height="100%" preload="auto" autoplay="autoplay" loop="loop" >
+        <div class="col-6">
+            <video width="100%" height="90%" preload="auto" autoplay="autoplay" loop="loop" >
                 <source src="{{ 'src/videos/projects/deep-learning-for-self-driving-cars/Visualization.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -172,10 +174,10 @@ style: assets/css/projects.css
 </section>
 <section id="arduino">
     <div class="row">
-        <h1 class="col-xs-12">Learning Arduino (2018 - 2019)</h1>
+        <h1 class="col-12">Learning Arduino (2018 - 2019)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Projects and tutorials that I have completed with the Elegoo Uno Starter Kit.
                 The intention was to use this to introduce myself to basic electronics and get a primer in sensors and simple robotics.
                 Source code and examples can be found <a href="https://github.com/asarav/Learning-Arduino" target="_blank">here</a>.
@@ -183,39 +185,39 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-3">
             Digital Inputs- Using switches
         </div>
-        <div class="col-xs-3">
+        <div class="col-3">
             Servo
         </div>
-        <div class="col-xs-3">
+        <div class="col-3">
             Passive Buzzer Playing Seven Nation Army
         </div>
-        <div class="col-xs-3">
+        <div class="col-3">
             Four Digital Seven Segment Display
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-3">
             <video width="100%" height="100%" controls>
                 <source src="{{ 'src/videos/projects/learning-arduino/Digital_Inputs.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="col-xs-3">
+        <div class="col-3">
             <video width="100%" height="100%" controls>
                 <source src="{{ 'src/videos/projects/learning-arduino/Servo.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="col-xs-3">
+        <div class="col-3">
             <video width="100%" height="100%" controls>
                 <source src="{{ 'src/videos/projects/learning-arduino/Passive_Buzzer_Custom.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="col-xs-3">
+        <div class="col-3">
             <video width="100%" height="100%" controls>
                 <source src="{{ 'src/videos/projects/learning-arduino/Four_Digital.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
@@ -225,10 +227,10 @@ style: assets/css/projects.css
 </section>
 <section id="processingjs">
     <div class="row">
-        <h1 class="col-xs-12">Learning ProcessingJS (2019)</h1>
+        <h1 class="col-12">Learning ProcessingJS (2019)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Powered through the ProcessingJS videos, challenges, and articles on Khan Academy so that I can eventually learn P5js and ml5js for machine learning applications and sophisticated visualizations.
                 You can find the source code <a href="https://github.com/asarav/LearningProcessingJS" target="_blank">here</a>.
                 Khan Academy covers simple topics such as drawing, and works its way up to more complex topics such as games and natural simulations.
@@ -237,69 +239,69 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Drawing and Animation</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Drawing and Animation/Flower Grower.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Drawing and Animation/Parting Clouds.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Drawing and Animation/Loopy Landscape.PNG' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Drawing and Animation/Make it Rain.gif' | relative_url }}" height="75%" width="100%">
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Games and Visualization</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Games and Visualizations/Pong.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Games and Visualizations/Rabbit Racer.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Games and Visualizations/Story Teller.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Games and Visualizations/Hoppy Beaver Extreme.gif' | relative_url }}" height="75%" width="100%">
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Natural Simulations</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Natural Simulations/Computational Creatures.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Natural Simulations/Falling Boulder.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Natural Simulations/Levy Walker.gif' | relative_url }}" height="75%" width="100%">
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-6 col-sm-3">
             <img class="minimized-image-height" src="{{ 'src/images/projects/processingjs/Natural Simulations/Spaceship Ride.gif' | relative_url }}" height="75%" width="100%">
         </div>
     </div>
 </section>
 <section id="learning-ml5js">
     <div class="row">
-        <h1 class="col-xs-12">Learning ml5js (2019)</h1>
+        <h1 class="col-12">Learning ml5js (2019)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Projects and tutorials that implement and extend the functionality of different aspects of the ml5js library.
                 Examples include image classification, pitch detection, video classification, and text generation.
                 While it is useful, ml5js' existing models are not very accurate, and the library is very buggy because it is still a new library.
@@ -315,30 +317,30 @@ style: assets/css/projects.css
 </section>
 <section id="habit-tracker">
     <div class="row">
-        <h1 class="col-xs-12">Habit Tracker (2019 - ?)</h1>
+        <h1 class="col-12">Habit Tracker (2019 - ?)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>A habit tracking electronjs app built using Angular 7. Still in progress. Source code can be found <a href="https://github.com/asarav/Habit-Tracker" target="_blank">here</a>.
                 Progress is currently stalled, but it is a good example of many of the concepts used in Angular.
             </p>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-sm-6 col-12">
             <img src="{{ 'src/images/projects/habit-tracker/Habit Tracker.png' | relative_url }}" height="80%" width="80%">
         </div>
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-sm-6 col-12">
             <img src="{{ 'src/images/projects/habit-tracker/Habit Tracker 2.png' | relative_url }}" height="80%" width="80%">
         </div>
     </div>
 </section>
 <section id="artificialIntelligenceTechniques">
     <div class="row">
-        <h1 class="col-xs-12">IN4010-12 Artificial Intelligence Techniques (2019 - 2020)</h1>
+        <h1 class="col-12">IN4010-12 Artificial Intelligence Techniques (2019 - 2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Artificial Intelligence related projects completed in the graduate level computer science course Artificial Intelligence Techniques at TU Delft.
             Source code is not public and was completed in groups.
             Projects include the following: calculation of posterior probabilities using Bayes Rule, automated bilateral negotiations through TU Delft's <a href="http://ii.tudelft.nl/genius/" target="_blank">GENIUS</a> framework, and reinforcement learning.
@@ -347,35 +349,35 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Automated Bilateral Negotiation</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-ai/Negotiation.PNG' | relative_url }}">
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Reinforcement Learning and Deep Q Reinforcement Learning</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-sm-6 col-12">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-ai/AI RL 1.gif' | relative_url }}">
         </div>
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-sm-6 col-12">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-ai/AI RL 2.gif' | relative_url }}">
         </div>
     </div>
 </section>
 <!-- <section id="multivariateDataAnalysis">
     <div class="row">
-        <h1 class="col-xs-12">CS4070 Multivariate Data Analysis (2019 - 2020)</h1>
+        <h1 class="col-12">CS4070 Multivariate Data Analysis (2019 - 2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Data Analysis and machine learning related projects completed in the graduate level computer science course Multivariate Data Analysis at TU Delft.
             Source code is not public. Projects include the following: calculation of autocorrelation and maximum a posteriori for EKG scans to identify diseased and healthy patients,
             Kalman Filtering and Bayesian Linear Regression of data, and implementations of the Newton Raphson method, Metropolis Hastings Algorithm, Gibbs Samplers, and Gaussian Processes.
@@ -384,54 +386,54 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Autocorrelation and Maximum A Posteriori estimation</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/AutoCorrelation.jpg' | relative_url }}">
         </div>
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/Gaussians with Smoothing.jpg' | relative_url }}">
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Bayesian updating for linear regression and Metropolis Hastings</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/Plot.png' | relative_url }}">
         </div>
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/Metropolis Hastings.png' | relative_url }}">
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <h4>Kernel Methods used in Gaussian Processes (Square Exponential, Polynomial, Neuronal)</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/Square Exponential.png' | relative_url }}">
         </div>
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/Polynomial.png' | relative_url }}">
         </div>
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-mda/Neuronal.png' | relative_url }}">
         </div>
     </div>
 </section> -->
 <section id="dataVisualization">
     <div class="row">
-        <h1 class="col-xs-12">IN4086-14 Data Visualization (2019 - 2020)</h1>
+        <h1 class="col-12">IN4086-14 Data Visualization (2019 - 2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Data Visualization related projects completed in the graduate level computer science course Data Visualization at TU Delft.
             Source code is not public and completed in groups. Projects include the following: infovis projects through d3 and volumetric rendering/coloring/shading of 3d data.
             Projects are coded in Html, Javascript, Python and Java.
@@ -439,10 +441,10 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-sm-6 col-12">
             <img src="{{ 'src/images/projects/delft-data-vis/info vis.gif' | relative_url }}" width="100%">
         </div>
-        <div class="col-xs-6 col-xs-12">
+        <div class="col-sm-6 col-12">
             <video autoplay loop muted playsinline width="90%">
                 <source src="{{ 'src/videos/projects/delft-data-vis/vol vis.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
@@ -452,10 +454,10 @@ style: assets/css/projects.css
 </section>
 <section id="machineLearning1">
     <div class="row">
-        <h1 class="col-xs-12">CS4220 Machine Learning 1 (2019 - 2020)</h1>
+        <h1 class="col-12">CS4220 Machine Learning 1 (2019 - 2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>The Machine Learning 1 graduate level computer science course at TU Delft did not involve any projects, but had exercises that involved practicing concepts such as training data sets, and cross validation using different classifiers.
             This was done in python through the use of a pattern recognition library called <a href="https://github.com/DMJTax/prtools" target="_blank">Pr Tools</a>.
             During the time this library was used in class, it was incomplete and buggy. Next steps would involve learning to use scikit-learn, tensorflow, and pytorch.
@@ -463,23 +465,23 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-machine-learning/Nearest Mean Classifier.png' | relative_url }}">
         </div>
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-machine-learning/Parzen.png' | relative_url }}">
         </div>
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-machine-learning/SVC.png' | relative_url }}">
         </div>
     </div>
 </section>
 <section id="informationRetrieval">
     <div class="row">
-        <h1 class="col-xs-12">IN4325 Information Retrieval (2020)</h1>
+        <h1 class="col-12">IN4325 Information Retrieval (2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Involved reproduction of two information retrieval papers in groups. The first paper related to sentiment judgements using natural language processing and machine learning with Spacy and scikit-learn.
             We compare the the performance of differrent classifiers as well as different feature representations such as bag of words and word2vec.
             Source code for the first project can be found <a href="https://github.com/andreaalf97/Natural-Language-Processing" target="_blank">here</a>.
@@ -489,17 +491,17 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-information-retrieval/WordEmbeddings.png' | relative_url }}">
         </div>
     </div>
 </section>
 <section id="sociocognitiveEngineering">
     <div class="row">
-        <h1 class="col-xs-12">CS4235 Socio-Cognitive Engineering (2020)</h1>
+        <h1 class="col-12">CS4235 Socio-Cognitive Engineering (2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Designed an interaction with a robotic agent for the purpose of elder care, sensory stimulation, and cognitive exercise
             Designs were made through a collaborative process with other team members using Atlassian's Confluence.
             The interaction uses the Spotify api to play music.
@@ -511,10 +513,10 @@ style: assets/css/projects.css
 </section>
 <section id="deepLearning">
     <div class="row">
-        <h1 class="col-xs-12">CS4240 Deep Learning (2020)</h1>
+        <h1 class="col-12">CS4240 Deep Learning (2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Reproduced the following <a href="http://jmlr.org/papers/v15/srivastava14a.html" target="_blank">paper</a> on dropout in neural networks.
             A <a href="https://medium.com/tu-delft-eemcs-student-projects/a-reproduction-attempt-of-dropout-a-simple-way-to-prevent-neural-networks-from-overfitting-43f5c97bc314" target="_blank">blog</a> was written about this reproduction, and code in the form of a google collab can be found <a href="https://github.com/andreaalf97/DeepLearning" target="_blank">here</a>.
             We studied Imagenet and CIFAR10 datasets for image classification.
@@ -524,10 +526,10 @@ style: assets/css/projects.css
 </section>
 <section id="crowdComputing">
     <div class="row">
-        <h1 class="col-xs-12">CS4145 Crowd Computing (2020)</h1>
+        <h1 class="col-12">CS4145 Crowd Computing (2020)</h1>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <p>Designed and implemented novel crowd sourcing tasks that can be used for the purpose of entity resolution.
             Crowd sourcing tasks were published and completed using Amazon Mechanical Turk.
             Data processing was performed using Python and Pandas.
@@ -537,7 +539,7 @@ style: assets/css/projects.css
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-xs-8">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-crowd-computing/MTurk.PNG' | relative_url }}">
         </div>
     </div>

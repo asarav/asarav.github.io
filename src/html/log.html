@@ -17,16 +17,16 @@ style: assets/css/log.css
     {% for item in site.data.log %}
     <section id="{{ item.date }}">
         <div class="row">
-            <div class="date col-xs-12 text-center">{{ item.date }}</div>
+            <div class="date col-12 text-center">{{ item.date }}</div>
         </div>
         <div class="row">
-            <div class="explanation col-xs-12">{{ item.explanation }}</div>
+            <div class="explanation col-12">{{ item.explanation }}</div>
         </div>
         <div class="row">
-            <img class="col-xs-12 col-sm-8 col-md-6" src="{{ item.image | relative_url }}">
+            <img class="col-12 col-sm-8 col-md-6" src="{{ item.image | relative_url }}">
         </div>
         <div class="row">
-            <img class="col-xs-12 col-sm-8 col-md-6" src="{{ item.image2 | relative_url }}">
+            <img class="col-12 col-sm-8 col-md-6" src="{{ item.image2 | relative_url }}">
         </div>
     </section>
     <hr>
