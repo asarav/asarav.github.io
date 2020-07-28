@@ -570,3 +570,52 @@ style: assets/css/projects.css
         </div>
     </div>
 </section>
+<section id="stockPrediction">
+    <div class="row">
+        <h1 class="col-12">Basic Stock Prediction (2020 - )</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Still in progress.
+            Develop a full pipeline that can predict the value of a stock at a particular time in the future.
+            Uses Sci-kit learn and the yFinance api.
+            Unlike other approaches, this does not try to use linear regression based off of a future date, but rather based off of past data.
+            Typical implementations try to plot a curve into the future while this tries to determine the value of a particular point using past data which can lead to greater flexibility and use for actual stock recommendations based on a particular timescale.
+            Future plans involve using crossvalidation to reduce overfitting, including index data as features, ablation tests, and expanding to a larger set of tickers.
+            Source code is public for now and can be found <a href="https://github.com/asarav/Basic-Stock-Prediction" target="_blank">here</a>.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/stock-prediction/stock-prediction.png' | relative_url }}">
+        </div>
+    </div>
+</section>
+<section id="evolutionaryAlgorithms">
+    <div class="row">
+        <h1 class="col-12">CS4205 Evolutionary Algorithms (2020)</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Used and implemented different evolutionary algorithms.
+                Completed different analyses such as scalability to determine the usefulness of certain algorithms for certain optimization problems.
+                Algorithms covered include simple genetic algorithm with multiple types of crossover in Python using DEAP as well as in Java, estimation of distribution algorithm, gene pool optimal mixing evolutionary algorithm,
+                binaryGomea, AMaLGaM with univariate and full implementations, NSGA-II, and evolutionary programming that uses sci-kit learn to generate a function.
+                Problems solved include the maxcut problem, weighted max cut problem, sphere problem, rotated ellipoid problem, and multiobjective optimization problems.
+                Implementations were made using Python, Java, and C. Source code has not been made public.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-8">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/delft-evolutionary-algorithms/Hamming Distance.png' | relative_url }}">
+        </div>
+        <div class="col-sm-4 col-8">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/delft-evolutionary-algorithms/GOMEA.gif' | relative_url }}">
+        </div>
+        <div class="col-sm-4 col-8">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/delft-evolutionary-algorithms/NGSAII Experiment 50.png' | relative_url }}">
+        </div>
+    </div>
+</section>
