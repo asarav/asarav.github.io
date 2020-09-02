@@ -32,18 +32,18 @@
                 .content {
                     border-right: 2px solid white;
                     border-left: 2px solid white;
-                    height: 250px;
+                    height: 280px;
                     @media only screen and (max-width: 1100px) {
-                        height: 300px;
+                        height: 350px;
                     }
                     @media only screen and (max-width: 1000px) {
-                        height: 425px;
+                        height: 445px;
                     }
                     @media only screen and (max-width: 900px) {
-                        height: 500px;
+                        height: 520px;
                     }
                     @media only screen and (max-width: 800px) {
-                        height: 575px;
+                        height: 595px;
                     }
                     .header {
                         a {
