@@ -1,3 +1,197 @@
+- title: "Shadow"
+  type: movie
+  completionDate: Dec 4, 2020
+  sourceDateAndInfo: Sep 6, 2018
+  source: https://www.imdb.com/title/tt6864046/
+  image: https://m.media-amazon.com/images/M/MV5BMWFjODJjZTMtOGYwMy00ZWYzLThjZWMtOTAxOTJmMTJhN2QzXkEyXkFqcGdeQXVyNTc5OTMwOTQ@._V1_UY268_CR3,0,182,268_AL_.jpg
+  explanation: >
+    I consider this to be Zhang Yimou's return to form after many disappointing films.
+    The narrative here is not particularly novel, but the third act felt almost Shakesperean and the duels felt reminiscient of jidaigeki films.
+    The strength of this film is its visual style and cinematography which manages to make the entire film feel like an ink painting or a work of calligraphy.
+    That, combined with the use of Daoist principles and concepts, make it very well done.
+    When compared with movies like Hero this does not have a moral, the soundtrack is minimal, and the spectacle is on a smaller level.
+    While this may not appeal to a larger audience, from a critical perspective, this is carefully crafted and technically consistent and original.
+- title: "DeepMind solves protein folding | AlphaFold 2"
+  type: video
+  completionDate: Dec 4, 2020
+  sourceDateAndInfo: Dec 2, 2020
+  source: https://youtu.be/W7wJDJ56c88
+  image: https://i.ytimg.com/vi/W7wJDJ56c88/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCNdNQQqGDDwO1QNLkGy7lPnkvlDA
+  explanation: > 
+    This video by Lex Fridman basically confirmed some of the thoughts I had when I saw Deepmind's recent work with AlphaFold.
+    This answered a few questions that I had about the possible deep learning architecture used in the newer version of AlphaFold and also provided a bit of insight into the general trends in deep learning.
+    Overall, I actually found this more informative and useful than the video that Deepmind made themselves.
+- title: "The Decision: Overcoming Today's BS for Tomorrow's Success"
+  type: book
+  completionDate: Dec 2, 2020
+  sourceDateAndInfo: Kevin Hart, May 21, 2020
+  source: https://www.goodreads.com/book/show/53456548-the-decision
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1590271157l/53456548._SX318_.jpg
+  explanation: >
+    This was unique in that it was never actually published as a book, so the content only exists in audio form.
+    In terms of content, the content seems relatively straightforward and can be found in most self help books.
+    The reason why I listened to this was mainly because of Kevin Hart's delivery.
+    His delivery was what made it worth listening to, and it felt more like a comedy special because of that.
+- title: "AlphaFold: The making of a scientific breakthrough"
+  type: video
+  completionDate: Dec 1, 2020
+  sourceDateAndInfo: Nov 30, 2020
+  source: https://youtu.be/gg7WjuFs8F4
+  image: https://i.ytimg.com/vi/gg7WjuFs8F4/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLD-_qBjnV2Mh3uk0Db3PVFUqg23zA
+  explanation: > 
+    It was interesting to see this succeed.
+    I remember reading a <a href="https://www.nature.com/articles/s41586-019-1923-7" target="_blank">paper</a> published in Nature in January, and I was surprised to see that they already reached global distance test scores of 80 or higher only a few months after.
+    What this shows is that the application of neural nets to problems that humans and traditional computing are unable to solve can result in satisfying results.
+    The approach used here was apparently one that leveraged the graph-like structure to apply an attention based neural network to the problem.
+    That said, there isn't an updated paper, so details regarding the architecture are a bit unclear.
+    In the Nature paper, Deepmind used convolutional blocks and stochastic gradient descent which does not seem all that novel, so I am curious to see what changed between now and January.
+- title: "Red Bull BC One World Final 2020 | Livestream"
+  type: video
+  completionDate: Nov 29, 2020
+  sourceDateAndInfo: Nov 28, 2020
+  source: https://youtu.be/a7UxhsxxUJs
+  image: https://i.ytimg.com/vi/a7UxhsxxUJs/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAxOckEoJoBg9fSQT7Ly8XNJKfk-A
+  explanation: > 
+    It was originally announced that there would be no Red Bull BC One this year due to COVID-19, so this completely took me by surprise.
+    The competition felt weird because there was no audience in the stadium.
+    That said, everything else was good.
+    The lineups were good.
+    The judging made sense.
+    Commentary was good.
+    The camera work was actually not that bad this time.
+    The MC was sub par, but acceptable.
+    The music was acceptable with some good tracks.
+    Starting at the quarter finals meant that everyone had a fresh set of moves that they could use for the entire competition.
+    Shigekix winning was not surprising at all given that he competed at a high level from a young age and the level of conditioning that he had combined with his musicality was simply incredible.
+    What is even more surprising is that his current form compared to two years or even one year ago is on another level and the rate of improvement is something I have not seen before.
+    He simply smoked all the competition in such a way that he made the strongest competitors look mediocre.
+- title: "F.E.A.R."
+  type: game
+  completionDate: Nov 28, 2020
+  sourceDateAndInfo: Oct 17, 2005
+  source: https://en.wikipedia.org/wiki/F.E.A.R._(video_game)
+  image: https://upload.wikimedia.org/wikipedia/en/1/15/FEAR_DVD_box_art.jpg
+  explanation: >
+    This game's strengths lie in its gameplay.
+    The shooter mechanics are fluid and the use of slow motion was also nice.
+    It felt similar to Half-Life, but the physics were not used as a mechanic by the player.
+    It also felt like Halo, but the weapon selection and enemy variety was limited in comparison.
+    What makes it unique is its horror tropes which seem to be inspired by Japanese film.
+    However, that premise was not fully utilized which prevented it from being as great as the other games mentioned.
+- title: "Ayitha Ezhuthu"
+  type: movie
+  completionDate: Nov 27, 2020
+  sourceDateAndInfo: May 21, 2004
+  source: https://www.imdb.com/title/tt0375571/
+  image: https://m.media-amazon.com/images/M/MV5BYzIyZGRjMWYtNTAxZS00YzFkLWE5MmEtMWU1MmUwOTE5OWMwXkEyXkFqcGdeQXVyOTk3NTc2MzE@._V1_UY268_CR21,0,182,268_AL_.jpg
+  explanation: >
+    A surprisingly modern film that is quite representative of the times it was made in.
+    During the late 90's and early 2000's, mainstream film had quite an experimental streak with many films playing with time such as Nolan's Memento and Zhang Yimou's Hero.
+    This film is not different, and like Hero, it also plays with color for each of its characters.
+    Because of this, it is not particularly original given the films that preceed it even when compared with Mani Ratnam's other works like Alai Payuthey which also played with time.
+    Even the quick editing felt reminiscent of some of the earlier works of Darren Aronofsky and Danny Boyle which also came out during the same time.
+    That said, I enjoyed this simply due to its momentum, tight script, and well acted characters.
+    The use of three colors for three characters, three ages, and three classes to highlight strata within South Indian society was well done.
+    It's main glaring weakness are action scenes which Mani Ratnam seems to struggle with for some strange reason despite his ability to film choreography for music and large groups of people.
+    The music is modern and the use of Tamil lyrics combined with modern genres is handled very well.
+    Its runtime is long, but it does not drag, making it time well spent.
+- title: "I Have No Mouth and I Must Scream"
+  type: book
+  completionDate: Nov 26, 2020
+  sourceDateAndInfo: Harlan Ellison, Apr, 1967
+  source: https://www.goodreads.com/book/show/415459.I_Have_No_Mouth_and_I_Must_Scream
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1423672898l/415459.jpg
+  explanation: >
+    A short story about an AI called AM that tortures humans within a virtual world without allowing them the option of death after human civilization has collapsed.
+    The premise is interesting, and I have seen similar concepts in other science fiction stories, but this is the only book to try to thoroughly explore it.
+    That said, the exploration of the premise is not that thorough mainly because the story is short.
+    The way in which AM tortures humans makes sense, but does not seem to be the most effective way of causing distress and pain.
+    I would have expected the form of suffering to be less physical and more psychological, but perhaps such schemes cannot be covered within a short story.
+    It may be interesting to also play the game that is based off of this.
+- title: "The Everything Store: Jeff Bezos and the Age of Amazon"
+  type: book
+  completionDate: Nov 25, 2020
+  sourceDateAndInfo:  Brad Stone, Oct 15, 2013
+  source: https://www.goodreads.com/book/show/17660462-the-everything-store
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1365394361l/17660462.jpg
+  explanation: >
+    This is a novel that offers a lot of clarity regarding Jeff Bezos as well as the growth of Amazon.
+    Although Amazon is currently one of the largest companies, the journey that was taken was not always one of an upward trajectory and was filled with ups and downs.
+    The emphasis on the customer as well as Amazon's culture and Jeff Bezos' volatility offers quite a bit of insight into the company for those who are only familiar with Amazon's public face.
+    Another interesting thing to note is that although Amazon is viewed as a tech company today, this was not always the case, and it is interesting to how a company that is older than Google managed to live through the tech bubble and the recession of 2008 to become what it is today.
+    One thing that I found myself agreeing with is that information should be presented with some narrative, and this strategy should be more widely adopted.
+    This has many similarities with Walter Isaacson's novel about Steve Jobs, but I think this is worth the read despite it being, in my opinion, inferior to Isaacson's works.
+- title: "Anand"
+  type: movie
+  completionDate: Nov 24, 2020
+  sourceDateAndInfo: Mar 12, 1971
+  source: https://www.imdb.com/title/tt0066763/
+  image: https://m.media-amazon.com/images/M/MV5BYmYzNmM2MDctZGY3Yi00NjRiLWIxZjctYjgzYTcxYTNhYTMyXkEyXkFqcGdeQXVyMjUxMTY3ODM@._V1_UY268_CR3,0,182,268_AL_.jpg
+  explanation: >
+    Despite the heavy theme of mortality, this film can have surprisingly light hearted moments.
+    When compared to a film like Ikiru, I prefered Ikiru, but this is unique and easier to digest.
+    The character of Anand was original and memorable which his primary characteristic of making friends with everyone he meets.
+    The uniqueness of the main character is what made this film, and without him, this would have not been as memorable.
+    This combined with the death of Anand made for a story with a lot of depth that was presented in a minimalistic manner that anyone would be able to appreciate.
+    Outside of Anand, there were no mistakes made, but camera work and other technical achievements were relatively unremarkable.
+    Overall, it is understandable why this is praised as one of the best Hindustani language films.
+- title: "Soma"
+  type: game
+  completionDate: Nov 23, 2020
+  sourceDateAndInfo: Sep 22, 2015
+  source: https://en.wikipedia.org/wiki/Soma_(video_game)
+  image: https://upload.wikimedia.org/wikipedia/en/2/21/Soma_Game_Art.png
+  explanation: >
+    The title of this game originates from the Greek word 'soma' which means body.
+    This is a game with a great hard sci-fi story that had above average gameplay.
+    On a technical level, it was superb with distinct levels, good dialogue, and some of the best sound design I have seen in a game.
+    The post-apocalyptic underwater setting was similar to Bioshock, but the use of detailed claustrophobic underwater habitats/facilities helped with the horror aspect of the game.
+    The story is what impressed me the most, and it seemed to draw on many of the same themes as that of Ghost in the Shell and The Matrix that touches upon concepts of free will and conciousness which is often covered within classic Greek philosophy.
+    The gameplay mostly consists of a series of sequences where you try to get from point A to point B while avoiding certain monsters that you are powerless against while navigating some moral dilemmas that don't affect the ending.
+    For someone who has made video games, and understand how game engines work, the horror was not quite as effective for me and had a certain level of predictability, but the jump scares were sometimes effective.
+    For a hard sci-fi story, there isn't a big reveal at the end, and the story has many smaller reveals that give the story a slow burn.
+    The concepts covered in this game also have some repercussions for technologies that might be developed in the future such as teleportation, digital legacy, cybernetics, simulation, and the technological singularity.
+- title: "Deep Work: Rules for Focused Success in a Distracted World"
+  type: book
+  completionDate: Nov 20, 2020
+  sourceDateAndInfo:   Cal Newport, Jan 5, 2016
+  source: https://www.goodreads.com/book/show/25744928-deep-work
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447957962l/25744928._SY475_.jpg
+  explanation: >
+    This book makes a distinction between shallow work and deep work and states that deep work is more valuable because it leads to new ideas and is not easily replicable.
+    This is partially true, but only if the shallow work is something anyone can do. If you are used to doing something that no one else can do, it can be shallow.
+    Because of this, on the face of things, this book seems to offer sound advice for deep meditative working conditions, but it also fails to quantify the effect of deep work in a rigorous manner.
+    It may be preferable to actually read the research behind the book rather than the book itself, since the book seems to be directed more towards a general reading audience.
+    That said, since I am used to completing a lot of different types of work and using an algorithmic approach, this book was not quite as useful for me.
+- title: "MO:Astray"
+  type: game
+  completionDate: Nov 19, 2020
+  sourceDateAndInfo: Oct 25, 2019
+  source: https://store.steampowered.com/app/1104660/MOAstray/
+  image: https://cdn.cloudflare.steamstatic.com/steam/apps/1104660/header.jpg?t=1594197745
+  explanation: >
+    I was impressed by this work by a Taiwanese Indie company.
+    The gameplay is like Ori and the Blind Forest with a little bit of Metroid mixed in.
+    The story is a tragedy with a little bit of cosmic horror mixed in.
+    In fact, this is probably the one of the only works of cosmic horror that I found to be effective although the way in which it was presented may have been a bit lacking.
+    The use of multiple endings based on whether the player finds all of a certain item in multiple locations was a nice touch.
+    It is not particularly groundbreaking, but what it manages to do, it does very well.
+    The mechanics of single directional jumping is not completely original, but it is used very well.
+    Art direction is well done, and the general environment design and color pallete felt reminiscient of high budget anime films from the 1980's and 1990's.
+    Although this is Taiwanese, this felt like a work that might have been made in Japan a few decades ago.
+    The music is well done and memorable.
+    Overall, this is a great game that deserves better marketing.
+- title: "The Machine Stops"
+  type: book
+  completionDate: Nov 18, 2020
+  sourceDateAndInfo:   E.M. Forster, 1909
+  source: https://www.goodreads.com/book/show/4711854-the-machine-stops
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347943820l/4711854.jpg
+  explanation: >
+    A surprisingly well written short story that managed to make a somewhat prescient premise that manages to predict the internet, social media, content creation, automation, and environmental collapse.
+    This is particularly impressive when one considers that the story was written more than 110 years ago.
+    Like many other works during the time like The Time Machine and Brave New World, this draws on dystopian themes as well as older philosophical works like Plato's Allegory of the Cave to make an entertaining read that is thought provoking.
+    Overall, this is original, but also feel dated which adds to the charm.
 - title: "Crew-1 Mission"
   type: video
   completionDate: Nov 16, 2020
@@ -1614,7 +1808,7 @@
   completionDate: Jun 4, 2020
   sourceDateAndInfo: May 31, 2020
   source: https://www.imdb.com/title/tt2861424/
-  image: https://m.media-amazon.com/images/M/MV5BMjRiNDRhNGUtMzRkZi00MThlLTg0ZDMtNjc5YzFjYmFjMmM4XkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_UY268_CR2,0,182,268_AL_.jpg
+  image: https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_UX182_CR0,0,182,268_AL_.jpg
   explanation: >
     Pretty funny, but also episodic.
     I think this has wide appeal.
