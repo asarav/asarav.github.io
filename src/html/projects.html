@@ -668,3 +668,74 @@ style: assets/css/projects.css
         </div>
     </div>
 </section>
+<section id="video-upscaling">
+    <div class="row">
+        <h1 class="col-12">Video Upscaling (2020)</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Upscaling of video using neural nets. Neural nets are trained using images that are downscaled.
+            I didn't bother to put this on github since there are literally many tutorials that show how to use convolutional neural networks.
+            The point of this project was to see what was possible using basic techniques rather than to innovate on existing architectures.
+            CNN's are run on individual frames which are then collected and played at the frame rate of the original video.
+            </p>
+            <p>The videos shown here are not the best quality due to compression used to reduce file size, but it can be seen that lines are sharper and pixelation is minimized.
+            In cases where images are highly degraded, the neural net adds information to the image to make it seem more convincing after upscaling.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Original (264p) vs Upscaled (4K)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <video width="100%" height="100%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/video-upscaling/Kara no Kyoukai.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="col-12">
+            Original (264p) vs Upscaled (4k)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <video width="90%" height="90%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/video-upscaling/Kara no Kyoukai 5.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Original (360p) vs Upscaled (720p)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <video width="90%" height="90%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/video-upscaling/Matrix.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Original (360p) vs Upscaled (4k)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <video width="90%" height="90%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/video-upscaling/Ghost in the Shell.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    -->
+</section>
