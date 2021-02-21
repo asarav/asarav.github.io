@@ -658,7 +658,9 @@ style: assets/css/projects.css
         <div class="col-12">
             <p>Worked in a group to create an interaction that was capable of teaching the basic math concept of division using the Furhat robot.
             Work involved affect detection to determine the frustration level of students, gestures, simplistic gaze, and the dialogue.
-            Code has not been made public. Affect detection has been implemented using the <a href="https://github.com/dkollias/Aff-Wild-models" target="_blank">Aff-Wild</a> models which utilizes Tensorflow.
+            Code has been made public and may be used in part for the next year's Conversational Agents course.
+            Code can be found <a href="https://github.com/asarav/Math-Tutoring-Conversational-Agent" target="_blank">here</a>.
+            Affect detection has been implemented using the <a href="https://github.com/dkollias/Aff-Wild-models" target="_blank">Aff-Wild</a> models which utilizes Tensorflow.
             </p>
         </div>
     </div>
@@ -679,7 +681,7 @@ style: assets/css/projects.css
             The point of this project was to see what was possible using basic techniques rather than to innovate on existing architectures.
             CNN's are run on individual frames which are then collected and played at the frame rate of the original video.
             </p>
-            <p>The videos shown here are not the best quality due to compression used to reduce file size, but it can be seen that lines are sharper and pixelation is minimized.
+            <p>The videos shown here are not the best quality due to compression used to reduce file size for better load times, but it can be seen that lines are sharper and pixelation is minimized.
             In cases where images are highly degraded, the neural net adds information to the image to make it seem more convincing after upscaling.
             </p>
         </div>
@@ -738,4 +740,35 @@ style: assets/css/projects.css
         </div>
     </div>
     -->
+</section>
+<section id="socialSignalProcessing">
+    <div class="row">
+        <h1 class="col-12">CS4165 Social Signal Processing (2020-2021)</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Applied machine learning techniques and statistics to analyze and annotate behavior within social contexts as a group.
+            The problem focused on in this project is that of the relationship between prosody and memory.
+            Specifically, we analyze how those interacting with a conversational agent or speaker entrain their prosody to a tutor's speech over time based on whether the participant of the experiment is interacting with a tutor with a human face or a robot face.
+            To do this, we showed participants of the experiment videos of a human tutor and of a robotic tutor with the same audio as the human and the human's facial gestures mapped to the robot so the robot matches the movements as well.
+            The robot used was the Furhat robot.
+            We used recorded audio to analyze levels of entrainment, and we used a questionnaire to analyze levels of recall and recognition.
+            Scripts were made in Python with Furhat using Kotlin.
+            For analysis of audio, we looked at certain features such as f0, mean and max values of pitch, HNR, and different values of shimmer and jitter.
+            To do this, we utilized the Pydub and Parselmouth libraries in python.
+            We then calculated convergence, proximity, and synchrony to relate the features to acoustic-prosodic entrainment.
+            To measure statistical significance, we used t-tests and mann-whitney u tests after using z-scores for standardization.
+            Code can be found <a href="https://github.com/Dekelv/ProsodicFeatureExtraction" target="_blank">here</a>.
+            The work from this course is expected to lead to a publication in the form of a research article later in 2021.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/delft-social-signal-processing/KNN7Both.png' | relative_url }}">
+        </div>
+        <div class="col-sm-6 col-12">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/delft-social-signal-processing/proximity_shimmer.png' | relative_url }}">
+        </div>
+    </div>
 </section>
