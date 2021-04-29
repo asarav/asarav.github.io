@@ -1,3 +1,23 @@
+- title: "VRChat"
+  type: game
+  completionDate: Apr 21, 2021
+  sourceDateAndInfo: Jan 16, 2014
+  source: https://en.wikipedia.org/wiki/VRChat
+  image: https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Vrchatlogo.png/330px-Vrchatlogo.png
+  explanation: >
+    This is a virtual world where you can interact with other people.
+    There is a bit of a learning curve when you are not using the application with a VR headset, so a VR headset is definitely recommended.
+    Due to the way conversations work, the voice chat is proximity based where volume is dependent on how close or far away you are from other players.
+    If your goal is to have a conversation, this is not the most efficient way of going about it, but it does offer something that is unique and relatively modern for meeting people.
+- title: "Mechanics Of A Side Split"
+  type: video
+  completionDate: Apr 18, 2021
+  sourceDateAndInfo: Nov 5, 2020
+  source: https://youtu.be/bJl4VSoESpo
+  image: https://i.ytimg.com/vi/bJl4VSoESpo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCDr8fs-7VDJgNJKKd8NwUbtJgg_Q
+  explanation: > 
+    A detailed mechanical explanation of how to reach side splits and what is required.
+    Far more useful for working towards splits than many other resources out there.
 - title: "Zack Snyder's Justice League"
   type: movie
   completionDate: Apr 9, 2021
