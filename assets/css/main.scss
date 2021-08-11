@@ -77,7 +77,7 @@
 
     //Try to mimic bootstrap 3 style
     .jumbotron p {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         font-size: 21px;
         font-weight: 200;
     }
@@ -111,13 +111,12 @@
             transition: opacity 0.5s ease-in;
         }
         .chevron-down {
-            padding-top: 40px;
+            padding-top: 15px;
             font-size: 60px;
             transition: padding-top 0.3s ease-in;
-            top: 40px;
             cursor: pointer;
             &:hover {
-                padding-top: 50px;
+                padding-top: 45px;
                 transition: padding-top 0.3s ease-in;
             }
         }
