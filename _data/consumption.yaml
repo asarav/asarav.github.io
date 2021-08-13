@@ -1,3 +1,24 @@
+- title: "The Adventures of Huckleberry Finn"
+  type: book
+  completionDate: Aug 13, 2021
+  sourceDateAndInfo: Mark Twain, Dec 1, 1884
+  source: https://www.goodreads.com/book/show/2956.The_Adventures_of_Huckleberry_Finn
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1546096879l/2956.jpg
+  explanation: >
+    I don't have much to say about this one.
+    It is similar to Tom Sawyer, but has more going on in my opinion.
+    The humor is a bit dated, but at times it can still be used to make statements about society.
+    Controversy regarding this work is overblown when considering the time and location in which the story takes place.
+    Good, but when compared to other great novels of the time, this does not compare.
+- title: "Starbase Launchpad Tour with Elon Musk [PART 3]"
+  type: video
+  completionDate: Aug 12, 2021
+  sourceDateAndInfo: Aug 11, 2021
+  source: https://youtu.be/9Zlnbs-NBUI
+  image: https://i.ytimg.com/vi/9Zlnbs-NBUI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBMg9gc3IOibtGRrczJ2mrS4Qh2yQ
+  explanation: > 
+    This is less packed than the other parts and primarily covers the orbital launch table.
+    In this, the contents covered are less about the engineering involved and more about the primary goals of SpaceX which are covered in other presentations, making this somewhat redundant.
 - title: "The Lives of Others"
   type: movie
   completionDate: Aug 10, 2021
