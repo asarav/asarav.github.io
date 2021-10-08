@@ -1,3 +1,119 @@
+- title: "OpenCV Course - Full Tutorial with Python"
+  type: video
+  completionDate: Oct 8, 2021
+  sourceDateAndInfo: Nov 3, 2020
+  source: https://youtu.be/oXlwWbU8l2o
+  image: https://i.ytimg.com/vi/oXlwWbU8l2o/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAFl0bNvhHOTmkib0of4DNMIj3d9w
+  explanation: > 
+    I need to learn how to use OpenCV for computer vision purposes.
+    This covered OpenCV from basic image manipulation to recognition using existing libraries.
+    The video lasted four hours, but I think most of it was worth the time due to video being a good medium to learn about computer vision.
+    Different concepts are split up by chapter within the video making it easy to follow and learn what you specifically want to learn.
+    The last lesson may be considered a waste of time due to it going through the deep learning pipeline and utilizing a library developed by the author of the video.
+    It is very much a case of the video creator peddling his own goods which would be fine if his libraries were used by many, but that is not the case.
+    Overall, not bad and a good starting point for things like object detection and recognition.
+- title: "Regular Expressions (Regex) Tutorial: How to Match Any Pattern of Text"
+  type: video
+  completionDate: Oct 6, 2021
+  sourceDateAndInfo: Oct 5, 2017
+  source: https://youtu.be/sa-TUpSx1JA
+  image: https://i.ytimg.com/vi/sa-TUpSx1JA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCrKWD7aVOJgFNGCR9CDCPCygoAzA
+  explanation: > 
+    I have not taken the chance to learn regular expressions until now, but this video makes it seem very easy.
+    As long as you understand what each individual code snippet does, you can assemble them together to create useful expressions.
+    While it is doubtful that I would need to use regular expressions in large amounts in the future, it helps to know this.
+- title: "Node.js Crash Course"
+  type: video
+  completionDate: Oct 6, 2021
+  sourceDateAndInfo: Feb 6, 2019
+  source: https://youtu.be/fBNz5xF-Kx4
+  image: https://i.ytimg.com/vi/fBNz5xF-Kx4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDXqCKlm5DW0ccc3Az3tHJM3wfbNg
+  explanation: > 
+    I have done extensive things with Node.js in the past such as i18n json translation into multiple languages, but I needed to refresh my knowledge.
+    This covers the basics and ends with the creation of a web server that is able to serve html webpages.
+    The video also shows how to deploy to Heroku which was quite useful for me.
+- title: "JavaScript ES6, ES7, ES8: Learn to Code on the Bleeding Edge (Full Course)"
+  type: video
+  completionDate: Oct 6, 2021
+  sourceDateAndInfo: May 14, 2018
+  source: https://youtu.be/nZ1DMMsyVyI
+  image: https://i.ytimg.com/vi/nZ1DMMsyVyI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD0Y2fHtZaHIcRcJ_AK7B0ZlWLAwA
+  explanation: > 
+    I wanted to get a refresher modern javascript and this pretty much covers it.
+    Unlike other videos which have a fetish for arrow functions, this provides a better overview of many of the features available.
+    That said, if you are experienced with javascript like me, you may be able to cover ground faster just by skimming through documentation.
+- title: "MongoDB Crash Course"
+  type: video
+  completionDate: Oct 5, 2021
+  sourceDateAndInfo: Jul 16, 2019
+  source: https://youtu.be/-56x56UppqQ
+  image: https://i.ytimg.com/vi/-56x56UppqQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAW-i4LBuCGIJngvANc-QVZppabbw
+  explanation: > 
+    Simply great and easy to understand.
+    I now understand the advantages and disadvantages of NoSQL, as well as how its queries are structured.
+    Since I have worked extensively with JSON in the past, this felt as though it was made for me.
+    The way in which ATLAS can immediately be set up with AWS, Azure or whatever is an extra plus which takes some of the complexity of devops out of the equation.
+- title: "Understanding Django In 30 Minutes | Eduonix"
+  type: video
+  completionDate: Oct 5, 2021
+  sourceDateAndInfo: Jul 7, 2018
+  source: https://youtu.be/IMG4r03G6g8
+  image: https://i.ytimg.com/vi/IMG4r03G6g8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD42I9rFhdLgf1cEz78l4IbY0G6Ag
+  explanation: > 
+    A description of what Django is, and an example application.
+    This does not show the full range of what Django can do, and in my case, what I was interested in was its use as a backend in a full stack web app.
+    This did not satisfy me, but it might be an acceptable starting point.
+- title: "Introduction to AWS Services"
+  type: video
+  completionDate: Oct 4, 2021
+  sourceDateAndInfo: Jun 9, 2019
+  source: https://youtu.be/Z3SYDTMP3ME
+  image: https://i.ytimg.com/vi/Z3SYDTMP3ME/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAaMXKSNMS7kr07H4qA2KSh8Vendg
+  explanation: > 
+    A great overview of many of the services offered by AWS as well as a great overview of large scale applications.
+    Highly recommended, straight forward, and thorough.
+- title: "Learn React In 30 Minutes"
+  type: video
+  completionDate: Oct 4, 2021
+  sourceDateAndInfo: Oct 22, 2019
+  source: https://youtu.be/hQAHSlTtcmY
+  image: https://i.ytimg.com/vi/hQAHSlTtcmY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDx6ljrOZH9FcOL-9K4HSADM-GTPQ
+  explanation: > 
+    Covers the basics of React in 30 minutes and does nothing else. This covers a todo list example in particular.
+    There is no routing, there is no coverage of single binding and double binding, no CRUD's, and I think most people would be lost if they did not have prior experience with some of the technologies involved.
+    While I did understand what was going on, there were some things people won't pick up on such as how binding in React works due to it not being covered explicitly.
+    This also did not cover things like best practices. This only covers the main mechanics. I recommend a more in depth overview regardless of whether you are an experienced front end dev or a newcomer.
+    What is also not clear is the advantages over Angular, although at face value, React seems easier to pick up.
+- title: "What is Firebase?"
+  type: video
+  completionDate: Sep 29, 2021
+  sourceDateAndInfo: Mar 3, 2019
+  source: https://youtu.be/-pyo67HWuOI
+  image: https://i.ytimg.com/vi/-pyo67HWuOI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC0zu2vNqbFoa1-UMTihv9uajThzQ
+  explanation: > 
+    I have been considering multiple solutions for hosting a dynamic website with a fully functional backend.
+    As I've experienced with Google products in the past, documentation is not that great.
+    This video is short enough to cover what Firebase is and the concept of database as a service.
+    What it does not show is the full range of functionalities available-- specifically if it is possible to separate business logic from the frontend and have it within Firebase itself.
+- title: "What Is Docker? | What Is Docker And How It Works? | Docker Tutorial For Beginners | Simplilearn"
+  type: video
+  completionDate: Sep 29, 2021
+  sourceDateAndInfo: Sep 4, 2019
+  source: https://youtu.be/rOTqprHv1YE
+  image: https://i.ytimg.com/vi/rOTqprHv1YE/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB6fvd4n0Z_EzmIiThZ76MDhM7klw
+  explanation: > 
+    I have heard a lot about Docker for many years and I watched this to determine if it is something I needed for personal projects and prototypes or not.
+    While this is useful, I think the quickest way to determine its value is to try it out yourself.
+- title: "How To Make A Logo In Inkscape"
+  type: video
+  completionDate: Sep 29, 2021
+  sourceDateAndInfo: Apr 18, 2013
+  source: https://youtu.be/dPHrmw4r16o
+  image: https://i.ytimg.com/vi/dPHrmw4r16o/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDq6h5bpunbp6MNPIIR9f8rTzTiEw
+  explanation: > 
+    Quick and straight to the point.
+    Shows how to trace a reference image and add text.
+    Despite this being eight years old, it is still useful.
 - title: "Inspiration4 | In-Flight Update with the Crew"
   type: video
   completionDate: Sep 26, 2021
