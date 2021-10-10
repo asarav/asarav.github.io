@@ -1,3 +1,13 @@
+- title: "Advanced Computer Vision with Python - Full Course"
+  type: video
+  completionDate: Oct 10, 2021
+  sourceDateAndInfo: May 27, 2021
+  source: https://youtu.be/01sAkU_NvOY
+  image: https://i.ytimg.com/vi/01sAkU_NvOY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLChXuD6nM6sHA5f_oW8pvRrn3Bebg
+  explanation: > 
+    Covers mediapipe usage. This covers pose, hands, and facial detection.
+    Although this is more than 6 hours long, it is quite useful and straight forward to follow and it's fairly recent.
+    I wish they had a project that utilized the facial mesh, but since each of the modules uses similar landmark based structures, the other projects included are useful as well.
 - title: "OpenCV Course - Full Tutorial with Python"
   type: video
   completionDate: Oct 8, 2021
