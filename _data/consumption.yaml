@@ -1,3 +1,62 @@
+- title: "PyTorch Tutorials - Complete Beginner Course"
+  type: video
+  completionDate: Nov 29, 2021
+  sourceDateAndInfo: Nov 21, 2020
+  source: https://www.youtube.com/watch?v=EMXfZB8FVUA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=1
+  image: https://i.ytimg.com/vi/EMXfZB8FVUA/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCuodcp16EIKjPIKoYh6eci2o6fRQ
+  explanation: > 
+    I needed a refresher on Pytorch as well as a full overview of the parts that I have not used in projects in the past.
+    This covers the basics needed for the training and testing loops.
+    It does not cover stuff like torchvision or torchaudio which can be disappointing, but since this is a beginner course, I suppose that is fine.
+    It should be noted that more complex architectures like transformers, autoencoders, deep q learning for reinforcement learning and GANs are not covered either.
+    There is coverage of pretty much everything for training from data loaders to optimizers, to learning rate scheduling to Pytorch lightning.
+    Pytorch lightning in particular seems quite useful and since I hate dealing with boilerplate, it might be something I would be interested in using myself.
+    Overall, useful for jogging one's memory, but I think the best way to really address one's weaknesses is by writing code and running it on collab.
+    In my case, the parts that I find to be most troublesome is dealing with tensor shapes and formatting data accordingly for loading data and running predictions.
+- title: "Behind the Frame: The Finest Scenery"
+  type: game
+  completionDate: Nov 26, 2021
+  sourceDateAndInfo: Apr 25, 2021
+  source: https://store.steampowered.com/app/1634150/Behind_the_Frame_The_Finest_Scenery/
+  image: https://cdn.akamai.steamstatic.com/steam/apps/1634150/header.jpg?t=1636052234
+  explanation: >
+    A short game with simple gameplay and great art direction.
+    Cutscenes and animation is quite reminiscient of Studio Ghibli's work which is quite impressive for a small team.
+    Pacing is great and the themes of art and dementia represent an approach to the topic that is quite different from other works like Everywhere at the End of Time or the works of William Utermohlen.
+- title: "Why Gifted Kids Are Actually Special Needs"
+  type: video
+  completionDate: Nov 25, 2021
+  sourceDateAndInfo: Nov 17, 2021
+  source: https://youtu.be/QUjYy4Ksy1E
+  image: https://i.ytimg.com/vi/QUjYy4Ksy1E/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD8KYekdUiha5iIpnGlGuyFeCIN5A
+  explanation: > 
+    Quite an interesting video from a gem of a channel.
+    It covers pacing and rate of learning and the needs of gifted children which is an area I don't hear all that much about in mental health discussions.
+- title: "What is NginX and What are its use cases?"
+  type: video
+  completionDate: Nov 24, 2021
+  sourceDateAndInfo: Feb 2, 2020
+  source: https://youtu.be/WHv_t_yK-QM
+  image: https://i.ytimg.com/vi/WHv_t_yK-QM/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAELew7h8RO1iCaK6Ml_NhIaPBFig
+  explanation: > 
+    Quick explanation of what NginX is. Put simply, it is a server that is used for load balancing and can be used as a reverse proxy.
+    With regards to what a reverse proxy is, the differences between a proxy and a reverse proxy are not all that distinctive.
+    In a reverse proxy the client doesn't know which server it is connecting to (balancer). In a proxy the server doesn't know which client it is connecting from (VPN).
+    So, you can have both.
+- title: "The Coddling of the American Mind: How Good Intentions and Bad Ideas Are Setting Up a Generation for Failure"
+  type: book
+  completionDate: Nov 21, 2021
+  sourceDateAndInfo: Jonathan Haidt, Greg Lukianoff, Sept 4, 2018
+  source: https://www.goodreads.com/book/show/36556202-the-coddling-of-the-american-mind
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1513836885l/36556202._SY475_.jpg
+  explanation: >
+    This is a book that gets brought up frequently in online discussions, so I went into this blind to figure out what all the fuss is about.
+    This focuses on free speech and how social trends are leading to a larger populace of people who are more easily offended.
+    Given the topic, it raises interesting points on education, personal development, and discourse in a non-partisan way.
+    What this book argues for is quite simply to avoid conflict, to assume no ill will when the intents of others are unknown, and to expose oneself to the challenges that one may realistically face rather than avoid them.
+    That sentence by itself should be enough, but it manages to take the core premise and turn it into a book when an article may be sufficient.
+    I appreciated the use of cognitive behavioral theory due to my own use of it in my research, but also found that this book relies too heavily on it and even simplifies it a bit more than I would prefer.
+    Overall, I found this thought provoking  despite its flaws.
 - title: "The Art of Communicating"
   type: book
   completionDate: Nov 10, 2021
