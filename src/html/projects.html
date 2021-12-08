@@ -584,12 +584,16 @@ style: assets/css/projects.css
             Future plans involve using crossvalidation to reduce overfitting, including index data as features, ablation tests, and expanding to a larger set of tickers.
             Source code is public for now and can be found <a href="https://github.com/asarav/Basic-Stock-Prediction" target="_blank">here</a>.
             I believe use of this project as well as development of other algorithms for modeling stock behavior in my personal investment strategy makes me a self employed amateur quantitative trader now instead of just a retail trader.
+            In 2021, I made the project available for use through streamlit. Those who wish to try the project can be given access upon request depending on what you intend to use the project for. If you wish to use the project to profit, let me know and we can negotiate the price of access.
             </p>
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-sm-4 col-8">
             <img class="minimized-image-height" src="{{ 'src/images/projects/stock-prediction/stock-prediction.png' | relative_url }}">
+        </div>
+        <div class="col-sm-4 col-8">
+            <img class="minimized-image-height" src="{{ 'src/images/projects/stock-prediction/streamlit.PNG' | relative_url }}">
         </div>
     </div>
 </section>
@@ -681,6 +685,7 @@ style: assets/css/projects.css
             I didn't bother to put this on github since there are literally many tutorials that show how to use convolutional neural networks.
             The point of this project was to see what was possible using basic techniques rather than to innovate on existing architectures.
             CNN's are run on individual frames which are then collected and played at the frame rate of the original video.
+            In my case, I used a tried and tested pretrained network in addition to additional training to avoid the pains of training for hours or days on end.
             </p>
             <p>The videos shown here are not the best quality due to compression used to reduce file size for better load times on the web, but it can be seen that lines are sharper and pixelation is minimized.
             In cases where images are highly degraded, the neural net adds information to the image to make it seem more convincing after upscaling.
