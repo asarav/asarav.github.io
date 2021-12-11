@@ -1,3 +1,65 @@
+- title: "Freedom from the Known"
+  type: book
+  completionDate: Dec 9, 2021
+  sourceDateAndInfo: Jiddu Krishnamurti, 1969
+  source: https://www.goodreads.com/book/show/143877.Freedom_from_the_Known
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1410132490l/143877.jpg
+  explanation: >
+    This is a discussion of the limits people place upon themselves which prevents them from reaching joyfulness or peace.
+    In this case, much of what is examined is the past, present and future's hold on one's thoughts which are preventing people from living in the moment.
+    In many ways, this is covered by Sadhguru's Inner Engineering, but since this predates that work by decades, one can think of this as a more intellectual version of the aforementioned work.
+- title: "Starcom: Nexus"
+  type: game
+  completionDate: Dec 7, 2021
+  sourceDateAndInfo: Dec 12, 2019
+  source: https://store.steampowered.com/app/863590/Starcom_Nexus/
+  image: https://cdn.akamai.steamstatic.com/steam/apps/863590/header.jpg?t=1583949059
+  explanation: >
+    A great indie game developed by one person.
+    As a space sim, this strikes a good balance between casual play and world building such that you don't need to micromanage everything.
+    The way the story unfolds adds another dimension to the gameplay, because you have to explore an entire galaxy to piece everything together.
+    The general feel of this is as though you were placed in the middle of a Star Trek episode where you meet new races and decide interact with them as you travel through space.
+    Really, the only thing that I felt was somewhat lacking was the depth of content, but for one person, this is great.
+    If there is a sequel, I would like to see more character interactions and greater rpg style world building, faction building, and character building.
+- title: "Being and Time"
+  type: book
+  completionDate: Dec 6, 2021
+  sourceDateAndInfo: Martin Heidegger, 1927
+  source: https://www.goodreads.com/book/show/92307.Being_and_Time
+  image: https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1298438455l/92307.jpg
+  explanation: >
+    The hardest philosophical work I have read and the extensive use of German based terminology such as Dasein did not help.
+    The primary concern of this work is to ask what it means to be or exist.
+    Heidegger makes references to Hegel, Kant, and Descartes in an attempt to explore this, so prior reading is to be expected.
+    In this work, Heidegger calls into question the ontological underpinnings established by philosophers like Kant and Descartes and asks whether an object and its properties can truly be separated.
+    Later on, he adds the effect of temporality into the mix to show that existence is a temporal phenomenon.
+    While this is not quite as logically dense as Kant, the reasoning provided by Heidegger to jump from one topic to the other looks very much into human perception as a way to explore what existence is, what it means to exist, and intellectual blindspots.
+    Because of this, the existence Heidegger analyzes is that of human existence as opposed to existence in general.
+    I did not understand everything due to the density of the text and a lack of experience with phemenology, but this is quite an interesting view on human existence and its relationship to time along with the human perspective of time.
+- title: "PyTorch for Audio + Music Processing"
+  type: video
+  completionDate: Dec 5, 2021
+  sourceDateAndInfo: Jul 12, 2021
+  source: https://youtu.be/gp2wZqDoJ1Y?list=PL-wATfeyAMNoirN4idjev6aRu8ISZYVWm
+  image: https://i.ytimg.com/vi/gp2wZqDoJ1Y/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDtVIPzyxkakFAV2GRcAOpNjfNJnQ
+  explanation: > 
+    I wanted to get a better understanding of Torchaudio, and this helped with that.
+    The code generated within this tutorial is compact and straight to the point which is a plus as well.
+    There is a bit of review regarding the Pytorch aspects for training, testing, and predicting, but things like how to process audio prior to loading for training was quite informative.
+    The example used here is that of classification of audio. This is good for educational purposes, but I think I would have preferred something more like audio generation as an example instead.
+- title: "Chat Bot With PyTorch - NLP Beginner Tutorial"
+  type: video
+  completionDate: Dec 2, 2021
+  sourceDateAndInfo: Feb 15, 2021
+  source: https://www.youtube.com/watch?v=RpWeNzfSUHw&list=PLqnslRFeH2UrFW4AUgn-eY37qOAWQpJyg&index=1
+  image: https://i.ytimg.com/vi/RpWeNzfSUHw/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAJNTg10be72RYhgIic4enFlCrQ7A
+  explanation: > 
+    A run through how to make a chat bot using Pytorch and NLP techniques.
+    Much of this felt like review to me, but it was interesting to see how the different pieces fit together.
+    To put things simply, this is an intent based conversational agent that tokenizes sentences and then constructs a bag of words representation which is used as training.
+    Any sentences passed by the user is then used to determine what response to provide by determining the intent using a probabilistic threshold which makes it a classification problem.
+    The model used is a simple feed forward network and there was some coverage on how to create a GUI for the project by using tkinter.
+    I'd like to try building something similar myself and pair it with a torchaudio model to enable text to speech and possibly speech to text for spoken conversation.
 - title: "PyTorch Tutorials - Complete Beginner Course"
   type: video
   completionDate: Nov 29, 2021
