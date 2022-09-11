@@ -18,7 +18,10 @@ style: assets/css/consumption.css
     <div class="row item">
         <label class="col-12">Date of Viewing/Completion</label>
     </div>
-    {% for item in site.data.consumption %}
+    <div class="row item years">
+        <a class="col-12" href="{{ 'src/html/consumption2010.html' | relative_url }}">2010</a>
+    </div>
+    {% for item in site.data.consumption2020 %}
         <div class="row item {{ item.type }}">
             <div class="col-2 date text-center">{{ item.completionDate }}</div>
             <div class="content col-lg-8 col-md-7 col-sm-6 col-5">
@@ -40,7 +43,12 @@ style: assets/css/consumption.css
     {% endfor %}
 </div>
 <div class="consumption-list mobile-res">
-    {% for item in site.data.consumption %}
+    <div class="item years">
+        <div class="row">
+            <a class="col-12" href="{{ 'src/html/consumption2010.html' | relative_url }}">2010</a>
+        </div>
+    </div>
+    {% for item in site.data.consumption2020 %}
         <div class="item {{ item.type }}">
             <div class="row">
                 <div class="col-12 date text-center">{{ item.completionDate }}</div>

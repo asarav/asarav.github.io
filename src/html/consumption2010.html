@@ -1,0 +1,78 @@
+---
+layout: default
+title: Media Consumption
+nav: nav.html
+footer: footer.html
+style: assets/css/consumption.css
+---
+<div class="jumbotron page-top">
+    <div class="consumption-preamble">
+        <h1 class="text-center">Media Consumption List</h1>
+    </div>
+    <div class="consumption-explanation">
+        <p>What I have read, watched or played at any particular time in the past that I considered to be of note.</p>
+        <p>If you are looking for my status log, click <a href="{{ 'src/html/log.html' | relative_url }}">here</a>.</p>
+    </div>
+</div>
+<div class="consumption-list full-res">
+    <div class="row item">
+        <label class="col-12">Date of Viewing/Completion</label>
+    </div>
+    <div class="row item years">
+        <a class="col-12" href="{{ 'src/html/consumption2020.html' | relative_url }}">2020</a>
+    </div>
+    {% for item in site.data.consumption2010 %}
+        <div class="row item {{ item.type }}">
+            <div class="col-2 date text-center">{{ item.completionDate }}</div>
+            <div class="content col-lg-8 col-md-7 col-sm-6 col-5">
+                <div class="row">
+                    <div class="col-12 header">
+                        <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
+                        <sub>{{ item.sourceDateAndInfo }}</sub>
+                    </div>
+                </div>
+                <hr>
+                <div class="row explanation">
+                    <div class="col-12">{{ item.explanation }}</div>
+                </div>
+            </div>
+            <div class="col-2 image">
+                <img src="{{ item.image }}">
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="consumption-list mobile-res">
+    <div class="item years">
+        <div class="row">
+            <a class="col-12" href="{{ 'src/html/consumption2020.html' | relative_url }}">2020</a>
+        </div>
+    </div>
+    {% for item in site.data.consumption2010 %}
+        <div class="item {{ item.type }}">
+            <div class="row">
+                <div class="col-12 date text-center">{{ item.completionDate }}</div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 header text-center">
+                    <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
+                </div>
+                <div class="col-12 text-center">
+                    <sub>{{ item.sourceDateAndInfo }}</sub>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 image text-center">
+                    <img src="{{ item.image }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center explanation">
+                    {{ item.explanation }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
