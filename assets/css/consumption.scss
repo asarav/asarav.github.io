@@ -58,18 +58,12 @@
                     }
                 }
                 .image {
+                    text-align: center;
                     img {
                         max-height: 217px;
                         max-width: 190px;
-                        @media only screen and (max-width: 1920px) {
-                            margin-left: 17%;
-                        }
-                        @media only screen and (max-width: 1600px) {
-                            margin-left: 20%;
-                        }
-                        @media only screen and (max-width: 1100px) {
-                            margin-left: 38%;
-                        }
+                        margin-right: auto;
+                        margin-left: auto;
                     }
                 }
 
