@@ -1,3 +1,28 @@
+- title: "Barry Lyndon"
+  type: movie
+  completionDate: Dec 11, 2022
+  sourceDateAndInfo: Dec 18, 1975
+  source: https://www.imdb.com/title/tt0072684/
+  image: https://m.media-amazon.com/images/M/MV5BNmY0MWY2NDctZDdmMi00MjA1LTk0ZTQtZDMyZTQ1NTNlYzVjXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_QL75_UX190_CR0,4,190,281_.jpg
+  explanation: >
+    This is a period epic by Stanley Kubrick. This means that it is automatically a great film.
+    Every frame is like a painting due to the careful lighting and color grading.
+    Camera movement is deliberate like pretty much every Kubrick film, and the plot, while clinical in its treatment, is well crafted.
+    Like every Kubrick film, it should be studied.
+- title: "Top Gun: Maverick"
+  type: movie
+  completionDate: Dec 10, 2022
+  sourceDateAndInfo: May 27, 2022
+  source: https://www.imdb.com/title/tt1745960/
+  image: https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    An absolute thrill from beginning to end. Almost everything is good. The dogfights and filming is good.
+    The music is good. The acting is good. Pretty much everything that I care about in a movie is handled well here and the visual quality is consistent with what I would expect of a film directed by Joseph Kosinski.
+    There are times when I felt like it hit notes that Ace Combat did.
+    The planes were real planes (except for the enemy ones), and the camera work inside and outside the cockpit is terrific.
+    However, unlike Ace Combat which can have anti-war messaging, this is undoubtedly a piece of propaganda.
+    This means that the geopolitical notes fall flat (the enemy belongs to an unnamed country), but themes of moving past tragedy and teamwork are very well handled.
+    Overall, I enjoyed it very much and it is a very good film.
 - title: "Mushoku Tensei: Isekai Ittara Honki Dasu Part 2"
   type: anime
   completionDate: Dec 10, 2022
@@ -20,6 +45,15 @@
     In addition to this, this shows off some aspects of Comanche culture which was interesting.
     I think the special effects were not that convincing, but it manages to be suspenseful, the camera work was interesting, and the score was well done.
     Overall, it is a good film that has a full character arc and interesting action sequences.
+- title: " Coffeezilla: SBF, FTX, Fraud, Scams, Fake Gurus, Money, Fame, and Power | Lex Fridman Podcast #345 "
+  type: video
+  completionDate: Dec 9, 2022
+  sourceDateAndInfo: Dec 8, 2022
+  source: https://youtu.be/hi9Rf0oLdHk
+  image: https://i.ytimg.com/vi/hi9Rf0oLdHk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCrqjtcYv4Y9C0bC_LQrQKWFD1NXg
+  explanation: > 
+    I have been following Coffeezilla for a while, so it was interesting to see more attention being given to outing snake oil salesmen.
+    This interview covers everything from fake gurus to bitcoin to FTX which brought Coffeezilla into the mainstream.
 - title: "The War of Art: Winning the Inner Creative Battle"
   type: book
   completionDate: Dec 6, 2022
