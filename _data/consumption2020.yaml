@@ -1,3 +1,14 @@
+- title: "Khan Academy Electrical Engineering"
+  type: video
+  completionDate: Dec 18, 2022
+  sourceDateAndInfo: Aug 30, 2016
+  source: https://youtu.be/ZRLXDiiUv8Q?list=PLSQl0a2vh4HCLqA-rhMi_Z_WnBkD3wUka
+  image: https://i.ytimg.com/vi/ZRLXDiiUv8Q/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBzvOkIcs9xsrhmNGPZBtXkx2FNtQ
+  explanation: > 
+    This was completed on the Khan Academy site.
+    This covers everything from charge to signals to fourier coefficients to reverse engineering of household devices.
+    The field seems to be multidisciplinary with a heavy usage of physics, mathematics, logic and some work with circuits and hardware.
+    I would say that out of many of the other areas that I studied, this seems to have the most overlap with other fields.
 - title: "1987: When the Day Comes"
   type: movie
   completionDate: Dec 17, 2022
