@@ -1,0 +1,29 @@
+---
+---
+
+#site {
+    background: rgb(30, 30, 31);
+    #content {
+        section {
+            font-size: 18px;
+            .heading {
+                font-size: 24px;
+                color: orange;
+            }
+            p {
+                margin-left: 15px;
+            }
+            .rotate180 {
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+            margin-bottom: 25px;
+        }
+        hr {
+            border-color: #1e334e;
+        }
+    }
+}

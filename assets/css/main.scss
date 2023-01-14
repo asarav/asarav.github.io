@@ -224,6 +224,9 @@
             &.consumption-tile {
                 background-image: url('https://asarav.github.io/src/images/homepage_tiles/consumption.jpg');
             }
+            &.books-tile {
+                background-image: url('https://asarav.github.io/src/images/homepage_tiles/books.png');
+            }
 
             @media only screen and (max-width: 900px) {
                 height: 300px;
