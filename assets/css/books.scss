@@ -4,6 +4,20 @@
 #site {
     background: rgb(30, 30, 31);
     #content {
+        color: white;
+        .jumbotron.page-top {
+            background-image: url('https://asarav.github.io/src/images/books/books-top.jpg');
+            height: 350px;
+            .books-preamble {
+    
+            }
+            .books-explanation {
+                p {
+                    color: darkred;
+                    text-shadow: -0.2px -0.2px 0 pink, 0.2px -0.2px 0 pink, -0.2px 0.2px 0 pink, 0.2px 0.2px 0 pink;
+                }
+            }
+        }
         section {
             font-size: 18px;
             .heading {
