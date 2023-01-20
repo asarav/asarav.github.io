@@ -19,10 +19,14 @@
             }
         }
         section {
+            margin-top: 25px;
+            padding-top: 15px;
             font-size: 18px;
+            border: 1px solid rgb(0, 123, 255);
+            border-radius: 1px;
             .heading {
                 font-size: 24px;
-                color: orange;
+                color: rgb(0, 123, 255);
             }
             p {
                 margin-left: 15px;
@@ -35,6 +39,53 @@
                 transform: rotate(180deg);
             }
             margin-bottom: 25px;
+            .images {
+                margin-bottom: 25px;
+                img.cover {
+                    max-width: 400px;
+                    height: auto;
+                }
+            }
+            .book-explanation {
+                color: orange;
+                margin-left: 25px;
+                margin-right: 25px;
+                border: 1px solid orange;
+                border-radius: 3px;
+                margin-bottom: 25px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .book-personal {
+                color: white;
+                margin-left: 25px;
+                margin-right: 25px;
+                border: 1px solid white;
+                border-radius: 3px;
+                margin-bottom: 25px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .book-links {
+                color: rgb(0, 170, 255);
+                margin-left: 25px;
+                margin-right: 25px;
+                border: 1px solid rgb(0, 170, 255);
+                border-radius: 3px;
+                margin-bottom: 25px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            &#substack {
+                .substack {
+                    @media only screen and (max-width: 540px) {
+                        width: 320px
+                    }
+                    @media screen and (min-width: 540px) {
+                        width: 480px
+                    }
+                }
+            }
         }
         hr {
             border-color: #1e334e;
