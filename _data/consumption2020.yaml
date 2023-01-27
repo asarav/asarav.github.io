@@ -1,3 +1,21 @@
+- title: "The Red Room"
+  type: book
+  completionDate: Jan 27, 2023
+  sourceDateAndInfo: H.G. Wells, Jan 1, 1894
+  source: https://www.goodreads.com/book/show/22158237-the-red-room
+  image: https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1400853261i/22158237.jpg
+  explanation: >
+    A short story about a haunted house and the nature of fear.
+    It is quite simplistic.
+- title: "The Star"
+  type: book
+  completionDate: Jan 27, 2023
+  sourceDateAndInfo: H.G. Wells, Jan 1, 1897
+  source: https://www.goodreads.com/en/book/show/15986051
+  image: https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1354290943i/15986051.jpg
+  explanation: >
+    This is a short story by H.G. Wells which involves a star flying through our solar system.
+    It's a bit fantastical and unrealistic, but I imagine it was quite entertaining for people who read it at the end of the 1800's.
 - title: "Escape from Mogadishu"
   type: movie
   completionDate: Jan 20, 2023
