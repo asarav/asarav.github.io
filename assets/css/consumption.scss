@@ -76,6 +76,14 @@
                 }
             }
 
+            .item.info.hidden {
+                display: none;
+              }
+              
+            .item.info.visible {
+              display: flex;
+            }
+
             .item.movie {
                 hr {
                     border-top: 1px solid rgb(28, 58, 139);
@@ -125,6 +133,7 @@
                 .image {
                     img {
                         max-height: 280px;
+                        max-width: 390px;
                         margin-top: 10px;
                         margin-bottom: 15px;
                     }
@@ -148,6 +157,13 @@
                     margin-right: 5px;
                     border-top: 1px solid rgb(112, 158, 189);
                 }
+            }
+            .item.info.hidden {
+                display: none;
+            }
+              
+            .item.info.visible {
+              display: block;
             }
         }
     }

@@ -1,3 +1,2 @@
 User-agent: *
-Disallow: src/html/consumption2020.html
-Disallow: src/html/consumption2010.html
+Disallow: src/html/consumption.html

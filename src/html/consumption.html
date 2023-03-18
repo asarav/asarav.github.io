@@ -5,6 +5,7 @@ nav: nav.html
 footer: footer.html
 style: assets/css/consumption.css
 ---
+
 <div class="jumbotron page-top">
     <div class="consumption-preamble">
         <h1 class="text-center">Media Consumption List</h1>
@@ -14,15 +15,13 @@ style: assets/css/consumption.css
         <p>If you are looking for my status log, click <a href="{{ 'src/html/log.html' | relative_url }}">here</a>.</p>
     </div>
 </div>
+
 <div class="consumption-list full-res">
-    <div class="row item">
+    <div class="row item title">
         <label class="col-12">Date of Viewing/Completion</label>
     </div>
-    <div class="row item years">
-        <a class="col-12" href="{{ 'src/html/consumption2010.html' | relative_url }}">2010</a>
-    </div>
-    {% for item in site.data.consumption2020 %}
-        <div class="row item {{ item.type }}">
+    {% for item in site.data.consumption %}
+        <div class="row item info {{ item.type }}" data-item-id="{{ forloop.index }}">
             <div class="col-2 date text-center">{{ item.completionDate }}</div>
             <div class="content col-lg-8 col-md-7 col-sm-6 col-5">
                 <div class="row">
@@ -37,19 +36,15 @@ style: assets/css/consumption.css
                 </div>
             </div>
             <div class="col-2 image">
-                <img src="{{ item.image }}">
+                <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
             </div>
         </div>
     {% endfor %}
 </div>
+
 <div class="consumption-list mobile-res">
-    <div class="item years">
-        <div class="row">
-            <a class="col-12" href="{{ 'src/html/consumption2010.html' | relative_url }}">2010</a>
-        </div>
-    </div>
-    {% for item in site.data.consumption2020 %}
-        <div class="item {{ item.type }}">
+    {% for item in site.data.consumption %}
+        <div class="mobile item info {{ item.type }}" data-item-id="{{ forloop.index }}">
             <div class="row">
                 <div class="col-12 date text-center">{{ item.completionDate }}</div>
             </div>
@@ -65,7 +60,7 @@ style: assets/css/consumption.css
             <hr>
             <div class="row">
                 <div class="col-12 image text-center">
-                    <img src="{{ item.image }}">
+                    <img src="{{ item.image }}" alt="{{ item.title }}">
                 </div>
             </div>
             <div class="row">
@@ -76,3 +71,58 @@ style: assets/css/consumption.css
         </div>
     {% endfor %}
 </div>
+
+<script>
+    let items = document.querySelectorAll('.full-res > .item.info');
+    let mobileItems = document.querySelectorAll('.mobile-res > .item.info');
+    let batchSize = 75;
+    let batchCount = 0;
+
+    console.log(items);
+    console.log(mobileItems);
+
+    function renderNextBatch() {
+        let startIndex = batchSize * batchCount;
+        let endIndex = batchSize * (batchCount + 1);
+
+        if (endIndex > items.length) {
+            endIndex = items.length;
+            window.removeEventListener('scroll', onScroll);
+        }
+
+        for (let i = startIndex; i < endIndex; i++) {
+            items[i].classList.add('visible');
+            items[i].classList.remove('hidden');
+            mobileItems[i].classList.add('visible');
+            mobileItems[i].classList.remove('hidden');
+        }
+
+        batchCount++;
+    }
+
+    function onScroll() {
+        let scrollPosition = window.innerHeight + window.scrollY;
+        let bodyHeight = document.body.offsetHeight;
+
+        if (scrollPosition >= bodyHeight - 100) {
+            renderNextBatch();
+        }
+    }
+
+    // Hide all items after the 75th item initially
+    for (let i = batchSize; i < items.length; i++) {
+        if (!items[i].classList.contains('visible')){
+            items[i].classList.add('hidden');
+        }
+    }
+
+    for (let i = batchSize; i < mobileItems.length; i++) {
+        if (!mobileItems[i].classList.contains('visible')){
+            mobileItems[i].classList.add('hidden');
+        }
+    }
+
+    renderNextBatch();
+    window.addEventListener('scroll', onScroll);
+  </script>  
+    
