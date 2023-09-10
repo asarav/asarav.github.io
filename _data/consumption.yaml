@@ -1,5 +1,28 @@
 - title: "Enter the Fat Dragon"
   type: movie
+  completionDate: Sep 9, 2023
+  sourceDateAndInfo: Jul 13, 1978
+  source: https://www.imdb.com/title/tt0077538/
+  image: https://m.media-amazon.com/images/M/MV5BYTExYzBhMzItMWViZS00NTBiLThkZmQtZDNjMGQzMjIxMGFlXkEyXkFqcGdeQXVyMTc3MjY3NTY@._V1_QL75_UY281_CR1,0,190,281_.jpg
+  explanation: >
+    This is better than the remake, but it also suffers as a film.
+    For one, it has repetitive humor.
+    With that said, the choreography and fight scenes which recreates famous scenes from Bruce Lee's films are great and showcases Sammo Hung's abilities despite his size.
+- title: "Resident Evil"
+  type: game
+  completionDate: Sep 8, 2023
+  sourceDateAndInfo: Nov 27, 2014
+  source: https://en.wikipedia.org/wiki/Resident_Evil_(2002_video_game)
+  image: https://upload.wikimedia.org/wikipedia/en/a/ab/Resident_Evil_2002_cover.jpg
+  explanation: >
+    I wanted to play some of the older Resident Evil games and I have to say that it is very different from the later entries.
+    For one, this involves a lot of backtracking.
+    In all honesty, this is more of a puzzle game with horror elements.
+    The fixed camera angles can be frustrating, but at the same time leads to a more cinematic experience.
+    It's very well crafted, but I also considered it to be clunky due to its adherence to some older game mechanics.
+    This, combined the limited number of saves makes it more challenging than it needs to be.
+- title: "Enter the Fat Dragon"
+  type: movie
   completionDate: Sep 4, 2023
   sourceDateAndInfo: Jul 23, 2020
   source: https://www.imdb.com/title/tt7335600/
