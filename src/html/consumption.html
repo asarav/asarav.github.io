@@ -75,7 +75,8 @@ style: assets/css/consumption.css
 <script>
     let items = document.querySelectorAll('.full-res > .item.info');
     let mobileItems = document.querySelectorAll('.mobile-res > .item.info');
-    let batchSize = 75;
+    //Amount of items grabbed per batch for infinite scrolling
+    let batchSize = 100;
     let batchCount = 0;
 
     function renderNextBatch() {
