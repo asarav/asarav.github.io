@@ -10,8 +10,8 @@ style: assets/css/games.css
         <h1 class="text-center">Games</h1>
     </div>
     <div class="games-explanation">
-        <p>These are games that I created with the Unity Game engine for a games development course.</p>
-        <p>Note: Games can take a long time to load due to the size of assets.</p>
+        <p>These are games that I created with the Unity Game engine for a games development course or as personal projects in other engines.</p>
+        <p>Note: Depending on the game, some games can take a long time to load due to the size of assets.</p>
     </div>
 </div>
 <div class="games-list">
@@ -19,7 +19,7 @@ style: assets/css/games.css
         <div class="game {{ game.style }}">
             <div class="row">
                 <div class="game-header col-6">{{ game.title }}</div>
-                <a class="ml-auto play-now" href="{{ game.link | relative_url }}">Play Now</a>
+                <a class="ml-auto play-now" href="{{ game.link | relative_url }}" target="_blank">Play Now</a>
             </div>
             <div class="row screenshots">
                 {% for image in game.images %}
