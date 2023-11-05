@@ -1,3 +1,31 @@
+- title: "Barbie"
+  type: movie
+  completionDate: Nov 4, 2023
+  sourceDateAndInfo: Jul 9, 2023
+  source: https://www.imdb.com/title/tt1517268/
+  image: https://m.media-amazon.com/images/M/MV5BNjU3N2QxNzYtMjk1NC00MTc4LTk1NTQtMmUxNTljM2I0NDA5XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    This is a very metaphysical and self aware film that may not have a clear audience.
+    It is incredibly stylized and the great acting by Margot Robbie and Ryan Gosling makes it feel hyperreal.
+    It also seems to tread a very interesting line between commercialism and satirization of capitalism.
+    I think this make it come across as a very smart film.
+    With that said, it does suffer from pacing issues later on in the film, and this affects the clarify of its messaging.
+    Part of the reason for this is because it is not clear when the audience should be taking the film seriously and when they should not be.
+    In many ways, it tries to have its cake and eat it too.
+- title: "Red Bull Dance Your Style World Final 2023"
+  type: video
+  completionDate: Nov 4, 2023
+  sourceDateAndInfo: Nov 4, 2023
+  source: https://youtu.be/3NI8nKyzC50
+  image: https://i.ytimg.com/vi/3NI8nKyzC50/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCXGCz_m1zx5X08gIETG3dydnFRzg
+  explanation: > 
+    Red Bull didn't leave the livestream up since someone showed a flag of Palestine.
+    With all that said, this is a different vibe from the BC One.
+    For one, the judging is done by the crowd which I feel is a better and more interesting system.
+    Another interesting thing was that depending on the style, the dancer might not use all of the stage which I feel is one thing that may be lacking in a lot of modern styles.
+    Conversely, the dancers here actually listened more to the music which was very welcome.
+    I was interested in seeing the D Soraki make his reappearance, but was disappointed to not find him present beyond bringing out the trophy.
+    It is different seeing someone feeling the music vs. dancing to the music and I hope to see a dancer do that one more time at one of these events in the future.
 - title: "The Final Empire"
   type: book
   completionDate: Nov 3, 2023
@@ -11,7 +39,7 @@
     The world is fleshed out, and there is quite a bit of depth and lore to it.
     Prose is easy to follow. I think this is a book that anyone can appreciate.
 - title: "Ghostwire: Tokyo"
-  type: video game
+  type: game
   completionDate: Nov 2, 2023
   sourceDateAndInfo: Mar 25, 2022
   source: https://en.wikipedia.org/wiki/Ghostwire:_Tokyo
@@ -21,7 +49,7 @@
     As a result, the city is empty and lifeless which does not work to its advantage.
     While I liked the visual style at times, the game does not really excel in terms of technology or gameplay or even story.
 - title: "Detroit: Become Human"
-  type: video game
+  type: game
   completionDate: Oct 24, 2023
   sourceDateAndInfo: Dec 12, 2019
   source: https://en.wikipedia.org/wiki/Detroit:_Become_Human
@@ -263,7 +291,7 @@
     The film follows the DigiDestined and their Digimon partners as they face a new threat in the form of a computer virus that threatens to infect the real world.
     It feels like a cross between War Games and Summer Wars and the threat of a thermonuclear missile is very daring for a film that is meant for children.
     The representation of old Windows operating systems is also interesing.
-    It should be noted that the way in which the internet is not accurate, but it is entertaining.
+    It should be noted that the way in which the internet is represented is not accurate, but it is entertaining.
 - title: "A Portrait of the Artist as a Young Man"
   type: book
   completionDate: Sep 19, 2023
