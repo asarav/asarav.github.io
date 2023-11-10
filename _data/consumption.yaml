@@ -1,3 +1,23 @@
+- title: "Middle-earth: Shadow of Mordor"
+  type: game
+  completionDate: Nov 10, 2023
+  sourceDateAndInfo: Sep 30, 2014
+  source: https://en.wikipedia.org/wiki/Middle-earth:_Shadow_of_Mordor
+  image: https://upload.wikimedia.org/wikipedia/en/0/01/Shadow_of_Mordor_cover_art.jpg
+  explanation: >
+    This had an interesting story that felt faithful to Tolkien's work while also being original.
+    Gameplay had similarities to some of the Arkham games while also introducing the nemesis system which allowed for larger macro changes in the game world and dynamic storytelling.
+    With all this said, I wish the world itself had more variety.
+    Other than this, it felt well optimized and is overall a solid game.
+- title: "Red Bull Dance Your Style World Final 2023"
+  type: video
+  completionDate: Nov 10, 2023
+  sourceDateAndInfo: Nov 9, 2023
+  source: https://youtu.be/JN3KPFbWCy8
+  image: https://i.ytimg.com/vi/JN3KPFbWCy8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCTYhEq1dIEGPrRfJxgUWt7r6zVPw
+  explanation: > 
+    This is a status update of time that is keeping up with some of the more recent trends with twitter and AI.
+    It also showcases the LLM developed by Twitter which is known as Grok.
 - title: "The Tibetan Book of the Dead"
   type: book
   completionDate: Nov 8, 2023
