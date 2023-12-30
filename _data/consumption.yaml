@@ -1,3 +1,13 @@
+- title: "G.R.M."
+  type: anime
+  completionDate: Dec 30, 2023
+  sourceDateAndInfo: 1996
+  source: https://myanimelist.net/anime/45571/GRM
+  image: https://cdn.myanimelist.net/images/anime/1475/115169.jpg
+  explanation: >
+    This was a prototype of sorts for the live action film that Mamoru Oshii would direct almost 2 decades later.
+    The animation here is incredibly sophisticated in addition to its usage of CGI during a time where it was just beginning to be used in 2d animation years prior.
+    I think what was shown here and what was shown in the film that came out later is an interesting case study in how costs, technology, and budget can change a project over time.
 - title: "Hypnotic"
   type: movie
   completionDate: Dec 30, 2023
@@ -63,6 +73,14 @@
     The way in which the nazis treated their enemies and committed war crimes is depicted in brutal detail while also acting as one of the few portrayals of the eastern front.
     The most similar film I think might be suited for comparison is All Quiet on the Western Front which has a similar anti-war message.
     Cinematography is great too with tracking shots that seem reminiscient of Kubrick.
+- title: "Remembering Manzanar"
+  type: movie
+  completionDate: Dec 22, 2023
+  sourceDateAndInfo: 2004
+  source: https://www.imdb.com/title/tt2118712/
+  image: https://i.ytimg.com/vi/Spo1Khmp2U4/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB6RU2o7JxXXl6me1mfLkSc5FI9IQ
+  explanation: >
+    A short documentary about the history of the Manzanar Japanese internment camp.
 - title: "Seeing Death Valley"
   type: movie
   completionDate: Dec 21, 2023
