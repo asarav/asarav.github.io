@@ -1,3 +1,22 @@
+- title: "If Beale Street Could Talk"
+  type: book
+  completionDate: Jan 5, 2024
+  sourceDateAndInfo: Jan 1, 1974, James Baldwin
+  source: https://www.goodreads.com/book/show/38463.If_Beale_Street_Could_Talk
+  image: https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1632433694i/38463.jpg
+  explanation: >
+    If Beale Street Could Talk is a powerful and better written novel by James Baldwin.
+    Set in 1970s America, it tells the story of Tish and Fonny, a young African-American couple whose lives are upended by a false rape accusation.
+    Unlike Giovanni's Room, this has optimism behind it despite the bleak outlook of the characters.
+- title: "All Summer in a Day"
+  type: book
+  completionDate: Jan 1, 2024
+  sourceDateAndInfo: Mar 1, 1956, Ray Bradbury
+  source: https://www.goodreads.com/en/book/show/45306054
+  image: https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1556264551i/45306054.jpg
+  explanation: >
+    A short story by Ray Bradbury about continuous rain on Venus stopping for a few hours.
+    The scientific foundation of this one is a bit dubious, but it makes for a strong metaphor.
 - title: "Deliver Us from Evil"
   type: movie
   completionDate: Dec 31, 2023
@@ -33,7 +52,7 @@
 - title: "Giovanni's Room"
   type: book
   completionDate: Dec 29, 2023
-  sourceDateAndInfo: January 1, 1956, James Baldwin
+  sourceDateAndInfo: Jan 1, 1956, James Baldwin
   source: https://www.goodreads.com/book/show/406235.Giovanni_s_Room
   image: https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1223664870i/406235.jpg
   explanation: >
