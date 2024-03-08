@@ -888,3 +888,40 @@ style: assets/css/projects.css
         <iframe frameborder="0" src="https://itch.io/embed/2288655" width="552" height="167"><a href="https://a-s-mori.itch.io/dreaming-of-a-hopeful-death">Dreaming of a Hopeful Death by A. S. Mori</a></iframe>
     </div>
 </section>
+<section id="text-to-video">
+    <div class="row">
+        <h1 class="col-12">Text to Video Generation (2024)</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Utilized <a href="https://arxiv.org/abs/2308.06571" target="_blank">ModelScope Text-to-Video</a> to generate a video based on a text prompt.
+                This was the first part of a collab pipeline which then used <a href="https://github.com/k4yt3x/video2x/">Video2x</a> to upscale, denoise, and add detail to the original video since the original videos generated were of low resolution.
+                This was done using Google collab and a desktop GUI, but but it is also possible to run ModelScope on hugging face.
+                As a side effect of upscaling, some of the more grainy noise which created the impression of detail were inadvertently removed.
+                Furthermore, there are a number of artifacts which can be seen in the video and either originate from ModelScope, or from Video2x.
+                It should also be noted that there is the presence of a Shutterstock watermark which is present due to the training data used on the pretrained model.
+                No further tuning was done for ModelScope except for some experimentation with hyperparameters to see how output could be improved or would differ.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <video width="100%" height="100%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/ai-video-generation/Desert Spaceship.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="col-3">
+            <video width="100%" height="100%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/ai-video-generation/Samurai Fighting.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="col-3">
+            <video width="100%" height="100%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/ai-video-generation/Space X.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</section>
