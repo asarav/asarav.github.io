@@ -1,3 +1,39 @@
+- title: "Alice Doesn't Live Here Anymore"
+  type: movie
+  completionDate: Jun 27, 2024
+  sourceDateAndInfo: Dec 9, 1974
+  source: https://www.imdb.com/title/tt0071115/
+  image: https://m.media-amazon.com/images/M/MV5BZWE4MTVjYTEtMmQ0NC00YjhkLTg3ODAtYTVlMzZhZjY3YjE2XkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_QL75_UX190_CR0,3,190,281_.jpg
+  explanation: >
+    This is one of Martin Scorsese's earlier films and it's a little bit outside his wheelhouse despite being well crafted.
+    Honestly, I never would have imagined that he would create a romance comedy film.
+    Given the time period, it often felt like a Woody Allen film, but with many variations on the signature dialogue.
+    The acting is generally good, but I can't understand why it won an Oscar.
+    Overall, I can understand its critical praise, but I felt that it was one of Scorsese's weaker films in terms of wider appeal and impact.
+- title: "Black Narcissus"
+  type: movie
+  completionDate: Jun 26, 2024
+  sourceDateAndInfo: Apr 24, 1947
+  source: https://www.imdb.com/title/tt0039192/
+  image: https://m.media-amazon.com/images/M/MV5BMTg3MDQxMzg2OF5BMl5BanBnXkFtZTgwNDY5NTY3MzE@._V1_QL75_UX190_CR0,5,190,281_.jpg
+  explanation: >
+    This was an interesting film about Anglican nuns trying to create a convent in the Himalayas.
+    There are some aspects of it that are dated such as a strange understanding of local culture.
+    The use of matte painting backgrounds, however are surprisingly effective though as it does seem to evoke the feeling of being in the Himalayas.
+    The psychological themes were unique and reminiscient of Heart of Darkness, but it felt a bit too tame in terms of content to be convincing.
+    Overall, I can see it's appeal despite being melodramatic.
+- title: "The Red Shoes"
+  type: movie
+  completionDate: Jun 26, 2024
+  sourceDateAndInfo: Jul 22, 1948
+  source: https://www.imdb.com/title/tt0040725/
+  image: https://m.media-amazon.com/images/M/MV5BNGY3NzRmMzQtYzljOC00NGZjLTk4NjQtMzc3YzMwOTVjYzE3XkEyXkFqcGdeQXVyNjc5NjEzNA@@._V1_QL75_UX190_CR0,2,190,281_.jpg
+  explanation: >
+    A surprisingly depressing film about ballet, music, romance, and the conflict between those themes.
+    The dancing is incredibly technical and the score is great too.
+    Having a professional ballet dancer be in the lead role was a very shrewd decision.
+    The visuals were great too with the use of color being one of the stand out features of this film given the time it came out.
+    It is almost as though a painting had come to life.
 - title: "Death Stranding"
   type: game
   completionDate: Jun 25, 2024
@@ -8,6 +44,7 @@
     A game about connection, time, humanity, extinction, and solitude.
     It has broad ideas and is very ambitious in its themes.
     From a gameplay perspective, it is both a hiking simulator and a survival game of sorts.
+    Furthermore, the soundtrack by Ludvig Forssell was masterfully crafted.
     That said, I enjoyed it for the scenery which is a close copy of Iceland and the incredible level of depth the story had.
     Chirality is a concept that is often brought up when discussing organic chemistry, but in here, it is more used for subatomic particles and antimatter.
     All of the actors put their best into their roles with Tommie Earl Jenkins in particular putting in a performance which would usually win awards under normal circumstances.
