@@ -1,3 +1,37 @@
+- title: "Grizzly Man"
+  type: movie
+  completionDate: Jul 30, 2024
+  sourceDateAndInfo: Mar 4, 1982
+  source: https://www.imdb.com/title/tt0427312/
+  image: https://m.media-amazon.com/images/M/MV5BODc3NTAxMTY1MV5BMl5BanBnXkFtZTcwOTE4NjUzMw@@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    This is a documentary directed by Werner Herzog about Timothy Treadwell and his death by a Grizzly bear.
+    It uses commentary by Herzog in addition to the footage shot by Timothy Treadwell.
+    I think it successfully shows how Timothy thought about himself and the bears which eventually killed him.
+- title: "Fitzcarraldo"
+  type: movie
+  completionDate: Jul 29, 2024
+  sourceDateAndInfo: Mar 4, 1982
+  source: https://www.imdb.com/title/tt0083946/
+  image: https://m.media-amazon.com/images/M/MV5BYjIzNTYxMTctZjAwNS00YzI3LWExMGMtMGQxNGM5ZTc1NzhlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_QL75_UX190_CR0,2,190,281_.jpg
+  explanation: >
+    The madness of Klaus Kinski once again pays off.
+    In this film, he plays an Irishman who is attempting to take a ship over a mountain to shortcut a logistics route to profit from the rubber business.
+    The character's love for opera in addition to the intensity of the acting and the way the other actors truly hated him made this film memorable for me.
+    Furthermore, the pure scale of the jungle and the set pieces put it on another level.
+    Werner Herzog is an unconventional director, but I can at least say that his approach to narrative and story is incredibly original and unique.
+- title: "Mushoku Tensei II: Isekai Ittara Honki Dasu Part 2"
+  type: anime
+  completionDate: Jul 27, 2024
+  sourceDateAndInfo: Jul 1, 2024
+  source: https://myanimelist.net/anime/55888/Mushoku_Tensei_II__Isekai_Ittara_Honki_Dasu_Part_2
+  image: https://cdn.myanimelist.net/images/anime/1876/141251.jpg
+  explanation: >
+    With this season, the show is beginning to reach around the point where I stopped reading the novel.
+    This season was rather impactful.
+    The animation is consistent with previous seasons and kept at a high level.
+    Furthermore, we see the conclusion of some threads and subplots and the development of characters as they grow older and reach new milestones.
+    Overall, this was an emotional continuation which manages to progress the story and offer substance.
 - title: "Clueless"
   type: movie
   completionDate: Jul 15, 2024
@@ -5,7 +39,7 @@
   source: https://www.imdb.com/title/tt0112697/
   image: https://m.media-amazon.com/images/M/MV5BMzBmOGQ0NWItOTZjZC00ZDAxLTgyOTEtODJiYWQ2YWNiYWVjXkEyXkFqcGdeQXVyNTE1NjY5Mg@@._V1_QL75_UX190_CR0,1,190,281_.jpg
   explanation: >
-    Clueless ahas witty dialogue, memorable characters, and timeless themes.
+    Clueless has witty dialogue, memorable characters, and timeless themes.
     That said, it is also very dated due to its deep reliance on 90's culture.
     It felt very similar to Mean Girls in that aspect where Mean Girls was rooted in the 2000's.
 - title: "Heathers"
