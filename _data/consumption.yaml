@@ -1,3 +1,59 @@
+- title: "Hitman"
+  type: game
+  completionDate: Feb 2, 2025
+  sourceDateAndInfo: Oct 31, 2016
+  source: https://en.wikipedia.org/wiki/Hitman_(2016_video_game)
+  image: https://upload.wikimedia.org/wikipedia/en/8/84/Hitman_2015.jpg
+  explanation: >
+    The reboot of the Hitman franchise.
+    Locations are interesting, but some of the levels could have been designed better.
+    I also wish that locations had proper localization to match the culture and languages of those locations.
+    The game is enjoyable, but it has its fair share of issues and it ends in a cliffhanger.
+    That said, it is very much an improvement over the other games in the series.
+- title: "Gagarine"
+  type: movie
+  completionDate: Jan 30, 2025
+  sourceDateAndInfo: Sep 26, 2020
+  source: https://www.imdb.com/title/tt12444424/
+  image: https://m.media-amazon.com/images/M/MV5BNDM3ZDliMTctOTE2Yy00NDdlLWI2OTAtMzFiYjBhOGFiZjlkXkEyXkFqcGc@._V1_QL75_UY281_CR11,0,190,281_.jpg
+  explanation: >
+    An independent film with great cinematography that is centered around a residental complex that actually existed.
+    It is a surreal and abstract film at times.
+    Acting is okay, but not particularly outstanding.
+    I think where this film excels is in its visual style.
+- title: "God Grew Tired of Us"
+  type: movie
+  completionDate: Jan 29, 2025
+  sourceDateAndInfo: Sep 4, 2006
+  source: https://www.imdb.com/title/tt0301555/
+  image: https://m.media-amazon.com/images/M/MV5BMjk2OTIwMzUzOF5BMl5BanBnXkFtZTcwMDU3MzU0MQ@@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    A documentary about refugees from Sudan known as the Lost Boys who spend time adapting to life in the United States.
+    Their life is hard and they learn to live in a very different society with amenities that we take for granted like running water and electricity.
+    It is interesting to see the state of Sudan back in the early 2000's as now Sudan is split into two countries.
+    The documentary is very well done and edited very well.
+- title: "Shoplifters"
+  type: movie
+  completionDate: Jan 27, 2025
+  sourceDateAndInfo: Jun 2, 2018
+  source: https://www.imdb.com/title/tt8075192/
+  image: https://m.media-amazon.com/images/M/MV5BMjY2NGZlZDUtMDUwMi00YTUxLTljNzEtZTE3YjAyNTQyNzU5XkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    Another great film by Koreeda which deals with societal issues.
+    Editing is good and almost unnoticable.
+    It's very much a slow burn that feels like a slice of life story with its own unique twist.
+    The intensity of the film subtly rises and falls as needed for the plot which is very rare to see in a film.
+- title: "Wonka"
+  type: movie
+  completionDate: Jan 27, 2025
+  sourceDateAndInfo: Nov 28, 2023
+  source: https://www.imdb.com/title/tt6166392/
+  image: https://m.media-amazon.com/images/M/MV5BM2Y1N2ZhNjctYjVhZC00MDg2LWFhNTItMzI3ZjAwZDhjYmFiXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,190,281_.jpg
+  explanation: >
+    A somewhat underwhelming movie that is fun at times, but it doesn't do anything interesting outside of its visuals.
+    The acting felt artificial like the actors were trying to play characters rather than become characters.
+    I am not sure if this was a casting issue.
+    I think this movie was generally an unnecessary addition to Roal Dahl's original works.
 - title: "The Witcher 3: Wild Hunt – Blood and Wine"
   type: game
   completionDate: Jan 24, 2025
