@@ -13,6 +13,68 @@ style: assets/css/projects.css
         <p>These are projects that I have either completed for a class or on my own time. All projects were *Made on Earth by humans*.</p>
     </div>
 </div>
+<section id="mern-langchain">
+    <div class="row">
+        <h1 class="col-12">Langchain Chains and Agents with MERN Stack Web Application (2025)</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>A full stack application using the MERN Stack with Typescript which implements both chain and agents using Langchain.
+            The frontend react app uses Typescript and NextJS.
+            The backend uses express with Typescript and mongoose to communicate with MongoDB.
+            MongoDB was used to persist chat history.
+            The agent is capable of remembering chat history without sending the entire history over the network to the LLM which in this case was Gemini.
+            The agent was also capable of simple ReAct based reasoning with access to tools such as Wikipedia, a calculator, and a headless web browser.
+            The application is fully dockerized with images for the frontend, backend, and nonrelational database.
+            The application can be fully stood up using either docker-compose or kubernetes.
+            This was further improved upon by using Kubernetes and a powershell script to deploy the application.
+            <a href="https://github.com/asarav/fullstack-ts-langchain" target="_blank">here.</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <video width="100%" height="100%" autoplay loop muted playsinline>
+                <source src="{{ 'src/videos/projects/ts-next-mern-langchain/langchain.mp4' | relative_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</section>
+<section id="MastersThesis">
+    <div class="row">
+        <h1 class="col-12">Masters Thesis (2020 - 2021)</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p><strong>Abstract:</strong>
+            In this work, a conversational interaction was designed and implemented to test the effect of references to past events or shared experiences rephrased into motivational phrases within the context of working towards a diet related goal that can assist with type II diabetes over multiple sessions.
+            Prior works that utilized a memory typically did not utilize a memory to refer to the past within conversations and when past events were referred to within a conversation, they were not utilized with motivational rephrasing.
+            Most prior works did not analyze long term interaction or how references to past events should have been utilized.
+            To further research in this area, the following research questions were posed:
+            <ol>
+                <li>Does referring to previous sessions improve goal attainment?</li>
+                <li>Does referring to previous sessions improve user experience?</li>
+                <li>Does a variety of references differ from making the same reference?</li>
+            </ol> 
+            To determine the answers to these questions, interactions were carried out through Zoom in a between subjects experiment with three groups of participants.
+            The results, once analyzed, found that there was a significant difference between interactions that only make references to the same shared experience and interactions that make references to various shared experiences where various shared experiences resulted in a significant increase in the change in motivation from prior to the experiment to during the experiment.
+            This offers the following contributions:
+            <ol>
+                <li>Provide clarity on how shared experiences should be used and not only whether they should be used.</li>
+                <li>A motivational memory utilizing shared experiences with intrinsic motivational value</li>
+                <li>Determine the effect of motivational references on goal achievement and user experience.</li>
+            </ol>
+            This holds promise for the use of such a memory for goal based efforts and future work can further the domains of application and effectiveness of the motivational memory and shared experiences.    
+            </p>
+            <p>A link to the thesis report can be found <a href="http://resolver.tudelft.nl/uuid:8507589f-ea44-4378-a5c4-04ef80c7a3be" target="_blank">here</a>.
+            A demo of some of the functionality can be found <a href="https://youtu.be/1l9Hl7ZY0I8" target="_blank">here</a>.
+            Code can be found <a href="https://github.com/asarav/MSc-Thesis-Experience-Sharing-Conversational-Agent" target="_blank">here</a>.
+            Data collected during experiments are anonymized to follow GDPR regulations.
+            </p>
+        </div>
+    </div>
+</section>
 <section id="teaching-tools">
     <div class="row">
         <h1 class="col-12">Teaching Tools (2012 - )</h1>
@@ -775,40 +837,6 @@ style: assets/css/projects.css
         </div>
         <div class="col-sm-6 col-12">
             <img class="minimized-image-height" src="{{ 'src/images/projects/delft-social-signal-processing/proximity_shimmer.png' | relative_url }}" loading="lazy">
-        </div>
-    </div>
-</section>
-<section id="MastersThesis">
-    <div class="row">
-        <h1 class="col-12">Masters Thesis (2020 - 2021)</h1>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <p><strong>Abstract:</strong>
-            In this work, a conversational interaction was designed and implemented to test the effect of references to past events or shared experiences rephrased into motivational phrases within the context of working towards a diet related goal that can assist with type II diabetes over multiple sessions.
-            Prior works that utilized a memory typically did not utilize a memory to refer to the past within conversations and when past events were referred to within a conversation, they were not utilized with motivational rephrasing.
-            Most prior works did not analyze long term interaction or how references to past events should have been utilized.
-            To further research in this area, the following research questions were posed:
-            <ol>
-                <li>Does referring to previous sessions improve goal attainment?</li>
-                <li>Does referring to previous sessions improve user experience?</li>
-                <li>Does a variety of references differ from making the same reference?</li>
-            </ol> 
-            To determine the answers to these questions, interactions were carried out through Zoom in a between subjects experiment with three groups of participants.
-            The results, once analyzed, found that there was a significant difference between interactions that only make references to the same shared experience and interactions that make references to various shared experiences where various shared experiences resulted in a significant increase in the change in motivation from prior to the experiment to during the experiment.
-            This offers the following contributions:
-            <ol>
-                <li>Provide clarity on how shared experiences should be used and not only whether they should be used.</li>
-                <li>A motivational memory utilizing shared experiences with intrinsic motivational value</li>
-                <li>Determine the effect of motivational references on goal achievement and user experience.</li>
-            </ol>
-            This holds promise for the use of such a memory for goal based efforts and future work can further the domains of application and effectiveness of the motivational memory and shared experiences.    
-            </p>
-            <p>A link to the thesis report can be found <a href="http://resolver.tudelft.nl/uuid:8507589f-ea44-4378-a5c4-04ef80c7a3be" target="_blank">here</a>.
-            A demo of some of the functionality can be found <a href="https://youtu.be/1l9Hl7ZY0I8" target="_blank">here</a>.
-            Code can be found <a href="https://github.com/asarav/MSc-Thesis-Experience-Sharing-Conversational-Agent" target="_blank">here</a>.
-            Data collected during experiments are anonymized to follow GDPR regulations.
-            </p>
         </div>
     </div>
 </section>
