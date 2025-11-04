@@ -1,3 +1,72 @@
+- title: "Frankenstein"
+  type: movie
+  completionDate: Nov 1, 2025
+  sourceDateAndInfo: Aug 30, 2025
+  source: https://www.imdb.com/title/tt1312221/
+  image: https://m.media-amazon.com/images/M/MV5BYzYzNDYxMTQtMTU4OS00MTdlLThhMTQtZjI4NGJmMTZmNmRiXkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    Absolutely great film by Guillermo del Toro.
+    It is an adaptation of the classic novel by Mary Shelley and is very well executed.
+    Visually, it is a masterpiece.
+    Pacing is not perfect, but every frame is like a classic oil painting.
+    Del Toro's direction is consistently good and it is representative of why he is an Oscar winning director.
+- title: "Everest"
+  type: movie
+  completionDate: Oct 28, 2025
+  sourceDateAndInfo: Sep 2, 2015
+  source: https://www.imdb.com/title/tt2719848/
+  image: https://m.media-amazon.com/images/M/MV5BNDAzOTYxMTctY2ViNi00NDI3LTgwMGItY2FhN2JjZWE5MjRkXkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg
+  explanation: >
+    An interesting film about the 1996 disaster on Everest which resulted in the deaths of many climbers.
+    The actors don't look anything like their real life counterparts, but it does provide a lot of exposition and information which acts as a good introduction to the mountain.
+    I think anyone who wants to eventually summit the mountain would benefit from seeing it, but in terms of narrative and quality, it could have been executed better.
+- title: "Darkest Hour"
+  type: movie
+  completionDate: Oct 27, 2025
+  sourceDateAndInfo: Sep 1, 2017
+  source: https://www.imdb.com/title/tt4555426/
+  image: https://m.media-amazon.com/images/M/MV5BMjIyNDkyMTgzMV5BMl5BanBnXkFtZTgwNTQwNjg2MzI@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    A film focusing on the British decision to continue to fight in the second world war instead of conceding to Hitler.
+    Gary Oldman's acting as Winston Churchill was convincing and effective.
+    It was almost reminiscient of Daniel Day Lewis as Lincoln, but was not quite the same level.
+    With that said, the film ends very strong and leaves an impression.
+    This is a film that would go very well with Dunkirk.
+- title: "The Day of the Jackal"
+  type: movie
+  completionDate: Oct 24, 2025
+  sourceDateAndInfo: May 16, 1973
+  source: https://www.imdb.com/title/tt0069947/
+  image: https://m.media-amazon.com/images/M/MV5BYzlmNDQ2YmUtOWZiYi00MDA1LTljOWEtNjYxNGI3ZDMzOThiXkEyXkFqcGc@._V1_QL75_UX190_CR0,5,190,281_.jpg
+  explanation: >
+    A thriller almost in the style of a John Le Carre novel.
+    It shows a story of an assassin who is hired to kill Charles de Gaulle and the people who chase after him.
+    The film is tightly edited and it feels like something that could actually happen for that time period.
+    Its methodical and deliberate nature is very rare to see in mainstream films today.
+- title: "F1: The Movie"
+  type: movie
+  completionDate: Oct 23, 2025
+  sourceDateAndInfo: Jun 23, 2025
+  source: https://www.imdb.com/title/tt16311594/
+  image: https://m.media-amazon.com/images/M/MV5BNGI0MDI4NjEtOWU3ZS00ODQyLWFhYTgtNGYxM2ZkM2Q2YjE3XkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    A very entertaining movie directed by Joseph Kosinski who also directed Top Gun: Maverick.
+    It is not accurate to F1, but it has a number of aspects that make it enjoyable and it is filmed very well.
+    For a Hollywood take, it is acceptable and worthwhile.
+    Furthermore, Hans Zimmer's music is of a high quality as usual.
+- title: "The Vegetarian"
+  type: book
+  completionDate: Oct 21, 2025
+  sourceDateAndInfo: Oct 30, 2007, Han Kang
+  source: https://www.goodreads.com/book/show/25489025-the-vegetarian
+  image: https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1728661771i/25489025.jpg
+  explanation: >
+    A divisive novel that is very affecting for the short length.
+    It is split into 3 parts and is very well written, but is not an enjoyable read.
+    This is a novel that wants to make the reader suffer to get across a message.
+    There are many themes here such as societal expectations, personal identity, freedom, and vegetarianism.
+    It is relatable at times and often very alienating.
+    There are a number of layers to this story and Han Kang's recognition as a Nobel Prize winner is understandable.
 - title: "Clair Obscur: Expedition 33"
   type: game
   completionDate: Oct 19, 2025
