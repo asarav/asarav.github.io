@@ -1,3 +1,26 @@
+- title: "Sisu"
+  type: movie
+  completionDate: Nov 6, 2025
+  sourceDateAndInfo: Sep 9, 2022
+  source: https://www.imdb.com/title/tt14846026/
+  image: https://m.media-amazon.com/images/M/MV5BYjAxN2RmYjktMDE2OS00MWM5LThlZTQtZDY4YzAxMWQyZWY4XkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    Effectively a World War II equivalent to Die Hard or an 80's action movie.
+    It is entertaining as long as one doesn't overthink it.
+    Interestingly, despite this being Finnish, it uses English as its main language.
+- title: "Pedro Páramo"
+  type: book
+  completionDate: Nov 4, 2025
+  sourceDateAndInfo: Mar 19, 1955, Juan Rulfo
+  source: https://www.goodreads.com/book/show/38787.Pedro_P_ramo
+  image: https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1500663791i/38787.jpg
+  explanation: >
+    A surreal and confusing novela which is said to be on of the best Mexican books ever written.
+    The perspective changes from first to third person and it is often difficult to determine who the narrator is.
+    Furthermore, it is difficult to differentiate between the living and the dead.
+    There are themes of the afterlife, sin, and it is all set against the background of Mexican history.
+    The character of Pedro Páramo is one without morals, but also very complex.
+    In many ways, this felt like 100 Years of Solitude.
 - title: "Frankenstein"
   type: movie
   completionDate: Nov 1, 2025
