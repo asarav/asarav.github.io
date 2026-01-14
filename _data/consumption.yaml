@@ -1,3 +1,12 @@
+- title: "The Producers"
+  type: movie
+  completionDate: Jan 6, 2026
+  sourceDateAndInfo: Nov 22, 1967
+  source: https://www.imdb.com/title/tt0063462/
+  image: https://m.media-amazon.com/images/M/MV5BZWMyNThmZDgtNDZlMy00N2RiLWJlM2QtZTAzNjUxZDM5YmM0XkEyXkFqcGc@._V1_QL75_UX190_CR0,4,190,281_.jpg
+  explanation: >
+    Great and witty comedy from Mel Brooks with Gene Wilder in one of the lead roles.
+    The humor is clever and it satirizes the world of theater and show business.
 - title: "I Will Teach You to Be Rich"
   type: book
   completionDate: Dec 26, 2025
