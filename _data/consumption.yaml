@@ -1,3 +1,57 @@
+- title: "Insomnia"
+  type: movie
+  completionDate: Feb 13, 2026
+  sourceDateAndInfo: Mar 14, 1997
+  source: https://www.imdb.com/title/tt0119375/
+  image: https://m.media-amazon.com/images/M/MV5BMTQ3NDM1NjgxMF5BMl5BanBnXkFtZTgwOTM5NTY2MDE@._V1_QL75_UY281_CR13,0,190,281_.jpg
+  explanation: >
+    This is what Christopher Nolan's Insomnia was based off of.
+    It is a Norwegian film that is a crime thriller with a unique setting in the Arctic Circle where the sun does not set for months.
+    The cinematography is excellent and the story is engaging.
+    I think Nolan's approach to the story was more effective, but this is still a solid film that is worth watching.
+    Stellen Skarsgård's performance is particularly noteworthy.
+- title: "The Odyssey"
+  type: book
+  completionDate: Feb 11, 2026
+  sourceDateAndInfo: Jan 1, 801, Homer
+  source: https://www.goodreads.com/book/show/1381.The_Odyssey
+  image: https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1711957706i/1381.jpg
+  explanation: >
+    The classic epic poem that is one of the foundational works of Western literature.
+    It is a story about the hero Odysseus and his journey home after the Trojan War.
+    The story is filled with adventure, mythology, and themes of heroism and perseverance.
+    It is unique because of its non linear structure and the way in which it explores the human condition through the lens of Greek mythology.
+- title: "The Hidden Fortress"
+  type: movie
+  completionDate: Feb 10, 2026
+  sourceDateAndInfo: Dec 28, 1958
+  source: https://www.imdb.com/title/tt0051808/
+  image: https://m.media-amazon.com/images/M/MV5BOGNmMGQ4YTQtYjA2My00ZDMyLWIzYzYtYmNhOGRjM2RjNTZjXkEyXkFqcGc@._V1_QL75_UY281_CR4,0,190,281_.jpg
+  explanation: >
+    This is the Japanese film that inspired Star Wars and it is easy to see why.
+    It has a similar feel to Star Wars, but it is also very much a samurai film with the same themes as other samurai films of the time.
+    It works as a great period film, but it also brings attention to the changes George Lucas made to the story and characters in order to make it more appealing to a western audience.
+    Furthermore, Misa Uehara's role is groundbreaking for the time.
+- title: "True Romance"
+  type: movie
+  completionDate: Feb 9, 2026
+  sourceDateAndInfo: Sep 8, 1993
+  source: https://www.imdb.com/title/tt0108399/
+  image: https://m.media-amazon.com/images/M/MV5BYzQ5OGMwMDAtMzcyOS00YTA4LWEwM2MtOTA1MDZjZGEyYmI1XkEyXkFqcGc@._V1_QL75_UX190_CR0,1,190,281_.jpg
+  explanation: >
+    This was written by Quentin Tarantino and it is easy to tell.
+    It has a feel that is very similar to Pulp Fiction at times.
+    However, since it is not directed by Quentin Tarantino, it is less stylized and can be enjoyed in a more straightforward manner.
+    The cast is great and the plot is constructed in such a way that it results in interesting and novel situations.
+- title: "The Kid"
+  type: movie
+  completionDate: Feb 5, 2026
+  sourceDateAndInfo: Jan 16, 1921
+  source: https://www.imdb.com/title/tt0012349/
+  image: https://m.media-amazon.com/images/M/MV5BNjkxMzY1NTQtN2YwOS00NmIwLTlkNTMtMjNkMzk1ZTk3ZDU2XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg
+  explanation: >
+    A somewhat melodramatic, but heartwarming film by Charlie Chaplin with his classic gags in his role as the tramp.
+    The story is simple, but the execution is great.
 - title: "City Lights"
   type: movie
   completionDate: Feb 4, 2026
