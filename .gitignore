@@ -21,6 +21,23 @@ $RECYCLE.BIN/
 # Dependency directories
 node_modules/
 
+# Ruby / Jekyll
+_site/
+.bundle/
+Gemfile.lock
+
+# IDEs
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+# Dependency directories
+node_modules/
+
 # =========================
 # Operating System Files
 # =========================

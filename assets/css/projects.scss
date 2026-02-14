@@ -1,13 +1,20 @@
 ---
 ---
 
+// ============================================================================
+// PROJECTS.SCSS - Projects Page Styles
+// ============================================================================
+// Page-specific overrides for src/html/projects.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
 #site {
     background: rgb(30, 30, 31);
     #content {
         color: white;
         margin-bottom: 30px;
         .jumbotron.page-top {
-            background-image: url('https://asarav.github.io/src/images/projects/projects-top.jpg');
+            background-image: url('/src/images/projects/projects-top.jpg');
             height: 350px;
             .projects-preamble {
 

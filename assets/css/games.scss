@@ -1,11 +1,18 @@
 ---
 ---
 
+// ============================================================================
+// GAMES.SCSS - Games Page Styles
+// ============================================================================
+// Page-specific overrides for src/html/games.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
 #site {
     background-image: linear-gradient(to right, rgb(30, 30, 31), rgb(43, 43, 44), rgb(8, 2, 41) );
     #content {
         .jumbotron.page-top {
-            background-image: url('https://asarav.github.io/src/images/games/games-top.jpg');
+            background-image: url('/src/images/games/games-top.jpg');
             height: 350px;
             .games-preamble {
 
@@ -26,16 +33,16 @@
                 margin-right: -15px;
                 background-size: 100% 100%;
                 &.light {
-                    background-image: url('https://asarav.github.io/src/images/games/game-background-light.jpg');
+                    background-image: url('/src/images/games/game-background-light.jpg');
                 }
                 &.medium-light {
-                    background-image: url('https://asarav.github.io/src/images/games/game-background-medium-light.jpg');
+                    background-image: url('/src/images/games/game-background-medium-light.jpg');
                 }
                 &.medium-dark {
-                    background-image: url('https://asarav.github.io/src/images/games/game-background-medium-dark.jpg');
+                    background-image: url('/src/images/games/game-background-medium-dark.jpg');
                 }
                 &.dark {
-                    background-image: url('https://asarav.github.io/src/images/games/game-background-dark.jpg');
+                    background-image: url('/src/images/games/game-background-dark.jpg');
                 }
                 .screenshots {
                     margin-bottom: 20px;

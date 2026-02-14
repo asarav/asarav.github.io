@@ -1,12 +1,19 @@
 ---
 ---
 
+// ============================================================================
+// BOOKS.SCSS - Books Page Styles
+// ============================================================================
+// Page-specific overrides for src/html/books.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
 #site {
     background: rgb(30, 30, 31);
     #content {
         color: white;
         .jumbotron.page-top {
-            background-image: url('https://asarav.github.io/src/images/books/books-top.jpg');
+            background-image: url('/src/images/books/books-top.jpg');
             height: 350px;
             .books-preamble {
     

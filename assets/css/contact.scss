@@ -1,12 +1,19 @@
 ---
 ---
 
+// ============================================================================
+// CONTACT.SCSS - Contact Page Styles
+// ============================================================================
+// Page-specific overrides for src/html/contact.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
 #site {
     background: rgb(30, 30, 31);
     #content {
         color: white;
         .jumbotron.page-top {
-            background-image: url('https://asarav.github.io/src/images/contact/contact-top.jpg');
+            background-image: url('/src/images/contact/contact-top.jpg');
             height: 350px;
             .contact-preamble {
 

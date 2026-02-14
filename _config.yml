@@ -1,6 +1,23 @@
 name: Avinash Saravanan, asarav
 title: Avinash Saravanan, asarav
+description: Personal portfolio website showcasing projects, games, music, books, and media consumption
+author: Avinash Saravanan
+url: https://asarav.github.io
 markdown: kramdown
-# This will require each of these plugins automatically.
+
+# Build settings
+exclude:
+  - node_modules/
+  - .git/
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .vscode/
+  - .DS_Store
+
+# Jekyll plugins
 plugins:
+  - jekyll-feed
+  - jekyll-sitemap
   - jekyll-seo-tag

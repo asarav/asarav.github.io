@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: src/html/consumption.html
+Disallow: /consumption/

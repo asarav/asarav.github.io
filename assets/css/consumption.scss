@@ -1,13 +1,20 @@
 ---
 ---
 
+// ============================================================================
+// CONSUMPTION.SCSS - Media Consumption Page Styles
+// ============================================================================
+// Page-specific overrides for src/html/consumption.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
 #site {
     background-image: linear-gradient(to right, rgb(30, 30, 31), transparent);
     background-color: rgb(17, 30, 56);
     #content {
         color: white;
         .jumbotron.page-top {
-            background-image: url('https://asarav.github.io/src/images/media/media-top.jpg');
+            background-image: url('/src/images/media/media-top.jpg');
             height: 350px;
             .consumption-preamble {
 

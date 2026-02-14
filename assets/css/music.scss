@@ -1,12 +1,19 @@
 ---
 ---
 
+// ============================================================================
+// MUSIC.SCSS - Music Page Styles
+// ============================================================================
+// Page-specific overrides for src/html/music.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
 #site {
     background: rgb(30, 30, 31);
     #content {
         color: white;
         .jumbotron.page-top {
-            background-image: url('https://asarav.github.io/src/images/music/music-top.jpg');
+            background-image: url('/src/images/music/music-top.jpg');
             height: 350px;
             .music-preamble {
 

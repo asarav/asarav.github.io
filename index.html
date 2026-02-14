@@ -20,7 +20,7 @@ footer: footer.html
 </div>
 <div class="tile-list" id="tile-list">
     <div class="row">
-        <a class="col-6 tile projects-tile" href="{{ 'src/html/projects.html' | relative_url }}">
+        <a class="col-6 tile projects-tile" href="{{ '/projects/' | relative_url }}">
             <div class="tile-content">
                 <label>Projects</label>
                 <div class="tile-explanation">
@@ -28,7 +28,7 @@ footer: footer.html
                 </div>
             </div>
         </a>
-        <a class="col-6 tile music-tile" href="{{ 'src/html/music.html' | relative_url }}">
+        <a class="col-6 tile music-tile" href="{{ '/music/' | relative_url }}">
             <div class="tile-content">
                 <label>Music</label>
                 <div class="tile-explanation">
@@ -38,7 +38,7 @@ footer: footer.html
         </a>
     </div>
     <div class="row">
-        <a class="col-6 tile games-tile" href="{{ 'src/html/games.html' | relative_url }}">
+        <a class="col-6 tile games-tile" href="{{ '/games/' | relative_url }}">
             <div class="tile-content">
                 <label>Games</label>
                 <div class="tile-explanation">
@@ -46,7 +46,7 @@ footer: footer.html
                 </div>
             </div>
         </a>
-        <a class="col-6 tile books-tile" href="{{ 'src/html/books.html' | relative_url }}">
+        <a class="col-6 tile books-tile" href="{{ '/books/' | relative_url }}">
             <div class="tile-content">
                 <label>Books</label>
                 <div class="tile-explanation">
@@ -56,7 +56,7 @@ footer: footer.html
         </a>
     </div>
     <div class="row">
-        <a class="col-6 tile consumption-tile" href="{{ 'src/html/consumption.html' | relative_url }}">
+        <a class="col-6 tile consumption-tile" href="{{ '/consumption/' | relative_url }}">
             <div class="tile-content">
                 <label>Media Consumption List</label>
                 <div class="tile-explanation">
@@ -64,7 +64,7 @@ footer: footer.html
                 </div>
             </div>
         </a>
-        <a class="col-6 tile about-tile" href="{{ 'src/html/about-me.html' | relative_url }}">
+        <a class="col-6 tile about-tile" href="{{ '/about/' | relative_url }}">
             <div class="tile-content">
                 <label>About Me</label>
                 <div class="tile-explanation">
@@ -74,7 +74,7 @@ footer: footer.html
         </a>
     </div>
     <div class="row">
-        <a class="col-6 tile contact-tile" href="{{ 'src/html/contact.html' | relative_url }}">
+        <a class="col-6 tile contact-tile" href="{{ '/contact/' | relative_url }}">
             <div class="tile-content">
                 <label>Contact Me</label>
                 <div class="tile-explanation">
@@ -85,9 +85,8 @@ footer: footer.html
     </div>
 </div>
 <script>
-    $("#down").click(function() {
-        $('html,body').animate({
-            scrollTop: $(".tile-list").offset().top
-        }, 'slow');
+    document.getElementById('down').addEventListener('click', function() {
+        const tileList = document.querySelector('.tile-list');
+        tileList.scrollIntoView({ behavior: 'smooth' });
     });
 </script>

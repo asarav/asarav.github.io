@@ -1,9 +1,3 @@
-$(document).ready(function () {
-    init();
+document.addEventListener('DOMContentLoaded', function() {
+    // Main initialization - add functionality here as needed
 });
-
-function init() {}
-
-function containsSubstring(container, substring) {
-    return container.indexOf(substring) !== -1;
-}
