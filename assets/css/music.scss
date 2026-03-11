@@ -25,14 +25,14 @@
             }
         }
         .song {
-            border: 1px solid rgb(231, 205, 205);
+            border: 3px solid rgb(231, 205, 205);
             margin-top: 20px;
             margin-bottom: 20px;
             padding: 5px 5px 5px 5px;
             audio {
                 width: 100%;
                 @-moz-document url-prefix() {
-                    border: 1px solid gray;
+                    border: 3px solid gray;
                     border-radius: 20px;
                 }
             }

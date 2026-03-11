@@ -10,6 +10,9 @@
 
 #site {
     background: rgb(30, 30, 31);
+    a {
+        text-decoration: none;
+    }
     #content {
         color: white;
         margin-bottom: 30px;
@@ -25,6 +28,8 @@
         }
         section {
             margin-bottom: 30px;
+            padding-left: 15px;
+            padding-right: 15px;
             table, th, td {
                 border: 2px solid white;
             }

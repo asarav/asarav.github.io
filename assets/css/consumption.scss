@@ -11,6 +11,9 @@
 #site {
     background-image: linear-gradient(to right, rgb(30, 30, 31), transparent);
     background-color: rgb(17, 30, 56);
+    a {
+        text-decoration: none;
+    }
     #content {
         color: white;
         .page-top {
@@ -32,25 +35,34 @@
                 padding: 5px 5px 5px 5px;
                 margin-top: 20px;
                 margin-bottom: 20px;
+                // Bootstrap 5 gutters are wider than older versions; tighten for this layout
+                --bs-gutter-x: 0.75rem;
+                align-items: stretch;
                 .date {
                     font-size: 20px;
-                    margin-top: 85px;
+                    margin-top: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
                 .content {
                     border-right: 2px solid rgb(38, 82, 133);
                     border-left: 2px solid rgb(38, 82, 133);
-                    height: 280px;
+                    height: auto;
+                    min-height: 215px;
+                    padding-left: 10px;
+                    padding-right: 10px;
                     @media only screen and (max-width: 1100px) {
-                        height: 355px;
+                        min-height: 355px;
                     }
                     @media only screen and (max-width: 1000px) {
-                        height: 450px;
+                        min-height: 450px;
                     }
                     @media only screen and (max-width: 900px) {
-                        height: 525px;
+                        min-height: 525px;
                     }
                     @media only screen and (max-width: 800px) {
-                        height: 600px;
+                        min-height: 600px;
                     }
                     .header {
                         a {
@@ -58,10 +70,14 @@
                         }
                         sub {
                             margin-left: 15px;
+                            bottom: -0.5em;
                         }
                     }
                     .explanation {
                         font-size: 14px;
+                        p {
+                            margin-bottom: 0;
+                        }
                     }
                 }
                 .image {
@@ -79,7 +95,7 @@
                     margin-bottom: 10px;
                     margin-left: 5px;
                     margin-right: 5px;
-                    border-top: 1px solid rgb(112, 158, 189);
+                    border-top: 3px solid rgb(112, 158, 189);
                 }
             }
 
@@ -91,21 +107,25 @@
               display: flex;
             }
 
+            .row.item.title {
+                --bs-gutter-x: 0.75rem;
+            }
+
             .item.movie {
                 hr {
-                    border-top: 1px solid rgb(28, 58, 139);
+                    border-top: 3px solid rgb(28, 58, 139);
                 }
             }
 
             .item.game {
                 hr {
-                    border-top: 1px solid rgb(5, 95, 5);
+                    border-top: 3px solid rgb(5, 95, 5);
                 }
             }
 
             .item.music {
                 hr {
-                    border-top: 1px solid rgb(95, 5, 5);
+                    border-top: 3px solid rgb(95, 5, 5);
                 }
             }
 
@@ -115,13 +135,13 @@
                 }
 
                 hr {
-                        border-top: 1px solid rgb(22, 78, 85);
+                        border-top: 3px solid rgb(22, 78, 85);
                     }
             }
 
             .item.book {
                 hr {
-                        border-top: 1px solid rgb(107, 15, 99);
+                        border-top: 3px solid rgb(107, 15, 99);
                     }
             }
         }
