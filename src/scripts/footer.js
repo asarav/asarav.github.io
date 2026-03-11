@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Bootstrap 4 tooltips
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
-    tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new (window.$ || {}).tooltip ? new $.tooltip(tooltipTriggerEl) : tooltipTriggerEl;
+    // Initialize Bootstrap 5 tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+        if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        }
     });
 
     // Update copyright year dynamically

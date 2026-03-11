@@ -6,7 +6,7 @@ footer: footer.html
 style: assets/css/games.css
 permalink: /games/
 ---
-<div class="jumbotron page-top">
+<div class="page-top">
     <div class="games-preamble">
         <h1 class="text-center">Games</h1>
     </div>
@@ -20,7 +20,7 @@ permalink: /games/
         <div class="game {{ game.style }}">
             <div class="row">
                 <div class="game-header col-6">{{ game.title }}</div>
-                <a class="ml-auto play-now" href="{{ game.link | relative_url }}" target="_blank">Play Now</a>
+                <a class="ms-auto play-now" href="{{ game.link | relative_url }}" target="_blank">Play Now</a>
             </div>
             <div class="row screenshots">
                 {% for image in game.images %}

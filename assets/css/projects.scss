@@ -13,7 +13,7 @@
     #content {
         color: white;
         margin-bottom: 30px;
-        .jumbotron.page-top {
+        .page-top {
             background-image: url('/src/images/projects/projects-top.jpg');
             height: 350px;
             .projects-preamble {
@@ -51,6 +51,18 @@
                 font-family: 'Montserrat Black', sans-serif;
                 text-shadow: 0 0 1px darkblue, 0 0 1px darkblue, 0 0 1px darkblue, 0 0 1px darkblue;
             }
+        }
+
+        // Progressive reveal (infinite-scroll style paging)
+        section.js-project-hidden {
+            display: none;
+        }
+
+        .projects-loading-hint {
+            text-align: center;
+            color: rgb(200, 200, 200);
+            font-size: 16px;
+            margin: 10px 0 30px 0;
         }
     }
 }

@@ -65,17 +65,24 @@ Updates all gems to their latest compatible versions.
 ## Key Technologies
 
 - **Jekyll** 3.9.5 - Static site generator
-- **Bootstrap** 4.0.0 - Responsive CSS framework
+- **Bootstrap** 5.3.8 - Responsive CSS framework
 - **SCSS** - CSS preprocessing
 - **Vanilla JavaScript** - ES6+ for interactivity (no jQuery)
 
 ## Recent Updates (2026)
 
+### Bootstrap 5 Upgrade
+- ✅ Upgraded from Bootstrap 4.0.0 to Bootstrap 5.3.8 (CDN)
+- ✅ Replaced data-toggle/data-target with data-bs-toggle/data-bs-target in nav and footer
+- ✅ Replaced ml-auto with ms-auto (Bootstrap 5 margin utilities)
+- ✅ Updated tooltip initialization to Bootstrap 5 API (footer.js)
+- ✅ Replaced deprecated .jumbotron with .page-top across HTML and SCSS (Bootstrap 5 removed jumbotron)
+
 ### JavaScript Modernization
 - ✅ Removed jQuery dependency from core functionality
 - ✅ Converted jQuery selectors to vanilla JavaScript DOM APIs
 - ✅ Converted scroll handlers to vanilla JavaScript (scrollIntoView)
-- ✅ Updated tooltip initialization to vanilla JS (Bootstrap 4 API)
+- ✅ Updated tooltip initialization to vanilla JS (Bootstrap 5 API)
 - ✅ Removed unused helper functions
 
 ### HTML Improvements

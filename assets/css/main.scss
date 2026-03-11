@@ -26,11 +26,24 @@ $section-heading: orange;
 $section-font-size: 18px;
 $section-heading-size: 24px;
 
+html, body {
+    overflow-x: hidden;
+}
+
 #site {
     background-image: url("/src/images/rain-background.jpg");
     background-size: 100% 100%;
     font-family: Arial, Helvetica, sans-serif;
     color: $primary-text;
+    overflow-x: hidden;
+
+    // Reset Bootstrap 5 spacing so layout matches previous look
+    #content {
+        padding-top: 0;
+        > *:first-child {
+            margin-top: 0;
+        }
+    }
 
     #navbar {
         background-image: linear-gradient(to right, $navbar-primary, $navbar-secondary);
@@ -38,8 +51,10 @@ $section-heading-size: 24px;
         border-radius: 1px;
         opacity: 0.85;
         transition: opacity 0.5s ease-in;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
         .navbar-brand {
             font-family: Brush Script MT, Brush Script Std, cursive;
             font-size: 40px;
@@ -62,7 +77,7 @@ $section-heading-size: 24px;
             margin-left: 3px;
             padding-right: 7.5px;
             padding-left: 7.5px;
-            float: right;
+            float: none;
         }
 
         .navbar-toggler:hover {
@@ -73,7 +88,7 @@ $section-heading-size: 24px;
         .navbar-collapse {
             padding-right: 0px;
             ul {
-                float: right;
+                float: none;
                 transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;
                 @media only screen and (max-width: 768px) {
                     width: 100%;
@@ -86,7 +101,7 @@ $section-heading-size: 24px;
                     transition: background 0.4s ease-in, color 0.4s ease-in, border-radius 0.5s ease-in;                        
                 }
                 @media only screen and (max-width: 768px) {
-                    float: left;
+                    float: none;
                 }
             }
         }
@@ -100,8 +115,8 @@ $section-heading-size: 24px;
         }
     }
 
-    //Try to mimic bootstrap 3 style
-    .jumbotron p {
+    // Hero / page-top paragraph styling (Bootstrap 5 removed .jumbotron)
+    .page-top p {
         margin-bottom: 10px;
         font-size: 21px;
         font-weight: 200;
@@ -113,7 +128,14 @@ $section-heading-size: 24px;
         background-size: 100% 100%;
         text-align: center;
         color: $accent-red;
-        margin: 0px -15px -1px -15px;
+        // Keep hero full-width within viewport without shifting navbar
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        margin: 0 0 -1px 0;
+        box-sizing: border-box;
+        padding-left: 0;
+        padding-right: 0;
         padding-top: 60px;
         height: 650px;
         opacity: 0.90;
@@ -193,6 +215,7 @@ $section-heading-size: 24px;
 
     .tile-list {
         .tile {
+            position: relative;
             background-size: 100% 100%;
             opacity: 0.75;
             text-align: center;
@@ -206,6 +229,11 @@ $section-heading-size: 24px;
                 border: 2px solid black;
             }
             .tile-content {
+                position: relative;
+                height: 100%;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
                 font-size: 28px;
                 color: rgb(255, 255, 255);
                 text-shadow: -1.5px 0 rgb(19, 18, 18), 0 1.5px rgb(29, 28, 28), 1.5px 0 rgb(19, 18, 18), 0 -1.5px rgb(29, 28, 28);
@@ -214,8 +242,14 @@ $section-heading-size: 24px;
                 }
                 .tile-explanation {
                     font-size: 16px;
-                    position: absolute;
-                    bottom: 0;
+                    margin-top: auto;
+                    padding: 12px 16px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    p {
+                        margin: 0;
+                        line-height: 1.4;
+                    }
                 }
 
                 @media only screen and (max-width: 900px) {
@@ -278,6 +312,15 @@ $section-heading-size: 24px;
         width: 100%;
         bottom: 0;
         opacity: 0.95;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        .container-fluid {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .row {
+            align-items: center;
+        }
         .contact {
             text-align: right;
         }
