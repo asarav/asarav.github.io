@@ -1,3 +1,39 @@
+- title: "Hunger"
+  type: book
+  completionDate: May 12, 2026
+  sourceDateAndInfo: Jan 1, 1890, Knut Hamsun
+  source: https://www.goodreads.com/book/show/32585.Hunger
+  image: https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1456243307i/32585.jpg
+  explanation: >
+    A Scandinavian Crime and Punishment of sorts with a similar protagonist, but different approach.
+    It is a psychological story of hardship and suffering.
+    The writing is intimate and it also shows the multifaceted nature of humans.
+- title: "Sousou no Frieren 2nd Season"
+  type: anime
+  completionDate: May 10, 2026
+  sourceDateAndInfo: Mar 27, 2026
+  source: https://myanimelist.net/anime/59978/Sousou_no_Frieren_2nd_Season
+  image: https://myanimelist.net/images/anime/1921/154528.jpg
+  explanation: >
+    The second season which is of a similar quality to the first season.
+    That said, this is also significantly shorter.
+    Animation and execution is great, and in a way it continues the spirit of the first season despite having less plot.
+# - title: "The Legend of Aang: The Last Airbender"
+#   type: movie
+#   completionDate: Apr 25, 2026
+#   sourceDateAndInfo: Oct 9, 2026
+#   source: https://www.imdb.com/title/tt18259538/
+#   image: https://m.media-amazon.com/images/M/MV5BNTNhN2Y5NTEtNzEyMy00NWQ0LTg4OTMtNzEwM2M1ZGYzYzA4XkEyXkFqcGc@._V1_QL75_UY281_CR10,0,190,281_.jpg
+#   explanation: >
+- title: "Egil's Saga"
+  type: book
+  completionDate: Apr 24, 2026
+  sourceDateAndInfo: Jan 1, 1240, Anonymous
+  source: https://www.goodreads.com/book/show/19195481
+  image: https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1386212822i/19195481.jpg
+  explanation: >
+    The Norse saga of Egil Skallagrimsson, a Viking warrior and poet.
+    This is the essential Icelandic saga and it is epic in scale and location in terms of all the ground it covers.
 - title: "A Few Good Men"
   type: movie
   completionDate: Apr 10, 2026
