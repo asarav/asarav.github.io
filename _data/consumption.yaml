@@ -1,3 +1,22 @@
+- title: "Highlander"
+  type: movie
+  completionDate: Jun 25, 2026
+  sourceDateAndInfo: Mar 7, 1986
+  source: https://www.imdb.com/title/tt0091203/
+  image: https://m.media-amazon.com/images/M/MV5BMDUzODA3ZDctODM1MS00YzY0LWI1MzUtZTU0N2UzYjRhY2M3XkEyXkFqcGc@._V1_QL75_UX190_CR0,4,190,281_.jpg
+  explanation: >
+    Surprisingly entertaining and more enjoyable than I expected.
+    It could have been trimmed and better shot, but it felt like a fantasy Terminator with a good soundtrack and a fun story.
+- title: "Independent People"
+  type: book
+  completionDate: Jun 22, 2026
+  sourceDateAndInfo: Jan 1, 1934, Halldór Laxness
+  source: https://www.goodreads.com/en/book/show/77287.Independent_People
+  image: https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1282892439i/77287.jpg
+  explanation: >
+    An interesting, but also somewhat dry novel about sheep farming.
+    The prose is great, but it also moves very slow.
+    I can see why this is considered a classic of Icelandic literature, but it takes some understanding and patience to appreciate it.
 - title: "Love & Mercy"
   type: movie
   completionDate: Jun 16, 2026
