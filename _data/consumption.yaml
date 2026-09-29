@@ -1,3 +1,21 @@
+- title: "The Witch"
+  type: movie
+  completionDate: Sep 28, 2026
+  sourceDateAndInfo: Jan 23, 2015
+  source: https://www.imdb.com/title/tt4263482/
+  image: https://m.media-amazon.com/images/M/MV5BMTUyNzkwMzAxOF5BMl5BanBnXkFtZTgwMzc1OTk1NjE@._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    A Christian horror film by Robert Eggers which takes place during the colonization of the new world.
+    This is also notable for being Anya Taylor-Joy's debut role.
+    It felt thoughtful and authentic in its depiction of the time period and the religious beliefs of the characters.
+- title: "[4K] Watch the FIRST Orbital Starship Mission!!!"
+  type: video
+  completionDate: Sep 28, 2026
+  sourceDateAndInfo: Sep 28, 2026
+  source: https://youtu.be/LeKY53pwArw
+  image: https://i.ytimg.com/vi/LeKY53pwArw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDz6rq3xus4lKRVw52WxI7PKmgcVg
+  explanation: > 
+    Everything didn't go as planned, but a successful entry into orbit was accomplished.
 - title: "The Florida Project"
   type: movie
   completionDate: Sep 14, 2026
