@@ -1,3 +1,23 @@
+- title: "Mystic River"
+  type: movie
+  completionDate: Oct 5, 2026
+  sourceDateAndInfo: Oct 3, 2003
+  source: https://www.imdb.com/title/tt0327056/
+  image: https://m.media-amazon.com/images/M/MV5BMTIzNDUyMjA4MV5BMl5BanBnXkFtZTYwNDc4ODM3._V1_QL75_UX190_CR0,0,190,281_.jpg
+  explanation: >
+    Great film directed by Clint Eastwood about a murder investigation in Boston.
+    The acting and script carry the film and it carries across the film of Boston very well.
+    The themes of morality and childhood are strong and I believe contributed directly to the Oscars earned.
+- title: "End of Watch"
+  type: movie
+  completionDate: Sep 30, 2026
+  sourceDateAndInfo: Sep 8, 2012
+  source: https://www.imdb.com/title/tt1855199/
+  image: https://m.media-amazon.com/images/M/MV5BMjMxNjU0ODU5Ml5BMl5BanBnXkFtZTcwNjI4MzAyOA@@._V1_QL75_UX190_CR0,6,190,281_.jpg
+  explanation: >
+    A realistic take on police work in Los Angeles by the same director as Suicide Squad.
+    Surprisingly, this was actually fairly good because of how real it felt and due to the acting.
+    The shaky camera work is overdone at times, but it does do what it sets out to do.
 - title: "The Witch"
   type: movie
   completionDate: Sep 28, 2026
