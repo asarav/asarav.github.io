@@ -1,3 +1,13 @@
+- title: "Human Resource Machine"
+  type: game
+  completionDate: Oct 10, 2026
+  sourceDateAndInfo: Oct 15, 2015
+  source: https://en.wikipedia.org/wiki/Human_Resource_Machine
+  image: https://upload.wikimedia.org/wikipedia/en/e/e1/Human_resource_machine_cover.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled
+  explanation: >
+    A puzzle game about programming and logic with some very light societal commentary.
+    The instructions are reminiscent of assembly language, and requires a different sort of thinking from a higher level language.
+    It is a fun and challenging game that teaches programming concepts in a way that is accessible to everyone.
 - title: "Mystic River"
   type: movie
   completionDate: Oct 5, 2026
