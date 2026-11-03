@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="asarav">
+  <rect width="32" height="32" fill="#070b10" />
+  <path d="M 5 16 C 5 8, 12 8, 16 16 C 20 24, 27 24, 27 16" fill="none" stroke="#00b33c" stroke-width="2.2" stroke-linecap="round" opacity="0.35" />
+  <path d="M 5 16 C 5 24, 12 24, 16 16 C 20 8, 27 8, 27 16" fill="none" stroke="#00b33c" stroke-width="2.2" stroke-linecap="round" />
+  <line x1="14" y1="14" x2="18" y2="18" stroke="#00b33c" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+  <text x="27" y="29" text-anchor="middle" font-family="monospace" font-size="8" font-weight="700" fill="#00b33c">a</text>
+</svg>

@@ -4,30 +4,46 @@ title: Status Log
 permalink: /log/
 style: assets/css/log.css
 ---
-<div class="page-top">
+<div class="page-top log-hero">
     <div class="log-preamble">
-        <h1 class="text-center">Status Log</h1>
-    </div>
-    <div class="log-explanation">
-        <p>Goals, Achievements, and Changes in Goals</p>
+                <h1>Status Log</h1>
+        <p class="log-explanation">Goals, Achievements, and Changes in Goals</p>
     </div>
 </div>
-<div class="log">
-    {% for item in site.data.log %}
-    <section id="{{ item.date }}">
-        <div class="row">
-            <div class="date col-12 text-center">{{ item.date }}</div>
-        </div>
-        <div class="row">
-            <div class="explanation col-12">{{ item.explanation }}</div>
-        </div>
-        <div class="row">
-            <img class="col-12 col-sm-8 col-md-6" src="{{ item.image | relative_url }}">
-        </div>
-        <div class="row">
-            <img class="col-12 col-sm-8 col-md-6" src="{{ item.image2 | relative_url }}">
-        </div>
-    </section>
-    <hr>
-    {% endfor %}
+
+<div class="log-shell">
+
+    <div class="log">
+        {% assign current_year = '' %}
+        {% for item in site.data.log %}
+            {% assign date_parts = item.date | split: ' ' %}
+            {% assign year = date_parts | last %}
+            {% if year != current_year %}
+                <div class="log-year" id="year-{{ year }}">
+                    <span>{{ year }}</span>
+                </div>
+                {% assign current_year = year %}
+            {% endif %}
+            <article class="log-entry" id="{{ item.date | slugify }}">
+                <div class="log-date">{{ item.date }}</div>
+                <div class="log-card">
+                    <div class="log-body">{{ item.explanation }}</div>
+                    {% if item.image or item.image2 %}
+                    <div class="log-media{% if item.image2 %} log-media--pair{% endif %}">
+                        {% if item.image %}
+                        <figure class="log-figure">
+                            <img src="{{ item.image | relative_url }}" alt="Status log image for {{ item.date }}" loading="lazy" decoding="async">
+                        </figure>
+                        {% endif %}
+                        {% if item.image2 %}
+                        <figure class="log-figure">
+                            <img src="{{ item.image2 | relative_url }}" alt="Additional status log image for {{ item.date }}" loading="lazy" decoding="async">
+                        </figure>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+        {% endfor %}
+    </div>
 </div>

@@ -17,7 +17,7 @@ $accent: rgb(209, 73, 73);
 $link: rgb(126, 191, 255);
 
 $types: (
-    anime: (rgb(214, 108, 173), "Anime"),
+    anime: (rgb(230, 120, 90), "Anime"),
     book: (rgb(167, 131, 224), "Book"),
     comic: (rgb(238, 159, 85), "Comic"),
     game: (rgb(74, 178, 120), "Game"),
@@ -112,9 +112,9 @@ $types: (
                 label {
                     margin: 0;
                     color: $muted;
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: var(--font-mono);
                     font-size: 11px;
-                    font-weight: 700;
+                    font-weight: 400;
                     letter-spacing: 0.18em;
                     text-transform: uppercase;
                 }
@@ -127,7 +127,7 @@ $types: (
                 overflow: hidden;
                 background: linear-gradient(160deg, $surface-raised 0%, $surface 75%);
                 border: 1px solid $border-color;
-                border-radius: 16px;
+                border-radius: 2px;
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
                 animation: consumption-rise 0.45s ease backwards;
                 transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
@@ -155,26 +155,14 @@ $types: (
                     justify-content: center;
                     gap: 6px;
                     padding: 0 8px;
-                    color: $text;
-                    font-family: 'Montserrat', sans-serif;
-                    font-size: 13px;
-                    font-weight: 700;
+                    color: var(--type-color, #{$link});
+                    font-family: var(--font-mono);
+                    font-size: 18px;
+                    font-weight: 400;
                     line-height: 1.4;
                     text-align: center;
 
-                    &::before {
-                        display: inline-block;
-                        padding: 4px 9px;
-                        color: var(--type-color, #{$link});
-                        border: 1px solid var(--type-color, #{$link});
-                        border-radius: 999px;
-                        font-size: 10px;
-                        font-weight: 700;
-                        letter-spacing: 0.12em;
-                        line-height: 1.3;
-                        text-transform: uppercase;
-                        content: "Entry";
-                    }
+
                 }
 
                 .content {
@@ -182,8 +170,8 @@ $types: (
 
                     .header {
                         a {
-                            color: rgb(255, 255, 255);
-                            font-family: 'Montserrat', sans-serif;
+                            color: var(--type-color, #{$link});
+                            font-family: var(--font-display);
                             font-size: 20px;
                             font-weight: 700;
                             line-height: 1.35;
@@ -237,7 +225,7 @@ $types: (
                         height: auto;
                         object-fit: contain;
                         border: 1px solid $border-color;
-                        border-radius: 10px;
+                        border-radius: 2px;
                         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
                         transition: transform 0.28s ease, filter 0.28s ease;
                     }
@@ -252,10 +240,6 @@ $types: (
             @each $type, $config in $types {
                 .item.info.#{$type} {
                     --type-color: #{nth($config, 1)};
-
-                    .date::before {
-                        content: nth($config, 2);
-                    }
                 }
             }
 
@@ -293,6 +277,11 @@ $types: (
 
                     .date {
                         margin: 0 0 10px;
+                        color: var(--type-color, #{$link});
+                        font-family: var(--font-mono);
+                        font-size: 16px;
+                        font-weight: 400;
+                        text-align: center;
                     }
 
                     hr {
@@ -305,8 +294,8 @@ $types: (
 
                     .header {
                         a {
-                            color: rgb(255, 255, 255);
-                            font-family: 'Montserrat', sans-serif;
+                            color: var(--type-color, #{$link});
+                            font-family: var(--font-display);
                             font-size: 19px;
                             font-weight: 700;
                             line-height: 1.35;

@@ -1,34 +1,36 @@
-<nav id="navbar" class="navbar navbar-expand-md navbar-light">
-    <a class="navbar-brand" href="{{ '#' | relative_url }}">
-        asarav
+{% assign current_path = page.url | default: '/' %}
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light" aria-label="Primary">
+    <a class="navbar-brand" href="{{ '/' | relative_url }}" aria-label="asarav home">
+        <canvas class="brand-mark" width="88" height="88" aria-hidden="true"></canvas>
+        <span class="brand-word">asarav</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" id="projects-nav" href="{{ '/projects/' | relative_url }}">Projects</a>    
+                <a class="nav-link{% if current_path == '/projects/' %} active{% endif %}" id="projects-nav" href="{{ '/projects/' | relative_url }}"{% if current_path == '/projects/' %} aria-current="page"{% endif %}>Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="music" href="{{ '/music/' | relative_url }}">Music</a>
+                <a class="nav-link{% if current_path == '/music/' %} active{% endif %}" id="music" href="{{ '/music/' | relative_url }}"{% if current_path == '/music/' %} aria-current="page"{% endif %}>Music</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="games-nav" href="{{ '/games/' | relative_url }}">Games</a>
+                <a class="nav-link{% if current_path == '/games/' %} active{% endif %}" id="games-nav" href="{{ '/games/' | relative_url }}"{% if current_path == '/games/' %} aria-current="page"{% endif %}>Games</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="books-nav" href="{{ '/books/' | relative_url }}">Books</a>
+                <a class="nav-link{% if current_path == '/books/' %} active{% endif %}" id="books-nav" href="{{ '/books/' | relative_url }}"{% if current_path == '/books/' %} aria-current="page"{% endif %}>Books</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="consumption-nav" href="{{ '/consumption/' | relative_url }}">Media Consumption List</a>    
+                <a class="nav-link{% if current_path == '/consumption/' %} active{% endif %}" id="consumption-nav" href="{{ '/consumption/' | relative_url }}"{% if current_path == '/consumption/' %} aria-current="page"{% endif %}>Media Consumption List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="about-nav" href="{{ '/about/' | relative_url }}">About Me</a>
+                <a class="nav-link{% if current_path == '/about/' %} active{% endif %}" id="about-nav" href="{{ '/about/' | relative_url }}"{% if current_path == '/about/' %} aria-current="page"{% endif %}>About Me</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="contact-nav" href="{{ '/contact/' | relative_url }}">Contact Me</a>
+                <a class="nav-link{% if current_path == '/contact/' %} active{% endif %}" id="contact-nav" href="{{ '/contact/' | relative_url }}"{% if current_path == '/contact/' %} aria-current="page"{% endif %}>Contact Me</a>
             </li>
         </ul>
     </div>
-  </nav>
+</nav>

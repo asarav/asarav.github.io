@@ -2,307 +2,308 @@
 ---
 
 // ============================================================================
-// BOOKS.SCSS - Books Page Styles
+// BOOKS.SCSS - The Library Alcove
 // ============================================================================
-// Page-specific overrides for src/html/books.html
-// Loaded via the 'style' front matter variable
+// Editorial two-column layout for src/html/books.html
 // ============================================================================
 
-$surface: rgb(23, 31, 41);
-$surface-raised: rgb(27, 38, 50);
-$border-color: rgba(112, 158, 189, 0.28);
-$text: rgb(220, 231, 241);
-$muted: rgb(168, 186, 203);
-$accent: rgb(209, 73, 73);
-$amber: rgb(244, 171, 68);
-$link: rgb(126, 191, 255);
+#site #content {
+    color: var(--frost);
 
-@keyframes book-rise {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .page-top {
+        background-image:
+            linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%),
+            linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%),
+            url('/src/images/books/books-top.jpg');
+        background-position: center;
+        background-size: cover;
+        border-bottom: 1px solid var(--line);
     }
 }
 
-#site {
-    background: rgb(30, 30, 31);
+.book-section {
+    max-width: 1280px;
+    margin: 0 auto clamp(60px, 8vw, 100px);
+    padding: clamp(34px, 5vw, 64px) var(--gutter);
+    background: linear-gradient(160deg, rgba(22, 35, 47, 0.94) 0%, rgba(13, 21, 29, 0.96) 78%);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+    animation: book-rise 0.6s ease both;
+}
 
-    #content {
-        color: $text;
-        margin-bottom: 30px;
+@keyframes book-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        .page-top {
-            background-image:
-                linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
-                url('/src/images/books/books-top.jpg');
-            height: 340px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 0;
-            border-bottom: 1px solid $border-color;
+.book-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(34px, 6vw, 76px);
+    align-items: start;
+}
 
-            .books-preamble h1 {
-                font-size: clamp(2.6rem, 5vw, 3.8rem);
-                letter-spacing: 0.01em;
-                margin-bottom: 8px;
-                text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
-            }
+.book-cover-column {
+    position: sticky;
+    top: calc(var(--nav-height) + 34px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
 
-            .books-explanation {
-                max-width: 920px;
-                margin: 0 auto;
+.book-cover-link {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    position: relative;
+    isolation: isolate;
+    text-decoration: none;
 
-                p {
-                    color: rgb(236, 243, 249);
-                    font-size: 18px;
-                    line-height: 1.6;
-                    margin-bottom: 8px;
-                    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
-                }
-            }
+    &::before {
+        content: "";
+        position: absolute;
+        inset: -24px -18px -18px -18px;
+        z-index: -1;
+        background: radial-gradient(ellipse at 50% 38%, rgba(244, 171, 68, 0.18), transparent 68%);
+        pointer-events: none;
+    }
 
-            @media only screen and (max-width: 768px) {
-                height: 300px;
+    .cover {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line-strong);
+        border-radius: 2px;
+        box-shadow: 0 22px 52px rgba(0, 0, 0, 0.48);
+        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
 
-                .books-explanation p {
-                    font-size: 15px;
-                }
+    &:hover .cover {
+        transform: translateY(-6px);
+        border-color: var(--amber);
+        box-shadow: 0 30px 62px rgba(0, 0, 0, 0.56);
+    }
+}
+
+.book-meta {
+    width: 100%;
+    max-width: 360px;
+    margin: 0;
+    padding-top: 4px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+
+    a {
+        color: var(--ice);
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+.book-text-column {
+    min-width: 0;
+
+    .eyebrow {
+        margin-bottom: 12px;
+    }
+
+    .heading {
+        margin: 0 0 18px;
+        color: var(--frost);
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+    }
+
+    .book-title {
+        display: inline-block;
+        color: inherit;
+        text-decoration: none;
+
+        &:hover .heading {
+            color: #fff;
+        }
+    }
+
+    .book-explanation {
+        max-width: 68ch;
+        margin: 0 0 26px;
+        padding: 0;
+        background: none;
+        border: 0;
+
+        p {
+            margin: 0 0 1.1em;
+            color: rgba(237, 244, 247, 0.86);
+            font-size: 1.04rem;
+            line-height: 1.75;
+
+            &:last-child {
+                margin-bottom: 0;
             }
         }
+    }
 
-        // Breathing room between the hero and the first book card.
-        .page-top + section {
-            margin-top: 30px;
-        }
+    .book-personal {
+        max-width: 68ch;
+        margin: 0 0 28px;
+        padding: 18px 22px;
+        background: rgba(112, 158, 189, 0.07);
+        border: 1px solid var(--line);
+        border-left: 2px solid var(--signal);
+        border-radius: 2px;
 
-        section {
-            position: relative;
-            width: calc(100% - 30px);
-            max-width: 1400px;
-            margin: 0 auto 30px;
-            padding: 30px 32px;
-            overflow: hidden;
-            background: linear-gradient(160deg, $surface-raised 0%, $surface 70%);
-            border: 1px solid $border-color;
-            border-radius: 16px;
-            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
-            animation: book-rise 0.5s ease both;
-
-            &::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 3px;
-                background: linear-gradient(90deg, $amber, $accent 55%, rgba(209, 73, 73, 0));
-            }
-
-            .heading {
-                color: $amber;
-                font-family: 'Montserrat', sans-serif;
-                font-size: clamp(1.5rem, 2.4vw, 2rem);
-                font-weight: 700;
-                line-height: 1.3;
-                margin-bottom: 10px;
-                text-align: center;
-            }
-
-            .book-title {
-                display: inline-block;
-                color: inherit;
-                text-decoration: none;
-
-                &:hover .heading {
-                    color: rgb(255, 255, 255);
-                }
-            }
-
-            .row:first-of-type p {
-                margin: 0 0 22px;
-                color: $muted;
-                font-size: 15px;
-                line-height: 1.5;
-                text-align: center;
-
-                a {
-                    color: $muted;
-
-                    &:hover {
-                        color: $link;
-                    }
-                }
-            }
-
-            p {
-                color: $text;
-                font-size: 17px;
-                line-height: 1.75;
-            }
+        p {
+            margin: 0;
+            color: rgba(237, 244, 247, 0.8);
+            font-size: 0.98rem;
+            line-height: 1.7;
 
             a {
-                color: $link;
-                text-decoration: underline;
-                text-decoration-thickness: 1px;
-                text-decoration-color: rgba(126, 191, 255, 0.4);
-                text-underline-offset: 3px;
-                transition: color 0.2s ease, text-decoration-color 0.2s ease;
+                color: var(--ice);
+                text-decoration-color: rgba(143, 208, 232, 0.45);
 
                 &:hover {
-                    color: rgb(255, 255, 255);
-                    text-decoration-color: $accent;
-                }
-            }
-
-            .row.images {
-                margin-bottom: 24px;
-
-                img.cover {
-                    display: block;
-                    width: auto;
-                    max-width: min(360px, 100%);
-                    height: auto;
-                    margin: 0 auto;
-                    border: 1px solid rgba(112, 158, 189, 0.35);
-                    border-radius: 14px;
-                    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
-                    transition: transform 0.3s ease, filter 0.3s ease, border-color 0.3s ease;
-
-                    &:hover {
-                        transform: translateY(-4px);
-                        filter: brightness(1.05);
-                        border-color: $amber;
-                    }
-                }
-            }
-
-            .book-explanation,
-            .book-personal {
-                max-width: 900px;
-                margin: 0 auto 18px;
-                padding: 18px 20px;
-                background: rgba(112, 158, 189, 0.07);
-                border: 1px solid rgba(112, 158, 189, 0.18);
-                border-radius: 12px;
-
-                p {
-                    margin: 0 0 12px;
-                    font-size: 16px;
-                    line-height: 1.75;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-
-            .book-personal {
-                border-left: 3px solid $accent;
-            }
-
-            .book-links {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                max-width: 900px;
-                margin: 0 auto 10px;
-                padding: 0;
-
-                .col-12 {
-                    flex: 0 0 auto;
-                    width: auto;
-                    padding: 0;
-                }
-
-                a {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    padding: 10px 18px;
-                    color: $link;
-                    background: rgba(112, 158, 189, 0.1);
-                    border: 1px solid rgba(112, 158, 189, 0.4);
-                    border-radius: 999px;
-                    font-family: 'Montserrat', sans-serif;
-                    font-size: 12px;
-                    font-weight: 700;
-                    letter-spacing: 0.08em;
-                    text-decoration: none;
-                    text-transform: uppercase;
-                    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-
-                    &::after {
-                        content: "\2197";
-                        font-size: 14px;
-                        line-height: 1;
-                    }
-
-                    &:hover,
-                    &:focus-visible {
-                        transform: translateY(-2px);
-                        color: rgb(255, 255, 255);
-                        background: rgba(112, 158, 189, 0.2);
-                        border-color: $link;
-                    }
-                }
-            }
-
-            &#substack {
-                .substack {
-                    display: block;
-                    width: min(480px, 100%);
-                    max-width: 100%;
-                    margin: 0 auto 10px;
-                    background: rgb(255, 255, 255);
-                    border: 1px solid $border-color;
-                    border-radius: 14px;
-                    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-                }
-            }
-
-            @media only screen and (max-width: 768px) {
-                width: calc(100% - 20px);
-                padding: 22px 18px;
-
-                .heading {
-                    font-size: 1.35rem;
-                }
-
-                p {
-                    font-size: 16px;
-                    line-height: 1.7;
-                }
-
-                .book-explanation p,
-                .book-personal p {
-                    font-size: 15px;
-                }
-
-                .row.images img.cover {
-                    max-width: 100%;
+                    color: #fff;
+                    text-decoration-color: var(--signal);
                 }
             }
         }
+    }
 
-        hr {
-            width: calc(100% - 30px);
-            max-width: 1400px;
-            height: 1px;
-            margin: 0 auto 30px;
-            border: 0;
-            background: linear-gradient(90deg, transparent, rgba(112, 158, 189, 0.5), transparent);
+    .book-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            color: var(--ice);
+            background: rgba(112, 158, 189, 0.08);
+            border: 1px solid var(--line-strong);
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+
+            &::after {
+                content: "\2197";
+                font-size: 0.85rem;
+                line-height: 1;
+            }
+
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-2px);
+                color: #fff;
+                background: var(--signal);
+                border-color: var(--signal);
+            }
         }
+    }
+}
+
+.substack-section {
+    max-width: 1280px;
+    margin: 0 auto clamp(80px, 10vw, 140px);
+    padding: clamp(34px, 5vw, 64px) var(--gutter);
+    background: linear-gradient(160deg, rgba(22, 35, 47, 0.94) 0%, rgba(13, 21, 29, 0.96) 78%);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+
+    .substack-intro {
+        margin-bottom: 24px;
+
+        .heading {
+            margin: 0;
+            color: var(--frost);
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+        }
+    }
+
+    .substack-frame {
+        display: flex;
+        justify-content: center;
+        padding: 18px;
+        background: rgba(7, 11, 16, 0.42);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+    }
+
+    .substack {
+        display: block;
+        width: min(480px, 100%);
+        max-width: 100%;
+        height: 320px;
+        margin: 0;
+        background: #fff;
+        border: 1px solid var(--line-strong);
+        border-radius: 2px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+}
+
+hr {
+    width: calc(100% - 30px);
+    max-width: 1280px;
+    height: 1px;
+    margin: 0 auto clamp(40px, 6vw, 64px);
+    border: 0;
+    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+
+@media only screen and (max-width: 900px) {
+    .book-layout {
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .book-cover-column {
+        position: static;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .book-text-column {
+        .heading {
+            font-size: clamp(2rem, 8vw, 3rem);
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .book-section,
+    .substack-section {
+        padding: 24px 18px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #site #content section {
+    .book-section {
         animation: none;
     }
 }

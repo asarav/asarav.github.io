@@ -59,7 +59,7 @@ style: assets/css/consumption.css
             <hr>
             <div class="row">
                 <div class="col-12 image text-center">
-                    <img src="{{ item.image }}" alt="{{ item.title }}">
+                    <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
                 </div>
             </div>
             <div class="row">
@@ -101,7 +101,7 @@ style: assets/css/consumption.css
         let scrollPosition = window.innerHeight + window.scrollY;
         let bodyHeight = document.body.offsetHeight;
 
-        if (scrollPosition >= bodyHeight - 100) {
+        if (scrollPosition >= bodyHeight - 600) {
             renderNextBatch();
         }
     }

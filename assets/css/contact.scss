@@ -75,9 +75,9 @@ $link: rgb(126, 191, 255);
         }
 
         .contact-list {
-            max-width: 1440px;
+            max-width: 1180px;
             margin: 0 auto;
-            padding: 30px 15px 10px;
+            padding: clamp(24px, 4vw, 44px) var(--gutter) clamp(80px, 10vw, 140px);
 
             .contact-card {
                 position: relative;
@@ -91,7 +91,7 @@ $link: rgb(126, 191, 255);
                 text-decoration: none;
                 background: linear-gradient(160deg, $surface-raised 0%, $surface 75%);
                 border: 1px solid $border-color;
-                border-radius: 16px;
+                border-radius: 2px;
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
                 transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
                 animation: contact-rise 0.5s ease backwards;
@@ -125,7 +125,7 @@ $link: rgb(126, 191, 255);
                     margin-right: 18px;
                     background: rgb(206, 222, 237);
                     border: 1px solid rgba(112, 158, 189, 0.55);
-                    border-radius: 12px;
+                    border-radius: 2px;
                     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 
                     img {
@@ -145,7 +145,7 @@ $link: rgb(126, 191, 255);
                 }
 
                 .contact-name {
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: var(--font-display);
                     font-size: 21px;
                     font-weight: 700;
                     line-height: 1.3;
@@ -174,7 +174,7 @@ $link: rgb(126, 191, 255);
                 background: linear-gradient(160deg, rgba(27, 38, 50, 0.92), rgba(23, 31, 41, 0.92));
                 border: 1px solid $border-color;
                 border-left: 3px solid $accent;
-                border-radius: 16px;
+                border-radius: 2px;
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 
                 p {

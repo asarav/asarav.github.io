@@ -3,6 +3,7 @@ layout: default
 title: Music
 permalink: /music/
 style: assets/css/music.css
+script: src/scripts/music-player.js
 ---
 
 <div class="page-top">
@@ -23,10 +24,31 @@ style: assets/css/music.css
                     {{ song.title }}
                 </div>
                 <div class="col-6">
-                    <audio controls>
-                        <source src="{{ song.src | relative_url }}" type="audio/mp3">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="audio-player" data-audio-player data-title="{{ song.title | escape }}">
+                        <audio controls preload="metadata">
+                            <source src="{{ song.src | relative_url }}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="player-controls" aria-label="Playback controls for {{ song.title }}">
+                            <button class="player-toggle" type="button" aria-label="Play {{ song.title }}">
+                                <span class="player-icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="player-progress">
+                                <input class="player-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek through {{ song.title }}">
+                                <div class="player-times">
+                                    <span class="player-current">0:00</span>
+                                    <span class="player-duration">0:00</span>
+                                </div>
+                            </div>
+                            <span class="player-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                            <button class="player-mute" type="button" aria-label="Mute {{ song.title }}">
+                                <svg class="mute-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"></path>
+                                    <path class="mute-wave" d="M16 8a4 4 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row song-explanation">
@@ -42,10 +64,31 @@ style: assets/css/music.css
             </div>
             <div class="row">
                 <div class="col-12">
-                    <audio controls>
-                        <source src="{{ song.src | relative_url }}" type="audio/mp3">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="audio-player" data-audio-player data-title="{{ song.title | escape }}">
+                        <audio controls preload="metadata">
+                            <source src="{{ song.src | relative_url }}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="player-controls" aria-label="Playback controls for {{ song.title }}">
+                            <button class="player-toggle" type="button" aria-label="Play {{ song.title }}">
+                                <span class="player-icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="player-progress">
+                                <input class="player-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek through {{ song.title }}">
+                                <div class="player-times">
+                                    <span class="player-current">0:00</span>
+                                    <span class="player-duration">0:00</span>
+                                </div>
+                            </div>
+                            <span class="player-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                            <button class="player-mute" type="button" aria-label="Mute {{ song.title }}">
+                                <svg class="mute-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"></path>
+                                    <path class="mute-wave" d="M16 8a4 4 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row song-explanation">

@@ -3,89 +3,99 @@ layout: default
 title: Avinash Saravanan
 ---
 
-<!-- Implement minimalist navigation panel -->
-<div class="page-top">
-    <h1>AVINASH SARAVANAN</h1>
-    <p class="left">(2023) Novelist</p>
-    <p class="right">(2021) Scientist/Researcher</p>
-    <p class="left">(2020) Amateur Quantitative Trader</p>
-    <p class="right">(2016) Software Engineer</p>
-    <p class="left">(2016) Novice Dancer</p>
-    <p class="right">(2013) Globalization Enthusiast</p>
-    <p class="left">(2012) Hobby Electric Guitarist/Shredder</p>
-    <p class="right">(2010) Film Connoisseur</p>
-    <p>This site is a continuously updated documentation of my progress as an individual.</p>
-    <div id="down" class="chevron-down">▼</div>
+<div class="page-top home-hero">
+    <div class="hero-frame" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero-main">
+        <h1>AVINASH<br><span>SARAVANAN</span></h1>
+    </div>
+    <div class="hero-floorplan" aria-label="Chronology">
+        <div class="floor"><span class="floor-year">2023</span><span class="floor-role">Novelist</span></div>
+        <div class="floor"><span class="floor-year">2021</span><span class="floor-role">Scientist/Researcher</span></div>
+        <div class="floor"><span class="floor-year">2020</span><span class="floor-role">Amateur Quantitative Trader</span></div>
+        <div class="floor"><span class="floor-year">2016</span><span class="floor-role">Software Engineer</span></div>
+        <div class="floor"><span class="floor-year">2016</span><span class="floor-role">Novice Dancer</span></div>
+        <div class="floor"><span class="floor-year">2013</span><span class="floor-role">Globalization Enthusiast</span></div>
+        <div class="floor"><span class="floor-year">2012</span><span class="floor-role">Hobby Electric Guitarist/Shredder</span></div>
+        <div class="floor"><span class="floor-year">2010</span><span class="floor-role">Film Connoisseur</span></div>
+    </div>
+    <p class="hero-note">This site is a continuously updated documentation of my progress as an individual.</p>
+    <a id="down" class="chevron-down" href="#tile-list" aria-label="Scroll to the archive">
+        <span aria-hidden="true">▼</span>
+    </a>
 </div>
+
+
 <div class="tile-list" id="tile-list">
-    <div class="row">
-        <a class="col-6 tile projects-tile" href="{{ '/projects/' | relative_url }}">
-            <div class="tile-content">
-                <label>Projects</label>
-                <div class="tile-explanation">
-                    <p>Some Projects I have worked on.</p>
-                </div>
+    <a class="tile tile--projects projects-tile" href="{{ '/projects/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">Projects</h2>
             </div>
-        </a>
-        <a class="col-6 tile music-tile" href="{{ '/music/' | relative_url }}">
-            <div class="tile-content">
-                <label>Music</label>
-                <div class="tile-explanation">
-                    <p>Music and Tracks that I created with a DAW</p>
-                </div>
+            <div class="tile-explanation">
+                <p>Some Projects I have worked on.</p>
             </div>
-        </a>
-    </div>
-    <div class="row">
-        <a class="col-6 tile games-tile" href="{{ '/games/' | relative_url }}">
-            <div class="tile-content">
-                <label>Games</label>
-                <div class="tile-explanation">
-                    <p>Games and Prototypes I have developed.</p>
-                </div>
+        </div>
+    </a>
+    <a class="tile tile--music music-tile" href="{{ '/music/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">Music</h2>
             </div>
-        </a>
-        <a class="col-6 tile books-tile" href="{{ '/books/' | relative_url }}">
-            <div class="tile-content">
-                <label>Books</label>
-                <div class="tile-explanation">
-                    <p>What I have written and published</p>
-                </div>
+            <div class="tile-explanation">
+                <p>Music and Tracks that I created with a DAW</p>
             </div>
-        </a>
-    </div>
-    <div class="row">
-        <a class="col-6 tile consumption-tile" href="{{ '/consumption/' | relative_url }}">
-            <div class="tile-content">
-                <label>Media Consumption List</label>
-                <div class="tile-explanation">
-                    <p>What I'm reading. What I'm watching. What I'm playing</p>
-                </div>
+        </div>
+    </a>
+    <a class="tile tile--games games-tile" href="{{ '/games/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">Games</h2>
             </div>
-        </a>
-        <a class="col-6 tile about-tile" href="{{ '/about/' | relative_url }}">
-            <div class="tile-content">
-                <label>About Me</label>
-                <div class="tile-explanation">
-                    <p>Who I am. What I do. Modus operandi.</p>
-                </div>
+            <div class="tile-explanation">
+                <p>Games and Prototypes I have developed.</p>
             </div>
-        </a>
-    </div>
-    <div class="row">
-        <a class="col-6 tile contact-tile" href="{{ '/contact/' | relative_url }}">
-            <div class="tile-content">
-                <label>Contact Me</label>
-                <div class="tile-explanation">
-                    <p>Avenues for Contact</p>
-                </div>
+        </div>
+    </a>
+    <a class="tile tile--books books-tile" href="{{ '/books/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">Books</h2>
             </div>
-        </a>
-    </div>
+            <div class="tile-explanation">
+                <p>What I have written and published</p>
+            </div>
+        </div>
+    </a>
+    <a class="tile tile--consumption consumption-tile" href="{{ '/consumption/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">Media Consumption List</h2>
+            </div>
+            <div class="tile-explanation">
+                <p>What I'm reading. What I'm watching. What I'm playing</p>
+            </div>
+        </div>
+    </a>
+    <a class="tile tile--about about-tile" href="{{ '/about/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">About Me</h2>
+            </div>
+            <div class="tile-explanation">
+                <p>Who I am. What I do. Modus operandi.</p>
+            </div>
+        </div>
+    </a>
+    <a class="tile tile--contact contact-tile" href="{{ '/contact/' | relative_url }}">
+        <div class="tile-content">
+            <div class="tile-heading">
+                <h2 class="tile-title">Contact Me</h2>
+            </div>
+            <div class="tile-explanation">
+                <p>Avenues for Contact</p>
+            </div>
+        </div>
+    </a>
 </div>
-<script>
-    document.getElementById('down').addEventListener('click', function() {
-        const tileList = document.querySelector('.tile-list');
-        tileList.scrollIntoView({ behavior: 'smooth' });
-    });
-</script>
