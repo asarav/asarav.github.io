@@ -24,32 +24,53 @@
                     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;                }
             }
         }
-        .song {
-            border: 3px solid rgb(231, 205, 205);
-            margin-top: 20px;
-            margin-bottom: 20px;
-            padding: 5px 5px 5px 5px;
-            audio {
-                width: 100%;
-                @-moz-document url-prefix() {
-                    border: 3px solid gray;
+        .music-list {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 15px 20px;
+            .song {
+                background: rgb(30, 30, 31);
+                border: 1px solid #1e334e;
+                border-left: 4px solid rgb(209, 73, 73);
+                border-radius: 12px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                padding: 20px;
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+                    border-left-color: rgb(0, 123, 255);
+                }
+                audio {
+                    width: 100%;
+                    display: block;
+                    border: none;
                     border-radius: 20px;
+                    background: black;
+                }
+                .title {
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+                .track-number {
+                    display: inline-block;
+                    min-width: 2em;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: rgb(209, 73, 73);
                 }
             }
-            .title {
-                font-weight: bold;
-                font-size: 18px;
+            .song.full-res {
+                @media only screen and (max-width: 768px) {
+                    display: none;
+                }
             }
-        }
-        .song.full-res {
-            @media only screen and (max-width: 768px) {
+            .song.mobile-res {
                 display: none;
-            }
-        }
-        .song.mobile-res {
-            display: none;
-            @media only screen and (max-width: 768px) {
-                display: block;
+                @media only screen and (max-width: 768px) {
+                    display: block;
+                }
             }
         }
     }

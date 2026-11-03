@@ -19,6 +19,7 @@ style: assets/css/music.css
         <div class="song full-res">
             <div class="row audio">
                 <div class="col-6 title">
+                    <span class="track-number">{{ forloop.index }}</span>
                     {{ song.title }}
                 </div>
                 <div class="col-6">
@@ -35,6 +36,7 @@ style: assets/css/music.css
         <div class="song mobile-res">
             <div class="row audio">
                 <div class="col-12 title text-center">
+                    <span class="track-number">{{ forloop.index }}</span>
                     {{ song.title }}
                 </div>
             </div>

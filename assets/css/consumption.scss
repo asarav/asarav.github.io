@@ -8,190 +8,356 @@
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
+$surface: rgb(23, 31, 41);
+$surface-raised: rgb(27, 38, 50);
+$border-color: rgba(112, 158, 189, 0.28);
+$text: rgb(220, 231, 241);
+$muted: rgb(168, 186, 203);
+$accent: rgb(209, 73, 73);
+$link: rgb(126, 191, 255);
+
+$types: (
+    anime: (rgb(214, 108, 173), "Anime"),
+    book: (rgb(167, 131, 224), "Book"),
+    comic: (rgb(238, 159, 85), "Comic"),
+    game: (rgb(74, 178, 120), "Game"),
+    movie: (rgb(74, 147, 255), "Movie"),
+    music: (rgb(209, 73, 73), "Music"),
+    show: (rgb(195, 137, 245), "Show"),
+    video: (rgb(58, 168, 170), "Video")
+);
+
+@keyframes consumption-rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 #site {
-    background-image: linear-gradient(to right, rgb(30, 30, 31), transparent);
-    background-color: rgb(17, 30, 56);
+    background: rgb(30, 30, 31);
+
     a {
         text-decoration: none;
     }
-    #content {
-        color: white;
-        .page-top {
-            background-image: url('/src/images/media/media-top.jpg');
-            height: 350px;
-            .consumption-preamble {
 
+    #content {
+        color: $text;
+
+        .page-top {
+            background-image:
+                linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
+                url('/src/images/media/media-top.jpg');
+            height: 340px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 0;
+            border-bottom: 1px solid $border-color;
+
+            .consumption-preamble h1 {
+                font-size: clamp(2.6rem, 5vw, 3.8rem);
+                letter-spacing: 0.01em;
+                margin-bottom: 8px;
+                text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
             }
+
             .consumption-explanation {
-                text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+                max-width: 920px;
+                margin: 0 auto;
+
+                p {
+                    color: rgb(236, 243, 249);
+                    font-size: 17px;
+                    line-height: 1.6;
+                    margin-bottom: 6px;
+                    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+
+                    a {
+                        color: rgb(255, 255, 255);
+                        text-decoration: underline;
+                        text-underline-offset: 3px;
+
+                        &:hover {
+                            color: $link;
+                        }
+                    }
+                }
+            }
+
+            @media only screen and (max-width: 768px) {
+                height: 320px;
+
+                .consumption-explanation p {
+                    font-size: 15px;
+                }
             }
         }
-        .consumption-list.full-res {
-            @media only screen and (max-width: 768px) {
-                display: none;
+
+        .consumption-list {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 30px 15px 10px;
+
+            .row.item.title {
+                display: block;
+                margin: 0 0 18px;
+                padding: 0 4px 12px;
+                border-bottom: 1px solid $border-color;
+
+                label {
+                    margin: 0;
+                    color: $muted;
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 0.18em;
+                    text-transform: uppercase;
+                }
             }
-            .item {
-                border: 4px solid rgb(6, 56, 112);
-                padding: 5px 5px 5px 5px;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                // Bootstrap 5 gutters are wider than older versions; tighten for this layout
-                --bs-gutter-x: 0.75rem;
-                align-items: stretch;
+
+            .item.info {
+                position: relative;
+                margin: 0 0 22px;
+                padding: 20px;
+                overflow: hidden;
+                background: linear-gradient(160deg, $surface-raised 0%, $surface 75%);
+                border: 1px solid $border-color;
+                border-radius: 16px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+                animation: consumption-rise 0.45s ease backwards;
+                transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, var(--type-color, #{$link}), transparent 78%);
+                }
+
+                &:hover {
+                    transform: translateY(-3px);
+                    border-color: rgba(126, 191, 255, 0.55);
+                    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
+                }
+
                 .date {
-                    font-size: 20px;
-                    margin-top: 0;
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                    gap: 6px;
+                    padding: 0 8px;
+                    color: $text;
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 13px;
+                    font-weight: 700;
+                    line-height: 1.4;
+                    text-align: center;
+
+                    &::before {
+                        display: inline-block;
+                        padding: 4px 9px;
+                        color: var(--type-color, #{$link});
+                        border: 1px solid var(--type-color, #{$link});
+                        border-radius: 999px;
+                        font-size: 10px;
+                        font-weight: 700;
+                        letter-spacing: 0.12em;
+                        line-height: 1.3;
+                        text-transform: uppercase;
+                        content: "Entry";
+                    }
                 }
+
                 .content {
-                    border-right: 2px solid rgb(38, 82, 133);
-                    border-left: 2px solid rgb(38, 82, 133);
-                    height: auto;
-                    min-height: 215px;
-                    padding-left: 10px;
-                    padding-right: 10px;
-                    @media only screen and (max-width: 1100px) {
-                        min-height: 355px;
-                    }
-                    @media only screen and (max-width: 1000px) {
-                        min-height: 450px;
-                    }
-                    @media only screen and (max-width: 900px) {
-                        min-height: 525px;
-                    }
-                    @media only screen and (max-width: 800px) {
-                        min-height: 600px;
-                    }
+                    padding: 0 18px;
+
                     .header {
                         a {
-                            font-size: 22px;
+                            color: rgb(255, 255, 255);
+                            font-family: 'Montserrat', sans-serif;
+                            font-size: 20px;
+                            font-weight: 700;
+                            line-height: 1.35;
+                            text-decoration: none;
+                            transition: color 0.2s ease;
+
+                            &:hover {
+                                color: $link;
+                            }
                         }
+
                         sub {
-                            margin-left: 15px;
-                            bottom: -0.5em;
+                            display: block;
+                            margin-top: 4px;
+                            color: $muted;
+                            font-size: 13px;
+                            line-height: 1.4;
                         }
                     }
+
+                    hr {
+                        height: 1px;
+                        margin: 12px 0;
+                        border: 0;
+                        background: linear-gradient(90deg, var(--type-color, #{$link}), rgba(112, 158, 189, 0.2) 60%, transparent);
+                        opacity: 0.65;
+                    }
+
                     .explanation {
-                        font-size: 14px;
+                        color: $text;
+                        font-size: 15px;
+                        line-height: 1.7;
+
                         p {
                             margin-bottom: 0;
                         }
                     }
                 }
+
                 .image {
-                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 4px;
+
                     img {
-                        max-height: 217px;
-                        max-width: 190px;
-                        margin-right: auto;
-                        margin-left: auto;
+                        display: block;
+                        max-width: 100%;
+                        max-height: 220px;
+                        width: auto;
+                        height: auto;
+                        object-fit: contain;
+                        border: 1px solid $border-color;
+                        border-radius: 10px;
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+                        transition: transform 0.28s ease, filter 0.28s ease;
                     }
-                }
 
-                hr {
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                    margin-left: 5px;
-                    margin-right: 5px;
-                    border-top: 3px solid rgb(112, 158, 189);
+                    &:hover img {
+                        transform: translateY(-2px);
+                        filter: brightness(1.05);
+                    }
                 }
             }
 
-            .item.info.hidden {
+            @each $type, $config in $types {
+                .item.info.#{$type} {
+                    --type-color: #{nth($config, 1)};
+
+                    .date::before {
+                        content: nth($config, 2);
+                    }
+                }
+            }
+
+            &.full-res {
+                @media only screen and (max-width: 768px) {
+                    display: none;
+                }
+
+                .item.info {
+                    display: flex;
+                    align-items: stretch;
+                    --bs-gutter-x: 0.75rem;
+                }
+
+                .item.info.hidden {
+                    display: none;
+                }
+
+                .item.info.visible {
+                    display: flex;
+                }
+            }
+
+            &.mobile-res {
                 display: none;
-              }
-              
-            .item.info.visible {
-              display: flex;
-            }
 
-            .row.item.title {
-                --bs-gutter-x: 0.75rem;
-            }
-
-            .item.movie {
-                hr {
-                    border-top: 3px solid rgb(28, 58, 139);
-                }
-            }
-
-            .item.game {
-                hr {
-                    border-top: 3px solid rgb(5, 95, 5);
-                }
-            }
-
-            .item.music {
-                hr {
-                    border-top: 3px solid rgb(95, 5, 5);
-                }
-            }
-
-            .item.video {
-                .image {
-                  padding-top: 2px;
+                @media only screen and (max-width: 768px) {
+                    display: block;
+                    padding: 20px 10px 4px;
                 }
 
-                hr {
-                        border-top: 3px solid rgb(22, 78, 85);
+                .item.info {
+                    display: block;
+                    padding: 18px 16px;
+
+                    .date {
+                        margin: 0 0 10px;
                     }
-            }
 
-            .item.book {
-                hr {
-                        border-top: 3px solid rgb(107, 15, 99);
+                    hr {
+                        height: 1px;
+                        margin: 10px 0;
+                        border: 0;
+                        background: linear-gradient(90deg, var(--type-color, #{$link}), rgba(112, 158, 189, 0.2) 60%, transparent);
+                        opacity: 0.65;
                     }
+
+                    .header {
+                        a {
+                            color: rgb(255, 255, 255);
+                            font-family: 'Montserrat', sans-serif;
+                            font-size: 19px;
+                            font-weight: 700;
+                            line-height: 1.35;
+                            text-decoration: none;
+                            transition: color 0.2s ease;
+
+                            &:hover {
+                                color: $link;
+                            }
+                        }
+                    }
+
+                    sub {
+                        display: block;
+                        margin-top: 6px;
+                        color: $muted;
+                        font-size: 12px;
+                        line-height: 1.4;
+                    }
+
+                    .image {
+                        margin: 14px 0;
+
+                        img {
+                            max-height: 300px;
+                            max-width: 100%;
+                        }
+                    }
+
+                    .explanation {
+                        padding: 0;
+                        font-size: 15px;
+                        line-height: 1.7;
+                        text-align: left;
+                    }
+                }
+
+                .item.info.hidden {
+                    display: none;
+                }
+
+                .item.info.visible {
+                    display: block;
+                }
             }
         }
+    }
+}
 
-        .consumption-list.mobile-res {
-            display: none;
-            @media only screen and (max-width: 768px) {
-                display: block;
-            }
-            .item {
-                border: 4px solid rgb(6, 56, 112);
-                margin-top: 5px;
-                &.years {
-                    padding: 5px;
-                }
-                .image {
-                    img {
-                        max-height: 280px;
-                        max-width: 390px;
-                        margin-top: 10px;
-                        margin-bottom: 15px;
-                    }
-                }
-                .date {
-                    font-size: 20px;
-                    margin-top: 10px;
-                    color: rgb(255, 234, 234);
-                }
-                .header {
-                    font-size: 23px;
-                }
-                .explanation {
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                }
-                hr {
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                    margin-left: 5px;
-                    margin-right: 5px;
-                    border-top: 1px solid rgb(112, 158, 189);
-                }
-            }
-            .item.info.hidden {
-                display: none;
-            }
-              
-            .item.info.visible {
-              display: block;
-            }
-        }
+@media (prefers-reduced-motion: reduce) {
+    #site #content .item.info {
+        animation: none;
     }
 }

@@ -23,14 +23,44 @@
         }
         .log {
             section {
+                position: relative;
+                background: rgb(30, 30, 31);
+                border: 1px solid #1e334e;
+                border-left: 4px solid rgb(134, 201, 218);
+                border-radius: 8px;
+                padding: 20px 20px 20px 25px;
                 margin-bottom: 25px;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 40px;
+                    left: -9px;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                    background: rgb(134, 201, 218);
+                    box-shadow: 0 0 0 5px rgb(21, 30, 56);
+                }
                 .date {
-                    font-size: 22px;
+                    display: inline-block;
+                    font-size: 18px;
                     color: rgb(134, 201, 218);
                     font-weight: bold;
+                    background: rgba(17, 30, 56, 0.9);
+                    border: 1px solid rgb(134, 201, 218);
+                    border-radius: 20px;
+                    padding: 5px 16px;
+                    margin-bottom: 12px;
                 }
                 .explanation {
                     font-size: 17px;
+                    color: rgb(222, 242, 243);
+                    margin-bottom: 10px;
+                }
+                img {
+                    border-radius: 8px;
+                    border: 1px solid #1e334e;
                 }
             }
         }
