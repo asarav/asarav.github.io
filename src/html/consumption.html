@@ -75,7 +75,7 @@ style: assets/css/consumption.css
     let items = document.querySelectorAll('.full-res > .item.info');
     let mobileItems = document.querySelectorAll('.mobile-res > .item.info');
     //Amount of items grabbed per batch for infinite scrolling
-    let batchSize = 100;
+    let batchSize = 125;
     let batchCount = 0;
 
     function renderNextBatch() {
@@ -101,7 +101,7 @@ style: assets/css/consumption.css
         let scrollPosition = window.innerHeight + window.scrollY;
         let bodyHeight = document.body.offsetHeight;
 
-        if (scrollPosition >= bodyHeight - 600) {
+        if (scrollPosition >= bodyHeight - 700) {
             renderNextBatch();
         }
     }
