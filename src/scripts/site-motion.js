@@ -1,3 +1,4 @@
+
 (function () {
     'use strict';
 
@@ -15,31 +16,8 @@
     let framePending = false;
 
     // -----------------------------------------------------------------------
-    // Network-aware animated rain background (fast connections only)
+    // Animated rain background
     // -----------------------------------------------------------------------
-    function isFastNetwork() {
-        const connection =
-            navigator.connection ||
-            navigator.mozConnection ||
-            navigator.webkitConnection;
-
-        if (!connection || connection.saveData) {
-            return false;
-        }
-
-        const type = connection.effectiveType;
-
-        if (type === '4g') {
-            return true;
-        }
-
-        if (type === '3g' && (connection.downlink || 0) >= 1.5) {
-            return true;
-        }
-
-        return false;
-    }
-
     function startRainCanvas(container) {
         if (reducedMotion.matches) {
             return;
@@ -52,6 +30,7 @@
         canvas.className = isBody ? 'rain-bg' : 'rain-bg rain-bg--hero';
         canvas.id = isBody ? 'rain-bg' : 'rain-bg-hero';
         canvas.setAttribute('aria-hidden', 'true');
+
         container.insertBefore(canvas, container.firstChild);
 
         if (!isBody) {
@@ -86,24 +65,42 @@
             const dt = Math.max(now - lastScrollTime, 16);
             const dy = window.scrollY - lastScrollY;
             const velocity = dy / dt;
+
             scrollVelocity = scrollVelocity * 0.85 + velocity * 0.15;
+
             lastScrollY = window.scrollY;
             lastScrollTime = now;
         }
 
-        window.addEventListener('pointermove', onPointerMove, { passive: true });
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('pointermove', onPointerMove, {
+            passive: true
+        });
+
+        window.addEventListener('scroll', onScroll, {
+            passive: true
+        });
 
         function resize() {
             if (isBody) {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             } else {
-                canvas.width = container.clientWidth || container.offsetWidth || window.innerWidth;
-                canvas.height = container.clientHeight || container.offsetHeight || 320;
+                canvas.width =
+                    container.clientWidth ||
+                    container.offsetWidth ||
+                    window.innerWidth;
+
+                canvas.height =
+                    container.clientHeight ||
+                    container.offsetHeight ||
+                    320;
             }
 
-            maxDrops = Math.min(14, Math.max(6, Math.round(canvas.width / 64)));
+            maxDrops = Math.min(
+                14,
+                Math.max(6, Math.round(canvas.width / 64))
+            );
+
             drops = [];
             nextSpawn = performance.now();
         }
@@ -111,6 +108,7 @@
         function spawnBurst() {
             const burstSize = 1 + Math.floor(Math.random() * 3);
             const baseX = Math.random() * canvas.width;
+
             for (let i = 0; i < burstSize; i++) {
                 if (drops.length >= maxDrops) {
                     break;
@@ -129,17 +127,21 @@
 
         function draw() {
             context.clearRect(0, 0, canvas.width, canvas.height);
+
             context.lineCap = 'round';
             context.lineWidth = 1;
 
             const now = performance.now();
+
             if (now >= nextSpawn) {
                 spawnBurst();
                 nextSpawn = now + 300 + Math.random() * 900;
             }
 
             const angle = (mouseX - 0.5) * 0.9;
-            const speedBoost = 1 + Math.min(Math.abs(scrollVelocity) * 0.6, 2.0);
+
+            const speedBoost =
+                1 + Math.min(Math.abs(scrollVelocity) * 0.6, 2.0);
 
             for (let i = drops.length - 1; i >= 0; i--) {
                 const drop = drops[i];
@@ -149,14 +151,19 @@
                 const y2 = drop.y + drop.length;
 
                 context.strokeStyle =
-                    'rgba(195, 225, 248, ' + drop.opacity.toFixed(3) + ')';
+                    'rgba(195, 225, 248, ' +
+                    drop.opacity.toFixed(3) +
+                    ')';
+
                 context.lineWidth = 1.2;
+
                 context.beginPath();
                 context.moveTo(drop.x, drop.y);
                 context.lineTo(x2, y2);
                 context.stroke();
 
                 drop.y += drop.speed * speedBoost;
+
                 drop.x += drop.drift + Math.sin(angle) * 0.6;
                 drop.x += (mouseX - 0.5) * 0.08;
 
@@ -180,8 +187,19 @@
         reducedMotion.addEventListener('change', function () {
             if (reducedMotion.matches) {
                 window.cancelAnimationFrame(frame);
-                window.removeEventListener('pointermove', onPointerMove);
-                window.removeEventListener('scroll', onScroll);
+
+                window.removeEventListener(
+                    'pointermove',
+                    onPointerMove
+                );
+
+                window.removeEventListener(
+                    'scroll',
+                    onScroll
+                );
+
+                window.removeEventListener('resize', resize);
+
                 if (canvas.parentNode) {
                     canvas.parentNode.removeChild(canvas);
                 }
@@ -189,18 +207,28 @@
         });
     }
 
-    if (isFastNetwork()) {
-        document.body.classList.add('fast-network');
-        startRainCanvas(document.body);
+    // -----------------------------------------------------------------------
+    // Initialize rain
+    //
+    // FIX: Removed the Network Information API requirement.
+    // Firefox may not expose navigator.connection.
+    // startRainCanvas() already respects reduced-motion preferences.
+    // -----------------------------------------------------------------------
+    document.body.classList.add('fast-network');
 
-        if (document.body.classList.contains('home-page')) {
-            const hero = document.querySelector('#content > .page-top');
-            if (hero) {
-                startRainCanvas(hero);
-            }
+    startRainCanvas(document.body);
+
+    if (document.body.classList.contains('home-page')) {
+        const hero = document.querySelector('#content > .page-top');
+
+        if (hero) {
+            startRainCanvas(hero);
         }
     }
 
+    // -----------------------------------------------------------------------
+    // Hero shine effect
+    // -----------------------------------------------------------------------
     function setupShine(hero) {
         if (!hero || hero.querySelector('.page-top__shine')) {
             return;
@@ -208,12 +236,15 @@
 
         const shine = document.createElement('div');
         shine.className = 'page-top__shine';
+
         hero.appendChild(shine);
 
         hero.addEventListener('pointermove', function (event) {
             const rect = hero.getBoundingClientRect();
+
             const x = ((event.clientX - rect.left) / rect.width) * 100;
             const y = ((event.clientY - rect.top) / rect.height) * 100;
+
             hero.style.setProperty('--shine-x', x.toFixed(1) + '%');
             hero.style.setProperty('--shine-y', y.toFixed(1) + '%');
         });
@@ -226,6 +257,9 @@
 
     document.querySelectorAll('#content > .page-top').forEach(setupShine);
 
+    // -----------------------------------------------------------------------
+    // Hero scroll animation
+    // -----------------------------------------------------------------------
     function clamp01(value) {
         return Math.min(1, Math.max(0, value));
     }
@@ -254,6 +288,7 @@
                 el.style.removeProperty('--section-shift');
                 el.style.removeProperty('--section-opacity');
             });
+
             return;
         }
 
@@ -273,11 +308,13 @@
             const center = rect.top + rect.height / 2;
             const half = vh / 2;
             const span = half + rect.height * 0.5;
+
             const distFromCenter = Math.abs(center - half);
             const deadZone = span * 0.2;
             const fadeRange = span - deadZone;
 
             let edge = 0;
+
             if (fadeRange > 0 && distFromCenter > deadZone) {
                 edge = (distFromCenter - deadZone) / fadeRange;
                 edge = Math.min(1, Math.max(0, edge));
@@ -287,8 +324,15 @@
             const shift = 0;
             const opacity = 1 - edge * 0.4;
 
-            el.style.setProperty('--section-shift', shift.toFixed(2) + 'px');
-            el.style.setProperty('--section-opacity', opacity.toFixed(3));
+            el.style.setProperty(
+                '--section-shift',
+                shift.toFixed(2) + 'px'
+            );
+
+            el.style.setProperty(
+                '--section-opacity',
+                opacity.toFixed(3)
+            );
         });
     }
 
@@ -312,13 +356,19 @@
 
         const rect = hero.getBoundingClientRect();
         const travel = Math.max(rect.height, 1);
+
         const progress = clamp01(-rect.top / travel);
 
-        hero.style.setProperty('--hero-progress', progress.toFixed(4));
+        hero.style.setProperty(
+            '--hero-progress',
+            progress.toFixed(4)
+        );
+
         hero.style.setProperty(
             '--hero-shift',
             (progress * -36).toFixed(1) + 'px'
         );
+
         hero.style.setProperty(
             '--hero-opacity',
             (1 - progress * 0.9).toFixed(3)
@@ -331,13 +381,15 @@
         }
 
         framePending = true;
+
         window.requestAnimationFrame(paint);
     }
 
     // -----------------------------------------------------------------------
     // Pointer tilt
     // -----------------------------------------------------------------------
-    const TILT_SELECTOR = '.tile, .contact-card, .game, .item.info, #content > section, .about-shell section, .log-card, .song';
+    const TILT_SELECTOR =
+        '.tile, .contact-card, .game, .item.info, #content > section, .about-shell section, .log-card, .song';
 
     let tiltTarget = null;
     let tiltFrame = 0;
@@ -354,6 +406,7 @@
         }
 
         target.classList.remove('is-tilting');
+
         target.style.removeProperty('--tilt-x');
         target.style.removeProperty('--tilt-y');
     }
@@ -378,7 +431,9 @@
         }
 
         resetTilt(tiltTarget);
+
         tiltTarget = target;
+
         tiltTarget.classList.add('is-tilting');
     }
 
@@ -407,7 +462,10 @@
                 return;
             }
 
-            const max = tiltTarget.classList.contains('tile') ? 0.6 : 0.5;
+            const max = tiltTarget.classList.contains('tile')
+                ? 0.6
+                : 0.5;
+
             const x = (pointerX - rect.left) / rect.width - 0.5;
             const y = (pointerY - rect.top) / rect.height - 0.5;
 
@@ -415,6 +473,7 @@
                 '--tilt-y',
                 (x * max).toFixed(2) + 'deg'
             );
+
             tiltTarget.style.setProperty(
                 '--tilt-x',
                 (-y * max).toFixed(2) + 'deg'
@@ -427,11 +486,15 @@
             return;
         }
 
-        if (event.relatedTarget && tiltTarget.contains(event.relatedTarget)) {
+        if (
+            event.relatedTarget &&
+            tiltTarget.contains(event.relatedTarget)
+        ) {
             return;
         }
 
         resetTilt(tiltTarget);
+
         tiltTarget = null;
     }
 
@@ -451,11 +514,22 @@
         finePointer.addEventListener('change', onMediaChange);
     }
 
-    document.addEventListener('pointerover', onPointerOver, { passive: true });
-    document.addEventListener('pointermove', onPointerMove, { passive: true });
-    document.addEventListener('pointerout', onPointerOut, { passive: true });
+    document.addEventListener('pointerover', onPointerOver, {
+        passive: true
+    });
 
-    window.addEventListener('scroll', requestPaint, { passive: true });
+    document.addEventListener('pointermove', onPointerMove, {
+        passive: true
+    });
+
+    document.addEventListener('pointerout', onPointerOut, {
+        passive: true
+    });
+
+    window.addEventListener('scroll', requestPaint, {
+        passive: true
+    });
+
     window.addEventListener('resize', function () {
         refreshContentElements();
         requestPaint();
