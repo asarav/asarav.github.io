@@ -18,11 +18,9 @@ $link: rgb(126, 191, 255);
 
 @keyframes project-rise {
     from {
-        opacity: 0;
         transform: translateY(12px);
     }
     to {
-        opacity: 1;
         transform: translateY(0);
     }
 }
@@ -47,7 +45,7 @@ $link: rgb(126, 191, 255);
 
             .projects-preamble h1 {
                 font-size: clamp(2.6rem, 5vw, 3.8rem);
-                letter-spacing: 0.01em;
+                letter-spacing: -0.05em;
                 margin-bottom: 8px;
                 text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
             }
@@ -73,7 +71,7 @@ $link: rgb(126, 191, 255);
 
         // Breathing room between the hero and the first project card.
         .page-top + section {
-            margin-top: 30px;
+            margin-top: 24px;
         }
 
         section {
@@ -86,6 +84,17 @@ $link: rgb(126, 191, 255);
             box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             animation: project-rise 0.5s ease both;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.2s ease;
+
+            &:hover {
+                border-color: rgba(126, 191, 255, 0.55);
+                box-shadow: 0 20px 46px rgba(0, 0, 0, 0.42);
+            }
+
+            &:active {
+                border-color: var(--signal);
+                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+            }
 
             &::before {
                 content: "";

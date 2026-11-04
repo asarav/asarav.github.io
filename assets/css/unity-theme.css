@@ -1,0 +1,165 @@
+/* Unity WebGL theme aligned with the Nocturne Archive */
+:root {
+    --ink: #070b10;
+    --frost: #dbf1fa;
+    --muted: #9db3c0;
+    --signal: #d14949;
+    --ice: #8fd0e8;
+    --line: rgba(139, 181, 204, 0.22);
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--ink);
+    background-image:
+        linear-gradient(180deg, rgba(7, 11, 16, 0.72) 0%, rgba(7, 11, 16, 0.88) 100%),
+        url('/src/images/rain-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--frost);
+    font-family: 'Syne', 'Instrument Sans', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body.template {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Show the header/footer instead of hiding them */
+p.header, p.footer {
+    display: block;
+    margin: 0;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+p.header {
+    margin-bottom: 18px;
+    color: var(--ice);
+}
+
+p.header span {
+    color: var(--signal);
+}
+
+p.footer {
+    margin-top: 18px;
+}
+
+p.footer a {
+    color: var(--ice);
+    text-decoration: none;
+}
+
+p.footer a:hover {
+    color: var(--signal);
+}
+
+div.title {
+    height: 44px;
+    line-height: 44px;
+    padding: 0 14px;
+    margin: 0 0 14px 0;
+    float: none;
+    color: var(--frost);
+    text-align: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+}
+
+.template-wrap {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.template-wrap canvas {
+    display: block;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+}
+
+.fullscreen {
+    float: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: rgba(16, 26, 36, 0.7);
+    cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.fullscreen:hover {
+    border-color: var(--line-strong);
+    background: rgba(209, 73, 73, 0.18);
+    transform: translateY(-2px);
+}
+
+.fullscreen img {
+    filter: invert(1) brightness(1.2);
+}
+
+/* Unity progress bar */
+#unity-progress-bar-empty {
+    width: 280px;
+    height: 6px;
+    margin: 0 auto;
+    background: rgba(139, 181, 204, 0.18);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#unity-progress-bar-full {
+    height: 100%;
+    background: linear-gradient(90deg, var(--signal), var(--ice));
+    transition: width 0.2s ease;
+}
+
+/* Vignette */
+body.template::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(4, 8, 12, 0.65) 100%);
+    z-index: 0;
+}
+
+.template-wrap, p.header, p.footer, div.title, .fullscreen {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    div.title { font-size: 1.2rem; }
+    .template-wrap canvas { max-width: 92vw; height: auto; }
+}

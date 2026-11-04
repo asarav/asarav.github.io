@@ -3,11 +3,12 @@ layout: default
 title: Media Consumption
 permalink: /consumption/
 style: assets/css/consumption.css
+script: src/scripts/consumption.js
 ---
 
 <div class="page-top">
     <div class="consumption-preamble">
-        <h1 class="text-center">Media Consumption List</h1>
+        <h1 class="text-center">Media Consumption <span>List</span></h1>
     </div>
     <div class="consumption-explanation">
         <p>What I have read, watched or played at any particular time in the past that I considered to be of note.</p>
@@ -15,111 +16,70 @@ style: assets/css/consumption.css
     </div>
 </div>
 
-<div class="consumption-list full-res">
-    <div class="row item title">
-        <label class="col-12">Date of Viewing/Completion</label>
+<div class="consumption-body">
+    <div class="consumption-chronology" data-chronology data-visible="false" aria-hidden="true">
+        <div class="consumption-chronology__main">
+            <span class="consumption-chronology__date" data-chronology-date>—</span>
+            <span class="consumption-chronology__meta" data-chronology-meta></span>
+        </div>
+        <span class="consumption-chronology__progress">
+            <span data-chronology-progress></span>
+        </span>
     </div>
-    {% for item in site.data.consumption %}
-        <div class="row item info {{ item.type }}" data-item-id="{{ forloop.index }}">
-            <div class="col-12 col-md-2 date text-center">{{ item.completionDate }}</div>
-            <div class="content col-12 col-md-8">
+
+    <div class="consumption-list full-res">
+        <div class="row item title">
+            <label class="col-12">Chronology · {{ site.data.consumption.size }} entries</label>
+        </div>
+        {% for item in site.data.consumption %}
+            <div class="row item info {{ item.type }}" data-item-id="{{ forloop.index }}" data-completion-date="{{ item.completionDate }}" data-title="{{ item.title | escape }}" data-type="{{ item.type }}">
+                <div class="col-12 col-md-2 date text-center">{{ item.completionDate }}</div>
+                <div class="content col-12 col-md-8">
+                    <div class="row">
+                        <div class="col-12 header">
+                            <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
+                            <sub>{{ item.sourceDateAndInfo }}</sub>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row explanation">
+                        <div class="col-12">{{ item.explanation }}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 image">
+                    <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="consumption-list mobile-res">
+        {% for item in site.data.consumption %}
+            <div class="mobile item info {{ item.type }}" data-item-id="{{ forloop.index }}" data-completion-date="{{ item.completionDate }}" data-title="{{ item.title | escape }}" data-type="{{ item.type }}">
                 <div class="row">
-                    <div class="col-12 header">
+                    <div class="col-12 date text-center">{{ item.completionDate }}</div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12 header text-center">
                         <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
+                    </div>
+                    <div class="col-12 text-center">
                         <sub>{{ item.sourceDateAndInfo }}</sub>
                     </div>
                 </div>
                 <hr>
-                <div class="row explanation">
-                    <div class="col-12">{{ item.explanation }}</div>
+                <div class="row">
+                    <div class="col-12 image text-center">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 explanation">
+                        {{ item.explanation }}
+                    </div>
                 </div>
             </div>
-            <div class="col-12 col-md-2 image">
-                <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
-
-<div class="consumption-list mobile-res">
-    {% for item in site.data.consumption %}
-        <div class="mobile item info {{ item.type }}" data-item-id="{{ forloop.index }}">
-            <div class="row">
-                <div class="col-12 date text-center">{{ item.completionDate }}</div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 header text-center">
-                    <a href="{{ item.source }}" target="_blank">{{ item.title }}</a>
-                </div>
-                <div class="col-12 text-center">
-                    <sub>{{ item.sourceDateAndInfo }}</sub>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 image text-center">
-                    <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 explanation">
-                    {{ item.explanation }}
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-</div>
-
-<script>
-    let items = document.querySelectorAll('.full-res > .item.info');
-    let mobileItems = document.querySelectorAll('.mobile-res > .item.info');
-    //Amount of items grabbed per batch for infinite scrolling
-    let batchSize = 125;
-    let batchCount = 0;
-
-    function renderNextBatch() {
-        let startIndex = batchSize * batchCount;
-        let endIndex = batchSize * (batchCount + 1);
-
-        if (endIndex > items.length) {
-            endIndex = items.length;
-            window.removeEventListener('scroll', onScroll);
-        }
-
-        for (let i = startIndex; i < endIndex; i++) {
-            items[i].classList.add('visible');
-            items[i].classList.remove('hidden');
-            mobileItems[i].classList.add('visible');
-            mobileItems[i].classList.remove('hidden');
-        }
-
-        batchCount++;
-    }
-
-    function onScroll() {
-        let scrollPosition = window.innerHeight + window.scrollY;
-        let bodyHeight = document.body.offsetHeight;
-
-        if (scrollPosition >= bodyHeight - 700) {
-            renderNextBatch();
-        }
-    }
-
-    // Hide all items after the 75th item initially
-    for (let i = batchSize; i < items.length; i++) {
-        if (!items[i].classList.contains('visible')){
-            items[i].classList.add('hidden');
-        }
-    }
-
-    for (let i = batchSize; i < mobileItems.length; i++) {
-        if (!mobileItems[i].classList.contains('visible')){
-            mobileItems[i].classList.add('hidden');
-        }
-    }
-
-    renderNextBatch();
-    window.addEventListener('scroll', onScroll);
-  </script>  
-    

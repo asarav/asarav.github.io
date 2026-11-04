@@ -13,6 +13,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - docs/
   - .vscode/
   - .DS_Store
 

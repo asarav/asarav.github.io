@@ -18,11 +18,9 @@ $link: rgb(126, 191, 255);
 
 @keyframes contact-rise {
     from {
-        opacity: 0;
         transform: translateY(10px);
     }
     to {
-        opacity: 1;
         transform: translateY(0);
     }
 }
@@ -47,7 +45,7 @@ $link: rgb(126, 191, 255);
 
             .contact-preamble h1 {
                 font-size: clamp(2.6rem, 5vw, 3.8rem);
-                letter-spacing: 0.01em;
+                letter-spacing: -0.05em;
                 margin-bottom: 8px;
                 text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
             }
@@ -76,8 +74,8 @@ $link: rgb(126, 191, 255);
 
         .contact-list {
             max-width: 1180px;
-            margin: 0 auto;
-            padding: clamp(24px, 4vw, 44px) var(--gutter) clamp(80px, 10vw, 140px);
+            margin: 24px auto 0;
+            padding: 0 var(--gutter) clamp(80px, 10vw, 140px);
 
             .contact-card {
                 position: relative;
@@ -92,8 +90,8 @@ $link: rgb(126, 191, 255);
                 background: linear-gradient(160deg, $surface-raised 0%, $surface 75%);
                 border: 1px solid $border-color;
                 border-radius: 2px;
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
-                transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+                box-shadow: var(--elev-1, 0 12px 30px rgba(0, 0, 0, 0.28));
+                transition: transform 0.22s ease-out, border-color 0.28s ease, box-shadow 0.28s ease;
                 animation: contact-rise 0.5s ease backwards;
 
                 &::before {
@@ -108,10 +106,15 @@ $link: rgb(126, 191, 255);
 
                 &:hover,
                 &:focus-visible {
-                    transform: translateY(-4px);
                     color: $text;
                     border-color: rgba(126, 191, 255, 0.55);
-                    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+                    box-shadow: var(--elev-2, 0 20px 44px rgba(0, 0, 0, 0.45));
+                    background-color: rgba(126, 191, 255, 0.04);
+                }
+
+                &:active {
+                    border-color: var(--signal);
+                    background-color: rgba(209, 73, 73, 0.06);
                 }
 
                 .contact-icon {

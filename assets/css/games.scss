@@ -24,7 +24,7 @@
 .games-list {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 var(--gutter) clamp(80px, 10vw, 140px);
+    padding: 24px var(--gutter) clamp(80px, 10vw, 140px);
 
     .game {
         position: relative;
@@ -34,11 +34,11 @@
         border: 1px solid var(--line);
         border-left: 2px solid var(--ice);
         border-radius: 2px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+        box-shadow: var(--elev-1, 0 16px 40px rgba(0, 0, 0, 0.28));
         overflow: hidden;
         color: var(--frost);
-        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-        animation: game-rise 0.6s ease both;
+        transition: transform 0.22s ease-out, border-color 0.35s ease, box-shadow 0.35s ease;
+        animation: game-rise 0.6s ease backwards;
 
         &::before {
             content: "";
@@ -58,17 +58,15 @@
         }
 
         &:hover {
-            transform: translateY(-4px);
             border-color: var(--line-strong);
             border-left-color: var(--signal);
-            box-shadow: 0 22px 52px rgba(0, 0, 0, 0.34);
+            box-shadow: var(--elev-2, 0 22px 52px rgba(0, 0, 0, 0.34));
+            background-color: rgba(209, 73, 73, 0.05);
         }
 
-        &.light,
-        &.medium-light,
-        &.medium-dark,
-        &.dark {
-            background-image: none;
+        &:active {
+            border-left-color: var(--ice);
+            background-color: rgba(143, 208, 232, 0.06);
         }
 
         .game-header-row {
@@ -203,11 +201,9 @@
 
 @keyframes game-rise {
     from {
-        opacity: 0;
         transform: translateY(14px);
     }
     to {
-        opacity: 1;
         transform: translateY(0);
     }
 }

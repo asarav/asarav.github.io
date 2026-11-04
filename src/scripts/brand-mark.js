@@ -44,6 +44,18 @@
         return palette().outline;
     }
 
+    function setBrandAttribute(brand, name, value) {
+        brand.setAttribute('data-brand-' + name, value ? 'true' : 'false');
+    }
+
+    function syncBrandActivation() {
+        const value = activated() ? 'true' : 'false';
+
+        document.querySelectorAll('.navbar-brand').forEach(function (brand) {
+            brand.setAttribute('data-brand-activated', value);
+        });
+    }
+
     function setup(canvas) {
         const ctx = canvas.getContext('2d', { alpha: true });
         if (!ctx) return;
@@ -51,13 +63,18 @@
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = SIZE * dpr;
         canvas.height = SIZE * dpr;
-        canvas.style.width = SIZE + 'px';
-        canvas.style.height = SIZE + 'px';
         ctx.scale(dpr, dpr);
 
         const motion = !window.matchMedia(
             '(prefers-reduced-motion: reduce)'
         ).matches;
+
+        // The whole wordmark shares the mark's hover and press state.
+        const brand = canvas.closest('.navbar-brand') || canvas;
+
+        setBrandAttribute(brand, 'hover', false);
+        setBrandAttribute(brand, 'pressed', false);
+        setBrandAttribute(brand, 'activated', activated());
 
         // The more recognizable Möbius orientation is the default.
         const INITIAL_X = 0.85 + Math.PI;
@@ -376,20 +393,58 @@
             window.requestAnimationFrame(animate);
         }
 
-        canvas.addEventListener('mouseenter', function () {
+        function enterBrand() {
+            setBrandAttribute(brand, 'hover', true);
+
             targetX = HOVER_X;
             targetY = HOVER_Y;
             targetZ = HOVER_Z;
-        });
+        }
 
-        canvas.addEventListener('mouseleave', function () {
+        function leaveBrand() {
+            setBrandAttribute(brand, 'hover', false);
+            setBrandAttribute(brand, 'pressed', false);
+
             targetX = INITIAL_X;
             targetY = INITIAL_Y;
             targetZ = INITIAL_Z;
+        }
+
+        brand.addEventListener('pointerenter', enterBrand);
+        brand.addEventListener('pointerleave', leaveBrand);
+
+        brand.addEventListener('focusin', enterBrand);
+        brand.addEventListener('focusout', function (event) {
+            if (!brand.contains(event.relatedTarget)) {
+                leaveBrand();
+            }
         });
 
-        canvas.addEventListener('click', function () {
+        brand.addEventListener('pointerdown', function () {
+            setBrandAttribute(brand, 'pressed', true);
+        });
+
+        brand.addEventListener('pointerup', function () {
+            setBrandAttribute(brand, 'pressed', false);
+        });
+
+        brand.addEventListener('pointercancel', function () {
+            setBrandAttribute(brand, 'pressed', false);
+        });
+
+        brand.addEventListener('click', function (event) {
+            if (
+                event.button !== 0 ||
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+            ) {
+                return;
+            }
+
             setActivated(!activated());
+            syncBrandActivation();
             draw();
         });
 
@@ -401,6 +456,7 @@
     }
 
     function init() {
+        syncBrandActivation();
         document.querySelectorAll('canvas.brand-mark').forEach(setup);
     }
 

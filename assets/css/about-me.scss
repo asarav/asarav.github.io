@@ -19,11 +19,9 @@ $link: rgb(126, 191, 255);
 
 @keyframes about-rise {
     from {
-        opacity: 0;
         transform: translateY(10px);
     }
     to {
-        opacity: 1;
         transform: translateY(0);
     }
 }
@@ -403,8 +401,8 @@ $link: rgb(126, 191, 255);
 // ABOUT HERO + CORRIDOR (log-inspired)
 // ============================================================================
 #site #content .page-top.about-hero {
-    min-height: 360px;
-    padding: 72px var(--gutter) 56px;
+    min-height: 320px;
+    padding: 72px var(--gutter) 40px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -424,9 +422,11 @@ $link: rgb(126, 191, 255);
         color: var(--frost);
         font-family: var(--font-display);
         font-size: clamp(3rem, 7vw, 5.6rem);
+        font-weight: 700;
         line-height: 0.92;
         letter-spacing: -0.05em;
         text-align: left;
+        text-transform: uppercase;
 
         &::after {
             content: "";
@@ -470,8 +470,8 @@ $link: rgb(126, 191, 255);
 #site #content .about-shell {
     position: relative;
     max-width: 1180px;
-    margin: 0 auto;
-    padding: clamp(36px, 5vw, 64px) var(--gutter) clamp(80px, 10vw, 140px);
+    margin: 24px auto 0;
+    padding: clamp(12px, 2vw, 20px) var(--gutter) clamp(80px, 10vw, 140px);
 
     &::before {
         content: "";
@@ -495,7 +495,7 @@ $link: rgb(126, 191, 255);
         box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
         overflow: hidden;
         animation: about-rise 0.6s ease both;
-        transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.2s ease;
 
         &::before {
             content: "";
@@ -514,7 +514,11 @@ $link: rgb(126, 191, 255);
             border-color: var(--line-strong);
             border-left-color: var(--ice);
             box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
-            transform: translateX(3px);
+            background-color: rgba(143, 208, 232, 0.05);
+        }
+
+        &:active {
+            border-left-color: var(--signal);
         }
     }
 
