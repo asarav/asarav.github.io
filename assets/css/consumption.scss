@@ -98,9 +98,7 @@ $types: (
             z-index: 20;
             display: flex;
             align-items: center;
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 auto;
             max-height: 0;
             overflow: hidden;
             background: rgba(30, 30, 31, 0.96);
@@ -189,7 +187,7 @@ $types: (
 
         @media only screen and (max-width: 768px) {
             .consumption-chronology {
-                top: calc(var(--nav-height) + 2px);
+                top: calc(var(--nav-height));
                 padding: 10px 14px 12px;
             }
 
