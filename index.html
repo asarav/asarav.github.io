@@ -1,15 +1,30 @@
 ---
 layout: default
-title: Avinash Saravanan — Software Engineer & Novelist
+title: Avinash Saravanan — Computer Scientist, Engineer, & Writer
 description: Personal portfolio of Avinash Saravanan — software engineer, researcher, and novelist. Projects, games, music, books, and a media consumption log.
 ---
 
 <div class="page-top home-hero">
+    <span class="hero-floor hero-floor--label" aria-hidden="true">G</span>
     <div class="hero-frame" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
     </div>
+    <div class="hero-plane" aria-hidden="true"></div>
     <div class="hero-main">
         <h1>AVINASH<br><span>SARAVANAN</span></h1>
+        <button class="hero-weather" type="button" aria-label="Refresh local weather" title="Refresh local weather" hidden>
+            <svg class="hero-weather__icon" data-weather-icon viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="8.5"></circle>
+                <path d="M12 7v5l3 2"></path>
+            </svg>
+            <span class="hero-weather__readout">
+                <span class="hero-weather__location" data-weather-location></span>
+                <span class="hero-weather__date" data-weather-date></span>
+                <span class="hero-weather__period" data-weather-period></span>
+                <span class="hero-weather__condition" data-weather-condition></span>
+            </span>
+            <span class="hero-weather__refresh" aria-hidden="true">↻</span>
+        </button>
     </div>
     <div class="hero-floorplan" aria-label="Chronology">
         <div class="floor"><span class="floor-year">2023</span><span class="floor-role">Novelist</span></div>
@@ -30,6 +45,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
 
 <div class="tile-list" id="tile-list">
     <a class="tile tile--projects projects-tile" href="{{ '/projects/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">01</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">Projects</h2>
@@ -40,6 +56,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
         </div>
     </a>
     <a class="tile tile--music music-tile" href="{{ '/music/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">02</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">Music</h2>
@@ -50,6 +67,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
         </div>
     </a>
     <a class="tile tile--games games-tile" href="{{ '/games/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">03</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">Games</h2>
@@ -60,6 +78,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
         </div>
     </a>
     <a class="tile tile--books books-tile" href="{{ '/books/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">04</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">Books</h2>
@@ -70,6 +89,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
         </div>
     </a>
     <a class="tile tile--consumption consumption-tile" href="{{ '/consumption/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">05</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">Media Consumption List</h2>
@@ -80,6 +100,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
         </div>
     </a>
     <a class="tile tile--about about-tile" href="{{ '/about/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">06</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">About Me</h2>
@@ -90,6 +111,7 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
         </div>
     </a>
     <a class="tile tile--contact contact-tile" href="{{ '/contact/' | relative_url }}">
+        <span class="tile-index" aria-hidden="true">07</span>
         <div class="tile-content">
             <div class="tile-heading">
                 <h2 class="tile-title">Contact Me</h2>

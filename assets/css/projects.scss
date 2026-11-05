@@ -18,19 +18,20 @@ $link: rgb(126, 191, 255);
 
 @keyframes project-rise {
     from {
-        transform: translateY(12px);
+        transform: translateY(24px) scale(0.985);
     }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 #site {
-    background: rgb(30, 30, 31);
+    background-color: rgb(30, 30, 31);
 
     #content {
         color: $text;
         margin-bottom: 30px;
+        counter-reset: project;
 
         .page-top {
             background-image:
@@ -83,17 +84,43 @@ $link: rgb(126, 191, 255);
             border-radius: 2px;
             box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            animation: project-rise 0.5s ease both;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.2s ease;
-
+            counter-increment: project;
+            animation: project-rise 0.6s var(--ease-out) both;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.2s ease, transform 0.3s var(--ease-out);
+            &::after {
+                content: counter(project, decimal-leading-zero);
+                position: absolute;
+                top: 18px;
+                right: 24px;
+                z-index: 0;
+                color: transparent;
+                -webkit-text-stroke: 1px rgba(112, 158, 189, 0.28);
+                font-family: var(--font-display);
+                font-size: clamp(3.6rem, 7vw, 6.4rem);
+                font-weight: 700;
+                line-height: 0.8;
+                letter-spacing: -0.05em;
+                pointer-events: none;
+                user-select: none;
+            }
+            > * {
+                position: relative;
+                z-index: 1;
+            }
             &:hover {
                 border-color: rgba(126, 191, 255, 0.55);
                 box-shadow: 0 20px 46px rgba(0, 0, 0, 0.42);
+                transform: translateY(-2px);
             }
-
-            &:active {
+&:active {
                 border-color: var(--signal);
                 box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+                h1 {
+                    color: var(--signal);
+                }
+                a {
+                    color: var(--ice);
+                }
             }
 
             &::before {
@@ -274,6 +301,16 @@ $link: rgb(126, 191, 255);
             font-size: 16px;
             margin: 10px 0 30px 0;
         }
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .js-motion #site #content section img {
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path 1s var(--ease-out);
+    }
+    .js-motion #site #content section.is-revealed img {
+        clip-path: inset(0 0 0 0);
     }
 }
 

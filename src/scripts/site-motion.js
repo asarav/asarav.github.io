@@ -14,50 +14,52 @@
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     let framePending = false;
+    let rainMultiplier = 1;
+    let weatherEffectScene = null;
+    let weatherEffectStops = [];
+    let rainBoostUntil = 0;
 
     // -----------------------------------------------------------------------
-    // Animated rain background
+    // Weather effects
     // -----------------------------------------------------------------------
-    function startRainCanvas(container) {
+    function startWeatherCanvas(container, type) {
         if (reducedMotion.matches) {
-            return;
+            return function () {};
         }
 
-        container = container || document.body;
         const isBody = container === document.body;
-
         const canvas = document.createElement('canvas');
-        canvas.className = isBody ? 'rain-bg' : 'rain-bg rain-bg--hero';
-        canvas.id = isBody ? 'rain-bg' : 'rain-bg-hero';
+        canvas.className = 'weather-bg weather-bg--' + type +
+            (isBody ? ' weather-bg--global' : '');
         canvas.setAttribute('aria-hidden', 'true');
-
         container.insertBefore(canvas, container.firstChild);
-
-        if (!isBody) {
-            canvas.style.position = 'absolute';
-            canvas.style.inset = '0';
-            canvas.style.zIndex = '0';
-        }
+        canvas.style.position = isBody ? 'fixed' : 'absolute';
+        canvas.style.inset = '0';
+        canvas.style.zIndex = isBody ? '-1' : '0';
 
         const context = canvas.getContext('2d');
 
         if (!context) {
-            return;
+            canvas.remove();
+            return function () {};
         }
 
-        let drops = [];
-        let maxDrops = 12;
+        let particles = [];
+        let maxParticles = 0;
         let nextSpawn = 0;
         let frame = 0;
+        let running = true;
         let mouseX = 0.5;
-        let mouseY = 0.5;
         let scrollVelocity = 0;
         let lastScrollY = window.scrollY;
         let lastScrollTime = performance.now();
 
+        const nowHour = new Date().getHours();
+        const isNight = nowHour >= 19 || nowHour < 6;
+        const rainIntensity = isNight ? 1.4 : 0.65;
+
         function onPointerMove(event) {
             mouseX = event.clientX / Math.max(window.innerWidth, 1);
-            mouseY = event.clientY / Math.max(window.innerHeight, 1);
         }
 
         function onScroll() {
@@ -70,6 +72,26 @@
 
             lastScrollY = window.scrollY;
             lastScrollTime = now;
+        }
+
+        function stop() {
+            if (!running) {
+                return;
+            }
+
+            running = false;
+            window.cancelAnimationFrame(frame);
+            window.removeEventListener('pointermove', onPointerMove);
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', resize);
+            reducedMotion.removeEventListener('change', onMotionPreferenceChange);
+            canvas.remove();
+        }
+
+        function onMotionPreferenceChange() {
+            if (reducedMotion.matches) {
+                stop();
+            }
         }
 
         window.addEventListener('pointermove', onPointerMove, {
@@ -89,141 +111,858 @@
                     container.clientWidth ||
                     container.offsetWidth ||
                     window.innerWidth;
-
                 canvas.height =
                     container.clientHeight ||
                     container.offsetHeight ||
                     320;
             }
 
-            maxDrops = Math.min(
-                14,
-                Math.max(6, Math.round(canvas.width / 64))
-            );
+            if (type === 'snow') {
+                maxParticles = Math.min(
+                    360,
+                    Math.max(30, Math.round(
+                        canvas.width / 13 * canvas.height / 320
+                    ))
+                );
+            } else if (type === 'stars') {
+                maxParticles = Math.min(
+                    360,
+                    Math.max(35, Math.round(canvas.width * canvas.height / 4000))
+                );
+            } else {
+                maxParticles = Math.min(
+                    96,
+                    Math.max(4, Math.round(
+                        canvas.width / 64 * rainIntensity * rainMultiplier *
+                        Math.max(1, canvas.height / 320)
+                    ))
+                );
+            }
 
-            drops = [];
+            particles = [];
+
+            if (type === 'snow') {
+                for (let i = 0; i < maxParticles; i++) {
+                    spawnSnowflake(true);
+                }
+            } else if (type === 'stars') {
+                for (let i = 0; i < maxParticles; i++) {
+                    spawnStar();
+                }
+            }
+
             nextSpawn = performance.now();
         }
 
-        function spawnBurst() {
-            const burstSize = 1 + Math.floor(Math.random() * 3);
+        function spawnRainBurst() {
+            const boosted = performance.now() < rainBoostUntil;
+            const burstSize = 1 + Math.floor(Math.random() * Math.min(5, (boosted ? 4 : (isNight ? 3 : 2)) * rainMultiplier));
             const baseX = Math.random() * canvas.width;
 
             for (let i = 0; i < burstSize; i++) {
-                if (drops.length >= maxDrops) {
+                if (particles.length >= maxParticles) {
                     break;
                 }
 
-                drops.push({
+                particles.push({
                     x: baseX + (Math.random() - 0.5) * 40,
                     y: -20 - Math.random() * 30,
                     length: 14 + Math.random() * 10,
                     speed: 3.5 + Math.random() * 3.5,
-                    opacity: 0.15 + Math.random() * 0.22,
+                    opacity: ((boosted ? 0.26 : (isNight ? 0.18 : 0.12)) + Math.random() * (boosted ? 0.2 : (isNight ? 0.28 : 0.16))),
                     drift: (Math.random() - 0.5) * 0.6
                 });
             }
         }
 
+        function spawnSnowflake(randomHeight) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: randomHeight ? Math.random() * canvas.height : -4 - Math.random() * 12,
+                radius: 0.7 + Math.random() * 2.2,
+                speed: 0.35 + Math.random() * 1.25,
+                drift: (Math.random() - 0.5) * 0.38,
+                sway: 0.25 + Math.random() * 0.9,
+                phase: Math.random() * Math.PI * 2,
+                opacity: 0.32 + Math.random() * 0.55
+            });
+        }
+
+        function spawnStar() {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: 0.45 + Math.random() * 1.15,
+                opacity: 0.28 + Math.random() * 0.62,
+                phase: Math.random() * Math.PI * 2,
+                twinkleSpeed: 0.0007 + Math.random() * 0.0014
+            });
+        }
+
         function draw() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.lineCap = 'round';
-            context.lineWidth = 1;
-
-            const now = performance.now();
-
-            if (now >= nextSpawn) {
-                spawnBurst();
-                nextSpawn = now + 300 + Math.random() * 900;
+            if (!running) {
+                return;
             }
 
-            const angle = (mouseX - 0.5) * 0.9;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            const now = performance.now();
+            const delta = Math.min((now - (draw.lastTime || now)) / 16.67, 2.5);
+            draw.lastTime = now;
 
-            const speedBoost =
-                1 + Math.min(Math.abs(scrollVelocity) * 0.6, 2.0);
-
-            for (let i = drops.length - 1; i >= 0; i--) {
-                const drop = drops[i];
-
-                const dx = Math.sin(angle) * drop.length * 0.5;
-                const x2 = drop.x + dx;
-                const y2 = drop.y + drop.length;
-
-                context.strokeStyle =
-                    'rgba(195, 225, 248, ' +
-                    drop.opacity.toFixed(3) +
-                    ')';
-
+            if (type === 'rain') {
+                context.lineCap = 'round';
                 context.lineWidth = 1.2;
 
-                context.beginPath();
-                context.moveTo(drop.x, drop.y);
-                context.lineTo(x2, y2);
-                context.stroke();
-
-                drop.y += drop.speed * speedBoost;
-
-                drop.x += drop.drift + Math.sin(angle) * 0.6;
-                drop.x += (mouseX - 0.5) * 0.08;
-
-                if (drop.y > canvas.height + drop.length) {
-                    drops.splice(i, 1);
-                } else if (drop.x < -10 || drop.x > canvas.width + 10) {
-                    drops.splice(i, 1);
+                if (now >= nextSpawn) {
+                    spawnRainBurst();
+                    const boosted = now < rainBoostUntil;
+                    const heightScale = Math.max(1, canvas.height / 320);
+                    nextSpawn = now + ((boosted ? 120 : (isNight ? 200 : 400)) +
+                        Math.random() * (boosted ? 200 : (isNight ? 600 : 1100))) /
+                        (rainMultiplier * heightScale);
                 }
+
+                const angle = (mouseX - 0.5) * 0.9;
+                const speedBoost = 1 + Math.min(Math.abs(scrollVelocity) * 0.6, 2.0);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const drop = particles[i];
+                    const x2 = drop.x + Math.sin(angle) * drop.length * 0.5;
+
+                    context.strokeStyle = 'rgba(195, 225, 248, ' + drop.opacity.toFixed(3) + ')';
+                    context.beginPath();
+                    context.moveTo(drop.x, drop.y);
+                    context.lineTo(x2, drop.y + drop.length);
+                    context.stroke();
+
+                    drop.y += drop.speed * speedBoost * delta;
+                    drop.x += drop.drift + Math.sin(angle) * 0.6 + (mouseX - 0.5) * 0.08;
+
+                    if (drop.y > canvas.height + drop.length || drop.x < -10 || drop.x > canvas.width + 10) {
+                        particles.splice(i, 1);
+                    }
+                }
+            } else if (type === 'snow') {
+                const wind = (mouseX - 0.5) * 0.55 + Math.sin(now * 0.00035) * 0.16;
+
+                if (particles.length < maxParticles && now >= nextSpawn) {
+                    spawnSnowflake(false);
+                    nextSpawn = now + 90 + Math.random() * 180;
+                }
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const flake = particles[i];
+                    const sway = Math.sin(now * 0.0007 + flake.phase) * flake.sway;
+
+                    flake.y += flake.speed * delta;
+                    flake.x += (flake.drift + sway + wind) * delta;
+
+                    context.fillStyle = 'rgba(255, 255, 255, ' + flake.opacity.toFixed(3) + ')';
+                    context.shadowColor = 'rgba(255, 255, 255, 0.7)';
+                    context.shadowBlur = flake.radius * 2.2;
+                    context.beginPath();
+                    context.ellipse(
+                        flake.x,
+                        flake.y,
+                        flake.radius * 0.82,
+                        flake.radius,
+                        sway * 0.08,
+                        0,
+                        Math.PI * 2
+                    );
+                    context.fill();
+
+                    if (flake.y > canvas.height + 5 || flake.x < -8 || flake.x > canvas.width + 8) {
+                        particles.splice(i, 1);
+                    }
+                }
+            } else {
+                particles.forEach(function (star) {
+                    const twinkle = 0.25 + (Math.sin(now * star.twinkleSpeed + star.phase) + 1) * 0.36;
+                    const opacity = star.opacity * twinkle;
+
+                    context.fillStyle = 'rgba(230, 243, 255, ' + opacity.toFixed(3) + ')';
+                    context.shadowColor = 'rgba(196, 224, 255, ' + (opacity * 0.65).toFixed(3) + ')';
+                    context.shadowBlur = star.radius * 3;
+                    context.beginPath();
+                    context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    context.fill();
+                });
+                context.shadowBlur = 0;
             }
 
             scrollVelocity *= 0.92;
-
             frame = window.requestAnimationFrame(draw);
         }
 
         resize();
+        window.addEventListener('resize', resize);
+        reducedMotion.addEventListener('change', onMotionPreferenceChange);
         draw();
 
-        window.addEventListener('resize', resize);
+        return stop;
+    }
 
-        reducedMotion.addEventListener('change', function () {
-            if (reducedMotion.matches) {
-                window.cancelAnimationFrame(frame);
+    // -----------------------------------------------------------------------
+    // Weather particles remain off until a weather response confirms rain
+    // or snow; the Konami rain surge only affects active rain.
+    // -----------------------------------------------------------------------
+    document.body.classList.add('fast-network');
 
-                window.removeEventListener(
-                    'pointermove',
-                    onPointerMove
-                );
+    window.__boostRain = function (ms) {
+        if (weatherEffectScene === 'rain') {
+            rainBoostUntil = performance.now() + (ms || 3000);
+        }
+    };
 
-                window.removeEventListener(
-                    'scroll',
-                    onScroll
-                );
+    // -----------------------------------------------------------------------
+    // Weather + time awareness
+    // -----------------------------------------------------------------------
+    const weatherDisplay = document.querySelector('.hero-weather');
+    const fahrenheitRegions = ['BS', 'BZ', 'KY', 'FM', 'MH', 'PW', 'US', 'LR'];
+    const temperatureLocales = Array.from(navigator.languages || []);
+    temperatureLocales.push(
+        navigator.language,
+        Intl.DateTimeFormat().resolvedOptions().locale
+    );
+    let temperatureUnit = 'celsius';
 
-                window.removeEventListener('resize', resize);
+    for (let i = 0; i < temperatureLocales.length; i++) {
+        const locale = String(temperatureLocales[i] || '').replace(/_/g, '-');
+        const region = locale.match(
+            /^[a-z]{2,3}-(?:[a-z]{4}-)?([a-z]{2}|[0-9]{3})(?:-|$)/i
+        );
 
-                if (canvas.parentNode) {
-                    canvas.parentNode.removeChild(canvas);
+        if (region) {
+            temperatureUnit = fahrenheitRegions.indexOf(region[1].toUpperCase()) !== -1
+                ? 'fahrenheit'
+                : 'celsius';
+            break;
+        }
+    }
+
+    const temperatureUnitLabel = temperatureUnit === 'fahrenheit' ? 'F' : 'C';
+    let weatherClock = null;
+    const weatherIcon = weatherDisplay &&
+        weatherDisplay.querySelector('[data-weather-icon]');
+    const weatherIconMarkup = {
+        day: '<circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v2M12 19.5v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2.5 12h2m15 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>',
+        night: '<path d="M19.2 15.1A8 8 0 0 1 8.9 4.8 8.1 8.1 0 1 0 19.2 15.1Z"/>',
+        sunrise: '<path d="M3 17h18M5 20h14M5.5 14a6.5 6.5 0 0 1 13 0M12 3v2m-6.4 2.6 1.4 1.4m12.8-1.4-1.4 1.4"/>',
+        sunset: '<path d="M3 17h18M5 20h14M5.5 14a6.5 6.5 0 0 1 13 0M12 3v2m-6.4 2.6 1.4 1.4m12.8-1.4-1.4 1.4"/>',
+        cloudy: '<path d="M20.2 17H7.3a4.3 4.3 0 1 1 .7-8.5 5.2 5.2 0 0 1 9.9 1.8 3.4 3.4 0 0 1 2.3 6.7Z"/>',
+        cloudyNight: '<path d="M16.5 5.1a5.9 5.9 0 0 1-7.6-2A6.2 6.2 0 0 0 15 11m5.2 6H7.3a4.3 4.3 0 1 1 .7-8.5 5.2 5.2 0 0 1 9.9 1.8 3.4 3.4 0 0 1 2.3 6.7Z"/>',
+        rain: '<path d="M20.2 15H7.3a4.3 4.3 0 1 1 .7-8.5 5.2 5.2 0 0 1 9.9 1.8 3.4 3.4 0 0 1 2.3 6.7ZM8 18l-1 2m6-2-1 2m6-2-1 2"/>',
+        snow: '<path d="M20.2 14.5H7.3a4.3 4.3 0 1 1 .7-8.5 5.2 5.2 0 0 1 9.9 1.8 3.4 3.4 0 0 1 2.3 6.7ZM8 18h.01M13 18h.01M18 18h.01M8 21h.01M13 21h.01M18 21h.01"/>',
+        storm: '<path d="M20.2 14.5H7.3a4.3 4.3 0 1 1 .7-8.5 5.2 5.2 0 0 1 9.9 1.8 3.4 3.4 0 0 1 2.3 6.7ZM13 15l-3 4h3l-1 3 4-5h-3l1-2Z"/>',
+        fog: '<path d="M4 8h16M2.5 12h19M4 16h16M7 20h10"/>'
+    };
+
+    function updateWeatherIcon(data) {
+        if (!weatherIcon) {
+            return;
+        }
+
+        const code = data.code;
+        const condition = String(data.condition || '').toLowerCase();
+        const scene = getWeatherScene(data);
+        const precipitation = getWeatherEffectScene(data);
+        let icon = scene;
+
+        if (/thunder/.test(condition) || [95, 96, 99].indexOf(code) !== -1) {
+            icon = 'storm';
+        } else if (precipitation === 'rain' || precipitation === 'snow') {
+            icon = precipitation;
+        } else if (/fog|mist/.test(condition) || [45, 48].indexOf(code) !== -1) {
+            icon = 'fog';
+        } else if (/cloud|overcast/.test(condition) ||
+            [2, 3].indexOf(code) !== -1) {
+            icon = scene === 'night' ? 'cloudyNight' : 'cloudy';
+        }
+
+        weatherIcon.dataset.weatherScene = icon;
+        weatherIcon.innerHTML = weatherIconMarkup[icon] || weatherIconMarkup.day;
+    }
+
+    function weatherCodeToText(code) {
+        const map = {
+            0: 'Clear',
+            1: 'Mainly clear',
+            2: 'Partly cloudy',
+            3: 'Overcast',
+            45: 'Fog',
+            48: 'Rime fog',
+            51: 'Light drizzle',
+            53: 'Drizzle',
+            55: 'Dense drizzle',
+            56: 'Freezing drizzle',
+            57: 'Freezing drizzle',
+            61: 'Light rain',
+            63: 'Rain',
+            65: 'Heavy rain',
+            66: 'Freezing rain',
+            67: 'Freezing rain',
+            71: 'Light snow',
+            73: 'Snow',
+            75: 'Heavy snow',
+            77: 'Snow grains',
+            80: 'Rain showers',
+            81: 'Rain showers',
+            82: 'Heavy showers',
+            85: 'Snow showers',
+            86: 'Snow showers',
+            95: 'Thunderstorm',
+            96: 'Thunderstorm',
+            99: 'Thunderstorm'
+        };
+        return map[code] || 'Unknown';
+    }
+
+    function isRainCode(code) {
+        return [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].indexOf(code) !== -1;
+    }
+
+    const sceneImages = {
+        cloudy: {
+            hero: 'city-cloudy.jpeg',
+            background: 'cloudy-background.jpeg'
+        },
+        day: {
+            hero: 'city-day.jpg',
+            background: 'day-background.jpeg'
+        },
+        night: {
+            hero: 'city-night.png',
+            background: 'night-background.jpeg'
+        },
+        rain: {
+            hero: 'city-rain.jpg',
+            background: 'rain-background.jpg'
+        },
+        snow: {
+            hero: 'city-snow.jpg',
+            background: 'snow-background.jpeg'
+        },
+        sunrise: {
+            hero: 'city-sunrise.png',
+            background: 'sunrise-background.jpeg'
+        },
+        sunset: {
+            hero: 'city-sunset.jpg',
+            background: 'sunset-background.jpeg'
+        }
+    };
+
+    function parseClock(value) {
+        const match = String(value || '').match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+
+        if (!match) {
+            return null;
+        }
+
+        let hour = parseInt(match[1], 10);
+        const minute = parseInt(match[2], 10);
+        const period = match[3] && match[3].toUpperCase();
+
+        if (period === 'PM' && hour < 12) {
+            hour += 12;
+        } else if (period === 'AM' && hour === 12) {
+            hour = 0;
+        }
+
+        return hour * 60 + minute;
+    }
+
+    function isNearTime(current, event) {
+        if (current === null || event === null) {
+            return false;
+        }
+
+        const difference = Math.abs(current - event);
+        return Math.min(difference, 1440 - difference) <= 75;
+    }
+
+    function getTimeScene(data) {
+        const current = parseClock(data.time);
+        const sunrise = parseClock(data.sunrise);
+        const sunset = parseClock(data.sunset);
+        const hour = current === null ? new Date().getHours() : Math.floor(current / 60);
+
+        if (isNearTime(current, sunrise)) {
+            return 'sunrise';
+        }
+
+        if (isNearTime(current, sunset)) {
+            return 'sunset';
+        }
+
+        if ((sunrise === null && hour >= 5 && hour < 8) ||
+            (sunset === null && hour >= 17 && hour < 20)) {
+            return hour < 12 ? 'sunrise' : 'sunset';
+        }
+
+        if (data.isDay === false || data.isDay === 0 || data.isDay === '0' ||
+            (data.isDay == null && (hour < 6 || hour >= 20))) {
+            return 'night';
+        }
+
+        return 'day';
+    }
+
+    function getWeatherScene(data) {
+        const timeScene = getTimeScene(data);
+
+        if (timeScene === 'night') {
+            return 'night';
+        }
+
+        const code = data.code;
+        const condition = String(data.condition || '').toLowerCase();
+
+        if (/snow|sleet|blizzard|ice pellets/.test(condition) ||
+            [71, 73, 75, 77, 85, 86].indexOf(code) !== -1) {
+            return 'snow';
+        }
+
+        if (/rain|drizzle|shower|thunder/.test(condition) || isRainCode(code)) {
+            return 'rain';
+        }
+
+        if (/cloud|overcast|fog|mist/.test(condition) ||
+            [2, 3, 45, 48].indexOf(code) !== -1) {
+            return 'cloudy';
+        }
+
+        return timeScene;
+    }
+
+    function getWeatherEffectScene(data) {
+        const code = data.code;
+        const condition = String(data.condition || '').toLowerCase();
+
+        if (/snow|sleet|blizzard|ice pellets/.test(condition) ||
+            [71, 73, 75, 77, 85, 86].indexOf(code) !== -1) {
+            return 'snow';
+        }
+
+        if (/rain|drizzle|shower|thunder/.test(condition) || isRainCode(code)) {
+            return 'rain';
+        }
+
+        return null;
+    }
+
+    function setWeatherScene(data) {
+        const scene = getWeatherScene(data);
+        const images = sceneImages[scene];
+        const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+
+        document.body.dataset.weatherScene = scene;
+        document.body.style.setProperty(
+            '--weather-background-image',
+            'url("' + imageRoot + images.background + '")'
+        );
+
+        if (document.body.classList.contains('home-page')) {
+            document.body.style.setProperty(
+                '--weather-home-image',
+                'url("' + imageRoot + images.hero + '")'
+            );
+        }
+
+        return scene;
+    }
+
+    setWeatherScene({ code: null });
+
+    function setWeatherEffect(scene) {
+        const pageHero = document.querySelector('#content > .page-top');
+
+        if (weatherEffectScene === scene &&
+            weatherEffectStops.length > 0) {
+            return;
+        }
+
+        weatherEffectStops.forEach(function (stop) {
+            stop();
+        });
+        weatherEffectStops = [];
+        weatherEffectScene = scene;
+
+        if (reducedMotion.matches ||
+            (scene !== 'rain' && scene !== 'snow' && scene !== 'stars')) {
+            return;
+        }
+
+        weatherEffectStops.push(startWeatherCanvas(document.body, scene));
+
+        if (pageHero &&
+            (pageHero.classList.contains('home-hero') ||
+                pageHero.classList.contains('about-hero'))) {
+            weatherEffectStops.push(startWeatherCanvas(pageHero, scene));
+        }
+    }
+
+    reducedMotion.addEventListener('change', function () {
+        if (reducedMotion.matches) {
+            weatherEffectStops.forEach(function (stop) {
+                stop();
+            });
+            weatherEffectStops = [];
+        } else if (weatherEffectScene) {
+            setWeatherEffect(weatherEffectScene);
+        }
+    });
+
+    function getTimePeriod(value) {
+        const minutes = parseClock(value);
+        const hour = minutes === null ? new Date().getHours() : Math.floor(minutes / 60);
+
+        if (hour < 5) {
+            return 'Late night';
+        }
+        if (hour < 11) {
+            return 'Morning';
+        }
+        if (hour < 14) {
+            return 'Midday';
+        }
+        if (hour < 18) {
+            return 'Afternoon';
+        }
+        if (hour < 21) {
+            return 'Evening';
+        }
+        return 'Night';
+    }
+
+    function parseWeatherTimestamp(value, timeZone) {
+        const match = String(value || '').trim().match(
+            /^(\d{4})-(\d{2})-(\d{2})[T\s]+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?/i
+        );
+
+        if (!match) {
+            return Date.now();
+        }
+
+        let hour = parseInt(match[4], 10);
+        const minute = parseInt(match[5], 10);
+        const second = parseInt(match[6] || '0', 10);
+
+        if (match[7]) {
+            const period = match[7].toUpperCase();
+            if (period === 'PM' && hour < 12) {
+                hour += 12;
+            } else if (period === 'AM' && hour === 12) {
+                hour = 0;
+            }
+        }
+
+        const localTimestamp = Date.UTC(
+            parseInt(match[1], 10),
+            parseInt(match[2], 10) - 1,
+            parseInt(match[3], 10),
+            hour,
+            minute,
+            second
+        );
+
+        let timestamp = localTimestamp;
+
+        try {
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone: timeZone,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hourCycle: 'h23'
+            }).formatToParts(new Date(localTimestamp));
+            const values = {};
+            parts.forEach(function (part) {
+                if (part.type !== 'literal') {
+                    values[part.type] = parseInt(part.value, 10);
                 }
+            });
+            const zonedTimestamp = Date.UTC(
+                values.year,
+                values.month - 1,
+                values.day,
+                values.hour,
+                values.minute,
+                values.second
+            );
+            timestamp = localTimestamp - (zonedTimestamp - localTimestamp);
+        } catch (error) {
+            timestamp = localTimestamp;
+        }
+
+        if (!match[6]) {
+            timestamp += Date.now() % 60000;
+        }
+
+        return timestamp;
+    }
+
+    function getTimezone(data) {
+        const timeZone = data.timezone ||
+            Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+
+        try {
+            new Intl.DateTimeFormat('en-US', { timeZone: timeZone });
+            return timeZone;
+        } catch (error) {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+        }
+    }
+
+    function getTimezoneAbbreviation(data, timeZone) {
+        if (data.timezoneAbbreviation) {
+            return data.timezoneAbbreviation;
+        }
+
+        if (!timeZone) {
+            return 'Local time';
+        }
+
+        try {
+            return new Intl.DateTimeFormat('en-US', {
+                timeZone: timeZone,
+                timeZoneName: 'short'
+            }).formatToParts(new Date()).filter(function (part) {
+                return part.type === 'timeZoneName';
+            })[0].value;
+        } catch (error) {
+            return timeZone.split('/').pop().replace(/_/g, ' ');
+        }
+    }
+
+    function getTimezoneCity(data, timeZone) {
+        if (data.city) {
+            return data.city;
+        }
+
+        if (timeZone) {
+            const city = timeZone.split('/').pop().replace(/_/g, ' ');
+            return city.replace(/\b\w/g, function (letter) {
+                return letter.toUpperCase();
+            });
+        }
+
+        return 'Local time';
+    }
+
+    function renderWeatherClock() {
+        if (!weatherDisplay || !weatherClock) {
+            return;
+        }
+
+        const now = new Date(
+            weatherClock.timestamp + Date.now() - weatherClock.startedAt
+        );
+        const clockParts = weatherClock.partsFormatter.formatToParts(now);
+        const values = {};
+        clockParts.forEach(function (part) {
+            if (part.type !== 'literal') {
+                values[part.type] = parseInt(part.value, 10);
+            }
+        });
+        const time = weatherClock.timeFormatter.format(now);
+        const date = weatherClock.dateFormatter.format(now);
+        const period = getTimePeriod(values.hour + ':' + values.minute);
+        const readout = period + ' · ' + time;
+
+        weatherDisplay.querySelector('[data-weather-date]').textContent = date;
+        weatherDisplay.querySelector('[data-weather-period]').textContent = readout;
+        weatherDisplay.setAttribute(
+            'aria-label',
+            weatherClock.location + ', ' + date + ', ' + readout + ', ' +
+                weatherClock.details + '. Activate to refresh local weather.'
+        );
+    }
+
+    function updateWeatherDisplay(data, condition, temp) {
+        if (!weatherDisplay) {
+            return;
+        }
+
+        const timeZone = getTimezone(data);
+        const location = getTimezoneCity(data, timeZone) +
+            ' · ' + getTimezoneAbbreviation(data, timeZone);
+        const details = temp == null
+            ? condition
+            : temp + '°' + temperatureUnitLabel + ' · ' + condition;
+
+        weatherDisplay.querySelector('[data-weather-location]').textContent = location;
+        weatherDisplay.querySelector('[data-weather-condition]').textContent = details;
+        updateWeatherIcon(data);
+        weatherClock = {
+            timestamp: parseWeatherTimestamp(data.time, timeZone),
+            startedAt: Date.now(),
+            timeZone: timeZone,
+            location: location,
+            details: details,
+            timeFormatter: new Intl.DateTimeFormat('en-US', {
+                timeZone: timeZone,
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit'
+            }),
+            dateFormatter: new Intl.DateTimeFormat('en-US', {
+                timeZone: timeZone,
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            }),
+            partsFormatter: new Intl.DateTimeFormat('en-US', {
+                timeZone: timeZone,
+                hour: '2-digit',
+                minute: '2-digit',
+                hourCycle: 'h23'
+            })
+        };
+        weatherDisplay.hidden = false;
+        renderWeatherClock();
+    }
+
+    function setWeatherRefreshing(isRefreshing) {
+        if (!weatherDisplay) {
+            return;
+        }
+
+        weatherDisplay.classList.toggle('is-refreshing', isRefreshing);
+        weatherDisplay.setAttribute('aria-busy', String(isRefreshing));
+    }
+
+    function applyWeather(data) {
+        const code = data.code;
+        const temp = data.temp;
+        const condition = data.condition || weatherCodeToText(code);
+        const scene = setWeatherScene(data);
+        const precipitation = getWeatherEffectScene(data);
+        const effectScene = precipitation || (scene === 'night' ? 'stars' : null);
+
+        setWeatherRefreshing(false);
+        updateWeatherDisplay(data, condition, temp);
+
+        if (precipitation === 'rain') {
+            rainMultiplier = 1.3;
+        }
+
+        setWeatherEffect(effectScene);
+
+    }
+
+    if (weatherDisplay) {
+        window.setInterval(renderWeatherClock, 1000);
+    }
+
+    function fetchWeather(lat, lon) {
+        setWeatherRefreshing(true);
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat +
+            '&longitude=' + lon +
+            '&current=weather_code,temperature_2m,is_day' +
+            '&temperature_unit=' + temperatureUnit +
+            '&daily=sunrise,sunset&forecast_days=1&timezone=auto';
+        fetch(url)
+            .then(function (r) { return r.json(); })
+            .then(function (json) {
+                if (json && json.current) {
+                    applyWeather({
+                        code: json.current.weather_code,
+                        temp: Math.round(json.current.temperature_2m),
+                        isDay: json.current.is_day,
+                        time: json.current.time,
+                        timezone: json.timezone,
+                        timezoneAbbreviation: json.timezone_abbreviation,
+                        sunrise: json.daily && json.daily.sunrise && json.daily.sunrise[0],
+                        sunset: json.daily && json.daily.sunset && json.daily.sunset[0]
+                    });
+                } else {
+                    fetchWttr();
+                }
+            })
+            .catch(function () {
+                // Fall back to wttr.in (IP-based).
+                fetchWttr();
+            });
+    }
+
+    function fetchWttr() {
+        setWeatherRefreshing(true);
+        fetch('https://wttr.in/?format=j1')
+            .then(function (r) { return r.json(); })
+            .then(function (json) {
+                if (json && json.current_condition && json.current_condition[0]) {
+                    const c = json.current_condition[0];
+                    const astronomy = json.weather &&
+                        json.weather[0] &&
+                        json.weather[0].astronomy &&
+                        json.weather[0].astronomy[0];
+                    const nearestArea = json.nearest_area &&
+                        json.nearest_area[0];
+                    const areaName = nearestArea &&
+                        nearestArea.areaName &&
+                        nearestArea.areaName[0] &&
+                        nearestArea.areaName[0].value;
+                    const timeZone = json.time_zone && json.time_zone[0];
+                    applyWeather({
+                        code: parseInt(c.weatherCode, 10),
+                        temp: temperatureUnit === 'fahrenheit' ? c.temp_F : c.temp_C,
+                        condition: c.weatherDesc && c.weatherDesc[0] && c.weatherDesc[0].value,
+                        time: c.localObsDateTime,
+                        city: areaName,
+                        timezone: timeZone && timeZone.zone,
+                        timezoneAbbreviation: timeZone && timeZone.abbreviation,
+                        sunrise: astronomy && astronomy.sunrise,
+                        sunset: astronomy && astronomy.sunset
+                    });
+                } else {
+                    setWeatherRefreshing(false);
+                    setWeatherScene({ code: null });
+                    setWeatherEffect(null);
+                    updateWeatherDisplay({}, 'Weather unavailable');
+                }
+            })
+            .catch(function () {
+                setWeatherRefreshing(false);
+                setWeatherScene({ code: null });
+                setWeatherEffect(null);
+                updateWeatherDisplay({}, 'Weather unavailable');
+            });
+    }
+
+    let weatherCoordinates = null;
+
+    if (weatherDisplay) {
+        weatherDisplay.addEventListener('click', function () {
+            if (weatherCoordinates) {
+                fetchWeather(weatherCoordinates.latitude, weatherCoordinates.longitude);
+            } else {
+                fetchWttr();
             }
         });
     }
 
-    // -----------------------------------------------------------------------
-    // Initialize rain
-    //
-    // FIX: Removed the Network Information API requirement.
-    // Firefox may not expose navigator.connection.
-    // startRainCanvas() already respects reduced-motion preferences.
-    // -----------------------------------------------------------------------
-    document.body.classList.add('fast-network');
-
-    startRainCanvas(document.body);
-
-    if (document.body.classList.contains('home-page')) {
-        const hero = document.querySelector('#content > .page-top');
-
-        if (hero) {
-            startRainCanvas(hero);
-        }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (pos) {
+                weatherCoordinates = {
+                    latitude: pos.coords.latitude,
+                    longitude: pos.coords.longitude
+                };
+                fetchWeather(weatherCoordinates.latitude, weatherCoordinates.longitude);
+            },
+            function () {
+                fetchWttr();
+            },
+            { timeout: 5000, maximumAge: 600000 }
+        );
+    } else {
+        fetchWttr();
     }
 
     // -----------------------------------------------------------------------
@@ -373,6 +1112,11 @@
             '--hero-opacity',
             (1 - progress * 0.9).toFixed(3)
         );
+
+        hero.style.setProperty(
+            '--hero-bg-pos',
+            (50 + progress * 12).toFixed(1) + '%'
+        );
     }
 
     function requestPaint() {
@@ -389,7 +1133,7 @@
     // Scroll-triggered reveals
     // -----------------------------------------------------------------------
     const REVEAL_SELECTOR =
-        '.tile, .book-section, #content > section, .contact-card, .game, .log-card, .song, .about-shell section';
+        '.tile, .book-section, #content > section, .contact-card, .game, .log-card, .song, .about-shell section, #footer';
 
     function setupReveals() {
         const root = document.documentElement;
@@ -425,7 +1169,7 @@
                 });
             },
             {
-                rootMargin: '0px 0px -8% 0px',
+                rootMargin: '0px',
                 threshold: 0
             }
         );
@@ -600,4 +1344,69 @@
 
     refreshContentElements();
     paint();
+    // -----------------------------------------------------------------------
+    // Easter egg: Konami code triggers a brief rain surge
+    // -----------------------------------------------------------------------
+    const konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+    let konamiIndex = 0;
+
+    window.addEventListener('keydown', function (event) {
+        if (event.keyCode === konami[konamiIndex]) {
+            konamiIndex += 1;
+
+            if (konamiIndex === konami.length) {
+                konamiIndex = 0;
+
+                if (typeof window.__boostRain === 'function') {
+                    window.__boostRain(4500);
+                }
+
+                document.body.classList.add('is-boosted');
+
+                window.setTimeout(function () {
+                    document.body.classList.remove('is-boosted');
+                }, 4500);
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+
+    // -----------------------------------------------------------------------
+    // Scroll progress bar
+    // -----------------------------------------------------------------------
+    const progressBar = document.querySelector('.scroll-progress');
+
+    if (progressBar && !reducedMotion.matches) {
+        let progressFrame = 0;
+
+        function updateProgress() {
+            progressFrame = 0;
+
+            const doc = document.documentElement;
+            const scrollable = doc.scrollHeight - window.innerHeight;
+
+            if (scrollable <= 0) {
+                progressBar.style.transform = 'scaleX(0)';
+                return;
+            }
+
+            const progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+            progressBar.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+        }
+
+        function requestProgress() {
+            if (progressFrame) {
+                return;
+            }
+
+            progressFrame = window.requestAnimationFrame(updateProgress);
+        }
+
+        window.addEventListener('scroll', requestProgress, { passive: true });
+        window.addEventListener('resize', requestProgress, { passive: true });
+
+        updateProgress();
+    }
+
 })();

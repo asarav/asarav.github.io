@@ -8,8 +8,9 @@ script: src/scripts/consumption.js
 ---
 
 <div class="page-top">
+    <span class="hero-floor" aria-hidden="true">05</span>
     <div class="consumption-preamble">
-        <h1 class="text-center">Media Consumption <span>List</span></h1>
+        <h1 class="text-center">Media Consumption List</h1>
     </div>
     <div class="consumption-explanation">
         <p>What I have read, watched or played at any particular time in the past that I considered to be of note.</p>
@@ -83,4 +84,5 @@ script: src/scripts/consumption.js
             </div>
         {% endfor %}
     </div>
+    <div class="consumption-sentinel" data-consumption-sentinel aria-hidden="true"></div>
 </div>

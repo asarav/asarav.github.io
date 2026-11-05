@@ -30,7 +30,6 @@
             <meta name="theme-color" content="#070b10">
             <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | relative_url }}">
             <link rel="shortcut icon" href="{{ 'favicon.png' | relative_url }}">
-            <link rel="preload" as="image" href="{{ 'src/images/rain-background.jpg' | relative_url }}">
             {% if page.url == '/' %}
             <link rel="preload" as="image" href="{{ 'src/images/homepage_tiles/projects.jpg' | relative_url }}" fetchpriority="high">
             {% endif %}
@@ -58,8 +57,9 @@
 }
 </script>
         </head>
-        <body id="site" class="site{% if page.url == '/' %} home-page{% endif %}">
+        <body id="site" class="site{% if page.url == '/' %} home-page{% endif %}" data-image-root="{{ 'src/images/' | relative_url }}">
             <a class="skip-link" href="#content">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"></div>
             {% include nav.html %}
             <main id="content" class="container-fluid">
                 {{ content }}
@@ -71,6 +71,7 @@
             {% endif %}
             <script defer type="text/javascript" src="{{ 'src/scripts/media-fallback.js' | relative_url }}"></script>
             <script defer type="text/javascript" src="{{ 'src/scripts/site-motion.js' | relative_url }}"></script>
+<script defer type="text/javascript" src="{{ 'src/scripts/ambient-sound.js' | relative_url }}"></script>
             <script defer type="text/javascript" src="{{ 'src/scripts/brand-mark.js' | relative_url }}"></script>
         </body>
 	</html>

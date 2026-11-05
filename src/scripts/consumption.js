@@ -23,14 +23,17 @@
     const fullItems = Array.from(fullList.querySelectorAll(':scope > .item.info'));
     const mobileItems = Array.from(mobileList.querySelectorAll(':scope > .item.info'));
     const totalItems = Math.max(fullItems.length, mobileItems.length);
+    const loadSentinel = shell.querySelector('[data-consumption-sentinel]');
 
-    const BATCH_SIZE = 125;
+    const BATCH_SIZE = 100;
+    const LOAD_AHEAD_PX = 1800;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const canObserve = typeof IntersectionObserver !== 'undefined';
 
     let batchCount = 0;
     let scrollTicking = false;
     let allBatchesRendered = totalItems === 0;
+    let batchObserver = null;
 
     function formatDate(value) {
         const parsed = new Date(value || '');
@@ -164,11 +167,6 @@
 
                 item.classList.add('is-revealed');
                 revealObserver.unobserve(item);
-
-                window.setTimeout(function () {
-                    item.classList.remove('will-reveal');
-                    item.classList.remove('is-revealed');
-                }, 520);
             });
         }, {
             rootMargin: '0px 0px -6% 0px',
@@ -234,6 +232,11 @@
         }
 
         updateProgress();
+
+        if (batchObserver && loadSentinel && !allBatchesRendered) {
+            batchObserver.unobserve(loadSentinel);
+            batchObserver.observe(loadSentinel);
+        }
     }
 
     function updateProgress() {
@@ -276,7 +279,7 @@
         if (!allBatchesRendered) {
             const scrollPosition = window.innerHeight + window.scrollY;
 
-            if (scrollPosition >= document.body.offsetHeight - 700) {
+            if (scrollPosition >= document.body.offsetHeight - LOAD_AHEAD_PX) {
                 renderNextBatch();
             }
         }
@@ -307,6 +310,20 @@
     }
 
     renderNextBatch();
+
+    if (canObserve && loadSentinel && !allBatchesRendered) {
+        batchObserver = new IntersectionObserver(function (entries) {
+            if (entries.some(function (entry) {
+                return entry.isIntersecting;
+            })) {
+                renderNextBatch();
+            }
+        }, {
+            rootMargin: LOAD_AHEAD_PX + 'px 0px'
+        });
+        batchObserver.observe(loadSentinel);
+    }
+
     updateProgress();
     updateChronologyVisibility();
 

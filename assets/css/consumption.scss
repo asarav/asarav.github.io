@@ -28,7 +28,7 @@ $types: (
 );
 
 #site {
-    background: rgb(30, 30, 31);
+    background-color: rgb(30, 30, 31);
 
     a {
         text-decoration: none;
@@ -48,11 +48,30 @@ $types: (
             padding-top: 0;
             border-bottom: 1px solid $border-color;
 
-            .consumption-preamble h1 {
+            &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
+                color: transparent;
                 font-size: clamp(2.6rem, 5vw, 3.8rem);
                 letter-spacing: -0.05em;
                 margin-bottom: 8px;
                 text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
+                -webkit-text-stroke: 1.5px rgba(237, 244, 247, 0.72);
+                transition: -webkit-text-stroke-color 0.3s ease, text-shadow 0.3s ease;
+            }
+
+            &:not(.home-hero):not(.log-hero):hover .consumption-preamble h1 {
+                color: transparent;
+                -webkit-text-stroke-color: var(--ice);
+            }
+
+            &:not(.home-hero):not(.log-hero):active .consumption-preamble h1 {
+                color: transparent;
+                -webkit-text-stroke-color: var(--signal);
+            }
+
+            @supports not (-webkit-text-stroke: 1px #fff) {
+                &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
+                    color: var(--frost);
+                }
             }
 
             .consumption-explanation {
@@ -90,6 +109,10 @@ $types: (
         .consumption-body {
             position: relative;
             margin-top: 24px;
+        }
+
+        .consumption-sentinel {
+            height: 1px;
         }
 
         .consumption-chronology {
@@ -357,7 +380,7 @@ $types: (
             .item.info.will-reveal {
                 opacity: 0;
                 transform: translateY(12px);
-                transition: opacity 0.5s ease, transform 0.5s var(--ease-out);
+                transition: opacity 0.35s ease, transform 0.35s var(--ease-out);
             }
 
             .item.info.will-reveal.is-revealed {

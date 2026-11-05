@@ -47,20 +47,27 @@ Updates all gems to their latest compatible versions.
 ```
 .
 ├── _config.yml              # Jekyll configuration
-├── _data/                   # YAML data files (games, music, consumption log)
-├── _includes/               # HTML partials (nav, footer)
-├── _layouts/                # Page layouts
-├── assets/css/              # SCSS stylesheets (compiled to CSS)
-├── src/                      # Source assets and content
-│   ├── assets/              # External service icons/logos
-│   ├── games/               # Game builds
-│   ├── html/                # Page HTML files
-│   ├── images/              # Project images and backgrounds
-│   ├── projects/            # Project files
-│   ├── scripts/             # JavaScript files
-│   └── videos/              # Project videos
-└── _site/                   # Build output (git-ignored)
+├── _data/                   # YAML data used by page templates
+├── _includes/               # Shared HTML partials
+├── _layouts/                # Shared page layouts
+├── assets/css/              # SCSS sources; Jekyll emits matching CSS here
+├── index.html               # Home page
+├── src/
+│   ├── html/                # Content pages, published via their permalink front matter
+│   ├── images/              # Site, project, and game images
+│   ├── scripts/             # Site and page JavaScript
+│   ├── assets/              # Third-party logos and other static assets
+│   ├── games/               # Standalone Unity game builds
+│   ├── projects/            # Downloadable/model project files
+│   ├── music/               # Audio files
+│   └── videos/              # Video files
+└── _site/                   # Generated site output (git-ignored)
 ```
+
+This layout follows Jekyll's special root-level folders for templates, data, and
+styles while keeping the larger collection of published media and standalone
+builds under `src/`. Moving those assets would change their public URLs, so the
+current split is intentional rather than a second source tree.
 
 ## Key Technologies
 
