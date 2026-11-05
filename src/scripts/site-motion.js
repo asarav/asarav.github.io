@@ -6,7 +6,7 @@
     const hero = document.querySelector('#content > .page-top');
 
     const CONTENT_SELECTOR =
-        '#content > section, .about-shell section, .consumption-list .item.info, .game, .log-card, .song';
+        '#content > section, .about-shell section, .games-list .game, .log-card, .song';
 
     let contentElements = [];
 
@@ -14,10 +14,24 @@
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     let framePending = false;
+    let opacityRevealsEnabled = true;
+    let scrollSamples = [{
+        position: window.scrollY,
+        time: performance.now()
+    }];
     let rainMultiplier = 1;
     let weatherEffectScene = null;
     let weatherEffectStops = [];
     let rainBoostUntil = 0;
+    let matrixRainCanvas = null;
+    let matrixRainHeroCanvas = null;
+    let matrixRainHero = null;
+    let matrixRainFrame = 0;
+    let matrixRainStreams = [];
+    let matrixRainLastFrame = 0;
+    const FAST_SCROLL_THRESHOLD = 2;
+    const MATRIX_RAIN_START = 23 * 60 + 30;
+    const MATRIX_RAIN_END = 3 * 60 + 30;
 
     // -----------------------------------------------------------------------
     // Weather effects
@@ -302,6 +316,245 @@
 
         return stop;
     }
+
+    function isMatrixRainTime() {
+        const now = new Date();
+        const minutes = now.getHours() * 60 + now.getMinutes();
+
+        return minutes >= MATRIX_RAIN_START || minutes < MATRIX_RAIN_END;
+    }
+
+    function stopMatrixRain() {
+        if (matrixRainFrame) {
+            window.cancelAnimationFrame(matrixRainFrame);
+            matrixRainFrame = 0;
+        }
+
+        if (matrixRainCanvas) {
+            matrixRainCanvas.remove();
+            matrixRainCanvas = null;
+        }
+
+        if (matrixRainHeroCanvas) {
+            matrixRainHeroCanvas.remove();
+            matrixRainHeroCanvas = null;
+            matrixRainHero = null;
+        }
+
+        matrixRainStreams = [];
+        matrixRainLastFrame = 0;
+        document.removeEventListener('visibilitychange', onMatrixRainVisibilityChange);
+        window.removeEventListener('resize', resizeMatrixRain);
+    }
+
+    function resizeMatrixRain() {
+        if (!matrixRainCanvas) {
+            return;
+        }
+
+        matrixRainCanvas.width = window.innerWidth;
+        matrixRainCanvas.height = window.innerHeight;
+        if (matrixRainHeroCanvas && matrixRainHero) {
+            matrixRainHeroCanvas.width = matrixRainHero.clientWidth;
+            matrixRainHeroCanvas.height = matrixRainHero.clientHeight;
+        }
+
+        const columnCount = Math.min(120, Math.ceil(matrixRainCanvas.width / 14));
+        matrixRainStreams = [];
+
+        for (let column = 0; column < columnCount;) {
+            const groupWidth = Math.random() < 0.14
+                ? Math.min(2 + Math.floor(Math.random() * 3), columnCount - column)
+                : 1;
+            const columns = Array.from({ length: groupWidth }, function (_, offset) {
+                return {
+                    x: (column + offset) * 14 + 7,
+                    offset: Math.random() * (groupWidth > 1 ? 5 : 14),
+                    length: 5 + Math.floor(Math.random() * 12),
+                    glyphs: Array.from({ length: 16 }, randomMatrixGlyph)
+                };
+            });
+
+            matrixRainStreams.push({
+                y: Math.random() * matrixRainCanvas.height - matrixRainCanvas.height,
+                speed: 1.2 + Math.random() * 1.4,
+                length: Math.max.apply(null, columns.map(function (item) {
+                    return item.length;
+                })),
+                active: Math.random() < (groupWidth > 1 ? 0.62 : 0.32),
+                columns: columns
+            });
+
+            column += groupWidth;
+        }
+    }
+
+    function randomMatrixGlyph() {
+        const choice = Math.random();
+        const glyphs = choice < 0.4
+            ? 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン'
+            : choice < 0.8
+                ? '0123456789'
+                : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return glyphs.charAt(Math.floor(Math.random() * glyphs.length));
+    }
+
+    function drawMatrixRain(timestamp) {
+        matrixRainFrame = 0;
+
+        if (!matrixRainCanvas || document.hidden) {
+            return;
+        }
+
+        if (timestamp - matrixRainLastFrame < 32) {
+            matrixRainFrame = window.requestAnimationFrame(drawMatrixRain);
+            return;
+        }
+
+        const context = matrixRainCanvas.getContext('2d');
+
+        if (!context) {
+            stopMatrixRain();
+            return;
+        }
+
+        const delta = Math.min((timestamp - (matrixRainLastFrame || timestamp)) / 16.67, 3);
+        matrixRainLastFrame = timestamp;
+        context.clearRect(0, 0, matrixRainCanvas.width, matrixRainCanvas.height);
+        context.font = '14px "IBM Plex Mono", monospace';
+        context.textAlign = 'center';
+
+        matrixRainStreams.forEach(function (group) {
+            if (!group.active) {
+                return;
+            }
+
+            group.columns.forEach(function (column) {
+                const head = group.y + column.offset;
+
+                for (let tail = column.length - 1; tail >= 0; tail--) {
+                    const y = head - tail * 18;
+
+                    if (y < -18 || y > matrixRainCanvas.height + 18) {
+                        continue;
+                    }
+
+                    const isHead = tail === 0;
+                    const alpha = 0.035 + (1 - tail / column.length) * 0.24;
+                    context.fillStyle = isHead
+                        ? 'rgba(190, 255, 190, 0.78)'
+                        : 'rgba(35, 205, 91, ' + alpha.toFixed(3) + ')';
+                    context.fillText(column.glyphs[tail], column.x, y);
+
+                    if (Math.random() < 0.035) {
+                        column.glyphs[tail] = randomMatrixGlyph();
+                    }
+                }
+            });
+
+            group.y += group.speed * delta;
+
+            if (group.y - group.length * 18 > matrixRainCanvas.height) {
+                group.y = -Math.random() * matrixRainCanvas.height * 0.7;
+                group.speed = 1.2 + Math.random() * 1.4;
+                group.columns.forEach(function (column) {
+                    column.length = 5 + Math.floor(Math.random() * 12);
+                });
+                group.length = Math.max.apply(null, group.columns.map(function (column) {
+                    return column.length;
+                }));
+                group.active = Math.random() < (group.columns.length > 1 ? 0.62 : 0.32);
+            }
+        });
+
+        if (matrixRainHeroCanvas && matrixRainHero) {
+            const rect = matrixRainHero.getBoundingClientRect();
+            const left = Math.max(0, rect.left);
+            const top = Math.max(0, rect.top);
+            const right = Math.min(matrixRainCanvas.width, rect.right);
+            const bottom = Math.min(matrixRainCanvas.height, rect.bottom);
+            const heroContext = matrixRainHeroCanvas.getContext('2d');
+
+            if (heroContext) {
+                heroContext.clearRect(
+                    0,
+                    0,
+                    matrixRainHeroCanvas.width,
+                    matrixRainHeroCanvas.height
+                );
+
+                if (right > left && bottom > top) {
+                    heroContext.drawImage(
+                        matrixRainCanvas,
+                        left,
+                        top,
+                        right - left,
+                        bottom - top,
+                        left - rect.left,
+                        top - rect.top,
+                        right - left,
+                        bottom - top
+                    );
+                }
+            }
+        }
+
+        matrixRainFrame = window.requestAnimationFrame(drawMatrixRain);
+    }
+
+    function onMatrixRainVisibilityChange() {
+        if (document.hidden) {
+            if (matrixRainFrame) {
+                window.cancelAnimationFrame(matrixRainFrame);
+                matrixRainFrame = 0;
+            }
+        } else if (matrixRainCanvas && !matrixRainFrame) {
+            matrixRainFrame = window.requestAnimationFrame(drawMatrixRain);
+        }
+    }
+
+    function syncMatrixRain() {
+        const shouldRun = !reducedMotion.matches && isMatrixRainTime();
+
+        if (!shouldRun) {
+            stopMatrixRain();
+            return;
+        }
+
+        if (matrixRainCanvas) {
+            return;
+        }
+
+        matrixRainCanvas = document.createElement('canvas');
+        matrixRainCanvas.className = 'matrix-rain matrix-rain--global';
+        matrixRainCanvas.setAttribute('aria-hidden', 'true');
+        document.body.insertBefore(matrixRainCanvas, document.body.firstChild);
+        matrixRainHero = document.querySelector(
+            '#content > .page-top.home-hero, #content > .page-top.about-hero'
+        );
+
+        if (matrixRainHero) {
+            matrixRainHeroCanvas = document.createElement('canvas');
+            matrixRainHeroCanvas.className = 'matrix-rain matrix-rain--hero';
+            matrixRainHeroCanvas.setAttribute('aria-hidden', 'true');
+            matrixRainHero.insertBefore(
+                matrixRainHeroCanvas,
+                matrixRainHero.firstChild
+            );
+        }
+
+        resizeMatrixRain();
+        document.addEventListener('visibilitychange', onMatrixRainVisibilityChange);
+        window.addEventListener('resize', resizeMatrixRain, { passive: true });
+
+        if (!document.hidden) {
+            matrixRainFrame = window.requestAnimationFrame(drawMatrixRain);
+        }
+    }
+
+    syncMatrixRain();
+    window.setInterval(syncMatrixRain, 30000);
+    reducedMotion.addEventListener('change', syncMatrixRain);
 
     // -----------------------------------------------------------------------
     // Weather particles remain off until a weather response confirms rain
@@ -636,76 +889,6 @@
         return 'Night';
     }
 
-    function parseWeatherTimestamp(value, timeZone) {
-        const match = String(value || '').trim().match(
-            /^(\d{4})-(\d{2})-(\d{2})[T\s]+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?/i
-        );
-
-        if (!match) {
-            return Date.now();
-        }
-
-        let hour = parseInt(match[4], 10);
-        const minute = parseInt(match[5], 10);
-        const second = parseInt(match[6] || '0', 10);
-
-        if (match[7]) {
-            const period = match[7].toUpperCase();
-            if (period === 'PM' && hour < 12) {
-                hour += 12;
-            } else if (period === 'AM' && hour === 12) {
-                hour = 0;
-            }
-        }
-
-        const localTimestamp = Date.UTC(
-            parseInt(match[1], 10),
-            parseInt(match[2], 10) - 1,
-            parseInt(match[3], 10),
-            hour,
-            minute,
-            second
-        );
-
-        let timestamp = localTimestamp;
-
-        try {
-            const parts = new Intl.DateTimeFormat('en-US', {
-                timeZone: timeZone,
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hourCycle: 'h23'
-            }).formatToParts(new Date(localTimestamp));
-            const values = {};
-            parts.forEach(function (part) {
-                if (part.type !== 'literal') {
-                    values[part.type] = parseInt(part.value, 10);
-                }
-            });
-            const zonedTimestamp = Date.UTC(
-                values.year,
-                values.month - 1,
-                values.day,
-                values.hour,
-                values.minute,
-                values.second
-            );
-            timestamp = localTimestamp - (zonedTimestamp - localTimestamp);
-        } catch (error) {
-            timestamp = localTimestamp;
-        }
-
-        if (!match[6]) {
-            timestamp += Date.now() % 60000;
-        }
-
-        return timestamp;
-    }
-
     function getTimezone(data) {
         const timeZone = data.timezone ||
             Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
@@ -759,9 +942,7 @@
             return;
         }
 
-        const now = new Date(
-            weatherClock.timestamp + Date.now() - weatherClock.startedAt
-        );
+        const now = new Date();
         const clockParts = weatherClock.partsFormatter.formatToParts(now);
         const values = {};
         clockParts.forEach(function (part) {
@@ -799,9 +980,6 @@
         weatherDisplay.querySelector('[data-weather-condition]').textContent = details;
         updateWeatherIcon(data);
         weatherClock = {
-            timestamp: parseWeatherTimestamp(data.time, timeZone),
-            startedAt: Date.now(),
-            timeZone: timeZone,
             location: location,
             details: details,
             timeFormatter: new Intl.DateTimeFormat('en-US', {
@@ -1031,6 +1209,10 @@
             return;
         }
 
+        if (!opacityRevealsEnabled) {
+            return;
+        }
+
         const vh = window.innerHeight || 1;
 
         contentElements.forEach(function (el) {
@@ -1075,6 +1257,37 @@
         });
     }
 
+    function disableOpacityRevealsOnFastScroll() {
+        const now = performance.now();
+        const position = window.scrollY;
+        const elapsed = now - scrollSamples[0].time;
+        const baseline = scrollSamples.find(function (sample) {
+            return now - sample.time >= 80;
+        });
+        const averageSpeed = baseline
+            ? Math.abs(position - baseline.position) / (now - baseline.time)
+            : 0;
+        const largeJump = Math.abs(position - scrollSamples[scrollSamples.length - 1].position) >
+            window.innerHeight * 2.5;
+
+        scrollSamples.push({ position: position, time: now });
+
+        while (
+            scrollSamples.length > 1 &&
+            now - scrollSamples[0].time > 250
+        ) {
+            scrollSamples.shift();
+        }
+
+        if (
+            opacityRevealsEnabled &&
+            (largeJump || (elapsed >= 80 && averageSpeed > FAST_SCROLL_THRESHOLD))
+        ) {
+            opacityRevealsEnabled = false;
+            document.documentElement.classList.add('fast-scroll');
+        }
+    }
+
     function paint() {
         framePending = false;
 
@@ -1082,6 +1295,7 @@
             nav.classList.toggle('is-scrolled', window.scrollY > 24);
         }
 
+        disableOpacityRevealsOnFastScroll();
         applyContentParallax();
 
         if (!hero) {
@@ -1133,7 +1347,7 @@
     // Scroll-triggered reveals
     // -----------------------------------------------------------------------
     const REVEAL_SELECTOR =
-        '.tile, .book-section, #content > section, .contact-card, .game, .log-card, .song, .about-shell section, #footer';
+        '.tile, .book-section, #content > section, .contact-card, .games-list .game, .log-card, .song, .about-shell section, #footer';
 
     function setupReveals() {
         const root = document.documentElement;
@@ -1196,7 +1410,7 @@
     // Pointer tilt
     // -----------------------------------------------------------------------
     const TILT_SELECTOR =
-        '.tile, .contact-card, .game, .item.info, #content > section, .about-shell section, .log-card, .song';
+        '.tile, .contact-card, .games-list .game, .item.info, #content > section, .about-shell section, .log-card, .song';
 
     let tiltTarget = null;
     let tiltFrame = 0;

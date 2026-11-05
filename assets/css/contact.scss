@@ -4,26 +4,11 @@
 // ============================================================================
 // CONTACT.SCSS - Contact Page Styles
 // ============================================================================
-// Page-specific overrides for src/html/contact.html
+// Page-specific overrides for pages/contact.html
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
-$surface: rgb(23, 31, 41);
-$surface-raised: rgb(27, 38, 50);
-$border-color: rgba(112, 158, 189, 0.28);
-$text: rgb(220, 231, 241);
-$muted: rgb(168, 186, 203);
-$accent: rgb(209, 73, 73);
-$link: rgb(126, 191, 255);
-
-@keyframes contact-rise {
-    from {
-        transform: translateY(10px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
+@import "page-palette";
 
 #site {
     background-color: rgb(30, 30, 31);
@@ -36,40 +21,7 @@ $link: rgb(126, 191, 255);
             background-image:
                 linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
                 url('/src/images/contact/contact-top.jpg');
-            height: 340px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 0;
             border-bottom: 1px solid $border-color;
-
-            .contact-preamble h1 {
-                font-size: clamp(2.6rem, 5vw, 3.8rem);
-                letter-spacing: -0.05em;
-                margin-bottom: 8px;
-                text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
-            }
-
-            .contact-explanation {
-                max-width: 920px;
-                margin: 0 auto;
-
-                p {
-                    color: rgb(236, 243, 249);
-                    font-size: 18px;
-                    line-height: 1.6;
-                    margin-bottom: 8px;
-                    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
-                }
-            }
-
-            @media only screen and (max-width: 768px) {
-                height: 300px;
-
-                .contact-explanation p {
-                    font-size: 15px;
-                }
-            }
         }
 
         .contact-list {
@@ -92,7 +44,7 @@ $link: rgb(126, 191, 255);
                 border-radius: 2px;
                 box-shadow: var(--elev-1, 0 12px 30px rgba(0, 0, 0, 0.28));
                 transition: transform 0.22s ease-out, border-color 0.28s ease, box-shadow 0.28s ease;
-                animation: contact-rise 0.5s ease backwards;
+                animation: rise-from-10 0.5s ease backwards;
 
                 &::before {
                     content: "";

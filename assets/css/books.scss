@@ -4,7 +4,7 @@
 // ============================================================================
 // BOOKS.SCSS - The Library Alcove
 // ============================================================================
-// Editorial two-column layout for src/html/books.html
+// Editorial two-column layout for pages/books.html
 // ============================================================================
 
 #site #content {
@@ -29,12 +29,7 @@
     border: 1px solid var(--line);
     border-radius: 2px;
     box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
-    animation: book-rise 0.6s ease both;
-}
-
-@keyframes book-rise {
-    from { transform: translateY(14px); }
-    to { transform: translateY(0); }
+    animation: rise-from-14 0.6s ease both;
 }
 
 .book-layout {

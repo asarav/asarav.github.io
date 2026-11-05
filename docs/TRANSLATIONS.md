@@ -2,9 +2,9 @@
 
 ## Current state
 
-- Static Jekyll site (3.9.5) deployed to GitHub Pages via the default `github-pages` gem build.
+- Static Jekyll site (3.10.0) deployed to GitHub Pages via the default `github-pages` gem build.
 - No i18n infrastructure exists: no `lang` attributes, no locale data, no translation files.
-- Content lives in `_data/*.yaml` (consumption, games, music, books), `src/html/*.html` (page markup), and `_includes/` (nav, footer).
+- Content lives in `_data/*.yaml` (consumption, games, music, books), `pages/*.html` (page markup), and `_includes/` (nav, footer).
 - Copy is hard-coded English in templates and data files.
 
 ## Goal
@@ -48,7 +48,7 @@ Support multiple languages (at minimum English + one other) without breaking the
 
 ### Phase 3 — Translate content (largest effort)
 
-- Translate static page copy in `src/html/*.html` (about, contact, projects intro, games, books, music, log).
+- Translate static page copy in `pages/*.html` (about, contact, projects intro, games, books, music, log).
 - For `_data` (consumption, games, music, books): either maintain parallel files per locale (`_data/es/consumption.yaml`) or keep English-only and translate only titles/explanations incrementally.
 - Add `hreflang` alternates in `<head>`.
 
@@ -67,7 +67,7 @@ Support multiple languages (at minimum English + one other) without breaking the
 | `_config.yml` | languages, polyglot config, plugins |
 | `Gemfile` / new `Gemfile.ci` | polyglot gem (CI only) |
 | `.github/workflows/pages.yml` | new — custom build + deploy |
-| `src/html/*.html` | wrap copy in i18n keys or create per-locale copies |
+| `pages/*.html` | wrap copy in i18n keys or create per-locale copies |
 | `_data/i18n/*.yml` | new — UI strings |
 | `assets/css/main.scss` | switcher styling |
 

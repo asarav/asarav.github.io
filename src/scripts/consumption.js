@@ -83,6 +83,8 @@
     // Track only the cards crossing the middle of the viewport. This keeps
     // the rail stable even when several cards are visible at once.
     const activeItems = new Set();
+    const parallaxItems = new Set();
+    let parallaxDisabled = false;
 
     function findClosestToCenter(candidates) {
         const center = window.innerHeight / 2;
@@ -142,6 +144,85 @@
         })
         : null;
 
+    const parallaxObserver = canObserve
+        ? new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    parallaxItems.add(entry.target);
+                } else {
+                    if (
+                        !reducedMotion.matches &&
+                        !document.documentElement.classList.contains('fast-scroll')
+                    ) {
+                        updateItemParallax(entry.target);
+                    } else {
+                        entry.target.style.removeProperty('--section-opacity');
+                    }
+
+                    parallaxItems.delete(entry.target);
+                }
+            });
+
+            updateConsumptionParallax();
+        }, {
+            rootMargin: '100% 0px',
+            threshold: 0
+        })
+        : null;
+
+    function updateItemParallax(item) {
+        const height = window.innerHeight || 1;
+        const rect = item.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const half = height / 2;
+        const span = half + rect.height * 0.5;
+        const distance = Math.abs(center - half);
+        const deadZone = span * 0.2;
+        const fadeRange = span - deadZone;
+        const edge = fadeRange > 0
+            ? Math.min(1, Math.max(0, (distance - deadZone) / fadeRange))
+            : 0;
+
+        item.style.setProperty(
+            '--section-opacity',
+            (1 - edge * 0.4).toFixed(3)
+        );
+    }
+
+    function updateConsumptionParallax() {
+        if (parallaxDisabled) {
+            return;
+        }
+
+        if (document.documentElement.classList.contains('fast-scroll')) {
+            parallaxItems.forEach(function (item) {
+                item.style.removeProperty('--section-opacity');
+            });
+            parallaxItems.clear();
+            parallaxDisabled = true;
+
+            if (parallaxObserver) {
+                parallaxObserver.disconnect();
+            }
+
+            return;
+        }
+
+        if (reducedMotion.matches) {
+            parallaxItems.forEach(function (item) {
+                item.style.removeProperty('--section-opacity');
+            });
+
+            return;
+        }
+
+        parallaxItems.forEach(updateItemParallax);
+    }
+
+    if (reducedMotion.addEventListener) {
+        reducedMotion.addEventListener('change', updateConsumptionParallax);
+    }
+
     function updateActiveFallback() {
         const list = window.matchMedia('(max-width: 768px)').matches
             ? mobileItems
@@ -154,8 +235,6 @@
         }
     }
 
-    // Reveal cards once, just below the fold, so content never flashes in
-    // after the page has already been painted.
     const revealObserver = canObserve && !reducedMotion.matches
         ? new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
@@ -163,25 +242,25 @@
                     return;
                 }
 
-                const item = entry.target;
-
-                item.classList.add('is-revealed');
-                revealObserver.unobserve(item);
+                entry.target.classList.add('is-revealed');
+                revealObserver.unobserve(entry.target);
             });
         }, {
-            rootMargin: '0px 0px -6% 0px',
+            rootMargin: '0px 0px 12% 0px',
             threshold: 0.05
         })
         : null;
 
     function prepareReveal(item) {
-        if (!revealObserver || item.classList.contains('will-reveal')) {
+        if (
+            !revealObserver ||
+            document.documentElement.classList.contains('fast-scroll') ||
+            item.classList.contains('will-reveal')
+        ) {
             return;
         }
 
-        const rect = item.getBoundingClientRect();
-
-        if (rect.top < window.innerHeight * 0.94) {
+        if (item.getBoundingClientRect().top < window.innerHeight * 0.94) {
             return;
         }
 
@@ -196,6 +275,14 @@
 
         if (activeObserver) {
             activeObserver.observe(item);
+        }
+
+        if (
+            parallaxObserver &&
+            !parallaxDisabled &&
+            !document.documentElement.classList.contains('fast-scroll')
+        ) {
+            parallaxObserver.observe(item);
         }
 
         prepareReveal(item);
@@ -271,6 +358,7 @@
 
         updateProgress();
         updateChronologyVisibility();
+        updateConsumptionParallax();
 
         if (!activeObserver) {
             updateActiveFallback();

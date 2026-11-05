@@ -24,7 +24,6 @@ node_modules/
 # Ruby / Jekyll
 _site/
 .bundle/
-Gemfile.lock
 
 # IDEs
 .vscode/

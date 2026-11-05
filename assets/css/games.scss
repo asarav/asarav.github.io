@@ -4,7 +4,7 @@
 // ============================================================================
 // GAMES.SCSS - The Arcade Wing
 // ============================================================================
-// Sharp, architectural card language for src/html/games.html
+// Sharp, architectural card language for pages/games.html
 // ============================================================================
 
 #site #content {
@@ -38,7 +38,7 @@
         overflow: hidden;
         color: var(--frost);
         transition: transform 0.22s ease-out, border-color 0.35s ease, box-shadow 0.35s ease;
-        animation: game-rise 0.6s ease backwards;
+        animation: rise-from-14 0.6s ease backwards;
 
         &::before {
             content: "";
@@ -196,15 +196,6 @@
                 font-size: 0.95rem;
             }
         }
-    }
-}
-
-@keyframes game-rise {
-    from {
-        transform: translateY(14px);
-    }
-    to {
-        transform: translateY(0);
     }
 }
 

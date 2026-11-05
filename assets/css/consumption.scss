@@ -4,17 +4,11 @@
 // ============================================================================
 // CONSUMPTION.SCSS - Media Consumption Page Styles
 // ============================================================================
-// Page-specific overrides for src/html/consumption.html
+// Page-specific overrides for pages/consumption.html
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
-$surface: rgb(23, 31, 41);
-$surface-raised: rgb(27, 38, 50);
-$border-color: rgba(112, 158, 189, 0.28);
-$text: rgb(220, 231, 241);
-$muted: rgb(168, 186, 203);
-$accent: rgb(209, 73, 73);
-$link: rgb(126, 191, 255);
+@import "page-palette";
 
 $types: (
     anime: (rgb(230, 120, 90), "Anime"),
@@ -41,11 +35,6 @@ $types: (
             background-image:
                 linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
                 url('/src/images/media/media-top.jpg');
-            height: 340px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 0;
             border-bottom: 1px solid $border-color;
 
             &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
@@ -75,16 +64,7 @@ $types: (
             }
 
             .consumption-explanation {
-                max-width: 920px;
-                margin: 0 auto;
-
                 p {
-                    color: rgb(236, 243, 249);
-                    font-size: 17px;
-                    line-height: 1.6;
-                    margin-bottom: 6px;
-                    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
-
                     a {
                         color: rgb(255, 255, 255);
                         text-decoration: underline;
@@ -97,13 +77,6 @@ $types: (
                 }
             }
 
-            @media only screen and (max-width: 768px) {
-                height: 320px;
-
-                .consumption-explanation p {
-                    font-size: 15px;
-                }
-            }
         }
 
         .consumption-body {
@@ -265,6 +238,7 @@ $types: (
                 border: 1px solid $border-color;
                 border-radius: 2px;
                 box-shadow: var(--elev-1, 0 12px 30px rgba(0, 0, 0, 0.28));
+                opacity: var(--section-opacity, 1);
                 transition: transform 0.22s ease-out, border-color 0.28s ease, box-shadow 0.28s ease, opacity 0.45s ease;
 
                 &::before {
@@ -494,6 +468,12 @@ $types: (
             }
         }
     }
+}
+
+html.fast-scroll #site #content .consumption-list .item.info {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -207,6 +207,26 @@ img:hover {
   opacity: 0.64;
 }
 
+.matrix-rain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.38;
+  mix-blend-mode: screen;
+}
+
+.matrix-rain--global {
+  z-index: -1;
+}
+
+.matrix-rain--hero {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.3;
+}
+
 #footer {
   position: relative;
   z-index: 2;
@@ -227,13 +247,21 @@ img:hover {
 
 #content > section,
 .about-shell section,
-.consumption-list .item.info,
-.game,
+.games-list .game,
 .log-card,
 .song {
   translate: 0 var(--section-shift, 0px);
   opacity: var(--section-opacity, 1);
   transition: translate 0.2s ease, opacity 0.2s ease;
+}
+
+html.fast-scroll #content > section,
+html.fast-scroll .about-shell section,
+html.fast-scroll .games-list .game,
+html.fast-scroll .log-card,
+html.fast-scroll .song {
+  opacity: 1 !important;
+  transition: none !important;
 }
 
 // ===========================================================================
@@ -531,12 +559,12 @@ body.home-page #navbar {
     background: radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(4, 8, 12, 0.58) 100%);
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
     position: relative;
     z-index: 2;
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
     transform: translate3d(0, var(--hero-shift, 0px), 0);
     opacity: var(--hero-opacity, 1);
   }
@@ -1480,10 +1508,41 @@ body.home-page #navbar {
     .footer-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .footer-column:nth-child(3) {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: start;
+
+      .footer-label {
+        grid-column: 1 / -1;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 560px) {
+  #footer {
+    .footer-grid {
+      column-gap: 20px;
+      row-gap: 24px;
+    }
+
+    .footer-column:nth-child(3) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer-base {
+      padding-top: 18px;
+      gap: 10px;
+      font-size: 0.56rem;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+@media only screen and (max-width: 360px) {
   #footer {
     .footer-base {
       flex-direction: column;
@@ -1510,7 +1569,7 @@ body.home-page #navbar {
   border-bottom: 1px solid var(--line);
   background-repeat: no-repeat;
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
     width: 100%;
     max-width: var(--content-max);
     margin-left: auto;
@@ -1591,6 +1650,26 @@ body.home-page #navbar {
   }
 }
 
+@keyframes rise-from-10 {
+  from {
+    transform: translateY(10px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-from-14 {
+  from {
+    transform: translateY(14px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
 // Scroll-triggered reveals: rise animations wait at their opening frame until
 
 // the element is actually on screen. Opacity is left to the parallax system.
@@ -1600,7 +1679,7 @@ body.home-page #navbar {
   .js-motion .book-section,
   .js-motion #content > section,
   .js-motion .contact-card,
-  .js-motion .game,
+  .js-motion .games-list .game,
   .js-motion .log-card,
   .js-motion .song,
   .js-motion .about-shell section {
@@ -1611,7 +1690,7 @@ body.home-page #navbar {
   .js-motion .book-section.is-revealed,
   .js-motion #content > section.is-revealed,
   .js-motion .contact-card.is-revealed,
-  .js-motion .game.is-revealed,
+  .js-motion .games-list .game.is-revealed,
   .js-motion .log-card.is-revealed,
   .js-motion .song.is-revealed,
   .js-motion .about-shell section.is-revealed {
@@ -1719,7 +1798,7 @@ img {
     scroll-behavior: auto !important;
   }
 
-  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg) {
+  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
     transform: none !important;
     opacity: 1 !important;
   }
@@ -1775,7 +1854,7 @@ body.is-boosted #site {
   position: absolute;
   top: clamp(48px, 7vw, 88px);
   right: clamp(24px, 4vw, 48px);
-  z-index: 0;
+  z-index: 2;
   margin: 0;
   color: rgba(183, 216, 230, 0.055);
   font-family: var(--font-display);

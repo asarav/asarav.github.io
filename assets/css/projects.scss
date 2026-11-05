@@ -4,17 +4,11 @@
 // ============================================================================
 // PROJECTS.SCSS - Projects Page Styles
 // ============================================================================
-// Page-specific overrides for src/html/projects.html
+// Page-specific overrides for pages/projects.html
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
-$surface: rgb(23, 31, 41);
-$surface-raised: rgb(27, 38, 50);
-$border-color: rgba(112, 158, 189, 0.28);
-$text: rgb(220, 231, 241);
-$muted: rgb(168, 186, 203);
-$accent: rgb(209, 73, 73);
-$link: rgb(126, 191, 255);
+@import "page-palette";
 
 @keyframes project-rise {
     from {
@@ -37,37 +31,7 @@ $link: rgb(126, 191, 255);
             background-image:
                 linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
                 url('/src/images/projects/projects-top.jpg');
-            height: 340px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 0;
             border-bottom: 1px solid $border-color;
-
-            .projects-preamble h1 {
-                font-size: clamp(2.6rem, 5vw, 3.8rem);
-                letter-spacing: -0.05em;
-                margin-bottom: 8px;
-                text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
-            }
-            .projects-explanation {
-                max-width: 920px;
-                margin: 0 auto;
-                p {
-                    color: rgb(236, 243, 249);
-                    font-size: 18px;
-                    line-height: 1.6;
-                    margin-bottom: 8px;
-                    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
-                }
-            }
-
-            @media only screen and (max-width: 768px) {
-                height: 300px;
-                .projects-explanation p {
-                    font-size: 15px;
-                }
-            }
         }
 
         // Breathing room between the hero and the first project card.
@@ -112,12 +76,15 @@ $link: rgb(126, 191, 255);
                 box-shadow: 0 20px 46px rgba(0, 0, 0, 0.42);
                 transform: translateY(-2px);
             }
-&:active {
+
+            &:active {
                 border-color: var(--signal);
                 box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+
                 h1 {
                     color: var(--signal);
                 }
+
                 a {
                     color: var(--ice);
                 }

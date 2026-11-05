@@ -4,7 +4,7 @@ A Jekyll-based personal portfolio website showcasing projects, games, music, boo
 
 ## Prerequisites
 
-- **Ruby** 2.7+ (required for Jekyll)
+- **Ruby** 3.2+ (required by the current locked dependencies)
 - **Bundler** (Ruby dependency manager)
 
 ## Installation
@@ -50,12 +50,13 @@ Updates all gems to their latest compatible versions.
 ├── _data/                   # YAML data used by page templates
 ├── _includes/               # Shared HTML partials
 ├── _layouts/                # Shared page layouts
+├── _sass/                   # Shared Sass variables and partials
 ├── assets/css/              # SCSS sources; Jekyll emits matching CSS here
 ├── index.html               # Home page
+├── pages/                   # Content templates with explicit permalinks
 ├── src/
-│   ├── html/                # Content pages, published via their permalink front matter
 │   ├── images/              # Site, project, and game images
-│   ├── scripts/             # Site and page JavaScript
+│   ├── scripts/             # Site and page JavaScript (served at /src/scripts/)
 │   ├── assets/              # Third-party logos and other static assets
 │   ├── games/               # Standalone Unity game builds
 │   ├── projects/            # Downloadable/model project files
@@ -64,15 +65,16 @@ Updates all gems to their latest compatible versions.
 └── _site/                   # Generated site output (git-ignored)
 ```
 
-This layout follows Jekyll's special root-level folders for templates, data, and
-styles while keeping the larger collection of published media and standalone
-builds under `src/`. Moving those assets would change their public URLs, so the
-current split is intentional rather than a second source tree.
+Page templates are grouped under `pages/`; their explicit permalinks keep the
+published routes independent of their source location. The larger media files
+and standalone builds remain under `src/` because their paths are published
+URLs. Site JavaScript stays at `/src/scripts/` for the same reason.
 
 ## Key Technologies
 
-- **Jekyll** 3.9.5 - Static site generator
+- **Jekyll** 3.10.0 - Static site generator (GitHub Pages-compatible)
 - **Bootstrap** 5.3.8 - Responsive CSS framework
+- **p5.js** 1.11.13 and **ml5.js** 0.12.2 - Legacy interactive machine-learning demos
 - **SCSS** - CSS preprocessing
 - **Vanilla JavaScript** - ES6+ for interactivity (no jQuery)
 
