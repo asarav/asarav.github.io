@@ -386,6 +386,69 @@
     }
 
     // -----------------------------------------------------------------------
+    // Scroll-triggered reveals
+    // -----------------------------------------------------------------------
+    const REVEAL_SELECTOR =
+        '.tile, .book-section, #content > section, .contact-card, .game, .log-card, .song, .about-shell section';
+
+    function setupReveals() {
+        const root = document.documentElement;
+
+        if (!root.classList.contains('js-motion')) {
+            return;
+        }
+
+        const targets = Array.from(document.querySelectorAll(REVEAL_SELECTOR));
+
+        function reveal(target) {
+            target.classList.add('is-revealed');
+        }
+
+        // The inline head script only adds js-motion when the API exists, but
+        // keep this defensive for older browsers and reduced-motion users.
+        if (reducedMotion.matches || typeof IntersectionObserver === 'undefined') {
+            targets.forEach(reveal);
+            root.classList.add('motion-ready');
+
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    reveal(entry.target);
+                    observer.unobserve(entry.target);
+                });
+            },
+            {
+                rootMargin: '0px 0px -8% 0px',
+                threshold: 0
+            }
+        );
+
+        targets.forEach(function (target) {
+            observer.observe(target);
+        });
+
+        reducedMotion.addEventListener('change', function () {
+            if (!reducedMotion.matches) {
+                return;
+            }
+
+            targets.forEach(reveal);
+            observer.disconnect();
+        });
+
+        root.classList.add('motion-ready');
+    }
+
+    setupReveals();
+
+    // -----------------------------------------------------------------------
     // Pointer tilt
     // -----------------------------------------------------------------------
     const TILT_SELECTOR =

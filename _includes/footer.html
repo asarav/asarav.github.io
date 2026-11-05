@@ -1,24 +1,33 @@
 <footer id="footer" class="footer">
-    <div class="container-fluid">
-        <div class="row text-center">
-            <div class="col-12 col-md-2 d-none d-md-block"></div>
-            <div class="col-12 col-md-8 copyright text-center">Copyright © 2026. All rights reserved.</div>
-            <div class="col-12 col-md-2 contact d-flex justify-content-center justify-content-md-end gap-2">
-                <a href="https://www.linkedin.com/in/avinash-saravanan-profile/" data-bs-toggle="tooltip" title="LinkedIn" target="_blank">
-                    <img src="{{ 'src/assets/linkedin-in-for-screen/LinkedIn_in_for_Screen/2-Color/In-2C-21px-R.png' | relative_url }}" height="20" width="30" alt="LinkedIn">
-                </a>
-                <a href="https://github.com/asarav" data-bs-toggle="tooltip" title="Github" target="_blank">
-                    <img src="{{ 'src/assets/GitHub-Mark/GitHub-Mark/PNG/GitHub-Mark-32px.png' | relative_url }}" height="22" width="22" alt="GitHub">
-                </a>
-                <a href="https://www.hackerrank.com/asarav?hr_r=1" data-bs-toggle="tooltip" title="Hackerrank" target="_blank">
-                    <img src="{{ 'src/assets/Hackerrank/hackerrank-logo.svg' | relative_url }}" height="22" width="22" alt="HackerRank">
-                </a>
-                <a href="https://www.khanacademy.org/profile/asarav/" data-bs-toggle="tooltip" title="Khan Academy" target="_blank">
-                    <img src="{{ 'src/assets/Khan Academy/favicon.ico' | relative_url }}" height="22" width="22" alt="Khan Academy">
-                </a>
+    <div class="footer-inner">
+        <nav class="footer-grid" aria-label="Footer">
+            <div class="footer-column">
+                <p class="footer-label">Index</p>
+                <a href="{{ '/projects/' | relative_url }}">Projects</a>
+                <a href="{{ '/music/' | relative_url }}">Music</a>
+                <a href="{{ '/games/' | relative_url }}">Games</a>
+                <a href="{{ '/books/' | relative_url }}">Books</a>
             </div>
+            <div class="footer-column">
+                <p class="footer-label">Archive</p>
+                <a href="{{ '/consumption/' | relative_url }}">Media Consumption</a>
+                <a href="{{ '/about/' | relative_url }}">About</a>
+                <a href="{{ '/log/' | relative_url }}">Log</a>
+                <a href="{{ '/contact/' | relative_url }}">Contact</a>
+            </div>
+            <div class="footer-column">
+                <p class="footer-label">Elsewhere</p>
+                <a href="https://github.com/asarav" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+                <a href="https://www.linkedin.com/in/avinash-saravanan-profile/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+                <a href="https://medium.com/@asarav" target="_blank" rel="noopener">Medium <span aria-hidden="true">↗</span></a>
+                <a href="https://scholar.google.com/citations?hl=en&amp;user=COg2LBoAAAAJ" target="_blank" rel="noopener">Scholar <span aria-hidden="true">↗</span></a>
+            </div>
+        </nav>
+
+        <div class="footer-base">
+            <p>© <span data-footer-year>2026</span> Avinash Saravanan</p>
+            <a class="footer-top" href="#site">Back to top <span aria-hidden="true">↑</span></a>
         </div>
     </div>
 </footer>
-<script type="text/javascript" src="{{ 'src/scripts/footer.js' | relative_url }}"></script>
-
+<script defer type="text/javascript" src="{{ 'src/scripts/footer.js' | relative_url }}"></script>

@@ -3,6 +3,7 @@ title: Avinash Saravanan, asarav
 description: Personal portfolio website showcasing projects, games, music, books, and media consumption
 author: Avinash Saravanan
 url: https://asarav.github.io
+image: /src/images/homepage_tiles/projects.jpg
 markdown: kramdown
 
 # Build settings
@@ -22,3 +23,22 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+
+# Keep generated source/game builds and repo meta pages out of the sitemap.
+defaults:
+  - scope:
+      path: "src/games"
+    values:
+      sitemap: false
+  - scope:
+      path: "src/projects"
+    values:
+      sitemap: false
+  - scope:
+      path: "CHANGELOG.md"
+    values:
+      sitemap: false
+  - scope:
+      path: "SECURITY.md"
+    values:
+      sitemap: false

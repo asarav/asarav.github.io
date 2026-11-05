@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /consumption/
+
+Sitemap: https://asarav.github.io/sitemap.xml

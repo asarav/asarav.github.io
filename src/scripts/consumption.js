@@ -81,16 +81,16 @@
     // the rail stable even when several cards are visible at once.
     const activeItems = new Set();
 
-    function updateActiveItem() {
-        if (activeItems.size === 0) {
-            return;
-        }
-
+    function findClosestToCenter(candidates) {
         const center = window.innerHeight / 2;
         let best = null;
         let bestDistance = Infinity;
 
-        activeItems.forEach(function (item) {
+        candidates.forEach(function (item) {
+            if (item.classList && item.classList.contains('hidden')) {
+                return;
+            }
+
             const rect = item.getBoundingClientRect();
 
             if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
@@ -106,6 +106,16 @@
                 bestDistance = distance;
             }
         });
+
+        return best;
+    }
+
+    function updateActiveItem() {
+        if (activeItems.size === 0) {
+            return;
+        }
+
+        const best = findClosestToCenter(Array.from(activeItems));
 
         if (best) {
             setChronology(best);
@@ -134,30 +144,7 @@
             ? mobileItems
             : fullItems;
 
-        const center = window.innerHeight / 2;
-        let best = null;
-        let bestDistance = Infinity;
-
-        list.forEach(function (item) {
-            if (item.classList.contains('hidden')) {
-                return;
-            }
-
-            const rect = item.getBoundingClientRect();
-
-            if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
-                return;
-            }
-
-            const distance = Math.abs(
-                rect.top + rect.height / 2 - center
-            );
-
-            if (distance < bestDistance) {
-                best = item;
-                bestDistance = distance;
-            }
-        });
+        const best = findClosestToCenter(list);
 
         if (best) {
             setChronology(best);
