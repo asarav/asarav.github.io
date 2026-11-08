@@ -80,8 +80,8 @@ body#site {
   line-height: 1.65;
   color: var(--frost);
   background-color: var(--ink);
-  background-image: linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/src/images/rain-background.jpg"));
-  background-size: auto, auto, auto, cover;
+  background-image: linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/src/images/rain-background.jpg")), linear-gradient(135deg, #1a2530, #0d1520);
+  background-size: auto, auto, auto, cover, cover;
   background-position: center, center, center, center;
   background-attachment: fixed, fixed, fixed, fixed;
   overflow-x: clip;
@@ -828,7 +828,7 @@ body.home-page #navbar {
   padding-bottom: clamp(24px, 3vh, 36px);
   background-position: 50% var(--hero-bg-pos, 50%);
   background-repeat: no-repeat;
-  background-image: linear-gradient(90deg, rgba(7, 11, 16, 0.78) 0%, rgba(7, 11, 16, 0.5) 48%, rgba(7, 11, 16, 0.72) 100%), linear-gradient(180deg, rgba(7, 11, 16, 0.34) 0%, rgba(7, 11, 16, 0.72) 100%), var(--weather-home-image, url("/src/images/city-rain.jpg"));
+  background-image: linear-gradient(90deg, rgba(7, 11, 16, 0.78) 0%, rgba(7, 11, 16, 0.5) 48%, rgba(7, 11, 16, 0.72) 100%), linear-gradient(180deg, rgba(7, 11, 16, 0.34) 0%, rgba(7, 11, 16, 0.72) 100%), var(--weather-home-image, url("/src/images/city-rain.jpg")), linear-gradient(135deg, #1a2530, #0d1520);
 
   .hero-floor--label {
     top: auto;
