@@ -114,7 +114,7 @@
         const sinceLastTransition = Date.now() - lastTransition;
 
         // Only transition if it has been a while since the last one.
-        if (sinceLastTransition < 1800000) {
+        if (sinceLastTransition < 2700000) {
             return Promise.resolve();
         }
 
