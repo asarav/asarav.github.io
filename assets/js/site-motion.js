@@ -131,54 +131,63 @@
 
         const imageRoot = document.body.dataset.imageRoot || '/src/images/';
         const oldImages = sceneImages[oldScene];
+        const newImages = sceneImages[newScene];
 
-        return new Promise(function (resolve) {
-            const overlay = document.createElement('div');
-            overlay.className = 'scene-timelapse';
-            overlay.style.backgroundImage =
-                'linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)), ' +
-                'url("' + imageRoot + oldImages.background + '")';
-            document.body.appendChild(overlay);
-
-            const hero = document.querySelector('#content > .page-top.home-hero, #content > .page-top.about-hero');
-            let heroOverlay = null;
-            if (hero && oldImages.hero) {
-                heroOverlay = document.createElement('div');
-                heroOverlay.className = 'scene-timelapse scene-timelapse--hero';
-                heroOverlay.style.backgroundImage =
-                    'linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%), ' +
-                    'linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%), ' +
-                    'url("' + imageRoot + oldImages.hero + '")';
-                hero.insertBefore(heroOverlay, hero.firstChild);
-            }
-
-            // Force reflow so the transition runs.
-            void overlay.offsetWidth;
-            if (heroOverlay) {
-                void heroOverlay.offsetWidth;
-            }
-
-            overlay.style.transition = 'opacity ' + duration + 'ms ease';
-            if (heroOverlay) {
-                heroOverlay.style.transition = 'opacity ' + duration + 'ms ease';
-            }
-
-            requestAnimationFrame(function () {
-                overlay.style.opacity = '0';
-                if (heroOverlay) {
-                    heroOverlay.style.opacity = '0';
-                }
+        // Preload the new scene image before starting the crossfade.
+        function preload(src) {
+            return new Promise(function (resolve) {
+                const img = new Image();
+                img.onload = function () { resolve(); };
+                img.onerror = function () { resolve(); };
+                img.src = src;
+                // Resolve after 1.5s even if not loaded.
+                window.setTimeout(resolve, 1500);
             });
+        }
 
-            window.setTimeout(function () {
-                if (overlay.parentNode) {
-                    overlay.parentNode.removeChild(overlay);
-                }
-                if (heroOverlay && heroOverlay.parentNode) {
-                    heroOverlay.parentNode.removeChild(heroOverlay);
-                }
-                resolve();
-            }, duration + 100);
+        const preloadPromise = preload(imageRoot + newImages.background);
+
+        return preloadPromise.then(function () {
+            return new Promise(function (resolve) {
+                const overlay = document.createElement('div');
+                overlay.className = 'scene-timelapse';
+                overlay.style.backgroundImage =
+                    'linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), ' +
+                    'radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), ' +
+                    'radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), ' +
+                    'url("' + imageRoot + oldImages.background + '")';
+                overlay.style.backgroundSize = 'auto, auto, auto, cover';
+                overlay.style.backgroundPosition = 'center, center, center, center';
+                overlay.style.backgroundAttachment = 'fixed, fixed, fixed, fixed';
+                document.body.appendChild(overlay);
+
+                // Non-blocking progress indicator.
+                const progress = document.createElement('div');
+                progress.className = 'scene-timelapse-progress';
+                document.body.appendChild(progress);
+
+                // Force reflow.
+                void overlay.offsetWidth;
+                void progress.offsetWidth;
+
+                overlay.style.transition = 'opacity ' + duration + 'ms ease';
+                progress.style.transition = 'transform ' + duration + 'ms linear';
+
+                requestAnimationFrame(function () {
+                    overlay.style.opacity = '0';
+                    progress.style.transform = 'scaleX(1)';
+                });
+
+                window.setTimeout(function () {
+                    if (overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                    if (progress.parentNode) {
+                        progress.parentNode.removeChild(progress);
+                    }
+                    resolve();
+                }, duration + 100);
+            });
         });
     }
 
