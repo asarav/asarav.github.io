@@ -56,18 +56,11 @@
 
     function storeScene(scene, room, timeScene) {
         try {
-            let existing = {};
-            try {
-                existing = JSON.parse(window.localStorage.getItem(SCENE_STORAGE_KEY) || '{}');
-            } catch (e) {
-                existing = {};
-            }
             window.localStorage.setItem(SCENE_STORAGE_KEY, JSON.stringify({
                 scene: scene,
                 room: room || (window.location.pathname || '/'),
                 timestamp: Date.now(),
-                timeScene: timeScene || existing.timeScene || null,
-                lastTransition: existing.lastTransition || 0
+                timeScene: timeScene || null
             }));
         } catch (error) {
             // Ignore storage failures (private mode, quota, etc.).
@@ -107,15 +100,6 @@
     function runTimelapse(oldScene, newScene, oldRoom) {
         if (!oldScene || !sceneImages[oldScene] || !sceneImages[newScene] ||
             oldScene === newScene || reducedMotion.matches) {
-            return Promise.resolve();
-        }
-
-        const stored = getStoredScene();
-        const lastTransition = stored && stored.lastTransition ? stored.lastTransition : 0;
-        const sinceLastTransition = Date.now() - lastTransition;
-
-        // Only transition if it has been a while since the last one.
-        if (sinceLastTransition < 2700000) {
             return Promise.resolve();
         }
 
@@ -168,14 +152,6 @@
                 window.setTimeout(function () {
                     if (heroOverlay && heroOverlay.parentNode) {
                         heroOverlay.parentNode.removeChild(heroOverlay);
-                    }
-                    // Record that a transition just ran.
-                    try {
-                        const current = JSON.parse(window.localStorage.getItem(SCENE_STORAGE_KEY) || '{}');
-                        current.lastTransition = Date.now();
-                        window.localStorage.setItem(SCENE_STORAGE_KEY, JSON.stringify(current));
-                    } catch (error) {
-                        // Ignore.
                     }
                     resolve();
                 }, duration + 100);
@@ -1202,42 +1178,11 @@
         }
 
         // Determine if a transition should happen.
-        // Only transition between adjacent time-of-day scenes (or when
-        // weather changed but time stayed the same), and only if it has
-        // been at least 45 minutes since the last transition.
+        // Transition whenever the scene changed. No adjacency check, no
+        // time window, no state tracking. Replay on reload is fine.
         let shouldTransition = false;
         if (previousScene && previousScene !== scene) {
-            if (previousTimeScene && currentTimeScene) {
-                const timeOrder = ['night', 'sunrise', 'day', 'sunset'];
-                const i1 = timeOrder.indexOf(previousTimeScene);
-                const i2 = timeOrder.indexOf(currentTimeScene);
-                if (i1 !== -1 && i2 !== -1) {
-                    const diff = Math.abs(i1 - i2);
-                    const adjacent = diff === 1 || diff === timeOrder.length - 1;
-                    if (adjacent) {
-                        shouldTransition = true;
-                    }
-                    // Weather changed but time stayed the same -> transition.
-                    if (previousTimeScene === currentTimeScene) {
-                        shouldTransition = true;
-                    }
-                } else {
-                    // Unknown time scene, allow transition.
-                    shouldTransition = true;
-                }
-            } else {
-                // No time scene info (backward compat), allow transition.
-                shouldTransition = true;
-            }
-        }
-
-        // 45-minute rule.
-        if (shouldTransition) {
-            const lastTransition = storedPrevious && storedPrevious.lastTransition ? storedPrevious.lastTransition : 0;
-            const sinceLastTransition = Date.now() - lastTransition;
-            if (sinceLastTransition < 2700000) {
-                shouldTransition = false;
-            }
+            shouldTransition = true;
         }
 
         // Timelapse from the previous scene to the current one.
