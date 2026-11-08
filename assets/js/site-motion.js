@@ -54,7 +54,7 @@
         }
     }
 
-    function storeScene(scene, room) {
+    function storeScene(scene, room, timeScene) {
         try {
             let existing = {};
             try {
@@ -66,6 +66,7 @@
                 scene: scene,
                 room: room || (window.location.pathname || '/'),
                 timestamp: Date.now(),
+                timeScene: timeScene || existing.timeScene || null,
                 lastTransition: existing.lastTransition || 0
             }));
         } catch (error) {
@@ -1187,7 +1188,9 @@
         const condition = data.condition || weatherCodeToText(code);
         const storedPrevious = getStoredScene();
         const previousScene = storedPrevious ? storedPrevious.scene : null;
+        const previousTimeScene = storedPrevious ? storedPrevious.timeScene : null;
         const scene = setWeatherScene(data);
+        const currentTimeScene = getTimeScene(data);
         const precipitation = getWeatherEffectScene(data);
         const effectScene = precipitation || (scene === 'night' ? 'stars' : null);
 
@@ -1198,8 +1201,47 @@
             rainMultiplier = 1.3;
         }
 
-        // Timelapse from the previous scene to the current one.
+        // Determine if a transition should happen.
+        // Only transition between adjacent time-of-day scenes (or when
+        // weather changed but time stayed the same), and only if it has
+        // been at least 45 minutes since the last transition.
+        let shouldTransition = false;
         if (previousScene && previousScene !== scene) {
+            if (previousTimeScene && currentTimeScene) {
+                const timeOrder = ['night', 'sunrise', 'day', 'sunset'];
+                const i1 = timeOrder.indexOf(previousTimeScene);
+                const i2 = timeOrder.indexOf(currentTimeScene);
+                if (i1 !== -1 && i2 !== -1) {
+                    const diff = Math.abs(i1 - i2);
+                    const adjacent = diff === 1 || diff === timeOrder.length - 1;
+                    if (adjacent) {
+                        shouldTransition = true;
+                    }
+                    // Weather changed but time stayed the same -> transition.
+                    if (previousTimeScene === currentTimeScene) {
+                        shouldTransition = true;
+                    }
+                } else {
+                    // Unknown time scene, allow transition.
+                    shouldTransition = true;
+                }
+            } else {
+                // No time scene info (backward compat), allow transition.
+                shouldTransition = true;
+            }
+        }
+
+        // 45-minute rule.
+        if (shouldTransition) {
+            const lastTransition = storedPrevious && storedPrevious.lastTransition ? storedPrevious.lastTransition : 0;
+            const sinceLastTransition = Date.now() - lastTransition;
+            if (sinceLastTransition < 2700000) {
+                shouldTransition = false;
+            }
+        }
+
+        // Timelapse from the previous scene to the current one.
+        if (shouldTransition) {
             // Stop existing weather effects immediately so they do not show
             // during the transition.
             setWeatherEffect(null);
@@ -1211,7 +1253,7 @@
             setWeatherEffect(effectScene);
         }
 
-        storeScene(scene, window.location.pathname || '/');
+        storeScene(scene, window.location.pathname || '/', currentTimeScene);
     }
 
     if (weatherDisplay) {
