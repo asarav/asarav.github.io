@@ -539,7 +539,7 @@
     function randomMatrixGlyph() {
         const choice = Math.random();
         const glyphs = choice < 0.4
-            ? 'アイウエオカキクケコサシスセソタチツチE��ナニヌネノハヒフヘ�Eマミムメモヤユヨラリルレロワン'
+            ? 'アイウエオカキクケコサシスセソタチツチE��ナニヌネノハヒフヘ�Eマミムメモヤユヨラリルレロワン'
             : choice < 0.8
                 ? '0123456789'
                 : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -1200,8 +1200,10 @@
 
         // Timelapse from the previous scene to the current one.
         if (previousScene && previousScene !== scene) {
-            // Defer the weather canvas until the timelapse finishes so the
-            // particles do not fight the crossfade.
+            // Stop existing weather effects immediately so they do not show
+            // during the transition.
+            setWeatherEffect(null);
+            // Defer the new weather canvas until the timelapse finishes.
             runTimelapse(previousScene, scene).then(function () {
                 setWeatherEffect(effectScene);
             });
