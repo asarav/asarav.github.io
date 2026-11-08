@@ -249,6 +249,36 @@ img:hover {
   opacity: 0.3;
 }
 
+.scene-timelapse {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  will-change: opacity;
+}
+
+.scene-timelapse--hero {
+  position: absolute;
+  z-index: 1;
+  opacity: 1;
+}
+
+body.is-anniversary .page-top {
+  box-shadow: inset 0 0 0 1px rgba(209, 73, 73, 0.18);
+}
+
+body.is-anniversary .page-top::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(209, 73, 73, 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 #footer {
   position: relative;
   z-index: 2;

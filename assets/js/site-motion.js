@@ -34,6 +34,155 @@
     const MATRIX_RAIN_END = 3 * 60 + 30;
 
     // -----------------------------------------------------------------------
+    // Scene memory (timelapse + continuity)
+    // -----------------------------------------------------------------------
+    const SCENE_STORAGE_KEY = 'asarav:lastScene';
+
+    function getStoredScene() {
+        try {
+            const raw = window.localStorage.getItem(SCENE_STORAGE_KEY);
+            if (!raw) {
+                return null;
+            }
+            const parsed = JSON.parse(raw);
+            if (!parsed || !parsed.scene || !sceneImages[parsed.scene]) {
+                return null;
+            }
+            return parsed;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function storeScene(scene, room) {
+        try {
+            window.localStorage.setItem(SCENE_STORAGE_KEY, JSON.stringify({
+                scene: scene,
+                room: room || (window.location.pathname || '/'),
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            // Ignore storage failures (private mode, quota, etc.).
+        }
+    }
+
+    const TIME_PHASES = ['night', 'sunrise', 'day', 'sunset'];
+
+    function timePhaseFromScene(scene) {
+        if (scene === 'sunrise') {
+            return 'sunrise';
+        }
+        if (scene === 'sunset') {
+            return 'sunset';
+        }
+        if (scene === 'night') {
+            return 'night';
+        }
+        return 'day';
+    }
+
+    function phaseSteps(fromPhase, toPhase) {
+        const fromIndex = TIME_PHASES.indexOf(fromPhase);
+        const toIndex = TIME_PHASES.indexOf(toPhase);
+        if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) {
+            return [toPhase];
+        }
+        const steps = [];
+        let index = fromIndex;
+        while (index !== toIndex) {
+            index = (index + 1) % TIME_PHASES.length;
+            steps.push(TIME_PHASES[index]);
+        }
+        return steps;
+    }
+
+    function runTimelapse(oldScene, newScene, oldRoom) {
+        if (!oldScene || !sceneImages[oldScene] || !sceneImages[newScene] ||
+            oldScene === newScene || reducedMotion.matches) {
+            return Promise.resolve();
+        }
+
+        const stored = getStoredScene();
+        const lastVisit = stored && stored.timestamp ? stored.timestamp : Date.now();
+        const deltaMs = Math.max(0, Date.now() - lastVisit);
+        const deltaHours = deltaMs / 3600000;
+
+        const oldPhase = timePhaseFromScene(oldScene);
+        const newPhase = timePhaseFromScene(newScene);
+        const steps = phaseSteps(oldPhase, newPhase);
+        const phaseCount = Math.max(1, steps.length);
+
+        let duration = phaseCount * 800;
+        if (duration < 2000) {
+            duration = 2000;
+        }
+        if (duration > 8000) {
+            duration = 8000;
+        }
+        if (deltaHours > 24) {
+            duration = Math.min(duration, 6000);
+        }
+        if (deltaHours > 168) {
+            duration = Math.min(duration, 4000);
+        }
+        if (deltaHours < 1) {
+            duration = 1000;
+        }
+
+        const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+        const oldImages = sceneImages[oldScene];
+
+        return new Promise(function (resolve) {
+            const overlay = document.createElement('div');
+            overlay.className = 'scene-timelapse';
+            overlay.style.backgroundImage =
+                'linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)), ' +
+                'url("' + imageRoot + oldImages.background + '")';
+            document.body.appendChild(overlay);
+
+            const hero = document.querySelector('#content > .page-top.home-hero, #content > .page-top.about-hero');
+            let heroOverlay = null;
+            if (hero && oldImages.hero) {
+                heroOverlay = document.createElement('div');
+                heroOverlay.className = 'scene-timelapse scene-timelapse--hero';
+                heroOverlay.style.backgroundImage =
+                    'linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%), ' +
+                    'linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%), ' +
+                    'url("' + imageRoot + oldImages.hero + '")';
+                hero.insertBefore(heroOverlay, hero.firstChild);
+            }
+
+            // Force reflow so the transition runs.
+            void overlay.offsetWidth;
+            if (heroOverlay) {
+                void heroOverlay.offsetWidth;
+            }
+
+            overlay.style.transition = 'opacity ' + duration + 'ms ease';
+            if (heroOverlay) {
+                heroOverlay.style.transition = 'opacity ' + duration + 'ms ease';
+            }
+
+            requestAnimationFrame(function () {
+                overlay.style.opacity = '0';
+                if (heroOverlay) {
+                    heroOverlay.style.opacity = '0';
+                }
+            });
+
+            window.setTimeout(function () {
+                if (overlay.parentNode) {
+                    overlay.parentNode.removeChild(overlay);
+                }
+                if (heroOverlay && heroOverlay.parentNode) {
+                    heroOverlay.parentNode.removeChild(heroOverlay);
+                }
+                resolve();
+            }, duration + 100);
+        });
+    }
+
+    // -----------------------------------------------------------------------
     // Weather effects
     // -----------------------------------------------------------------------
     function startWeatherCanvas(container, type) {
@@ -826,7 +975,26 @@
         return scene;
     }
 
-    setWeatherScene({ code: null });
+    const storedInitialScene = getStoredScene();
+    if (storedInitialScene) {
+        document.body.dataset.weatherScene = storedInitialScene.scene;
+        const storedImages = sceneImages[storedInitialScene.scene];
+        if (storedImages) {
+            const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+            document.body.style.setProperty(
+                '--weather-background-image',
+                'url("' + imageRoot + storedImages.background + '")'
+            );
+            if (document.body.classList.contains('home-page')) {
+                document.body.style.setProperty(
+                    '--weather-home-image',
+                    'url("' + imageRoot + storedImages.hero + '")'
+                );
+            }
+        }
+    } else {
+        setWeatherScene({ code: null });
+    }
 
     function setWeatherEffect(scene) {
         const pageHero = document.querySelector('#content > .page-top');
@@ -1019,6 +1187,8 @@
         const code = data.code;
         const temp = data.temp;
         const condition = data.condition || weatherCodeToText(code);
+        const storedPrevious = getStoredScene();
+        const previousScene = storedPrevious ? storedPrevious.scene : null;
         const scene = setWeatherScene(data);
         const precipitation = getWeatherEffectScene(data);
         const effectScene = precipitation || (scene === 'night' ? 'stars' : null);
@@ -1030,8 +1200,18 @@
             rainMultiplier = 1.3;
         }
 
-        setWeatherEffect(effectScene);
+        // Timelapse from the previous scene to the current one.
+        if (previousScene && previousScene !== scene) {
+            // Defer the weather canvas until the timelapse finishes so the
+            // particles do not fight the crossfade.
+            runTimelapse(previousScene, scene).then(function () {
+                setWeatherEffect(effectScene);
+            });
+        } else {
+            setWeatherEffect(effectScene);
+        }
 
+        storeScene(scene, window.location.pathname || '/');
     }
 
     if (weatherDisplay) {
@@ -1100,9 +1280,10 @@
                     });
                 } else {
                     setWeatherRefreshing(false);
-                    setWeatherScene({ code: null });
+                    var fallbackScene = setWeatherScene({ code: null });
                     setWeatherEffect(null);
                     updateWeatherDisplay({}, 'Weather unavailable');
+                    storeScene(fallbackScene, window.location.pathname || '/');
                 }
             })
             .catch(function () {
@@ -1622,5 +1803,32 @@
 
         updateProgress();
     }
+
+    // -----------------------------------------------------------------------
+    // Calendar: real anniversaries of real events
+    // -----------------------------------------------------------------------
+    (function checkCalendar() {
+        const calendar = window.__calendar;
+        if (!Array.isArray(calendar) || calendar.length === 0) {
+            return;
+        }
+
+        const now = new Date();
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const todayMonth = monthNames[now.getMonth()];
+        const todayDay = String(now.getDate());
+
+        const matches = calendar.filter(function (entry) {
+            return entry.month === todayMonth && String(entry.day) === todayDay;
+        });
+
+        if (matches.length === 0) {
+            return;
+        }
+
+        document.body.classList.add('is-anniversary');
+        document.body.dataset.anniversaryPage = matches[0].page || '';
+    })();
 
 })();

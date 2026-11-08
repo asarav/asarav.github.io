@@ -34,6 +34,13 @@
             {% if page.url == '/projects/' %}
             <link rel="alternate" type="application/json" href="{{ '/projects.json' | relative_url }}" title="Machine-readable project index">
             {% endif %}
+            <script>
+                window.__calendar = [
+                    {% for item in site.data.calendar %}
+                    { "month": {{ item.month | jsonify }}, "day": {{ item.day | jsonify }}, "page": {{ item.page | jsonify }}, "label": {{ item.label | jsonify }} }{% unless forloop.last %},{% endunless %}
+                    {% endfor %}
+                ];
+            </script>
             {% if page.url == '/' %}
             <link rel="preload" as="image" href="{{ 'src/images/homepage_tiles/projects.jpg' | relative_url }}" fetchpriority="high">
             {% endif %}
