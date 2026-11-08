@@ -1,0 +1,418 @@
+{
+  "site": "https://asarav.github.io",
+  "author": "Avinash Saravanan",
+  "canonical": "https://asarav.github.io/projects/",
+  "description": "Machine-readable index of the 33 projects documented at /projects/. Each record mirrors the public write-up and links back to its section anchor.",
+  "count": 33,
+  "fields": {
+    "id": "Section anchor on /projects/.",
+    "order": "Position in the public project list, newest first.",
+    "year": "Project year or range as shown in the project heading.",
+    "summary": "Short factual summary derived from the project write-up.",
+    "stack": "Languages, frameworks, services, and tools stated in the write-up.",
+    "url": "Canonical section URL.",
+    "links": "Public source, demo, paper, or related project links."
+  },
+  "projects": [
+    {
+      "id": "mern-langchain",
+      "order": 1,
+      "title": "Langchain Chains and Agents with MERN Stack Web Application",
+      "year": "2025",
+      "summary": "Full-stack TypeScript application on the MERN stack that implements LangChain chains and ReAct-style agents with Gemini, persists chat history in MongoDB, and exposes tools including Wikipedia, a calculator, and a headless browser. Dockerized for docker-compose and Kubernetes deployment.",
+      "stack": ["TypeScript", "React", "Next.js", "Tailwind CSS", "Express", "Mongoose", "MongoDB", "LangChain", "Gemini", "Docker", "Kubernetes"],
+      "url": "https://asarav.github.io/projects/#mern-langchain",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/fullstack-ts-langchain" }
+      ]
+    },
+    {
+      "id": "MastersThesis",
+      "order": 2,
+      "title": "Masters Thesis",
+      "year": "2020-2021",
+      "summary": "TU Delft master's thesis designing and evaluating a conversational agent that rephrases shared experiences into motivational references to support diet-related goals for people with type II diabetes.",
+      "stack": [],
+      "url": "https://asarav.github.io/projects/#MastersThesis",
+      "links": [
+        { "label": "Thesis report", "url": "http://resolver.tudelft.nl/uuid:8507589f-ea44-4378-a5c4-04ef80c7a3be" },
+        { "label": "Demo", "url": "https://youtu.be/1l9Hl7ZY0I8" },
+        { "label": "Source code", "url": "https://github.com/asarav/MSc-Thesis-Experience-Sharing-Conversational-Agent" }
+      ]
+    },
+    {
+      "id": "speed-reader",
+      "order": 3,
+      "title": "Speed Reader",
+      "year": "2026",
+      "summary": "Desktop speed-reading application for improving reading speed and comprehension, written in Python and packaged as executables for Windows, macOS, and Linux.",
+      "stack": ["Python"],
+      "url": "https://asarav.github.io/projects/#speed-reader",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/speed-reader" }
+      ]
+    },
+    {
+      "id": "teaching-tools",
+      "order": 4,
+      "title": "Teaching Tools",
+      "year": "2012-",
+      "summary": "Templates, examples, and walkthroughs for teaching HTML, LaTeX, programming concepts, and Python.",
+      "stack": ["HTML", "LaTeX", "Python"],
+      "url": "https://asarav.github.io/projects/#teaching-tools",
+      "links": [
+        { "label": "Educational Tools", "url": "https://github.com/asarav/Educational-Tools" },
+        { "label": "Learning Python", "url": "https://github.com/asarav/Learning-Python" }
+      ]
+    },
+    {
+      "id": "genetic-algorithm",
+      "order": 5,
+      "title": "Genetic Algorithm",
+      "year": "2015",
+      "summary": "Python implementation of a genetic algorithm that approximates an input image with a limited number of colored polygons, written for an introductory AI course at the University of Michigan.",
+      "stack": ["Python"],
+      "url": "https://asarav.github.io/projects/#genetic-algorithm",
+      "links": []
+    },
+    {
+      "id": "user-styles",
+      "order": 6,
+      "title": "User Styles",
+      "year": "2016-",
+      "summary": "A collection of custom user styles that add dark modes and other restyling to websites, usable through browser extensions such as Stylus or Stylish.",
+      "stack": ["CSS"],
+      "url": "https://asarav.github.io/projects/#user-styles",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/User-Styles" }
+      ]
+    },
+    {
+      "id": "personal-website",
+      "order": 7,
+      "title": "!This Website!",
+      "year": "2018-",
+      "summary": "The personal portfolio itself: a statically generated Jekyll site with Sass, JavaScript, and Bootstrap, iterated through several major redesigns.",
+      "stack": ["Jekyll", "Sass", "JavaScript", "Bootstrap"],
+      "url": "https://asarav.github.io/projects/#personal-website",
+      "links": [
+        { "label": "Live site", "url": "https://asarav.github.io/" }
+      ]
+    },
+    {
+      "id": "deep-traffic",
+      "order": 8,
+      "title": "MIT 6.S094 Deep Traffic",
+      "year": "2018",
+      "summary": "Solution to MIT 6.S094's DeepTraffic deep reinforcement learning competition, averaging about 66 mph against a maximum speed of 80 mph.",
+      "stack": [],
+      "url": "https://asarav.github.io/projects/#deep-traffic",
+      "links": [
+        { "label": "MIT Deep Traffic", "url": "https://selfdrivingcars.mit.edu/deeptraffic/" }
+      ]
+    },
+    {
+      "id": "arduino",
+      "order": 9,
+      "title": "Learning Arduino",
+      "year": "2018-2019",
+      "summary": "Projects and tutorials completed with the Elegoo Uno Starter Kit, covering digital inputs, servos, a passive buzzer, and a four-digit seven-segment display.",
+      "stack": ["Arduino", "Elegoo Uno"],
+      "url": "https://asarav.github.io/projects/#arduino",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Learning-Arduino" }
+      ]
+    },
+    {
+      "id": "processingjs",
+      "order": 10,
+      "title": "Learning ProcessingJS",
+      "year": "2019",
+      "summary": "ProcessingJS sketches and challenges from Khan Academy covering drawing, animation, games, and natural simulations.",
+      "stack": ["ProcessingJS"],
+      "url": "https://asarav.github.io/projects/#processingjs",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/LearningProcessingJS" }
+      ]
+    },
+    {
+      "id": "learning-ml5js",
+      "order": 11,
+      "title": "Learning ml5js",
+      "year": "2019",
+      "summary": "Projects and tutorials extending ml5.js for image classification, pitch detection, video classification, and text generation, with browser demos.",
+      "stack": ["ml5.js"],
+      "url": "https://asarav.github.io/projects/#learning-ml5js",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Learning-ml5js" },
+        { "label": "Image classification demo", "url": "https://asarav.github.io/src/projects/Image%20Classification%20with%20Uploaded%20File/image-classification.html" },
+        { "label": "LSTM text prediction demo", "url": "https://asarav.github.io/src/projects/LSTM%20Text%20Prediction/text-prediction.html" },
+        { "label": "Guitar tuner demo", "url": "https://asarav.github.io/src/projects/Pitch%20Detection/pitch-detection.html" }
+      ]
+    },
+    {
+      "id": "habit-tracker",
+      "order": 12,
+      "title": "Habit Tracker",
+      "year": "2019-",
+      "summary": "In-progress habit-tracking desktop application built with Electron and Angular 7.",
+      "stack": ["Electron", "Angular 7"],
+      "url": "https://asarav.github.io/projects/#habit-tracker",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Habit-Tracker" }
+      ]
+    },
+    {
+      "id": "artificialIntelligenceTechniques",
+      "order": 13,
+      "title": "IN4010-12 Artificial Intelligence Techniques",
+      "year": "2019-2020",
+      "summary": "Graduate coursework covering Bayesian posterior probabilities, automated bilateral negotiation through TU Delft's GENIUS framework, and reinforcement learning.",
+      "stack": ["Python", "Java", "GENIUS"],
+      "url": "https://asarav.github.io/projects/#artificialIntelligenceTechniques",
+      "links": []
+    },
+    {
+      "id": "multivariateDataAnalysis",
+      "order": 14,
+      "title": "CS4070 Multivariate Data Analysis",
+      "year": "2019-2020",
+      "summary": "Graduate data-analysis coursework covering EKG autocorrelation and maximum a posteriori estimation, Kalman filtering, Bayesian linear regression, Newton-Raphson, Metropolis-Hastings, Gibbs sampling, and Gaussian processes.",
+      "stack": ["Matlab", "Python"],
+      "url": "https://asarav.github.io/projects/#multivariateDataAnalysis",
+      "links": []
+    },
+    {
+      "id": "dataVisualization",
+      "order": 15,
+      "title": "IN4086-14 Data Visualization",
+      "year": "2019-2020",
+      "summary": "Graduate data-visualization coursework covering d3 information visualization and volumetric rendering, coloring, and shading of 3D data.",
+      "stack": ["HTML", "JavaScript", "Python", "Java", "D3.js"],
+      "url": "https://asarav.github.io/projects/#dataVisualization",
+      "links": []
+    },
+    {
+      "id": "machineLearning1",
+      "order": 16,
+      "title": "CS4220 Machine Learning 1",
+      "year": "2019-2020",
+      "summary": "Machine-learning coursework exercises on training data, cross-validation, and classifiers using the PRTools pattern-recognition library.",
+      "stack": ["Python", "PRTools"],
+      "url": "https://asarav.github.io/projects/#machineLearning1",
+      "links": [
+        { "label": "PRTools", "url": "https://github.com/DMJTax/prtools" }
+      ]
+    },
+    {
+      "id": "informationRetrieval",
+      "order": 17,
+      "title": "IN4325 Information Retrieval",
+      "year": "2020",
+      "summary": "Reproduction of two information-retrieval papers: sentiment classification with spaCy and scikit-learn, and Wikipedia table lookup using SPARQL, word2vec, and a random-forest regressor.",
+      "stack": ["Python", "spaCy", "scikit-learn", "SPARQL", "word2vec"],
+      "url": "https://asarav.github.io/projects/#informationRetrieval",
+      "links": [
+        { "label": "Sentiment paper", "url": "https://aclanthology.org/N16-1138/" },
+        { "label": "Sentiment source code", "url": "https://github.com/andreaalf97/Natural-Language-Processing" },
+        { "label": "Table lookup paper", "url": "https://arxiv.org/abs/1802.06159" },
+        { "label": "Table lookup source code", "url": "https://github.com/asarav/Core-IR-Project" }
+      ]
+    },
+    {
+      "id": "sociocognitiveEngineering",
+      "order": 18,
+      "title": "CS4235 Socio-Cognitive Engineering",
+      "year": "2020",
+      "summary": "Designed a Pepper robot interaction for elder care, sensory stimulation, and cognitive exercise, including music playback through the Spotify API.",
+      "stack": ["Pepper robot", "ES-TUDelft robot interaction tool", "Spotify API"],
+      "url": "https://asarav.github.io/projects/#sociocognitiveEngineering",
+      "links": [
+        { "label": "Prototype video", "url": "https://youtu.be/lC8raSinMF0" },
+        { "label": "Robot interaction tool", "url": "https://github.com/ES-TUDelft/robot-interaction-tool" }
+      ]
+    },
+    {
+      "id": "deepLearning",
+      "order": 19,
+      "title": "CS4240 Deep Learning",
+      "year": "2020",
+      "summary": "Reproduction of the dropout paper for neural networks, with experiments on ImageNet and CIFAR-10 image classification.",
+      "stack": [],
+      "url": "https://asarav.github.io/projects/#deepLearning",
+      "links": [
+        { "label": "Paper", "url": "http://jmlr.org/papers/v15/srivastava14a.html" },
+        { "label": "Blog write-up", "url": "https://medium.com/tu-delft-eemcs-student-projects/a-reproduction-attempt-of-dropout-a-simple-way-to-prevent-neural-networks-from-overfitting-43f5c97bc314" },
+        { "label": "Code notebook", "url": "https://github.com/andreaalf97/DeepLearning" }
+      ]
+    },
+    {
+      "id": "crowdComputing",
+      "order": 20,
+      "title": "CS4145 Crowd Computing",
+      "year": "2020",
+      "summary": "Designed and ran crowd-sourcing tasks on Amazon Mechanical Turk for entity resolution, with Python and Pandas data processing.",
+      "stack": ["Python", "Pandas", "HTML", "Amazon Mechanical Turk"],
+      "url": "https://asarav.github.io/projects/#crowdComputing",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Robot-Monkeys-Crowd-Computing" }
+      ]
+    },
+    {
+      "id": "multimediaSearchAndRecommendation",
+      "order": 21,
+      "title": "CS4065 Multimedia Search and Recommendation",
+      "year": "2020",
+      "summary": "Game recommendation system using Steam data, matrix factorization, Gaussian mixture feature fusion, and neural collaborative filtering with RecoUtils and TensorFlow, plus a D3 front end for qualitative evaluation.",
+      "stack": ["Python", "Jupyter", "MySQL", "TensorFlow", "RecoUtils", "D3.js", "jQuery", "Bootstrap", "HTML"],
+      "url": "https://asarav.github.io/projects/#multimediaSearchAndRecommendation",
+      "links": [
+        { "label": "Video walkthrough", "url": "https://youtu.be/kvVUOOkGS2U" }
+      ]
+    },
+    {
+      "id": "stockPrediction",
+      "order": 22,
+      "title": "Basic Stock Prediction",
+      "year": "2020-",
+      "summary": "Ongoing pipeline that predicts a stock's future value from past data using scikit-learn and the yFinance API, with a Streamlit interface available on request.",
+      "stack": ["Python", "scikit-learn", "yFinance", "Streamlit"],
+      "url": "https://asarav.github.io/projects/#stockPrediction",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Basic-Stock-Prediction" }
+      ]
+    },
+    {
+      "id": "evolutionaryAlgorithms",
+      "order": 23,
+      "title": "CS4205 Evolutionary Algorithms",
+      "year": "2020",
+      "summary": "Implementation and analysis of evolutionary algorithms including genetic algorithms, GOMEA variants, AMaLGaM, NSGA-II, and evolutionary programming on max-cut, sphere, rotated-ellipsoid, and multi-objective problems.",
+      "stack": ["Python", "Java", "C", "DEAP", "scikit-learn"],
+      "url": "https://asarav.github.io/projects/#evolutionaryAlgorithms",
+      "links": []
+    },
+    {
+      "id": "machineLearningForSoftwareEngineering",
+      "order": 24,
+      "title": "IN4334 Machine Learning for Software Engineering",
+      "year": "2020",
+      "summary": "Applied BERT to story-point estimation using Jira data from public Apache and Mulesoft servers, incorporating team dynamics through a sliding window and comparing against a recurrent highway network baseline.",
+      "stack": ["Python", "BERT", "PyTorch", "Jira API", "Google Colab"],
+      "url": "https://asarav.github.io/projects/#machineLearningForSoftwareEngineering",
+      "links": [
+        { "label": "Baseline paper", "url": "https://ieeexplore.ieee.org/document/8255666" }
+      ]
+    },
+    {
+      "id": "conversationalAgents",
+      "order": 25,
+      "title": "CS4270 Conversational Agents",
+      "year": "2020",
+      "summary": "Furhat robot interaction teaching the basic math concept of division, with affect detection, gestures, gaze, and dialogue.",
+      "stack": ["Furhat", "Aff-Wild", "TensorFlow"],
+      "url": "https://asarav.github.io/projects/#conversationalAgents",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Math-Tutoring-Conversational-Agent" },
+        { "label": "Aff-Wild models", "url": "https://github.com/dkollias/Aff-Wild-models" }
+      ]
+    },
+    {
+      "id": "video-upscaling",
+      "order": 26,
+      "title": "Deep Learning Based Video Upscaling",
+      "year": "2020",
+      "summary": "Video upscaling with convolutional neural networks trained on downscaled images, applied frame by frame and reassembled at the original frame rate.",
+      "stack": ["Convolutional neural networks"],
+      "url": "https://asarav.github.io/projects/#video-upscaling",
+      "links": []
+    },
+    {
+      "id": "socialSignalProcessing",
+      "order": 27,
+      "title": "CS4165 Social Signal Processing",
+      "year": "2020-2021",
+      "summary": "Study of prosodic entrainment and memory when participants interact with human-faced versus robot-faced tutors, using Furhat, Pydub, Parselmouth, and statistical tests; the work led to an ACM Multimedia workshop publication.",
+      "stack": ["Python", "Kotlin", "Furhat", "Pydub", "Parselmouth"],
+      "url": "https://asarav.github.io/projects/#socialSignalProcessing",
+      "links": [
+        { "label": "Analysis code", "url": "https://github.com/Dekelv/ProsodicFeatureExtraction" },
+        { "label": "Publication", "url": "https://dl.acm.org/doi/10.1145/3475959.3485394" }
+      ]
+    },
+    {
+      "id": "PytorchRefresher",
+      "order": 28,
+      "title": "Pytorch Refresher",
+      "year": "2021-",
+      "summary": "Collection of PyTorch scripts for refreshing deep-learning fundamentals, including deep Q-learning on CartPole and Acrobot, feed-forward networks on MNIST-family datasets, a CIFAR-10 CNN, RNN name generation and classification, and an FGSM tutorial.",
+      "stack": ["Python", "PyTorch"],
+      "url": "https://asarav.github.io/projects/#PytorchRefresher",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Pytorch-Refresher" }
+      ]
+    },
+    {
+      "id": "LearningTableau",
+      "order": 29,
+      "title": "Learning Tableau",
+      "year": "2022-",
+      "summary": "Tableau dashboards and sheets built from public datasets using Tableau Public 2022.1.",
+      "stack": ["Tableau"],
+      "url": "https://asarav.github.io/projects/#LearningTableau",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Learning-Tableau" }
+      ]
+    },
+    {
+      "id": "conway-game-of-life",
+      "order": 30,
+      "title": "Conway's Game of Life",
+      "year": "2023",
+      "summary": "Browser implementation of Conway's Game of Life in HTML, JavaScript, and CSS.",
+      "stack": ["HTML", "JavaScript", "CSS"],
+      "url": "https://asarav.github.io/projects/#conway-game-of-life",
+      "links": [
+        { "label": "Live demo", "url": "https://asarav.github.io/src/projects/Conway%20Game%20of%20Life/conway.html" }
+      ]
+    },
+    {
+      "id": "dreaming-of-a-hopeful-death",
+      "order": 31,
+      "title": "Dreaming of a Hopeful Death",
+      "year": "2023",
+      "summary": "Visual-novel adaptation of the novel of the same name, with DALL-E 2 generated images and dialogue written in Python using the Ren'Py engine.",
+      "stack": ["Python", "Ren'Py", "DALL-E 2"],
+      "url": "https://asarav.github.io/projects/#dreaming-of-a-hopeful-death",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Dreaming-of-a-Hopeful-Death" },
+        { "label": "Play on itch.io", "url": "https://a-s-mori.itch.io/dreaming-of-a-hopeful-death" }
+      ]
+    },
+    {
+      "id": "text-to-video",
+      "order": 32,
+      "title": "Text to Video Generation",
+      "year": "2024",
+      "summary": "Text-to-video generation with ModelScope, followed by Video2x upscaling and denoising as part of a collaborative pipeline.",
+      "stack": ["ModelScope", "Video2x", "Google Colab"],
+      "url": "https://asarav.github.io/projects/#text-to-video",
+      "links": [
+        { "label": "ModelScope paper", "url": "https://arxiv.org/abs/2308.06571" },
+        { "label": "Video2x", "url": "https://github.com/k4yt3x/video2x/" }
+      ]
+    },
+    {
+      "id": "learning-next-js",
+      "order": 33,
+      "title": "Nextjs Frontend with Routing and APIs",
+      "year": "2025",
+      "summary": "Next.js and TypeScript frontend with routing and APIs built by following Vercel's tutorial, hosted on Vercel with a Neon Postgres database.",
+      "stack": ["Next.js", "TypeScript", "Vercel", "Neon Postgres"],
+      "url": "https://asarav.github.io/projects/#learning-next-js",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/Learning-Next" }
+      ]
+    }
+  ]
+}

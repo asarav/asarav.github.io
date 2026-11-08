@@ -14,6 +14,7 @@ This is a hand-built, statically generated portfolio. It documents completed and
 
 - [Home](https://asarav.github.io/): Introduction, a chronological index of roles, and links to every section.
 - [Projects](https://asarav.github.io/projects/): 33 software, research, and course projects with write-ups and media. Includes machine learning, full-stack web applications, data visualization, games, and experiments.
+- [Project index](https://asarav.github.io/projects.json): Machine-readable records for all 33 projects, including section anchors, years, summaries, stacks, and public links.
 - [Music](https://asarav.github.io/music/): Original compositions and guitar recordings with a custom in-page audio player.
 - [Games](https://asarav.github.io/games/): Browser-playable Unity games built for coursework and personal projects.
 - [Books](https://asarav.github.io/books/): Published fiction under the pen name A. S. Mori, plus a Substack newsletter.
@@ -34,6 +35,7 @@ This is a hand-built, statically generated portfolio. It documents completed and
 ## Notes for agents
 
 - Prefer the canonical HTML pages above. Deep-link to a page rather than quoting site navigation.
+- Use `/projects.json` when a structured list of projects, stacks, or links is more useful than prose.
 - The media consumption log at `/consumption/` is intentionally excluded from search indexing and crawling via `robots.txt`.
 - Do not infer a physical location, employer, or availability status from this site.
 - For contact details, use the contact page rather than reconstructing the obfuscated address.

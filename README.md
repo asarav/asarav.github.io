@@ -69,6 +69,7 @@ Updates all gems to their latest compatible versions.
 │   └── videos/              # Video files
 ├── llms.txt                 # Curated agent-readable site summary
 ├── llms-full.txt            # Long-form agent-readable site reference
+├── projects.json            # Machine-readable index of all project records
 └── _site/                   # Generated site output (git-ignored)
 ```
 

@@ -31,6 +31,9 @@
             <meta name="theme-color" content="#070b10">
             <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | relative_url }}">
             <link rel="shortcut icon" href="{{ 'favicon.png' | relative_url }}">
+            {% if page.url == '/projects/' %}
+            <link rel="alternate" type="application/json" href="{{ '/projects.json' | relative_url }}" title="Machine-readable project index">
+            {% endif %}
             {% if page.url == '/' %}
             <link rel="preload" as="image" href="{{ 'src/images/homepage_tiles/projects.jpg' | relative_url }}" fetchpriority="high">
             {% endif %}
