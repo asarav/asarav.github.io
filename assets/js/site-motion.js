@@ -113,8 +113,7 @@
         const lastTransition = stored && stored.lastTransition ? stored.lastTransition : 0;
         const sinceLastTransition = Date.now() - lastTransition;
 
-        // Only transition if it has been a while since the last one, so
-        // reloads and short revisits do not replay the same crossfade.
+        // Only transition if it has been a while since the last one.
         if (sinceLastTransition < 1800000) {
             return Promise.resolve();
         }
@@ -125,37 +124,26 @@
         const oldImages = sceneImages[oldScene];
         const newImages = sceneImages[newScene];
 
-        // Preload the new scene image before starting the crossfade.
+        // Preload the new hero image before starting the crossfade.
         function preload(src) {
             return new Promise(function (resolve) {
                 const img = new Image();
                 img.onload = function () { resolve(); };
                 img.onerror = function () { resolve(); };
                 img.src = src;
-                // Resolve after 1.5s even if not loaded.
                 window.setTimeout(resolve, 1500);
             });
         }
 
-        const preloadPromise = preload(imageRoot + newImages.background);
+        const preloadPromise = oldImages.hero
+            ? preload(imageRoot + newImages.hero)
+            : Promise.resolve();
 
         return preloadPromise.then(function () {
             return new Promise(function (resolve) {
-                const overlay = document.createElement('div');
-                overlay.className = 'scene-timelapse';
-                overlay.style.backgroundImage =
-                    'linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), ' +
-                    'radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), ' +
-                    'radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), ' +
-                    'url("' + imageRoot + oldImages.background + '")';
-                overlay.style.backgroundSize = 'auto, auto, auto, cover';
-                overlay.style.backgroundPosition = 'center, center, center, center';
-                overlay.style.backgroundAttachment = 'fixed, fixed, fixed, fixed';
-                document.body.appendChild(overlay);
-
-                // Hero crossfade (home page only).
                 const hero = document.querySelector('#content > .page-top.home-hero');
                 let heroOverlay = null;
+
                 if (hero && oldImages.hero) {
                     heroOverlay = document.createElement('div');
                     heroOverlay.className = 'scene-timelapse scene-timelapse--hero';
@@ -166,32 +154,17 @@
                     heroOverlay.style.backgroundSize = 'cover';
                     heroOverlay.style.backgroundPosition = 'center';
                     hero.insertBefore(heroOverlay, hero.firstChild);
+
+                    void heroOverlay.offsetWidth;
+
+                    heroOverlay.style.transition = 'opacity ' + duration + 'ms ease';
+
+                    requestAnimationFrame(function () {
+                        heroOverlay.style.opacity = '0';
+                    });
                 }
 
-                // Non-blocking progress indicator.
-                const progress = document.createElement('div');
-                progress.className = 'scene-timelapse-progress';
-                document.body.appendChild(progress);
-
-                // Force reflow.
-                void overlay.offsetWidth;
-                void progress.offsetWidth;
-
-                overlay.style.transition = 'opacity ' + duration + 'ms ease';
-                progress.style.transition = 'transform ' + duration + 'ms linear';
-
-                requestAnimationFrame(function () {
-                    overlay.style.opacity = '0';
-                    progress.style.transform = 'scaleX(1)';
-                });
-
                 window.setTimeout(function () {
-                    if (overlay.parentNode) {
-                        overlay.parentNode.removeChild(overlay);
-                    }
-                    if (progress.parentNode) {
-                        progress.parentNode.removeChild(progress);
-                    }
                     if (heroOverlay && heroOverlay.parentNode) {
                         heroOverlay.parentNode.removeChild(heroOverlay);
                     }
@@ -208,8 +181,6 @@
             });
         });
     }
-
-    // -----------------------------------------------------------------------
     // Weather effects
     // -----------------------------------------------------------------------
     function startWeatherCanvas(container, type) {
@@ -568,7 +539,7 @@
     function randomMatrixGlyph() {
         const choice = Math.random();
         const glyphs = choice < 0.4
-            ? 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン'
+            ? 'アイウエオカキクケコサシスセソタチツチE��ナニヌネノハヒフヘ�Eマミムメモヤユヨラリルレロワン'
             : choice < 0.8
                 ? '0123456789'
                 : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
