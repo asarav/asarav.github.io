@@ -262,9 +262,12 @@ img:hover {
 
 .scene-timelapse--hero {
   position: absolute;
+  inset: 0;
   z-index: 0;
   opacity: 1;
   pointer-events: none;
+  background-size: cover;
+  background-position: center;
 }
 
 .scene-timelapse-progress {
@@ -658,12 +661,12 @@ body.home-page #navbar {
     background: radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(4, 8, 12, 0.58) 100%);
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     position: relative;
     z-index: 2;
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     transform: translate3d(0, var(--hero-shift, 0px), 0);
     opacity: var(--hero-opacity, 1);
   }
@@ -1745,7 +1748,7 @@ body.home-page #navbar {
   border-bottom: 1px solid var(--line);
   background-repeat: no-repeat;
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     width: 100%;
     max-width: var(--content-max);
     margin-left: auto;
@@ -1974,7 +1977,7 @@ img {
     scroll-behavior: auto !important;
   }
 
-  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain) {
+  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     transform: none !important;
     opacity: 1 !important;
   }
