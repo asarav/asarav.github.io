@@ -56,10 +56,17 @@
 
     function storeScene(scene, room) {
         try {
+            let existing = {};
+            try {
+                existing = JSON.parse(window.localStorage.getItem(SCENE_STORAGE_KEY) || '{}');
+            } catch (e) {
+                existing = {};
+            }
             window.localStorage.setItem(SCENE_STORAGE_KEY, JSON.stringify({
                 scene: scene,
                 room: room || (window.location.pathname || '/'),
-                timestamp: Date.now()
+                timestamp: Date.now(),
+                lastTransition: existing.lastTransition || 0
             }));
         } catch (error) {
             // Ignore storage failures (private mode, quota, etc.).
@@ -103,22 +110,16 @@
         }
 
         const stored = getStoredScene();
-        const lastVisit = stored && stored.timestamp ? stored.timestamp : Date.now();
-        const deltaMs = Math.max(0, Date.now() - lastVisit);
-        const deltaHours = deltaMs / 3600000;
+        const lastTransition = stored && stored.lastTransition ? stored.lastTransition : 0;
+        const sinceLastTransition = Date.now() - lastTransition;
 
-        const oldPhase = timePhaseFromScene(oldScene);
-        const newPhase = timePhaseFromScene(newScene);
-        const steps = phaseSteps(oldPhase, newPhase);
-        const phaseCount = Math.max(1, steps.length);
+        // Only transition if it has been a while since the last one, so
+        // reloads and short revisits do not replay the same crossfade.
+        if (sinceLastTransition < 1800000) {
+            return Promise.resolve();
+        }
 
-        let duration = 2500;
-        if (deltaHours < 1) {
-            duration = 1500;
-        }
-        if (deltaHours > 24) {
-            duration = 2000;
-        }
+        const duration = 4500;
 
         const imageRoot = document.body.dataset.imageRoot || '/src/images/';
         const oldImages = sceneImages[oldScene];
@@ -193,6 +194,14 @@
                     }
                     if (heroOverlay && heroOverlay.parentNode) {
                         heroOverlay.parentNode.removeChild(heroOverlay);
+                    }
+                    // Record that a transition just ran.
+                    try {
+                        const current = JSON.parse(window.localStorage.getItem(SCENE_STORAGE_KEY) || '{}');
+                        current.lastTransition = Date.now();
+                        window.localStorage.setItem(SCENE_STORAGE_KEY, JSON.stringify(current));
+                    } catch (error) {
+                        // Ignore.
                     }
                     resolve();
                 }, duration + 100);
