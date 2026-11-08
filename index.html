@@ -17,28 +17,30 @@ description: Personal portfolio of Avinash Saravanan — software engineer, rese
                 <circle cx="12" cy="12" r="8.5"></circle>
                 <path d="M12 7v5l3 2"></path>
             </svg>
-            <span class="hero-weather__readout">
+            <span class="hero-weather__readout" aria-live="polite">
                 <span class="hero-weather__location" data-weather-location></span>
                 <span class="hero-weather__date" data-weather-date></span>
                 <span class="hero-weather__period" data-weather-period></span>
                 <span class="hero-weather__condition" data-weather-condition></span>
             </span>
-            <span class="hero-weather__refresh" aria-hidden="true">↻</span>
+            <svg class="hero-weather__refresh" aria-hidden="true" focusable="false">
+                <use href="#ui-refresh"></use>
+            </svg>
         </button>
     </div>
-    <div class="hero-floorplan" aria-label="Chronology">
-        <div class="floor"><span class="floor-year">2023</span><span class="floor-role">Novelist</span></div>
-        <div class="floor"><span class="floor-year">2021</span><span class="floor-role">Scientist/Researcher</span></div>
-        <div class="floor"><span class="floor-year">2020</span><span class="floor-role">Amateur Quantitative Trader</span></div>
-        <div class="floor"><span class="floor-year">2016</span><span class="floor-role">Software Engineer</span></div>
-        <div class="floor"><span class="floor-year">2016</span><span class="floor-role">Novice Dancer</span></div>
-        <div class="floor"><span class="floor-year">2013</span><span class="floor-role">Globalization Enthusiast</span></div>
-        <div class="floor"><span class="floor-year">2012</span><span class="floor-role">Hobby Electric Guitarist/Shredder</span></div>
-        <div class="floor"><span class="floor-year">2010</span><span class="floor-role">Film Connoisseur</span></div>
+    <div class="hero-floorplan" aria-label="Chronology" role="list">
+        <div class="floor" role="listitem"><span class="floor-year">2023</span><span class="floor-role">Novelist</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2021</span><span class="floor-role">Scientist/Researcher</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2020</span><span class="floor-role">Amateur Quantitative Trader</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2016</span><span class="floor-role">Software Engineer</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2016</span><span class="floor-role">Novice Dancer</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2013</span><span class="floor-role">Globalization Enthusiast</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2012</span><span class="floor-role">Hobby Electric Guitarist/Shredder</span></div>
+        <div class="floor" role="listitem"><span class="floor-year">2010</span><span class="floor-role">Film Connoisseur</span></div>
     </div>
     <p class="hero-note">This site is a continuously updated documentation of my progress as an individual.</p>
     <a id="down" class="chevron-down" href="#tile-list" aria-label="Scroll to the archive">
-        <span aria-hidden="true">▼</span>
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#ui-chevron-down"></use></svg>
     </a>
 </div>
 

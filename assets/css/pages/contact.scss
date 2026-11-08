@@ -1,0 +1,177 @@
+---
+---
+
+// ============================================================================
+// CONTACT.SCSS - Contact Page Styles
+// ============================================================================
+// Page-specific overrides for pages/contact.html
+// Loaded via the 'style' front matter variable
+// ============================================================================
+
+@import "page-palette";
+
+#site {
+    background-color: rgb(30, 30, 31);
+
+    #content {
+        color: $text;
+        margin-bottom: 30px;
+
+        .page-top {
+            background-image:
+                linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
+                url('/src/images/contact/contact-top.jpg');
+            border-bottom: 1px solid $border-color;
+        }
+
+        .contact-list {
+            max-width: 1180px;
+            margin: 24px auto 0;
+            padding: 0 var(--gutter) clamp(80px, 10vw, 140px);
+
+            .contact-card {
+                position: relative;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                margin-bottom: 16px;
+                padding: 18px 20px;
+                overflow: hidden;
+                color: $text;
+                text-decoration: none;
+                background: linear-gradient(160deg, $surface-raised 0%, $surface 75%);
+                border: 1px solid $border-color;
+                border-radius: 2px;
+                box-shadow: var(--elev-1, 0 12px 30px rgba(0, 0, 0, 0.28));
+                transition: transform 0.22s ease-out, border-color 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease;
+                animation: rise-from-10 0.5s ease backwards;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, $accent, rgb(0, 123, 255) 55%, rgba(0, 123, 255, 0));
+                }
+
+                &:hover,
+                &:focus-visible {
+                    color: $text;
+                    border-color: rgba(126, 191, 255, 0.55);
+                    box-shadow: var(--elev-2, 0 20px 44px rgba(0, 0, 0, 0.45));
+                    background-color: rgba(126, 191, 255, 0.04);
+
+                    .contact-name {
+                        color: var(--ice);
+                    }
+
+                    .contact-icon {
+                        border-color: rgba(143, 208, 232, 0.72);
+
+                        img {
+                            transform: scale(1.05);
+                            filter: brightness(1.05);
+                        }
+                    }
+                }
+
+                &:active {
+                    border-color: var(--signal);
+                    background-color: rgba(209, 73, 73, 0.06);
+
+                    .contact-name {
+                        color: var(--signal);
+                    }
+
+                    .contact-icon {
+                        border-color: var(--signal);
+
+                        img {
+                            transform: scale(0.98);
+                        }
+                    }
+                }
+
+                .contact-icon {
+                    flex: 0 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 88px;
+                    height: 62px;
+                    padding: 8px 10px;
+                    margin-right: 18px;
+                    background: rgb(206, 222, 237);
+                    border: 1px solid rgba(112, 158, 189, 0.55);
+                    border-radius: 2px;
+                    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+                    transition: border-color 0.28s ease;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+
+                    &--dark {
+                        background: rgb(15, 20, 27);
+                        border-color: rgba(112, 158, 189, 0.4);
+                    }
+                }
+
+                .contact-info {
+                    min-width: 0;
+                }
+
+                .contact-name {
+                    font-family: var(--font-display);
+                    font-size: 21px;
+                    font-weight: 700;
+                    line-height: 1.3;
+                    transition: color 0.28s ease;
+                }
+
+                @media only screen and (max-width: 575px) {
+                    padding: 14px 16px;
+
+                    .contact-icon {
+                        width: 72px;
+                        height: 54px;
+                        padding: 6px 8px;
+                        margin-right: 14px;
+                    }
+
+                    .contact-name {
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .contact-note {
+                position: relative;
+                margin: 16px 0 30px;
+                padding: 20px 22px;
+                background: linear-gradient(160deg, rgba(27, 38, 50, 0.92), rgba(23, 31, 41, 0.92));
+                border: 1px solid $border-color;
+                border-left: 3px solid $accent;
+                border-radius: 2px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+
+                p {
+                    margin: 0;
+                    color: $text;
+                    font-size: 16px;
+                    line-height: 1.7;
+                }
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #site #content .contact-card {
+        animation: none;
+    }
+}

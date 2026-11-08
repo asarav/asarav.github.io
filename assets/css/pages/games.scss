@@ -1,0 +1,247 @@
+---
+---
+
+// ============================================================================
+// GAMES.SCSS - The Arcade Wing
+// ============================================================================
+// Sharp, architectural card language for pages/games.html
+// ============================================================================
+
+#site #content {
+    color: var(--frost);
+
+    .page-top {
+        background-image:
+            linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%),
+            linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%),
+            url('/src/images/games/games-top.jpg');
+        background-position: center;
+        background-size: cover;
+        border-bottom: 1px solid var(--line);
+    }
+}
+
+.games-list {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px var(--gutter) clamp(80px, 10vw, 140px);
+
+    .game {
+        position: relative;
+        margin: 0 0 34px;
+        padding: 30px 32px 32px;
+        background: linear-gradient(160deg, rgba(22, 35, 47, 0.94) 0%, rgba(13, 21, 29, 0.96) 78%);
+        border: 1px solid var(--line);
+        border-left: 2px solid var(--ice);
+        border-radius: 2px;
+        box-shadow: var(--elev-1, 0 16px 40px rgba(0, 0, 0, 0.28));
+        overflow: hidden;
+        color: var(--frost);
+        transition: transform 0.22s ease-out, border-color 0.35s ease, box-shadow 0.35s ease;
+        animation: rise-from-14 0.6s ease backwards;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, rgba(143, 208, 232, 0.07), transparent 42%),
+                linear-gradient(180deg, rgba(7, 11, 16, 0.12), rgba(7, 11, 16, 0.34));
+        }
+
+        > .row,
+        > .row > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        &:hover {
+            border-color: var(--line-strong);
+            border-left-color: var(--signal);
+            box-shadow: var(--elev-2, 0 22px 52px rgba(0, 0, 0, 0.34));
+            background-color: rgba(209, 73, 73, 0.05);
+
+            .game-header {
+                color: var(--ice);
+            }
+
+            .play-now {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 24px rgba(209, 73, 73, 0.3);
+            }
+
+            .screenshots img {
+                border-color: var(--line-strong);
+                filter: brightness(1.05);
+            }
+
+            .explanation {
+                border-left-color: var(--ice);
+            }
+
+            .explanation p {
+                color: var(--frost);
+            }
+        }
+
+        &:active {
+            border-left-color: var(--ice);
+            background-color: rgba(143, 208, 232, 0.06);
+
+            .game-header {
+                color: var(--signal);
+            }
+
+            .play-now {
+                transform: translateY(0) scale(0.98);
+            }
+
+            .screenshots img {
+                border-color: var(--signal);
+            }
+
+            .explanation p {
+                color: var(--signal);
+            }
+        }
+
+        .game-header-row {
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .game-header {
+            color: var(--frost);
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            transition: color 0.25s ease;
+        }
+
+        .play-now {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0;
+            padding: 11px 18px;
+            color: #fff;
+            background: var(--signal);
+            border: 1px solid var(--signal);
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+            &::after {
+                content: "\2192";
+                font-size: 0.95rem;
+                line-height: 1;
+            }
+
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-2px);
+                color: #fff;
+                background: rgb(180, 45, 45);
+                border-color: rgb(180, 45, 45);
+                box-shadow: 0 10px 24px rgba(209, 73, 73, 0.3);
+            }
+        }
+
+        .screenshots {
+            margin: 0 0 20px;
+
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+                border: 1px solid var(--line);
+                border-radius: 2px;
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+                transition: transform 0.35s ease, border-color 0.35s ease, filter 0.35s ease;
+
+                &:hover {
+                    transform: translateY(-3px);
+                    filter: brightness(1.06);
+                    border-color: var(--ice);
+                }
+            }
+        }
+
+        .explanation {
+            margin: 0;
+            padding: 20px 22px;
+            background: rgba(7, 11, 16, 0.42);
+            border: 1px solid var(--line);
+            border-left: 2px solid rgba(143, 208, 232, 0.42);
+            border-radius: 2px;
+            transition: border-color 0.3s ease;
+
+            > [class*="col-"] {
+                padding: 0;
+            }
+
+            p {
+                color: rgba(237, 244, 247, 0.82);
+                font-size: 1rem;
+                line-height: 1.75;
+                margin: 0 0 10px;
+                transition: color 0.25s ease;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                a {
+                    color: var(--ice);
+                    text-decoration-color: rgba(143, 208, 232, 0.45);
+
+                    &:hover {
+                        color: #fff;
+                        text-decoration-color: var(--signal);
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            padding: 22px 18px 24px;
+
+            .game-header {
+                font-size: 1.35rem;
+            }
+
+            .play-now {
+                padding: 9px 14px;
+                font-size: 0.62rem;
+            }
+
+            .explanation {
+                padding: 16px 18px;
+            }
+
+            .explanation p {
+                font-size: 0.95rem;
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .games-list .game {
+        animation: none;
+    }
+}

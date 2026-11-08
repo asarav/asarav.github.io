@@ -1,0 +1,333 @@
+---
+---
+
+// ============================================================================
+// LOG.SCSS - The Corridor
+// ============================================================================
+// A chronological, architectural timeline for pages/log.html
+// ============================================================================
+
+#site #content {
+    color: var(--frost);
+}
+
+.log-hero {
+    min-height: 430px;
+    background-image:
+        linear-gradient(90deg, rgba(7, 11, 16, 0.8) 0%, rgba(7, 11, 16, 0.48) 55%, rgba(7, 11, 16, 0.74) 100%),
+        linear-gradient(180deg, rgba(7, 11, 16, 0.22) 0%, rgba(7, 11, 16, 0.76) 100%),
+        url('/src/images/log/log.jpg');
+    background-position: center, center, center 40%;
+    border-bottom: 1px solid var(--line);
+
+    .log-preamble {
+        width: 100%;
+        max-width: var(--content-max);
+        margin: 0 auto;
+
+        h1 {
+            max-width: 900px;
+            margin: 0;
+            font-size: clamp(3.4rem, 8vw, 7rem);
+            line-height: 0.92;
+            letter-spacing: -0.055em;
+        }
+
+        .log-explanation {
+            max-width: 540px;
+            margin: 22px 0 0;
+            color: rgba(237, 244, 247, 0.78);
+            font-size: 1.04rem;
+            line-height: 1.55;
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8);
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+        min-height: 360px;
+    }
+}
+
+.log-shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(54px, 7vw, 92px) var(--gutter) clamp(90px, 11vw, 150px);
+}
+
+.log-intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+
+    .log-lede {
+        max-width: 620px;
+        margin: 0;
+        color: var(--frost);
+        font-family: var(--font-display);
+        font-size: clamp(1.2rem, 2.3vw, 1.75rem);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        text-align: right;
+    }
+
+    @media only screen and (max-width: 700px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .log-lede {
+            text-align: left;
+        }
+    }
+}
+
+.log {
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 190px;
+        width: 1px;
+        background: linear-gradient(180deg, transparent 0%, var(--line-strong) 4%, var(--line) 92%, transparent 100%);
+        pointer-events: none;
+    }
+}
+
+.log-year {
+    position: sticky;
+    top: calc(var(--nav-height) + 12px);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin: 44px 0 22px;
+    padding: 10px 0;
+    background: var(--ink);
+    box-shadow: 0 14px 18px rgba(7, 11, 16, 0.88);
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    span {
+        color: transparent;
+        font-family: var(--font-display);
+        font-size: clamp(2.6rem, 5.6vw, 4.8rem);
+        font-weight: 700;
+        line-height: 0.9;
+        letter-spacing: -0.055em;
+        -webkit-text-stroke: 1px rgba(237, 244, 247, 0.52);
+    }
+
+    &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--line-strong), transparent);
+    }
+
+    @supports not (-webkit-text-stroke: 1px #fff) {
+        span {
+            color: rgba(237, 244, 247, 0.42);
+        }
+    }
+}
+
+.log-entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 48px;
+    padding-bottom: 42px;
+    scroll-margin-top: calc(var(--nav-height) + 90px);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 190px;
+        width: 11px;
+        height: 11px;
+        background: var(--ink);
+        border: 1px solid var(--ice);
+        box-shadow: 0 0 0 6px var(--ink);
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    .log-date {
+        padding: 9px 28px 0 0;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        line-height: 1.5;
+        letter-spacing: 0.1em;
+        text-align: right;
+        text-transform: uppercase;
+        transition: color 0.25s ease;
+    }
+
+    .log-card {
+        position: relative;
+        padding: 24px 30px;
+        background: linear-gradient(160deg, rgba(22, 35, 47, 0.94) 0%, rgba(13, 21, 29, 0.96) 72%);
+        border: 1px solid var(--line);
+        border-left: 2px solid rgba(143, 208, 232, 0.5);
+        border-radius: 2px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+        transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        animation: log-rise 0.45s ease backwards;
+
+        &:hover {
+            border-color: var(--line-strong);
+            border-left-color: var(--ice);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+            background-color: rgba(143, 208, 232, 0.05);
+
+            .log-body {
+                color: var(--frost);
+            }
+
+            .log-figure img {
+                transform: scale(1.015);
+            }
+        }
+
+        &:active {
+            border-left-color: var(--signal);
+
+            .log-body {
+                color: var(--signal);
+            }
+        }
+    }
+
+    &:hover .log-date {
+        color: var(--ice);
+    }
+
+    &:active .log-date {
+        color: var(--signal);
+    }
+
+    .log-body {
+        color: rgba(237, 244, 247, 0.88);
+        font-size: 1.02rem;
+        line-height: 1.7;
+        transition: color 0.25s ease;
+
+        p {
+            margin: 0 0 0.8em;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        a {
+            color: var(--ice);
+            text-decoration-color: rgba(143, 208, 232, 0.45);
+
+            &:hover {
+                color: #fff;
+                text-decoration-color: var(--signal);
+            }
+        }
+    }
+
+    .log-media {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+
+        &.log-media--pair {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    .log-figure {
+        margin: 0;
+        overflow: hidden;
+        background: #090f15;
+        border: 1px solid var(--line);
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            transition: transform 0.6s var(--ease-out);
+        }
+
+        &:hover img {
+            transform: scale(1.015);
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-bottom: 34px;
+        padding-left: 30px;
+
+        &::before {
+            top: 7px;
+            left: 0;
+        }
+
+        .log-date {
+            padding: 0;
+            text-align: left;
+        }
+
+        .log-card {
+            padding: 20px 22px;
+
+            &:hover {
+                transform: none;
+            }
+        }
+
+        .log-media--pair {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+        .log-body {
+            font-size: 0.98rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .log::before {
+        left: 0;
+    }
+
+    .log-year {
+        top: calc(var(--nav-height) + 8px);
+        margin-top: 38px;
+
+        span {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+@keyframes log-rise {
+    from {
+        transform: translateY(12px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

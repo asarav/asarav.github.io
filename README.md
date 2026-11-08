@@ -48,27 +48,46 @@ Updates all gems to their latest compatible versions.
 .
 ├── _config.yml              # Jekyll configuration
 ├── _data/                   # YAML data used by page templates
-├── _includes/               # Shared HTML partials
+├── _includes/               # Shared HTML partials and inline UI icon sprite
 ├── _layouts/                # Shared page layouts
 ├── _sass/                   # Shared Sass variables and partials
-├── assets/css/              # SCSS sources; Jekyll emits matching CSS here
+├── assets/
+│   ├── css/
+│   │   ├── main.scss        # Global styles; emitted as main.css
+│   │   ├── pages/           # Page-specific SCSS
+│   │   └── unity-theme.css  # Theme used inside the standalone Unity builds
+│   ├── icons/
+│   │   └── tech-sprite.svg  # Monochrome brand icons for the About stack
+│   └── js/                  # Site and page JavaScript (served at /assets/js/)
 ├── index.html               # Home page
 ├── pages/                   # Content templates with explicit permalinks
 ├── src/
 │   ├── images/              # Site, project, and game images
-│   ├── scripts/             # Site and page JavaScript (served at /src/scripts/)
-│   ├── assets/              # Third-party logos and other static assets
 │   ├── games/               # Standalone Unity game builds
 │   ├── projects/            # Downloadable/model project files
 │   ├── music/               # Audio files
 │   └── videos/              # Video files
+├── llms.txt                 # Curated agent-readable site summary
+├── llms-full.txt            # Long-form agent-readable site reference
 └── _site/                   # Generated site output (git-ignored)
 ```
 
 Page templates are grouped under `pages/`; their explicit permalinks keep the
 published routes independent of their source location. The larger media files
 and standalone builds remain under `src/` because their paths are published
-URLs. Site JavaScript stays at `/src/scripts/` for the same reason.
+URLs. Site JavaScript lives in `assets/js/` and page styles in
+`assets/css/pages/`, so Jekyll emits them at stable `/assets/...` URLs.
+
+## Build notes
+
+The `github-pages` gem is pinned to `232` in the `Gemfile`. The `233` release
+requires a native `openssl` build that does not install cleanly on Windows.
+GitHub Pages supplies its own gem set at deploy time, so the pin only affects
+local builds.
+
+`bundle exec jekyll build` may print a harmless `faraday-retry` warning. If a
+build fails with `Permission denied` under `_site/src/videos/`, stop any running
+Jekyll server, remove `_site`, and rebuild.
 
 ## Key Technologies
 

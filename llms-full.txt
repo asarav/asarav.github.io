@@ -1,0 +1,128 @@
+# Avinash Saravanan (asarav) — full site reference
+
+> Personal portfolio of Avinash Saravanan — computer scientist, engineer, and writer. A continuously updated documentation of my progress as an individual.
+
+This file is the long-form companion to `/llms.txt`. It summarises the public pages and lists their primary content so an assistant can answer questions without crawling every page.
+
+- Canonical URL: https://asarav.github.io
+- Author: Avinash Saravanan
+- Language: English
+- Stack: Jekyll, SCSS, vanilla JavaScript, Bootstrap 5, GitHub Pages
+- Content policy: no advertising, no tracking pixels, no third-party analytics
+
+## Home
+
+The home page opens with a large typographic portrait of the author's name and a chronological index of roles: novelist (2023), scientist/researcher (2021), amateur quantitative trader (2020), software engineer (2016), novice dancer (2016), globalization enthusiast (2013), hobby electric guitarist (2012), and film connoisseur (2010). It links to every section through a directory of image tiles. A small weather readout appears only when the visitor's browser can provide local weather.
+
+## About
+
+### Education
+
+- **University of Michigan, Ann Arbor** — Bachelor of Science in Computer Science, minor in Asian Languages and Cultures with a focus on Japanese. Coursework and activities included the Lloyd Hall Scholars program, the Ross School of Business, and Circle K.
+- **TU Delft** — MSc in Computer Science, Data Science and Technology track. Thesis work on conversational agents situated in a diet-based context for patients with type II diabetes, using shared experiences to support goal achievement.
+
+### Professional experience
+
+The About page documents roles at Perficient, 日本ソフト開発 (Nihon Soft Kaihatsu), Sony, Thomson Reuters, TU Delft, Helio/Be There, Repairify, and Coupa, in chronological order, with descriptions of the work and selected photographs.
+
+### Research and publications
+
+The site lists scientific publications and research work, including the master's thesis and course research in information retrieval, conversational agents, social signal processing, and related areas. Project write-ups provide the public record.
+
+### Technical stack
+
+Python, TypeScript, JavaScript, React, Angular, Django, Flask, Pandas, NumPy, OpenCV, PyTorch, PostgreSQL, Docker, Kubernetes, GitHub, Jekyll, Unity, LangChain, Cursor, and GitHub Copilot. The page also lists languages, frameworks, databases, source-control tools, and other tools in more detail.
+
+### Languages and interests
+
+The About page describes Japanese language study (JLPT N2), some Dutch, and interests including electric guitar, foreign cultures, existential philosophy, dance, globalization, film, private equity trading, the commercial space industry, and AI.
+
+## Projects
+
+Thirty-three project entries, newest first:
+
+1. Langchain Chains and Agents with MERN Stack Web Application (2025)
+2. Masters Thesis (2020–2021)
+3. Speed Reader (2026)
+4. Teaching Tools (2012–)
+5. Genetic Algorithm (2015)
+6. User Styles (2016–)
+7. !This Website! (2018–)
+8. MIT 6.S094 Deep Traffic (2018)
+9. Learning Arduino (2018–2019)
+10. Learning ProcessingJS (2019)
+11. Learning ml5js (2019)
+12. Habit Tracker (2019–?)
+13. IN4010-12 Artificial Intelligence Techniques (2019–2020)
+14. CS4070 Multivariate Data Analysis (2019–2020)
+15. IN4086-14 Data Visualization (2019–2020)
+16. CS4220 Machine Learning 1 (2019–2020)
+17. IN4325 Information Retrieval (2020)
+18. CS4235 Socio-Cognitive Engineering (2020)
+19. CS4240 Deep Learning (2020)
+20. CS4145 Crowd Computing (2020)
+21. CS4065 Multimedia Search and Recommendation (2020)
+22. Basic Stock Prediction (2020–)
+23. CS4205 Evolutionary Algorithms (2020)
+24. IN4334 Machine Learning for Software Engineering (2020)
+25. CS4270 Conversational Agents (2020)
+26. Deep Learning Based Video Upscaling (2020)
+27. CS4165 Social Signal Processing (2020–2021)
+28. Pytorch Refresher (2021–)
+29. Learning Tableau (2022–)
+30. Conway's Game of Life (2023)
+31. Dreaming of a Hopeful Death (2023)
+32. Text to Video Generation (2024)
+33. Nextjs Frontend with Routing and APIs (2025)
+
+Each project page section includes a write-up, technology notes, and where available images, videos, tables, or links to source code and demos.
+
+## Games
+
+- Dreaming of a Hopeful Death (2023)
+- Rebel Knight (2016)
+- Switcheroo (2016)
+- Commuter North (2016)
+- Metroid in Unity (2016)
+- Space SHMUP Prototype (2016)
+- Apple Picker Prototype (2016)
+
+Games are browser-playable Unity builds, linked from `/games/`.
+
+## Music
+
+Original tracks and recordings include:
+
+- Going Off 2 (2022)
+- The Kid LAROI, Justin Bieber — STAY Guitar (2022)
+- Stairway to Heaven Backing Track Jam (2021)
+- Eternal Recurrence (2021)
+- Death Stranding Inspired Track (2019)
+- Music Box (2019)
+- Power Ballad Backing Track Jam (2018)
+- Going Off (2018)
+- Music Signature (2017)
+- The Plains of LEO (2017)
+- Robocopter V1 (2016)
+
+## Books
+
+Published fiction under the pen name **A. S. Mori**:
+
+- *Dreaming of a Hopeful Death* (2023) — debut novel, also adapted as a free visual novel on itch.io.
+- A Substack newsletter is embedded on the books page.
+
+## Status log
+
+A chronological list of short public updates. Each entry has a date and a note. The log is the most frequently updated section.
+
+## Contact
+
+The contact page links to public profiles for code, writing, research, and professional networks. The email address is entity-encoded and not published as plain text. There is no availability or hiring pitch on the site.
+
+## Machine-readable notes
+
+- `robots.txt` disallows `/consumption/` for all crawlers, including AI crawlers.
+- `/sitemap.xml` and `/feed.xml` are generated by Jekyll.
+- Structured data on every page describes the author as a `Person` and the site as a `ProfilePage`.
+- Page content is static HTML. JavaScript enhances motion, media, and weather but is not required to read the content.

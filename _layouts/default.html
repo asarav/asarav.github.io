@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 	<html lang="en">
         <head>
-            <title>{{ page.title }} | asarav</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="color-scheme" content="dark">
+            <title>{% if page.url == '/' %}{{ page.title }}{% else %}{{ page.title }} | asarav{% endif %}</title>
             <meta name="author" content="Avinash Saravanan">
             <meta name="keywords" content="Avinash,Saravanan,Software,Engineer,Scientist,Novelist,Guitar,Games,Music,Dance,AI,Badass,asarav,Developer,Programmer">
             <meta name="google-site-verification" content="pgJJ8njw6GLljKN4caY8Xtz5zoMPTyBsdpK6CMRhNBM" />
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
             <script>
                 // Opt into scroll-triggered motion only when the browser can
                 // support it. The timeout restores normal animations if the
@@ -35,6 +36,7 @@
             {% endif %}
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
             <!--Stylesheets -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
             <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;700&family=Syne:wght@700&display=swap" rel="stylesheet">
@@ -46,18 +48,57 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Avinash Saravanan",
-  "url": "https://asarav.github.io",
-  "jobTitle": "Software Engineer",
-  "sameAs": [
-    "https://github.com/asarav",
-    "https://www.linkedin.com/in/avinash-saravanan-profile/"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://asarav.github.io/#person",
+      "name": "Avinash Saravanan",
+      "alternateName": "asarav",
+      "url": "https://asarav.github.io",
+      "jobTitle": ["Software Engineer", "Computer Scientist", "Writer"],
+      "knowsAbout": [
+        "Software Engineering",
+        "Machine Learning",
+        "Human-Computer Interaction",
+        "Science Fiction",
+        "Music Composition"
+      ],
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "TU Delft" },
+        { "@type": "CollegeOrUniversity", "name": "University of Michigan" }
+      ],
+      "sameAs": [
+        "https://github.com/asarav",
+        "https://www.linkedin.com/in/avinash-saravanan-profile/",
+        "https://medium.com/@asarav"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://asarav.github.io/#website",
+      "url": "https://asarav.github.io",
+      "name": "Avinash Saravanan, asarav",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://asarav.github.io/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://asarav.github.io/#profile",
+      "url": "https://asarav.github.io",
+      "name": "Avinash Saravanan",
+      "isPartOf": { "@id": "https://asarav.github.io/#website" },
+      "mainEntity": { "@id": "https://asarav.github.io/#person" },
+      "about": { "@id": "https://asarav.github.io/#person" }
+    }
   ]
 }
 </script>
+<script type="speculationrules">
+{"prefetch":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}
+</script>
         </head>
         <body id="site" class="site{% if page.url == '/' %} home-page{% endif %}" data-image-root="{{ 'src/images/' | relative_url }}">
+            {% include ui-icons.html %}
             <a class="skip-link" href="#content">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"></div>
             {% include nav.html %}
@@ -69,9 +110,9 @@
             {% if page.script %}
                 <script defer type="text/javascript" src="{{ page.script | relative_url }}"></script>
             {% endif %}
-            <script defer type="text/javascript" src="{{ 'src/scripts/media-fallback.js' | relative_url }}"></script>
-            <script defer type="text/javascript" src="{{ 'src/scripts/site-motion.js' | relative_url }}"></script>
-<script defer type="text/javascript" src="{{ 'src/scripts/ambient-sound.js' | relative_url }}"></script>
-            <script defer type="text/javascript" src="{{ 'src/scripts/brand-mark.js' | relative_url }}"></script>
+            <script defer type="text/javascript" src="{{ 'assets/js/media-fallback.js' | relative_url }}"></script>
+            <script defer type="text/javascript" src="{{ 'assets/js/site-motion.js' | relative_url }}"></script>
+<script defer type="text/javascript" src="{{ 'assets/js/ambient-sound.js' | relative_url }}"></script>
+            <script defer type="text/javascript" src="{{ 'assets/js/brand-mark.js' | relative_url }}"></script>
         </body>
 	</html>

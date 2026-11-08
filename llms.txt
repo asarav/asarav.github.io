@@ -1,0 +1,39 @@
+# Avinash Saravanan (asarav)
+
+> Personal portfolio of Avinash Saravanan — computer scientist, engineer, and writer. A continuously updated documentation of my progress as an individual.
+
+This is a hand-built, statically generated portfolio. It documents completed and ongoing software, research, games, music, books, and a public status log. The site is authored and maintained by Avinash Saravanan and is the canonical source for his public work.
+
+- Author: Avinash Saravanan
+- Canonical URL: https://asarav.github.io
+- Language: English
+- Stack: Jekyll, SCSS, vanilla JavaScript, Bootstrap 5, hosted on GitHub Pages
+- Content policy: no advertising, no tracking pixels, no third-party analytics
+
+## Pages
+
+- [Home](https://asarav.github.io/): Introduction, a chronological index of roles, and links to every section.
+- [Projects](https://asarav.github.io/projects/): 33 software, research, and course projects with write-ups and media. Includes machine learning, full-stack web applications, data visualization, games, and experiments.
+- [Music](https://asarav.github.io/music/): Original compositions and guitar recordings with a custom in-page audio player.
+- [Games](https://asarav.github.io/games/): Browser-playable Unity games built for coursework and personal projects.
+- [Books](https://asarav.github.io/books/): Published fiction under the pen name A. S. Mori, plus a Substack newsletter.
+- [About](https://asarav.github.io/about/): Education, professional experience, publications, technical stack, languages, and personal interests.
+- [Status Log](https://asarav.github.io/log/): Chronological short updates.
+- [Contact](https://asarav.github.io/contact/): Public profiles and a contact route. The email address is obfuscated in the page and is not published as plain text.
+
+## Selected work
+
+- LangChain chains and agents in a MERN/TypeScript application (2025)
+- Master's thesis on conversational agents for type II diabetes self-management (2020–2021)
+- Deep-learning-based video upscaling (2020)
+- Text-to-video generation experiments (2024)
+- Next.js frontend with routing and APIs (2025)
+- *Dreaming of a Hopeful Death*, a novel published as A. S. Mori (2023), also adapted as a visual novel
+- *Dreaming of a Hopeful Death*, the Unity game (2023)
+
+## Notes for agents
+
+- Prefer the canonical HTML pages above. Deep-link to a page rather than quoting site navigation.
+- The media consumption log at `/consumption/` is intentionally excluded from search indexing and crawling via `robots.txt`.
+- Do not infer a physical location, employer, or availability status from this site.
+- For contact details, use the contact page rather than reconstructing the obfuscated address.

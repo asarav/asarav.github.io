@@ -1,4 +1,22 @@
+# Agent-readable site summary: https://asarav.github.io/llms.txt
+# Full site reference: https://asarav.github.io/llms-full.txt
+
 User-agent: *
+Disallow: /consumption/
+
+# AI and answer-engine crawlers may index the public portfolio.
+# The media consumption log remains excluded for every agent.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Amazonbot
 Disallow: /consumption/
 
 Sitemap: https://asarav.github.io/sitemap.xml

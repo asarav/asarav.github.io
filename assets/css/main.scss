@@ -31,6 +31,7 @@
   --content-max: 1360px;
   --gutter: clamp(20px, 4vw, 56px);
   --nav-height: 60px;
+  color-scheme: dark;
 
   // One motion language: shared curves and durations keep every transition
 
@@ -146,6 +147,27 @@ img {
 
 img:hover {
   filter: saturate(0.96) contrast(1.08) brightness(1);
+}
+
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.12em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .contact-icon img,
@@ -409,10 +431,42 @@ html.fast-scroll .song {
   .navbar-toggler {
     border-color: rgba(255, 255, 255, 0.45);
     padding: 0.35rem 0.55rem;
+    color: rgba(240, 248, 252, 0.82);
+    background: transparent;
+    transition: color 0.25s ease, border-color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.72);
+    }
   }
 
   .navbar-toggler-icon {
-    filter: invert(1);
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    filter: none;
+
+    .toggler-line {
+      transform-origin: 12px 12px;
+      transition: transform 0.3s var(--ease-out), opacity 0.2s ease;
+    }
+  }
+
+  .navbar-toggler[aria-expanded="true"] .toggler-line--top {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .navbar-toggler[aria-expanded="true"] .toggler-line--mid {
+    opacity: 0;
+  }
+
+  .navbar-toggler[aria-expanded="true"] .toggler-line--bot {
+    transform: translateY(-5px) rotate(-45deg);
   }
 
   .navbar-nav {
@@ -665,11 +719,25 @@ body.home-page #navbar {
     background: var(--signal);
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 
+    .icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.8;
+    }
+
     &:hover {
       color: #fff;
       background: rgb(180, 45, 45);
       border-color: rgb(180, 45, 45);
       transform: translateY(2px);
+    }
+
+    &:hover .icon {
+      transform: translateY(2px);
+    }
+
+    &:active .icon {
+      transform: translateY(4px);
     }
   }
 
@@ -682,7 +750,7 @@ body.home-page #navbar {
 
 // ===========================================================================
 
-// HOME - THE FA繝ｻ繝ｻ雍・E
+// HOME - THE MONUMENT
 
 // ===========================================================================
 
@@ -880,6 +948,22 @@ body.home-page #navbar {
       &:hover {
         padding-left: 8px;
         background: rgba(143, 208, 232, 0.06);
+
+        .floor-year {
+          color: var(--amber);
+        }
+
+        .floor-role {
+          color: var(--frost);
+        }
+      }
+
+      &:active {
+        background: rgba(209, 73, 73, 0.08);
+
+        .floor-year {
+          color: var(--ice);
+        }
       }
     }
 
@@ -889,6 +973,7 @@ body.home-page #navbar {
       font-size: 0.72rem;
       line-height: 1.55;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 1px rgba(0, 0, 0, 0.95);
+      transition: color 0.25s ease;
     }
 
     .floor-role {
@@ -897,6 +982,7 @@ body.home-page #navbar {
       line-height: 1.45;
       overflow-wrap: break-word;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 1px rgba(0, 0, 0, 0.95);
+      transition: color 0.25s ease;
     }
   }
 
@@ -1447,6 +1533,9 @@ body.home-page #navbar {
     }
 
     a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       color: var(--muted);
       text-decoration: none;
       border-bottom: 1px solid transparent;
@@ -1462,9 +1551,28 @@ body.home-page #navbar {
         border-bottom-color: var(--signal);
       }
 
-      span {
+      .footer-link-icon {
+        width: 12px;
+        height: 12px;
         color: var(--steel);
-        font-size: 0.78em;
+        stroke-width: 1.8;
+        opacity: 0.5;
+        transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s var(--ease-out);
+      }
+
+      &:hover .footer-link-icon {
+        color: var(--ice);
+        opacity: 1;
+        transform: translateX(3px);
+      }
+
+      &:active .footer-link-icon {
+        color: var(--signal);
+        opacity: 1;
+      }
+
+      &[target="_blank"]:hover .footer-link-icon {
+        transform: translate(2px, -2px);
       }
     }
   }
@@ -1488,6 +1596,9 @@ body.home-page #navbar {
     }
 
     a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.3s ease;
@@ -1498,6 +1609,26 @@ body.home-page #navbar {
 
       &:active {
         color: var(--signal);
+      }
+
+      .footer-link-icon {
+        width: 12px;
+        height: 12px;
+        color: var(--steel);
+        stroke-width: 1.8;
+        opacity: 0.6;
+        transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s var(--ease-out);
+      }
+
+      &:hover .footer-link-icon {
+        color: var(--ice);
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      &:active .footer-link-icon {
+        color: var(--signal);
+        opacity: 1;
       }
     }
   }
@@ -1910,6 +2041,7 @@ body.is-boosted #site {
 }
 
 #content > section:hover h1,
+#content > section:hover h2,
 #content > section:hover .heading {
   color: var(--ice);
 }
@@ -2019,6 +2151,14 @@ body.is-boosted #site {
     border-color: var(--ice);
     background: rgba(16, 26, 36, 0.9);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+
+    .hero-weather__location {
+      color: rgba(219, 241, 250, 0.82);
+    }
+
+    .hero-weather__condition {
+      color: #fff;
+    }
   }
 
   &:focus-visible {
@@ -2031,6 +2171,10 @@ body.is-boosted #site {
     border-color: var(--signal);
     background: rgba(209, 73, 73, 0.2);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.26);
+
+    .hero-weather__condition {
+      color: var(--signal);
+    }
   }
 
   &__icon {
@@ -2064,18 +2208,21 @@ body.is-boosted #site {
     color: rgba(219, 241, 250, 0.62);
     font-size: 0.52rem;
     letter-spacing: 0.12em;
+    transition: color var(--dur-fast) ease;
   }
 
   &__date {
     color: rgba(219, 241, 250, 0.74);
     font-size: 0.54rem;
     letter-spacing: 0.08em;
+    transition: color var(--dur-fast) ease;
   }
 
   &__period {
     color: var(--amber);
     font-size: 0.58rem;
     letter-spacing: 0.16em;
+    transition: color var(--dur-fast) ease;
   }
 
   &__condition {
@@ -2083,13 +2230,20 @@ body.is-boosted #site {
     color: rgba(219, 241, 250, 0.78);
     font-size: 0.62rem;
     letter-spacing: 0.08em;
+    transition: color var(--dur-fast) ease;
   }
 
   &__refresh {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
     margin-left: 5px;
     color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     transition: color var(--dur-fast) ease, transform var(--dur-base) var(--ease-out);
   }
 
