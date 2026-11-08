@@ -1818,4 +1818,42 @@
         document.body.dataset.anniversaryPage = matches[0].page || '';
     })();
 
+    // -----------------------------------------------------------------------
+    // Firefox fallback for page transitions (View Transitions API not supported)
+    // -----------------------------------------------------------------------
+    if (!('startViewTransition' in document)) {
+        document.body.classList.add('page-transition-fade');
+
+        document.addEventListener('click', function (event) {
+            const link = event.target.closest('a[href]');
+            if (!link) {
+                return;
+            }
+            const href = link.getAttribute('href');
+            if (!href || href.charAt(0) === '#' ||
+                href.indexOf('mailto:') === 0) {
+                return;
+            }
+            // Only handle same-origin navigations.
+            try {
+                const url = new URL(href, window.location.href);
+                if (url.origin !== window.location.origin) {
+                    return;
+                }
+                if (url.pathname === window.location.pathname &&
+                    url.search === window.location.search) {
+                    return;
+                }
+            } catch (e) {
+                return;
+            }
+            event.preventDefault();
+            document.body.style.transition = 'opacity 0.2s ease';
+            document.body.style.opacity = '0';
+            window.setTimeout(function () {
+                window.location.href = link.href;
+            }, 200);
+        });
+    }
+
 })();

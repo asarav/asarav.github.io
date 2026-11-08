@@ -1,6 +1,22 @@
 ---
 ---
 
+@view-transition {
+  navigation: auto;
+}
+
+/* Firefox fallback for page transitions */
+@media (prefers-reduced-motion: no-preference) {
+  body.page-transition-fade {
+    animation: page-fade-in 0.3s ease;
+  }
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 // ===========================================================================
 
 // MAIN.SCSS - The Nocturne Archive
@@ -2335,4 +2351,28 @@ body.is-boosted #site {
   background-color: rgba(143, 208, 232, 0.08);
   color: var(--frost);
   transform: translateY(-1px);
+}
+
+/* Reduced motion and mobile coverage */
+@media (prefers-reduced-motion: reduce) {
+  .matrix-rain,
+  .weather-bg {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
+  .matrix-rain,
+  .weather-bg {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .matrix-rain {
+    display: none !important;
+  }
+  .weather-bg {
+    opacity: 0.6;
+  }
 }

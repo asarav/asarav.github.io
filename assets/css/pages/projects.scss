@@ -1,8 +1,21 @@
 ---
 ---
 
-// ============================================================================
-// PROJECTS.SCSS - Projects Page Styles
+@view-transition {
+  navigation: auto;
+}
+
+/* Firefox fallback: smooth fade on navigation */
+@media (prefers-reduced-motion: no-preference) {
+  .page-transition-fade {
+    animation: page-fade-in 0.3s ease;
+  }
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 // ============================================================================
 // Page-specific overrides for pages/projects.html
 // Loaded via the 'style' front matter variable
