@@ -112,21 +112,12 @@
         const steps = phaseSteps(oldPhase, newPhase);
         const phaseCount = Math.max(1, steps.length);
 
-        let duration = phaseCount * 800;
-        if (duration < 2000) {
-            duration = 2000;
-        }
-        if (duration > 8000) {
-            duration = 8000;
+        let duration = 2500;
+        if (deltaHours < 1) {
+            duration = 1500;
         }
         if (deltaHours > 24) {
-            duration = Math.min(duration, 6000);
-        }
-        if (deltaHours > 168) {
-            duration = Math.min(duration, 4000);
-        }
-        if (deltaHours < 1) {
-            duration = 1000;
+            duration = 2000;
         }
 
         const imageRoot = document.body.dataset.imageRoot || '/src/images/';
