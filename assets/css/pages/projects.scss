@@ -43,7 +43,8 @@
         .page-top {
             background-image:
                 linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
-                url('/src/images/projects/projects-top.jpg');
+                url('/src/images/projects/projects-top.jpg'),
+                linear-gradient(135deg, #248aba, #21699a);
             border-bottom: 1px solid $border-color;
         }
 
