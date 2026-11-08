@@ -262,8 +262,9 @@ img:hover {
 
 .scene-timelapse--hero {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   opacity: 1;
+  pointer-events: none;
 }
 
 .scene-timelapse-progress {
@@ -613,7 +614,7 @@ body.home-page #navbar {
 
 // SHARED HERO
 
-// ===========================================================================
+.hero-main, .hero-floorplan, .hero-note, .hero-floor--label, .hero-weather, #down { position: relative; z-index: 1; }
 
 .page-top {
   position: relative;

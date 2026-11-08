@@ -161,6 +161,21 @@
                 overlay.style.backgroundAttachment = 'fixed, fixed, fixed, fixed';
                 document.body.appendChild(overlay);
 
+                // Hero crossfade (home page only).
+                const hero = document.querySelector('#content > .page-top.home-hero');
+                let heroOverlay = null;
+                if (hero && oldImages.hero) {
+                    heroOverlay = document.createElement('div');
+                    heroOverlay.className = 'scene-timelapse scene-timelapse--hero';
+                    heroOverlay.style.backgroundImage =
+                        'linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%), ' +
+                        'linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%), ' +
+                        'url("' + imageRoot + oldImages.hero + '")';
+                    heroOverlay.style.backgroundSize = 'cover';
+                    heroOverlay.style.backgroundPosition = 'center';
+                    hero.insertBefore(heroOverlay, hero.firstChild);
+                }
+
                 // Non-blocking progress indicator.
                 const progress = document.createElement('div');
                 progress.className = 'scene-timelapse-progress';
@@ -184,6 +199,9 @@
                     }
                     if (progress.parentNode) {
                         progress.parentNode.removeChild(progress);
+                    }
+                    if (heroOverlay && heroOverlay.parentNode) {
+                        heroOverlay.parentNode.removeChild(heroOverlay);
                     }
                     resolve();
                 }, duration + 100);
