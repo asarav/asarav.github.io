@@ -1381,7 +1381,7 @@ body.home-page #navbar {
       min-height: 560px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/projects.jpg");
+        background-image: url("/src/images/homepage_tiles/projects.jpg"), linear-gradient(135deg, #57aae9, #368ed7);
       }
     }
 
@@ -1390,7 +1390,7 @@ body.home-page #navbar {
       min-height: 560px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/music.png");
+        background-image: url("/src/images/homepage_tiles/music.png"), linear-gradient(135deg, #111111, #585530);
       }
     }
 
@@ -1399,7 +1399,7 @@ body.home-page #navbar {
       min-height: 420px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/games.jpg");
+        background-image: url("/src/images/homepage_tiles/games.jpg"), linear-gradient(135deg, #026698, #03345c);
       }
     }
 
@@ -1408,7 +1408,7 @@ body.home-page #navbar {
       min-height: 420px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/books.png");
+        background-image: url("/src/images/homepage_tiles/books.png"), linear-gradient(135deg, #05080b, #6cadda);
       }
     }
 
@@ -1417,7 +1417,7 @@ body.home-page #navbar {
       min-height: 390px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/consumption.jpg");
+        background-image: url("/src/images/homepage_tiles/consumption.jpg"), linear-gradient(135deg, #dcd9d0, #a9a29b);
       }
     }
 
@@ -1426,7 +1426,7 @@ body.home-page #navbar {
       min-height: 390px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/about-me.jpg");
+        background-image: url("/src/images/homepage_tiles/about-me.jpg"), linear-gradient(135deg, #161616, #1c1c1c);
       }
     }
 
@@ -1435,7 +1435,7 @@ body.home-page #navbar {
       min-height: 300px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/contact.jpg");
+        background-image: url("/src/images/homepage_tiles/contact.jpg"), linear-gradient(135deg, #3c3e47, #504e51);
       }
 
       .tile-content {
