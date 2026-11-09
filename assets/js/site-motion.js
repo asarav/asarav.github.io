@@ -1870,3 +1870,42 @@
     }
 
 })();
+// -----------------------------------------------------------------------
+// Cheap parallax depth on the hero floor number
+// -----------------------------------------------------------------------
+(function () {
+    try {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+
+        var hero = document.querySelector('.page-top');
+        var floor = document.querySelector('.hero-floor, .hero-floor--label');
+        if (!hero || !floor) return;
+
+        var targetX = 0, targetY = 0;
+        var curX = 0, curY = 0;
+        var raf = 0;
+
+        function onMove(e) {
+            var r = hero.getBoundingClientRect();
+            targetX = (e.clientX - (r.left + r.width / 2)) / r.width;
+            targetY = (e.clientY - (r.top + r.height / 2)) / r.height;
+        }
+
+        function tick() {
+            curX += (targetX - curX) * 0.06;
+            curY += (targetY - curY) * 0.06;
+            var x = (curX * 10).toFixed(2);
+            var y = (curY * 6).toFixed(2);
+            floor.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+            raf = requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('mousemove', onMove, { passive: true });
+        raf = requestAnimationFrame(tick);
+
+        window.addEventListener('pagehide', function () {
+            if (raf) cancelAnimationFrame(raf);
+        });
+    } catch (e) {}
+})();

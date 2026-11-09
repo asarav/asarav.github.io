@@ -25,6 +25,9 @@ image: src/images/media/media-top.jpg
         <div class="consumption-chronology__main">
             <span class="consumption-chronology__date" data-chronology-date>—</span>
             <span class="consumption-chronology__meta" data-chronology-meta></span>
+            <select class="consumption-chronology__year" aria-label="Jump to year" data-year-jump>
+                <option value="">Year</option>
+            </select>
         </div>
         <span class="consumption-chronology__progress">
             <span data-chronology-progress></span>
@@ -34,6 +37,12 @@ image: src/images/media/media-top.jpg
     <div class="consumption-list full-res">
         <div class="row item title">
             <label class="col-12">Chronology · {{ site.data.consumption.size }} entries</label>
+            <div class="col-12 consumption-year-jump-wrap">
+                <label for="consumption-year-jump" class="consumption-year-jump-label">Jump to year</label>
+                <select id="consumption-year-jump" class="consumption-year-jump" data-year-jump>
+                    <option value="">—</option>
+                </select>
+            </div>
         </div>
         {% for item in site.data.consumption %}
             <div class="row item info {{ item.type }}" data-item-id="{{ forloop.index }}" data-completion-date="{{ item.completionDate }}" data-title="{{ item.title | escape }}" data-type="{{ item.type }}">

@@ -1,6 +1,8 @@
 ---
 ---
 
+@import "page-hero";
+
 // ============================================================================
 // LOG.SCSS - The Corridor
 // ============================================================================
@@ -13,12 +15,8 @@
 
 .log-hero {
     min-height: 430px;
-    background-image:
-        var(--hero-grade),
-        url('/src/images/log/log.jpg'),
-        linear-gradient(135deg, #736e6c, #c8cce3);
+    @include page-hero('/src/images/log/log.jpg', linear-gradient(135deg, #736e6c, #c8cce3));
     background-position: center, center, center, center, center 40%, center;
-    border-bottom: 1px solid var(--top-border);
 
     .log-preamble {
         width: 100%;

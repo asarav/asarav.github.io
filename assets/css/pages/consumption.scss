@@ -9,6 +9,7 @@
 // ============================================================================
 
 @import "page-palette";
+@import "page-hero";
 
 $types: (
     anime: (rgb(230, 120, 90), "Anime"),
@@ -29,14 +30,10 @@ $types: (
     }
 
     #content {
-        color: $text;
+        color: var(--frost);
 
         .page-top {
-            background-image:
-                var(--hero-grade),
-                url('/src/images/media/media-top.jpg'),
-                linear-gradient(135deg, #06080b, #2e4c6c);
-            border-bottom: 1px solid $border-color;
+            @include page-hero('/src/images/media/media-top.jpg', linear-gradient(135deg, #06080b, #2e4c6c), $border-color);
 
             &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
                 color: transparent;
@@ -363,7 +360,7 @@ $types: (
                     }
 
                     .explanation {
-                        color: $text;
+                        color: var(--frost);
                         font-size: 15px;
                         line-height: 1.7;
                         transition: color 0.25s ease;
@@ -536,5 +533,25 @@ html.fast-scroll #site #content .consumption-list .item.info {
 
     #site #content .item.info:hover {
         transform: none;
+    }
+}
+
+.consumption-year-jump-wrap { display: flex; align-items: center; gap: 8px; margin: 8px 0 12px; }
+.consumption-year-jump-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.consumption-year-jump, .consumption-chronology__year { background: rgba(16,26,36,0.9); color: var(--frost); border: 1px solid var(--line); border-radius: 2px; padding: 4px 8px; font-family: var(--font-mono); font-size: 0.75rem; }
+.consumption-chronology__year { margin-left: auto; }
+
+.item.info.is-jump-target {
+    outline: 2px solid var(--signal);
+    outline-offset: 4px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.06);
+    animation: consumption-jump-target 1s ease-out forwards;
+}
+
+@keyframes consumption-jump-target {
+    to {
+        outline-color: transparent;
+        box-shadow: 0 0 0 0 transparent;
     }
 }

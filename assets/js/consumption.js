@@ -415,6 +415,118 @@
     updateProgress();
     updateChronologyVisibility();
 
+    // Year jump: populate selects and scroll to the first entry of a chosen year.
+    (function setupYearJump() {
+        var yearSelects = Array.from(document.querySelectorAll('[data-year-jump]'));
+
+        if (!yearSelects.length || !fullItems.length) {
+            return;
+        }
+
+        var years = Array.from(new Set(fullItems.map(function (item) {
+            var d = item.getAttribute('data-completion-date') || '';
+            var m = d.match(/(\d{4})/);
+            return m ? m[1] : null;
+        }).filter(Boolean))).sort(function (a, b) {
+            return b - a;
+        });
+
+        function jumpToYear(y, activeSelect) {
+            // Render every batch so the target is guaranteed to be in the DOM.
+            while (!allBatchesRendered) {
+                renderNextBatch();
+            }
+
+            // Pick the list that is actually visible. At narrow widths the
+            // full-res list is display: none and the mobile-res list shows
+            // instead, so scrolling to a full-res item's position would land
+            // near the top of the page.
+            var visibleList = fullList.offsetParent !== null ? fullList : mobileList;
+            var visibleItems = visibleList === fullList ? fullItems : mobileItems;
+
+            // The list is newest-first, so pick the earliest-dated entry of
+            // the chosen year (the "first date" of that year), not just the
+            // first match in DOM order.
+            var matches = visibleItems.filter(function (item) {
+                var d = item.getAttribute('data-completion-date') || '';
+                var m = d.match(/(\d{4})/);
+                return m && m[1] === y;
+            });
+
+            var target = null;
+            var targetTime = 0;
+            matches.forEach(function (item) {
+                var itemTime = new Date(item.getAttribute('data-completion-date') || '').getTime();
+                if (isNaN(itemTime)) {
+                    return;
+                }
+                if (!target || itemTime < targetTime) {
+                    target = item;
+                    targetTime = itemTime;
+                }
+            });
+
+            if (!target) {
+                return;
+            }
+
+            // Make sure the sticky rail is showing before we move the page.
+            chronology.setAttribute('data-visible', 'true');
+
+            // Force a layout flush so the rail's transitioned height is
+            // reflected before we measure it.
+            void chronology.offsetHeight;
+
+            // Position the target just below the sticky chronology rail.
+            var railHeight = chronology.offsetHeight || 80;
+            var top = target.getBoundingClientRect().top + window.scrollY - railHeight - 12;
+
+            window.scrollTo({
+                top: top,
+                behavior: reducedMotion.matches ? 'instant' : 'smooth'
+            });
+
+            // Update the sticky rail to reflect where we landed.
+            setChronology(target);
+
+            // Briefly flash the target so the eye lands on it.
+            target.classList.add('is-jump-target');
+            setTimeout(function () {
+                target.classList.remove('is-jump-target');
+            }, 1000);
+
+            // Keep the other select in sync.
+            yearSelects.forEach(function (s) {
+                if (s !== activeSelect) {
+                    s.value = y;
+                }
+            });
+        }
+
+        yearSelects.forEach(function (select) {
+            years.forEach(function (y) {
+                var opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = y;
+                select.appendChild(opt);
+            });
+
+            select.onchange = function () {
+                var y = select.value;
+                if (!y) {
+                    return;
+                }
+                jumpToYear(y, select);
+            };
+        });
+    })();
+
+    window.__renderAll = function () {
+        while (!allBatchesRendered) {
+            renderNextBatch();
+        }
+    };
+
     window.addEventListener('scroll', requestScrollFrame, { passive: true });
     window.addEventListener('resize', requestScrollFrame);
 })();

@@ -1,6 +1,8 @@
 ---
 ---
 
+@import "page-hero";
+
 // ============================================================================
 // MUSIC.SCSS - The Listening Room
 // ============================================================================
@@ -11,13 +13,7 @@
     color: var(--frost);
 
     .page-top {
-        background-image:
-            var(--hero-grade),
-            url('/src/images/music/music-top.jpg'),
-            linear-gradient(135deg, #161715, #685b4a);
-        background-position: center;
-        background-size: cover;
-        border-bottom: 1px solid var(--top-border);
+        @include page-hero('/src/images/music/music-top.jpg', linear-gradient(135deg, #161715, #685b4a));
     }
 }
 

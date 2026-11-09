@@ -45,6 +45,7 @@
   --font-display: 'Syne', sans-serif;
   --font-body: 'Instrument Sans', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
+  --font-floor: 'Orbitron', sans-serif;
   --content-max: 1360px;
   --gutter: clamp(20px, 4vw, 56px);
   --nav-height: 60px;
@@ -845,7 +846,7 @@ body.home-page #navbar {
     right: clamp(24px, 4vw, 48px);
     bottom: clamp(24px, 4vw, 48px);
     line-height: 0.8;
-    font-family: var(--font-display);
+    font-family: var(--font-floor);
     font-size: clamp(7rem, 18vw, 15rem);
     font-weight: 700;
   }
@@ -2067,7 +2068,7 @@ body.is-boosted #site {
   z-index: 2;
   margin: 0;
   color: rgba(183, 216, 230, 0.055);
-  font-family: var(--font-display);
+  font-family: var(--font-floor);
   font-size: clamp(7rem, 18vw, 15rem);
   font-weight: 700;
   // Match the digits' visual bottom to the element box so the gap is
@@ -2079,12 +2080,10 @@ body.is-boosted #site {
   -webkit-text-stroke: 1px rgba(139, 181, 204, 0.04);
 }
 
-// Syne's digits have inconsistent ink bounds (03/04/05/07 hang below the
-// baseline, 06/08 sit higher), which made the ghost numbers land differently
-// on each page. Instrument Sans has uniform lining figures, so one placement
-// works everywhere.
+// Orbitron has uniform lining figures for every digit, so the same placement
+// works on every page (including the home hero's "G" label).
 #site #content > .page-top:not(.home-hero) .hero-floor {
-  font-family: var(--font-body);
+  font-family: var(--font-floor);
   font-size: clamp(4.9rem, 12.6vw, 10.5rem);
 }
 
@@ -2402,3 +2401,30 @@ body.is-boosted #site {
     opacity: 0.6;
   }
 }
+
+// Floor 0 directory
+.floor-directory { padding: clamp(48px, 6vw, 96px) var(--gutter); color: var(--frost); }
+.floor-directory .container { max-width: var(--content-max); margin: 0 auto; }
+.floor-directory__title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px; }
+.floor-directory__list { list-style: none; padding: 0; margin: 0 0 48px; }
+.floor-directory__list li { border-top: 1px solid var(--line); padding: 12px 0; }
+.floor-directory__list li:last-child { border-bottom: 1px solid var(--line); }
+.floor-directory__list a { display: flex; align-items: center; gap: 16px; color: var(--frost); text-decoration: none; transition: color 0.2s ease; }
+.floor-directory__list a:hover { color: var(--ice); }
+.floor-directory__num { font-family: var(--font-floor); font-size: 1.4rem; font-weight: 700; color: var(--signal); min-width: 2.4rem; }
+.floor-directory__blueprint { display: grid; grid-template-columns: max-content 1fr; gap: 8px 24px; margin: 0; }
+.floor-directory__blueprint dt { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.floor-directory__blueprint dd { margin: 0; color: var(--frost); }
+.floor-directory__blueprint dd a { color: var(--ice); }
+
+.footer-transmission { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); margin: 8px 0 0; font-style: italic; }
+
+.footnote { position: relative; border-bottom: 1px dotted var(--muted); cursor: help; }
+.footnote::after { content: attr(data-note); position: absolute; left: 0; bottom: 1.4em; min-width: 200px; max-width: 280px; padding: 8px 10px; background: rgba(16,26,36,0.96); color: var(--frost); border: 1px solid var(--line); border-radius: 2px; font-size: 0.78rem; line-height: 1.4; opacity: 0; pointer-events: none; transform: translateY(4px); transition: opacity 0.2s ease, transform 0.2s ease; z-index: 20; }
+.footnote:hover::after, .footnote:focus::after { opacity: 1; transform: translateY(0); }
+
+@keyframes hero-breathe {
+  0% { opacity: 0.96; }
+  100% { opacity: 1; }
+}
+.hero-floor, .hero-floor--label { animation: hero-breathe 8s ease-in-out infinite alternate; }

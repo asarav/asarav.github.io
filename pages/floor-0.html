@@ -1,0 +1,44 @@
+---
+layout: default
+title: Floor 0 — The Blueprint
+description: A directory of every floor in the archive, plus notes on how it is built.
+permalink: /floor-0/
+image: src/images/homepage_tiles/projects.jpg
+---
+
+<div class="page-top">
+    <span class="hero-floor" aria-hidden="true">00</span>
+    <div class="hero-main">
+        <h1>FLOOR<br><span>ZERO</span></h1>
+        <p class="hero-note">The blueprint. A directory of every floor in the archive, and notes on how it is built.</p>
+    </div>
+</div>
+
+<section class="floor-directory">
+    <div class="container">
+        <h2 class="floor-directory__title">Directory</h2>
+        <ul class="floor-directory__list">
+            <li><a href="{{ '/' | relative_url }}"><span class="floor-directory__num">G</span> Home — the lobby and the chronology</a></li>
+            <li><a href="{{ '/projects/' | relative_url }}"><span class="floor-directory__num">01</span> Projects — software, research, and builds</a></li>
+            <li><a href="{{ '/music/' | relative_url }}"><span class="floor-directory__num">02</span> Music — the listening room</a></li>
+            <li><a href="{{ '/games/' | relative_url }}"><span class="floor-directory__num">03</span> Games — browser and Unity builds</a></li>
+            <li><a href="{{ '/books/' | relative_url }}"><span class="floor-directory__num">04</span> Books — the library alcove</a></li>
+            <li><a href="{{ '/consumption/' | relative_url }}"><span class="floor-directory__num">05</span> Media consumption — the ledger</a></li>
+            <li><a href="{{ '/about/' | relative_url }}"><span class="floor-directory__num">06</span> About — the person behind the archive</a></li>
+            <li><a href="{{ '/contact/' | relative_url }}"><span class="floor-directory__num">07</span> Contact — open channels</a></li>
+            <li><a href="{{ '/log/' | relative_url }}"><span class="floor-directory__num">13</span> Log — the corridor (status log)</a></li>
+        </ul>
+
+        <h2 class="floor-directory__title">Blueprint</h2>
+        <dl class="floor-directory__blueprint">
+            <dt>Stack</dt>
+            <dd>Jekyll, SCSS, vanilla JavaScript, Bootstrap 5</dd>
+            <dt>Typography</dt>
+            <dd>Cormorant Garamond, IBM Plex Mono, Instrument Sans, Syne, Orbitron</dd>
+            <dt>Last revised</dt>
+            <dd>{{ site.time | date: "%B %-d, %Y" }}</dd>
+            <dt>Source</dt>
+            <dd><a href="https://github.com/asarav/asarav.github.io" target="_blank" rel="noopener">github.com/asarav/asarav.github.io</a></dd>
+        </dl>
+    </div>
+</section>

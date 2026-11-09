@@ -1,27 +1,13 @@
 ---
 ---
 
-@view-transition {
-  navigation: auto;
-}
-
-/* Firefox fallback: smooth fade on navigation */
-@media (prefers-reduced-motion: no-preference) {
-  .page-transition-fade {
-    animation: page-fade-in 0.3s ease;
-  }
-}
-
-@keyframes page-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 // ============================================================================
 // Page-specific overrides for pages/projects.html
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
 @import "page-palette";
+@import "page-hero";
 
 @keyframes project-rise {
     from {
@@ -36,16 +22,12 @@
     background-color: rgb(30, 30, 31);
 
     #content {
-        color: $text;
+        color: var(--frost);
         margin-bottom: 30px;
         counter-reset: project;
 
         .page-top {
-            background-image:
-                var(--hero-grade),
-                url('/src/images/projects/projects-top.jpg'),
-                linear-gradient(135deg, #248aba, #21699a);
-            border-bottom: 1px solid $border-color;
+            @include page-hero('/src/images/projects/projects-top.jpg', linear-gradient(135deg, #248aba, #21699a), $border-color);
         }
 
         // Breathing room between the hero and the first project card.
@@ -152,7 +134,7 @@
                 left: 0;
                 right: 0;
                 height: 3px;
-                background: linear-gradient(90deg, $accent, rgb(0, 123, 255) 55%, rgba(0, 123, 255, 0));
+                background: linear-gradient(90deg, var(--signal), rgb(0, 123, 255) 55%, rgba(0, 123, 255, 0));
             }
 
             .row + .row {
@@ -181,7 +163,7 @@
                     font-weight: 700;
                     letter-spacing: 0.22em;
                     text-transform: uppercase;
-                    color: $accent;
+                    color: var(--signal);
                     margin-bottom: 8px;
                 }
             }
@@ -196,12 +178,12 @@
                 color: rgb(184, 204, 222);
                 margin: 24px 0 12px;
                 padding-left: 14px;
-                border-left: 3px solid $accent;
+                border-left: 3px solid var(--signal);
                 transition: color 0.25s ease, border-color 0.25s ease;
             }
 
             p {
-                color: $text;
+                color: var(--frost);
                 font-size: 17px;
                 line-height: 1.75;
                 margin-bottom: 14px;
@@ -223,7 +205,7 @@
 
                 &:hover {
                     color: rgb(255, 255, 255);
-                    text-decoration-color: $accent;
+                    text-decoration-color: var(--signal);
                 }
             }
 

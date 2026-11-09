@@ -9,20 +9,17 @@
 // ============================================================================
 
 @import "page-palette";
+@import "page-hero";
 
 #site {
     background-color: rgb(30, 30, 31);
 
     #content {
-        color: $text;
+        color: var(--frost);
         margin-bottom: 30px;
 
         .page-top {
-            background-image:
-                var(--hero-grade),
-                url('/src/images/contact/contact-top.jpg'),
-                linear-gradient(135deg, #202227, #5f5e63);
-            border-bottom: 1px solid $border-color;
+            @include page-hero('/src/images/contact/contact-top.jpg', linear-gradient(135deg, #202227, #5f5e63), $border-color);
         }
 
         .contact-list {
@@ -38,7 +35,7 @@
                 margin-bottom: 16px;
                 padding: 18px 20px;
                 overflow: hidden;
-                color: $text;
+                color: var(--frost);
                 text-decoration: none;
                 background: linear-gradient(160deg, $surface-raised 0%, $surface 75%);
                 border: 1px solid $border-color;
@@ -54,12 +51,12 @@
                     left: 0;
                     right: 0;
                     height: 3px;
-                    background: linear-gradient(90deg, $accent, rgb(0, 123, 255) 55%, rgba(0, 123, 255, 0));
+                    background: linear-gradient(90deg, var(--signal), rgb(0, 123, 255) 55%, rgba(0, 123, 255, 0));
                 }
 
                 &:hover,
                 &:focus-visible {
-                    color: $text;
+                    color: var(--frost);
                     border-color: rgba(126, 191, 255, 0.55);
                     box-shadow: var(--elev-2, 0 20px 44px rgba(0, 0, 0, 0.45));
                     background-color: rgba(126, 191, 255, 0.04);
@@ -156,13 +153,13 @@
                 padding: 20px 22px;
                 background: linear-gradient(160deg, rgba(27, 38, 50, 0.92), rgba(23, 31, 41, 0.92));
                 border: 1px solid $border-color;
-                border-left: 3px solid $accent;
+                border-left: 3px solid var(--signal);
                 border-radius: 2px;
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 
                 p {
                     margin: 0;
-                    color: $text;
+                    color: var(--frost);
                     font-size: 16px;
                     line-height: 1.7;
                 }
