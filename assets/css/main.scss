@@ -2057,8 +2057,9 @@ body.is-boosted #site {
 
 .hero-floor {
   position: absolute;
-  top: clamp(48px, 7vw, 88px);
+  top: auto;
   right: clamp(24px, 4vw, 48px);
+  bottom: clamp(24px, 4vw, 48px);
   z-index: 2;
   margin: 0;
   color: rgba(183, 216, 230, 0.055);
