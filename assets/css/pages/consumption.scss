@@ -33,9 +33,9 @@ $types: (
 
         .page-top {
             background-image:
-                linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
+                var(--hero-grade),
                 url('/src/images/media/media-top.jpg'),
-        linear-gradient(135deg, #06080b, #2e4c6c);
+                linear-gradient(135deg, #06080b, #2e4c6c);
             border-bottom: 1px solid $border-color;
 
             &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {

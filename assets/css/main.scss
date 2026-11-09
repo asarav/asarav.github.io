@@ -61,6 +61,15 @@
   --elev-1: 0 10px 24px rgba(0, 0, 0, 0.24);
   --elev-2: 0 18px 42px rgba(0, 0, 0, 0.32);
   --elev-3: 0 28px 64px rgba(0, 0, 0, 0.46);
+
+  // Shared film grade for the inner-page image heroes. Top-weighted light,
+  // a soft vignette, and a faint cool-shadow / warm-highlight wash keep the
+  // photographs matte instead of flat or glossy.
+  --hero-grade:
+    linear-gradient(90deg, rgba(6, 10, 15, 0.64) 0%, rgba(6, 10, 15, 0.28) 50%, rgba(6, 10, 15, 0.56) 100%),
+    linear-gradient(180deg, rgba(6, 10, 15, 0.16) 0%, rgba(6, 10, 15, 0.02) 36%, rgba(6, 10, 15, 0.48) 100%),
+    radial-gradient(125% 115% at 50% 30%, transparent 42%, rgba(3, 6, 10, 0.26) 100%),
+    linear-gradient(102deg, rgba(54, 88, 116, 0.07) 0%, transparent 48%, rgba(118, 82, 54, 0.06) 100%);
 }
 
 *, *::before, *::after {

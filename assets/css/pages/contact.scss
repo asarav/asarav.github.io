@@ -19,9 +19,9 @@
 
         .page-top {
             background-image:
-                linear-gradient(rgba(9, 14, 22, 0.18), rgba(9, 14, 22, 0.68)),
+                var(--hero-grade),
                 url('/src/images/contact/contact-top.jpg'),
-        linear-gradient(135deg, #202227, #5f5e63);
+                linear-gradient(135deg, #202227, #5f5e63);
             border-bottom: 1px solid $border-color;
         }
 

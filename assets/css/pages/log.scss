@@ -14,11 +14,10 @@
 .log-hero {
     min-height: 430px;
     background-image:
-        linear-gradient(90deg, rgba(7, 11, 16, 0.8) 0%, rgba(7, 11, 16, 0.48) 55%, rgba(7, 11, 16, 0.74) 100%),
-        linear-gradient(180deg, rgba(7, 11, 16, 0.22) 0%, rgba(7, 11, 16, 0.76) 100%),
+        var(--hero-grade),
         url('/src/images/log/log.jpg'),
         linear-gradient(135deg, #736e6c, #c8cce3);
-    background-position: center, center, center 40%;
+    background-position: center, center, center, center, center 40%, center;
     border-bottom: 1px solid var(--top-border);
 
     .log-preamble {
