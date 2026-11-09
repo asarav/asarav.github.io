@@ -2059,7 +2059,7 @@ body.is-boosted #site {
   position: absolute;
   top: auto;
   right: clamp(24px, 4vw, 48px);
-  bottom: clamp(24px, 4vw, 48px);
+  bottom: clamp(-10px, -0.6vw, -4px);
   z-index: 2;
   margin: 0;
   color: rgba(183, 216, 230, 0.055);
