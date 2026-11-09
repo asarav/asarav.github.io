@@ -844,6 +844,10 @@ body.home-page #navbar {
     top: auto;
     right: clamp(24px, 4vw, 48px);
     bottom: clamp(24px, 4vw, 48px);
+    line-height: 0.8;
+    font-family: var(--font-display);
+    font-size: clamp(7rem, 18vw, 15rem);
+    font-weight: 700;
   }
 
   &::before {
@@ -2059,18 +2063,29 @@ body.is-boosted #site {
   position: absolute;
   top: auto;
   right: clamp(24px, 4vw, 48px);
-  bottom: clamp(-10px, -0.6vw, -4px);
+  bottom: clamp(10px, 1.2vw, 16px);
   z-index: 2;
   margin: 0;
   color: rgba(183, 216, 230, 0.055);
   font-family: var(--font-display);
   font-size: clamp(7rem, 18vw, 15rem);
   font-weight: 700;
-  line-height: 0.8;
+  // Match the digits' visual bottom to the element box so the gap is
+  // predictable across hero heights and viewports.
+  line-height: 0.68;
   letter-spacing: -0.06em;
   pointer-events: none;
   user-select: none;
   -webkit-text-stroke: 1px rgba(139, 181, 204, 0.04);
+}
+
+// Syne's digits have inconsistent ink bounds (03/04/05/07 hang below the
+// baseline, 06/08 sit higher), which made the ghost numbers land differently
+// on each page. Instrument Sans has uniform lining figures, so one placement
+// works everywhere.
+#site #content > .page-top:not(.home-hero) .hero-floor {
+  font-family: var(--font-body);
+  font-size: clamp(4.9rem, 12.6vw, 10.5rem);
 }
 
 .footer-wordmark {
