@@ -126,6 +126,16 @@
             <script defer type="text/javascript" src="{{ 'assets/js/brand-mark.js' | relative_url }}"></script>
             <script>
                 if ('serviceWorker' in navigator) {
+                    var swHadController = !!navigator.serviceWorker.controller;
+                    var swReloading = false;
+                    navigator.serviceWorker.addEventListener('controllerchange', function () {
+                        // Only reload for an actual update, and only once.
+                        if (!swHadController || swReloading) {
+                            return;
+                        }
+                        swReloading = true;
+                        window.location.reload();
+                    });
                     window.addEventListener('load', function () {
                         navigator.serviceWorker.register('{{ 'sw.js' | relative_url }}').catch(function () {});
                     });

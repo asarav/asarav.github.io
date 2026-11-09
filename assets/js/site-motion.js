@@ -97,65 +97,62 @@
         return steps;
     }
 
-    function runTimelapse(oldScene, newScene, oldRoom) {
-        if (!oldScene || !sceneImages[oldScene] || !sceneImages[newScene] ||
-            oldScene === newScene || reducedMotion.matches) {
+    let activeTimelapseOverlay = null;
+
+    function runTimelapse(oldScene, applyNewScene) {
+        if (!oldScene || !sceneImages[oldScene] || reducedMotion.matches ||
+            activeTimelapseOverlay) {
+            applyNewScene();
+            return Promise.resolve();
+        }
+
+        const hero = document.querySelector('#content > .page-top.home-hero');
+        const oldImages = sceneImages[oldScene];
+
+        if (!hero || !oldImages.hero) {
+            applyNewScene();
             return Promise.resolve();
         }
 
         const duration = 4500;
-
         const imageRoot = document.body.dataset.imageRoot || '/src/images/';
-        const oldImages = sceneImages[oldScene];
-        const newImages = sceneImages[newScene];
 
-        // Preload the new hero image before starting the crossfade.
-        function preload(src) {
-            return new Promise(function (resolve) {
-                const img = new Image();
-                img.onload = function () { resolve(); };
-                img.onerror = function () { resolve(); };
-                img.src = src;
-                window.setTimeout(resolve, 1500);
+        // Put the old image on top *before* the new scene is applied, so the
+        // new image never paints first (which caused a new -> old -> new flash).
+        const overlay = document.createElement('div');
+        overlay.className = 'scene-timelapse scene-timelapse--hero';
+        overlay.style.backgroundImage =
+            'linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%), ' +
+            'linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%), ' +
+            'url("' + imageRoot + oldImages.hero + '")';
+        overlay.style.backgroundSize = 'cover';
+        overlay.style.backgroundPosition = 'center';
+        hero.insertBefore(overlay, hero.firstChild);
+        activeTimelapseOverlay = overlay;
+
+        // Swap the scene underneath the overlay.
+        applyNewScene();
+
+        // Commit the opaque overlay, then fade it out over the new scene.
+        void overlay.offsetWidth;
+        overlay.style.transition = 'opacity ' + duration + 'ms ease';
+
+        return new Promise(function (resolve) {
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    overlay.style.opacity = '0';
+                });
             });
-        }
 
-        const preloadPromise = oldImages.hero
-            ? preload(imageRoot + newImages.hero)
-            : Promise.resolve();
-
-        return preloadPromise.then(function () {
-            return new Promise(function (resolve) {
-                const hero = document.querySelector('#content > .page-top.home-hero');
-                let heroOverlay = null;
-
-                if (hero && oldImages.hero) {
-                    heroOverlay = document.createElement('div');
-                    heroOverlay.className = 'scene-timelapse scene-timelapse--hero';
-                    heroOverlay.style.backgroundImage =
-                        'linear-gradient(90deg, rgba(7, 11, 16, 0.76) 0%, rgba(7, 11, 16, 0.42) 55%, rgba(7, 11, 16, 0.7) 100%), ' +
-                        'linear-gradient(180deg, rgba(7, 11, 16, 0.24) 0%, rgba(7, 11, 16, 0.78) 100%), ' +
-                        'url("' + imageRoot + oldImages.hero + '")';
-                    heroOverlay.style.backgroundSize = 'cover';
-                    heroOverlay.style.backgroundPosition = 'center';
-                    hero.insertBefore(heroOverlay, hero.firstChild);
-
-                    void heroOverlay.offsetWidth;
-
-                    heroOverlay.style.transition = 'opacity ' + duration + 'ms ease';
-
-                    requestAnimationFrame(function () {
-                        heroOverlay.style.opacity = '0';
-                    });
+            window.setTimeout(function () {
+                if (overlay.parentNode) {
+                    overlay.parentNode.removeChild(overlay);
                 }
-
-                window.setTimeout(function () {
-                    if (heroOverlay && heroOverlay.parentNode) {
-                        heroOverlay.parentNode.removeChild(heroOverlay);
-                    }
-                    resolve();
-                }, duration + 100);
-            });
+                if (activeTimelapseOverlay === overlay) {
+                    activeTimelapseOverlay = null;
+                }
+                resolve();
+            }, duration + 100);
         });
     }
     // Weather effects
@@ -863,24 +860,43 @@
         const current = parseClock(data.time);
         const sunrise = parseClock(data.sunrise);
         const sunset = parseClock(data.sunset);
-        const hour = current === null ? new Date().getHours() : Math.floor(current / 60);
+        const now = new Date();
+        const minutesNow = current === null
+            ? now.getHours() * 60 + now.getMinutes()
+            : current;
+        const hour = Math.floor(minutesNow / 60);
 
-        if (isNearTime(current, sunrise)) {
+        if (isNearTime(minutesNow, sunrise)) {
             return 'sunrise';
         }
 
-        if (isNearTime(current, sunset)) {
+        if (isNearTime(minutesNow, sunset)) {
             return 'sunset';
         }
 
-        if ((sunrise === null && hour >= 5 && hour < 8) ||
-            (sunset === null && hour >= 17 && hour < 20)) {
-            return hour < 12 ? 'sunrise' : 'sunset';
+        if (data.isDay === false || data.isDay === 0 || data.isDay === '0') {
+            return 'night';
         }
 
-        if (data.isDay === false || data.isDay === 0 || data.isDay === '0' ||
-            (data.isDay == null && (hour < 6 || hour >= 20))) {
-            return 'night';
+        // Some providers (notably wttr.in) do not send a day/night flag, so
+        // fall back to the sun's own schedule instead of guessing from a
+        // fixed hour. Without this, sunset at 4:36 PM still rendered a
+        // daytime hero until 8:00 PM.
+        if (data.isDay == null) {
+            if (sunrise !== null && sunset !== null) {
+                return (minutesNow < sunrise || minutesNow >= sunset)
+                    ? 'night'
+                    : 'day';
+            }
+            if (hour >= 5 && hour < 8) {
+                return 'sunrise';
+            }
+            if (hour >= 17 && hour < 20) {
+                return 'sunset';
+            }
+            if (hour < 6 || hour >= 20) {
+                return 'night';
+            }
         }
 
         return 'day';
@@ -1164,8 +1180,7 @@
         const condition = data.condition || weatherCodeToText(code);
         const storedPrevious = getStoredScene();
         const previousScene = storedPrevious ? storedPrevious.scene : null;
-        const previousTimeScene = storedPrevious ? storedPrevious.timeScene : null;
-        const scene = setWeatherScene(data);
+        const scene = getWeatherScene(data);
         const currentTimeScene = getTimeScene(data);
         const precipitation = getWeatherEffectScene(data);
         const effectScene = precipitation || (scene === 'night' ? 'stars' : null);
@@ -1177,24 +1192,22 @@
             rainMultiplier = 1.3;
         }
 
+        function applyScene() {
+            setWeatherScene(data);
+        }
+
         // Determine if a transition should happen.
         // Transition whenever the scene changed. No adjacency check, no
         // time window, no state tracking. Replay on reload is fine.
-        let shouldTransition = false;
         if (previousScene && previousScene !== scene) {
-            shouldTransition = true;
-        }
-
-        // Timelapse from the previous scene to the current one.
-        if (shouldTransition) {
             // Stop existing weather effects immediately so they do not show
-            // during the transition.
+            // during the transition, and defer the new canvas until it ends.
             setWeatherEffect(null);
-            // Defer the new weather canvas until the timelapse finishes.
-            runTimelapse(previousScene, scene).then(function () {
+            runTimelapse(previousScene, applyScene).then(function () {
                 setWeatherEffect(effectScene);
             });
         } else {
+            applyScene();
             setWeatherEffect(effectScene);
         }
 

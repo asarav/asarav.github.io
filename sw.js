@@ -1,4 +1,4 @@
-const CACHE_NAME = 'asarav-shell-v1';
+const CACHE_NAME = 'asarav-shell-v2';
 const SHELL_ASSETS = [
   '/',
   '/projects/',
@@ -40,30 +40,44 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', function (event) {
   const url = new URL(event.request.url);
-  // Only cache same-origin GET requests.
+
+  // Only handle same-origin GET requests.
   if (url.origin !== self.location.origin || event.request.method !== 'GET') {
     return;
   }
-  // Skip large media files.
-  if (/\.(mp4|webm|mp3|wav|ogg|jpg|jpeg|png|gif|webp|svg)$/i.test(url.pathname)) {
+
+  // Skip media and fonts; let the browser handle them directly.
+  if (/\.(mp4|webm|mp3|wav|ogg|jpg|jpeg|png|gif|webp|svg|ico|woff2?|ttf|otf)$/i.test(url.pathname)) {
     return;
   }
+
+  const isNavigation = event.request.mode === 'navigate';
+  const isFreshAsset = /\.(css|js|json|txt|xml)$/i.test(url.pathname);
+
+  if (!isNavigation && !isFreshAsset) {
+    return;
+  }
+
+  // Network-first so updated markup and assets reach the visitor. The cache
+  // is only a fallback for offline use.
   event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      if (cached) {
-        return cached;
+    fetch(event.request).then(function (response) {
+      if (response && response.ok) {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(function (cache) {
+          cache.put(event.request, clone);
+        });
       }
-      return fetch(event.request).then(function (response) {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(event.request, clone);
-          });
+      return response;
+    }).catch(function () {
+      return caches.match(event.request).then(function (cached) {
+        if (cached) {
+          return cached;
         }
-        return response;
-      }).catch(function () {
-        // Offline fallback: return cached index if available.
-        return caches.match('/');
+        if (isNavigation) {
+          return caches.match('/');
+        }
+        return undefined;
       });
     })
   );
