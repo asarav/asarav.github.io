@@ -256,6 +256,35 @@ img:hover {
   opacity: 0.64;
 }
 
+.weather-light {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at var(--light-x, 74%) var(--light-y, 14%),
+      var(--light-color, rgba(255, 206, 150, 0.18)) 0%,
+      rgba(0, 0, 0, 0) 58%
+    ),
+    radial-gradient(
+      circle at var(--shadow-x, 26%) var(--shadow-y, 86%),
+      var(--light-shadow, rgba(3, 7, 13, 0.14)) 0%,
+      rgba(0, 0, 0, 0) 72%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-light {
+    background:
+      radial-gradient(
+        circle at 72% 12%,
+        rgba(214, 226, 255, 0.10) 0%,
+        rgba(0, 0, 0, 0) 58%
+      );
+  }
+}
+
 .matrix-rain {
   position: fixed;
   inset: 0;
@@ -372,7 +401,7 @@ html.fast-scroll .song {
   top: 0;
   z-index: 1030;
   min-height: var(--nav-height);
-  padding: 0.2rem var(--gutter);
+  padding: 0 var(--gutter);
   background-image: linear-gradient(105deg, rgba(80, 105, 128, 0.98), rgba(17, 65, 138, 0.98));
   border: 0;
   border-bottom: 1px solid rgba(176, 214, 234, 0.24);
@@ -428,6 +457,10 @@ html.fast-scroll .song {
     }
 
     .brand-mark {
+      // Scale the fixed-size mark instead of resizing its box, so the
+      // scrolled state cannot change the navbar height. A changing height
+      // caused scroll-anchoring to oscillate around the is-scrolled threshold.
+      --brand-scale: 1;
       display: block;
       width: 58px;
       height: 58px;
@@ -435,12 +468,13 @@ html.fast-scroll .song {
       background: transparent;
       border: 0;
       cursor: pointer;
+      transform: scale(var(--brand-scale));
       transform-style: preserve-3d;
-      transition: transform 0.4s ease, filter 0.4s ease, width 0.35s ease, height 0.35s ease;
+      transition: transform 0.4s ease, filter 0.4s ease;
     }
 
     &[data-brand-hover="true"] .brand-mark {
-      transform: none;
+      transform: scale(var(--brand-scale));
       filter: drop-shadow(0 0 18px rgba(64, 163, 95, 0.42));
     }
 
@@ -449,7 +483,7 @@ html.fast-scroll .song {
     }
 
     &[data-brand-pressed="true"] .brand-mark {
-      transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(0.97);
+      transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(calc(var(--brand-scale) * 0.97));
       filter: drop-shadow(0 0 18px rgba(209, 73, 73, 0.45));
     }
 
@@ -480,19 +514,18 @@ html.fast-scroll .song {
   }
 
   &.is-scrolled .navbar-brand .brand-mark {
-    width: 46px;
-    height: 46px;
+    --brand-scale: 0.793;
   }
 
   &.is-scrolled .navbar-brand .brand-word {
     font-size: 1.35rem;
   }
 
-  #navbar .navbar-brand:active .brand-mark {
-    transform: scale(0.96);
+  .navbar-brand:active .brand-mark {
+    transform: scale(calc(var(--brand-scale) * 0.96));
   }
 
-  #navbar .navbar-brand:active .brand-word {
+  .navbar-brand:active .brand-word {
     color: var(--signal);
   }
 
@@ -688,12 +721,12 @@ body.home-page #navbar {
     background: radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(4, 8, 12, 0.58) 100%);
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     position: relative;
     z-index: 2;
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     transform: translate3d(0, var(--hero-shift, 0px), 0);
     opacity: var(--hero-opacity, 1);
   }
@@ -707,6 +740,27 @@ body.home-page #navbar {
     mix-blend-mode: screen;
     opacity: 0.6;
     transition: opacity 0.3s ease;
+  }
+
+  .page-top__light {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at var(--light-x, 74%) var(--light-y, 14%),
+      var(--light-color, rgba(255, 206, 150, 0.18)) 0%,
+      rgba(0, 0, 0, 0) 55%
+    );
+    mix-blend-mode: screen;
+
+    @media (prefers-reduced-motion: reduce) {
+      background: radial-gradient(
+        circle at 72% 12%,
+        rgba(214, 226, 255, 0.10) 0%,
+        rgba(0, 0, 0, 0) 55%
+      );
+    }
   }
 
   h1 {
@@ -1779,7 +1833,7 @@ body.home-page #navbar {
   border-bottom: 0.5px solid var(--top-border);
   background-repeat: no-repeat;
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     width: 100%;
     max-width: var(--content-max);
     margin-left: auto;
@@ -2008,7 +2062,7 @@ img {
     scroll-behavior: auto !important;
   }
 
-  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
+  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse) {
     transform: none !important;
     opacity: 1 !important;
   }

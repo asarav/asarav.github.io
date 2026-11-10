@@ -29,6 +29,8 @@
     let matrixRainFrame = 0;
     let matrixRainStreams = [];
     let matrixRainLastFrame = 0;
+    let currentLight = null;
+    let lightLayer = null;
     const FAST_SCROLL_THRESHOLD = 2;
     const MATRIX_RAIN_START = 23 * 60 + 30;
     const MATRIX_RAIN_END = 3 * 60 + 30;
@@ -157,6 +159,234 @@
     }
     // Weather effects
     // -----------------------------------------------------------------------
+    function mixChannel(base, target, amount) {
+        return Math.round(base + (target - base) * amount);
+    }
+
+    // -----------------------------------------------------------------------
+    // Sun / moon illumination
+    // -----------------------------------------------------------------------
+    function julianDay(date) {
+        return date.getTime() / 86400000 + 2440587.5;
+    }
+
+    function solarPosition(date, lat, lon) {
+        const rad = Math.PI / 180;
+        const d = julianDay(date) - 2451545.0;
+        const meanAnomaly = (357.5291 + 0.98560028 * d) * rad;
+        const equation = (1.9148 * Math.sin(meanAnomaly) +
+            0.02 * Math.sin(2 * meanAnomaly) +
+            0.0003 * Math.sin(3 * meanAnomaly)) * rad;
+        const perihelion = 102.9372 * rad;
+        const longitude = meanAnomaly + equation + perihelion + Math.PI;
+        const obliquity = 23.4397 * rad;
+        const declination = Math.asin(
+            Math.sin(obliquity) * Math.sin(longitude)
+        );
+        const rightAscension = Math.atan2(
+            Math.sin(longitude) * Math.cos(obliquity),
+            Math.cos(longitude)
+        );
+        const sidereal = (280.16 + 360.9856235 * d) * rad;
+        const hourAngle = sidereal + lon * rad - rightAscension;
+        const phi = lat * rad;
+        const altitude = Math.asin(
+            Math.sin(phi) * Math.sin(declination) +
+            Math.cos(phi) * Math.cos(declination) * Math.cos(hourAngle)
+        );
+        const azimuth = Math.atan2(
+            Math.sin(hourAngle),
+            Math.cos(hourAngle) * Math.sin(phi) -
+                Math.tan(declination) * Math.cos(phi)
+        );
+
+        return {
+            altitude: altitude / rad,
+            azimuth: (azimuth / rad + 180) % 360,
+            longitude: longitude
+        };
+    }
+
+    function lunarPosition(date, lat, lon) {
+        const rad = Math.PI / 180;
+        const d = julianDay(date) - 2451545.0;
+        const meanLongitude = (218.316 + 13.176396 * d) * rad;
+        const meanAnomaly = (134.963 + 13.064993 * d) * rad;
+        const meanDistance = (93.272 + 13.22935 * d) * rad;
+        const longitude = meanLongitude + 6.289 * rad * Math.sin(meanAnomaly);
+        const latitude = 5.128 * rad * Math.sin(meanDistance);
+        const obliquity = 23.4397 * rad;
+        const rightAscension = Math.atan2(
+            Math.sin(longitude) * Math.cos(obliquity) -
+                Math.tan(latitude) * Math.sin(obliquity),
+            Math.cos(longitude)
+        );
+        const declination = Math.asin(
+            Math.sin(latitude) * Math.cos(obliquity) +
+            Math.cos(latitude) * Math.sin(obliquity) * Math.sin(longitude)
+        );
+        const sidereal = (280.16 + 360.9856235 * d) * rad;
+        const hourAngle = sidereal + lon * rad - rightAscension;
+        const phi = lat * rad;
+        const altitude = Math.asin(
+            Math.sin(phi) * Math.sin(declination) +
+            Math.cos(phi) * Math.cos(declination) * Math.cos(hourAngle)
+        );
+        const azimuth = Math.atan2(
+            Math.sin(hourAngle),
+            Math.cos(hourAngle) * Math.sin(phi) -
+                Math.tan(declination) * Math.cos(phi)
+        );
+        const sun = solarPosition(date, lat, lon);
+        const elongation = Math.abs(
+            ((longitude - sun.longitude + Math.PI) % (2 * Math.PI)) -
+            Math.PI
+        );
+
+        return {
+            altitude: altitude / rad,
+            azimuth: (azimuth / rad + 180) % 360,
+            phase: (1 - Math.cos(elongation)) / 2
+        };
+    }
+
+    function estimatedPosition(date) {
+        const hour = date.getHours() + date.getMinutes() / 60 +
+            date.getSeconds() / 3600;
+        const daylight = Math.sin(((hour - 6) / 12) * Math.PI);
+
+        return {
+            altitude: daylight * 62,
+            azimuth: (((90 + (hour - 6) * 15) % 360) + 360) % 360,
+            phase: 0.5
+        };
+    }
+
+    function smoothstep(edge0, edge1, value) {
+        const t = Math.min(
+            1,
+            Math.max(0, (value - edge0) / (edge1 - edge0))
+        );
+
+        return t * t * (3 - 2 * t);
+    }
+
+    function computeIllumination(date) {
+        const coords = weatherCoordinates;
+        const sun = coords
+            ? solarPosition(date, coords.latitude, coords.longitude)
+            : estimatedPosition(date);
+        const moon = coords
+            ? lunarPosition(date, coords.latitude, coords.longitude)
+            : (sun.altitude < 0
+                ? {
+                    altitude: Math.min(60, -sun.altitude * 0.7),
+                    azimuth: (sun.azimuth + 180) % 360,
+                    phase: 0.6
+                }
+                : null);
+        const dayFactor = smoothstep(-6, 8, sun.altitude);
+        const useMoon = dayFactor < 0.08 && moon && moon.altitude > 0;
+        const body = useMoon ? 'moon' : (dayFactor > 0.08 ? 'sun' : 'ambient');
+
+        let altitude;
+        let azimuth;
+        let color;
+        let tint;
+        let alpha;
+        let shadowAlpha;
+
+        if (body === 'sun') {
+            altitude = sun.altitude;
+            azimuth = sun.azimuth;
+            const warmth = 1 - smoothstep(4, 40, sun.altitude);
+            color = [
+                Math.round(214 + 41 * warmth),
+                Math.round(226 - 20 * warmth),
+                Math.round(255 - 110 * warmth)
+            ];
+            tint = 0.18 + 0.34 * warmth;
+            alpha = 0.12 + 0.10 * warmth;
+            shadowAlpha = 0.10 + 0.07 * warmth;
+        } else if (body === 'moon') {
+            altitude = moon.altitude;
+            azimuth = moon.azimuth;
+            color = [150, 190, 255];
+            tint = 0.22 + 0.08 * moon.phase;
+            alpha = (0.09 + 0.07 * moon.phase) *
+                smoothstep(0, 18, moon.altitude);
+            shadowAlpha = 0.08;
+        } else {
+            altitude = Math.max(sun.altitude, -10);
+            azimuth = sun.azimuth;
+            color = [126, 166, 214];
+            tint = 0.20;
+            alpha = 0.075;
+            shadowAlpha = 0.08;
+        }
+
+        const height = Math.min(1, Math.max(0, (altitude + 8) / 98));
+        const x = 50 + 50 * Math.sin(azimuth * Math.PI / 180);
+        const y = 100 - height * 100;
+
+        return {
+            x: Math.min(96, Math.max(4, x)),
+            y: Math.min(94, Math.max(2, y)),
+            r: color[0],
+            g: color[1],
+            b: color[2],
+            tint: tint,
+            alpha: Math.max(0, Math.min(0.28, alpha)),
+            shadowAlpha: Math.max(0, Math.min(0.22, shadowAlpha)),
+            body: body
+        };
+    }
+
+    function ensureLightLayer() {
+        if (lightLayer && lightLayer.isConnected) {
+            return lightLayer;
+        }
+        if (!document.body) {
+            return null;
+        }
+
+        lightLayer = document.createElement('div');
+        lightLayer.className = 'weather-light';
+        lightLayer.setAttribute('aria-hidden', 'true');
+        document.body.insertBefore(lightLayer, document.body.firstChild);
+
+        return lightLayer;
+    }
+
+    function updateIllumination() {
+        const light = computeIllumination(new Date());
+
+        ensureLightLayer();
+        currentLight = light;
+
+        const root = document.documentElement;
+
+        root.style.setProperty('--light-x', light.x.toFixed(2) + '%');
+        root.style.setProperty('--light-y', light.y.toFixed(2) + '%');
+        root.style.setProperty(
+            '--light-color',
+            'rgba(' + light.r + ', ' + light.g + ', ' + light.b +
+            ', ' + light.alpha.toFixed(3) + ')'
+        );
+        root.style.setProperty(
+            '--light-shadow',
+            'rgba(3, 7, 13, ' + light.shadowAlpha.toFixed(3) + ')'
+        );
+        root.style.setProperty(
+            '--shadow-x',
+            (100 - light.x).toFixed(2) + '%'
+        );
+        root.style.setProperty(
+            '--shadow-y',
+            (100 - light.y).toFixed(2) + '%'
+        );
+    }
+
     function startWeatherCanvas(container, type) {
         if (reducedMotion.matches) {
             return function () {};
@@ -344,6 +574,21 @@
             const delta = Math.min((now - (draw.lastTime || now)) / 16.67, 2.5);
             draw.lastTime = now;
 
+            const light = currentLight;
+            const tint = light ? light.tint : 0;
+            const lightR = light ? light.r : 195;
+            const lightG = light ? light.g : 225;
+            const lightB = light ? light.b : 248;
+            const rainR = mixChannel(195, lightR, tint);
+            const rainG = mixChannel(225, lightG, tint);
+            const rainB = mixChannel(248, lightB, tint);
+            const snowR = mixChannel(255, lightR, tint * 0.45);
+            const snowG = mixChannel(255, lightG, tint * 0.45);
+            const snowB = mixChannel(255, lightB, tint * 0.45);
+            const starR = mixChannel(230, lightR, tint * 0.55);
+            const starG = mixChannel(243, lightG, tint * 0.55);
+            const starB = mixChannel(255, lightB, tint * 0.55);
+
             if (type === 'rain') {
                 context.lineCap = 'round';
                 context.lineWidth = 1.2;
@@ -363,8 +608,16 @@
                 for (let i = particles.length - 1; i >= 0; i--) {
                     const drop = particles[i];
                     const x2 = drop.x + Math.sin(angle) * drop.length * 0.5;
+                    const proximity = light
+                        ? 1 - Math.min(1, Math.abs(
+                            drop.x / canvas.width - light.x / 100
+                        ) * 1.3)
+                        : 0.5;
+                    const shade = 0.78 + 0.42 * proximity;
 
-                    context.strokeStyle = 'rgba(195, 225, 248, ' + drop.opacity.toFixed(3) + ')';
+                    context.strokeStyle = 'rgba(' + rainR + ', ' + rainG + ', ' +
+                        rainB + ', ' +
+                        Math.min(1, drop.opacity * shade).toFixed(3) + ')';
                     context.beginPath();
                     context.moveTo(drop.x, drop.y);
                     context.lineTo(x2, drop.y + drop.length);
@@ -388,12 +641,21 @@
                 for (let i = particles.length - 1; i >= 0; i--) {
                     const flake = particles[i];
                     const sway = Math.sin(now * 0.0007 + flake.phase) * flake.sway;
+                    const proximity = light
+                        ? 1 - Math.min(1, Math.abs(
+                            flake.x / canvas.width - light.x / 100
+                        ) * 1.3)
+                        : 0.5;
+                    const shade = 0.8 + 0.38 * proximity;
 
                     flake.y += flake.speed * delta;
                     flake.x += (flake.drift + sway + wind) * delta;
 
-                    context.fillStyle = 'rgba(255, 255, 255, ' + flake.opacity.toFixed(3) + ')';
-                    context.shadowColor = 'rgba(255, 255, 255, 0.7)';
+                    context.fillStyle = 'rgba(' + snowR + ', ' + snowG + ', ' +
+                        snowB + ', ' +
+                        Math.min(1, flake.opacity * shade).toFixed(3) + ')';
+                    context.shadowColor = 'rgba(' + snowR + ', ' + snowG + ', ' +
+                        snowB + ', 0.7)';
                     context.shadowBlur = flake.radius * 2.2;
                     context.beginPath();
                     context.ellipse(
@@ -416,8 +678,10 @@
                     const twinkle = 0.25 + (Math.sin(now * star.twinkleSpeed + star.phase) + 1) * 0.36;
                     const opacity = star.opacity * twinkle;
 
-                    context.fillStyle = 'rgba(230, 243, 255, ' + opacity.toFixed(3) + ')';
-                    context.shadowColor = 'rgba(196, 224, 255, ' + (opacity * 0.65).toFixed(3) + ')';
+                    context.fillStyle = 'rgba(' + starR + ', ' + starG + ', ' +
+                        starB + ', ' + opacity.toFixed(3) + ')';
+                    context.shadowColor = 'rgba(' + starR + ', ' + starG + ', ' +
+                        starB + ', ' + (opacity * 0.65).toFixed(3) + ')';
                     context.shadowBlur = star.radius * 3;
                     context.beginPath();
                     context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
@@ -1249,6 +1513,24 @@
             });
     }
 
+    function readWttrCoordinate(value) {
+        if (value === null || value === undefined) {
+            return null;
+        }
+
+        if (Array.isArray(value)) {
+            value = value[0];
+        }
+
+        if (value && typeof value === 'object') {
+            value = value.value;
+        }
+
+        const parsed = parseFloat(value);
+
+        return isFinite(parsed) ? parsed : null;
+    }
+
     function fetchWttr() {
         setWeatherRefreshing(true);
         fetch('https://wttr.in/?format=j1')
@@ -1267,6 +1549,21 @@
                         nearestArea.areaName[0] &&
                         nearestArea.areaName[0].value;
                     const timeZone = json.time_zone && json.time_zone[0];
+                    const wttrLat = readWttrCoordinate(
+                        nearestArea && nearestArea.latitude
+                    );
+                    const wttrLon = readWttrCoordinate(
+                        nearestArea && nearestArea.longitude
+                    );
+
+                    if (wttrLat !== null && wttrLon !== null) {
+                        weatherCoordinates = {
+                            latitude: wttrLat,
+                            longitude: wttrLon
+                        };
+                        updateIllumination();
+                    }
+
                     applyWeather({
                         code: parseInt(c.weatherCode, 10),
                         temp: temperatureUnit === 'fahrenheit' ? c.temp_F : c.temp_C,
@@ -1296,6 +1593,14 @@
 
     let weatherCoordinates = null;
 
+    updateIllumination();
+    window.setInterval(updateIllumination, 30000);
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) {
+            updateIllumination();
+        }
+    });
+
     if (weatherDisplay) {
         weatherDisplay.addEventListener('click', function () {
             if (weatherCoordinates) {
@@ -1313,6 +1618,7 @@
                     latitude: pos.coords.latitude,
                     longitude: pos.coords.longitude
                 };
+                updateIllumination();
                 fetchWeather(weatherCoordinates.latitude, weatherCoordinates.longitude);
             },
             function () {
@@ -1331,6 +1637,10 @@
         if (!hero || hero.querySelector('.page-top__shine')) {
             return;
         }
+
+        const light = document.createElement('div');
+        light.className = 'page-top__light';
+        hero.insertBefore(light, hero.firstChild);
 
         const shine = document.createElement('div');
         shine.className = 'page-top__shine';
