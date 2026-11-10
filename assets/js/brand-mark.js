@@ -14,11 +14,11 @@
             outline: '#860000'
         },
         active: {
-            dark: [8, 55, 25],
-            light: [170, 245, 185],
-            marker: '#b5f5c2',
-            glow: '#40a35f',
-            outline: '#186900'
+            dark: [8, 28, 60],
+            light: [170, 210, 245],
+            marker: '#b5d4f5',
+            glow: '#4080a3',
+            outline: '#184069'
         }
     };
 

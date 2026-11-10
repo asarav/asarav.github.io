@@ -475,7 +475,7 @@ html.fast-scroll .song {
 
     &[data-brand-hover="true"] .brand-mark {
       transform: scale(var(--brand-scale));
-      filter: drop-shadow(0 0 18px rgba(64, 163, 95, 0.42));
+      filter: drop-shadow(0 0 18px rgba(64, 128, 203, 0.42));
     }
 
     &[data-brand-hover="true"][data-brand-activated="false"] .brand-mark {
@@ -488,7 +488,7 @@ html.fast-scroll .song {
     }
 
     &[data-brand-pressed="true"][data-brand-activated="true"] .brand-mark {
-      filter: drop-shadow(0 0 18px rgba(64, 163, 95, 0.55));
+      filter: drop-shadow(0 0 18px rgba(64, 128, 203, 0.55));
     }
 
     .brand-word {
@@ -678,6 +678,18 @@ body.home-page #navbar {
 // SHARED HERO
 
 .hero-main, .hero-floorplan, .hero-note, .hero-floor--label, .hero-weather, #down { position: relative; z-index: 1; }
+
+/* Hide jumbotron sub text until the typing enhancement reveals it (avoids a
+   flash of the full text before the animation starts). no-JS keeps it visible. */
+html.js .hero-note,
+html.js .log-explanation,
+html.js .page-top > [class$="-explanation"] > p,
+html.js .tile-explanation > p,
+html.js .hero-floorplan .floor-role,
+html.js .footer-transmission {
+  opacity: 0 !important;
+  animation: none !important;
+}
 
 .page-top {
   position: relative;
@@ -2482,3 +2494,26 @@ body.is-boosted #site {
   100% { opacity: 1; }
 }
 .hero-floor, .hero-floor--label { animation: hero-breathe 8s ease-in-out infinite alternate; }
+
+.hero-note__cursor {
+  display: inline-block;
+  margin-left: 1px;
+  color: #00ff41;
+  font-weight: 400;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
+  animation: hero-note-blink 1.05s steps(2, start) infinite;
+}
+
+@keyframes hero-note-blink {
+  to { visibility: hidden; }
+}
+
+/* While a line is being typed it reads as terminal-green; once it is
+   finished it settles back into its real color. */
+.is-typing {
+  color: #90ee90 !important;
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace !important;
+  text-shadow: none !important;
+  transition: color 0.6s ease, background-color 0.6s ease, font-family 0s, text-shadow 0.6s ease;
+}
