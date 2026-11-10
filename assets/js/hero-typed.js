@@ -93,6 +93,18 @@
         markAnimated(pageKey);
     }
 
+    if (typeof IntersectionObserver === 'undefined') {
+        // Older browsers: reveal everything immediately, no typing.
+        var allEls = [];
+        groups.forEach(function (g) { g.els.forEach(function (el) { allEls.push(el); }); });
+        var ft = document.querySelector('.footer-transmission');
+        if (ft) allEls.push(ft);
+        allEls.forEach(function (el) {
+            el.style.setProperty('opacity', '1', 'important');
+        });
+        return;
+    }
+
     if (!groups.length && !document.querySelector('.footer-transmission')) {
         return;
     }
@@ -346,4 +358,7 @@
         // be in view, so check immediately as well.
         startFooterTyping();
     }
+
+    // Signal that the enhancement loaded (used by the head-script fallback).
+    window.__heroTypedReady = true;
 })();

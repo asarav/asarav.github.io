@@ -10,6 +10,13 @@
             <meta name="google-site-verification" content="pgJJ8njw6GLljKN4caY8Xtz5zoMPTyBsdpK6CMRhNBM" />
             <script>
                 document.documentElement.classList.add('js');
+                // Fallback: if the typing enhancement never loads (slow or
+                // failed connection), reveal the text so the page is usable.
+                window.setTimeout(function () {
+                    if (!window.__heroTypedReady) {
+                        document.documentElement.classList.remove('js');
+                    }
+                }, 5000);
                 // Opt into scroll-triggered motion only when the browser can
                 // support it. The timeout restores normal animations if the
                 // motion bundle fails to load for any reason.
