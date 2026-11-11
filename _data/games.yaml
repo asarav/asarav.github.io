@@ -47,15 +47,15 @@
   style: dark
   link: src/games/Space_SHMUP_Prototype/index.html
   images:
-    - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture.jpg
-    - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture 2.jpg
+    - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture.PNG
+    - src: src/games/Space_SHMUP_Prototype/Screenshots/Capture 2.PNG
   explanation: >
     A simple space shooter game to test parallax and 2d Unity
 - title: Apple Picker Prototype (2016)
   style: light
   link: src/games/Apple_Picker_Prototype/index.html
   images:
-    - src: src/games/Apple_Picker_Prototype/Screenshots/Capture.jpg
-    - src: src/games/Apple_Picker_Prototype/Screenshots/Capture 2.jpg
+    - src: src/games/Apple_Picker_Prototype/Screenshots/Capture.PNG
+    - src: src/games/Apple_Picker_Prototype/Screenshots/Capture 2.PNG
   explanation: >
     A game that I created to teach myself the basics of Unity
