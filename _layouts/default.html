@@ -4,6 +4,16 @@
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
             <meta name="color-scheme" content="dark">
+            <!-- Warm up connections to the image CDNs used by the consumption page. -->
+            <link rel="preconnect" href="https://m.media-amazon.com" crossorigin>
+            <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin>
+            <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin>
+            <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+            <link rel="preconnect" href="https://i.gr-assets.com" crossorigin>
+            <link rel="dns-prefetch" href="https://images.gr-assets.com">
+            {% if page.image %}
+            <link rel="preload" as="image" href="{{ page.image | relative_url }}" fetchpriority="high">
+            {% endif %}
             <title>{% if page.url == '/' %}{{ page.title }}{% else %}{{ page.title }} | asarav{% endif %}</title>
             <meta name="author" content="Avinash Saravanan">
             <meta name="keywords" content="Avinash,Saravanan,Software,Engineer,Scientist,Novelist,Guitar,Games,Music,Dance,AI,Badass,asarav,Developer,Programmer">

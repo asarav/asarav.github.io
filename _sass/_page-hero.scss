@@ -1,6 +1,7 @@
 // Shared hero background for inner pages.
 // Usage: @include page-hero('/src/images/...', linear-gradient(...), $border-color);
 @mixin page-hero($image, $gradient, $border: var(--top-border)) {
+    $mobile-image: str-insert($image, '.mobile', str-index($image, '.'));
     background-image:
         var(--hero-grade),
         url($image),
@@ -8,4 +9,11 @@
     background-position: center;
     background-size: cover;
     border-bottom: 1px solid $border;
+
+    @media (max-width: 768px) {
+        background-image:
+            var(--hero-grade),
+            url($mobile-image),
+            $gradient;
+    }
 }

@@ -1070,7 +1070,7 @@
             background: 'day-background.jpeg'
         },
         night: {
-            hero: 'city-night.png',
+            hero: 'city-night.jpg',
             background: 'night-background.jpeg'
         },
         rain: {
@@ -1082,7 +1082,7 @@
             background: 'snow-background.jpeg'
         },
         sunrise: {
-            hero: 'city-sunrise.png',
+            hero: 'city-sunrise.jpg',
             background: 'sunrise-background.jpeg'
         },
         sunset: {
@@ -1209,21 +1209,30 @@
         return null;
     }
 
+    function insertMobileSuffix(name, suffix) {
+        if (!suffix) return name;
+        return name.replace(/(\.[^.]+)$/, suffix + '$1');
+    }
+
     function setWeatherScene(data) {
         const scene = getWeatherScene(data);
         const images = sceneImages[scene];
         const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const suffix = isMobile ? '.mobile' : '';
+        const heroName = insertMobileSuffix(images.hero, suffix);
+        const bgName = insertMobileSuffix(images.background, suffix);
 
         document.body.dataset.weatherScene = scene;
         document.body.style.setProperty(
             '--weather-background-image',
-            'url("' + imageRoot + images.background + '")'
+            'url("' + imageRoot + bgName + '")'
         );
 
         if (document.body.classList.contains('home-page')) {
             document.body.style.setProperty(
                 '--weather-home-image',
-                'url("' + imageRoot + images.hero + '")'
+                'url("' + imageRoot + heroName + '")'
             );
         }
 
@@ -1236,14 +1245,16 @@
         const storedImages = sceneImages[storedInitialScene.scene];
         if (storedImages) {
             const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const suffix = isMobile ? '.mobile' : '';
             document.body.style.setProperty(
                 '--weather-background-image',
-                'url("' + imageRoot + storedImages.background + '")'
+                'url("' + imageRoot + insertMobileSuffix(storedImages.background, suffix) + '")'
             );
             if (document.body.classList.contains('home-page')) {
                 document.body.style.setProperty(
                     '--weather-home-image',
-                    'url("' + imageRoot + storedImages.hero + '")'
+                    'url("' + imageRoot + insertMobileSuffix(storedImages.hero, suffix) + '")'
                 );
             }
         }
