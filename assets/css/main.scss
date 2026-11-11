@@ -117,8 +117,17 @@ body#site::after {
   z-index: 9999;
   pointer-events: none;
   opacity: 0.032;
+  clip-path: inset(var(--safe-top, 0px) 0 0 0);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
+}
+
+// On phones, drop the fixed background attachment so iOS Safari does not
+// sample the page background into the status-bar / Dynamic Island strip.
+@media only screen and (max-width: 768px) {
+  body#site {
+    background-attachment: scroll;
+  }
 }
 
 .scroll-progress {
@@ -183,7 +192,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   left: 0;
   right: 0;
   height: var(--safe-top);
-  z-index: 1029;
+  z-index: 10000;
   background-color: var(--nav-tint);
   // Match the navbar so the strip does not visibly change colour when the
   // home page's in-flow navbar scrolls away.
@@ -256,6 +265,10 @@ img:hover {
   z-index: 0;
   pointer-events: none;
   opacity: 0.56;
+  // Keep the translucent atmosphere out of the iOS status-bar / Dynamic
+  // Island strip so Safari cannot sample it there (it would otherwise
+  // make the strip see-through).
+  clip-path: inset(var(--safe-top, 0px) 0 0 0);
 }
 
 .weather-bg:not(.weather-bg--global) {
@@ -293,6 +306,7 @@ img:hover {
   inset: 0;
   z-index: -2;
   pointer-events: none;
+  clip-path: inset(var(--safe-top, 0px) 0 0 0);
   background:
     radial-gradient(
       circle at var(--light-x, 74%) var(--light-y, 14%),
@@ -325,6 +339,7 @@ img:hover {
   pointer-events: none;
   opacity: 0.38;
   mix-blend-mode: screen;
+  clip-path: inset(var(--safe-top, 0px) 0 0 0);
 }
 
 .matrix-rain--global {
@@ -346,6 +361,7 @@ img:hover {
   background-position: center;
   opacity: 1;
   will-change: opacity;
+  clip-path: inset(var(--safe-top, 0px) 0 0 0);
 }
 
 .scene-timelapse--hero {
@@ -1532,7 +1548,7 @@ html.js .footer-transmission {
       min-height: 390px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/consumption.jpg"), linear-gradient(135deg, #dcd9d0, #a9a29b);
+        background-image: url("/src/images/homepage_tiles/consumption.png"), linear-gradient(135deg, #dcd9d0, #a9a29b);
       }
     }
 

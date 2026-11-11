@@ -152,6 +152,7 @@ body.template::after {
     pointer-events: none;
     background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(4, 8, 12, 0.65) 100%);
     z-index: 0;
+    clip-path: inset(var(--safe-top, 0px) 0 0 0);
 }
 
 .template-wrap, p.header, p.footer, div.title, .fullscreen {
