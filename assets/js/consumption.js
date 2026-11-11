@@ -73,7 +73,20 @@
             .trim();
 
         dateEl.textContent = formatDate(date);
-        metaEl.textContent = type && title ? type + ' · ' + title : title;
+
+        metaEl.textContent = '';
+
+        if (type && title) {
+            const typeEl = document.createElement('span');
+
+            typeEl.className = 'consumption-chronology__type';
+            typeEl.textContent = type + ' · ';
+            metaEl.appendChild(typeEl);
+        }
+
+        if (title) {
+            metaEl.appendChild(document.createTextNode(title));
+        }
 
         if (accent) {
             chronology.style.setProperty('--chronology-accent', accent);

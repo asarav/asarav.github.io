@@ -55,6 +55,13 @@ $types: (
                 -webkit-text-stroke-color: var(--signal);
             }
 
+            // Long hero word ("Consumption") can overflow tiny viewports.
+            @media only screen and (max-width: 480px) {
+                &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
+                    font-size: clamp(1.8rem, 8.5vw, 2.6rem);
+                }
+            }
+
             @supports not (-webkit-text-stroke: 1px #fff) {
                 &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
                     color: var(--frost);
@@ -181,27 +188,57 @@ $types: (
 
         @media only screen and (max-width: 768px) {
             .consumption-chronology {
-                top: calc(var(--nav-height));
-                padding: 10px 14px 12px;
+                top: calc(var(--nav-height) + 2px);
+
+                &[data-visible="true"] {
+                    max-height: 64px;
+                    padding: 10px 14px 12px;
+                }
             }
 
+            // Keep the rail on a single line: date, truncated title, year.
             .consumption-chronology__main {
-                gap: 10px;
+                align-items: center;
+                flex-wrap: nowrap;
+                gap: 8px;
             }
 
             .consumption-chronology__date {
-                font-size: 11px;
-                letter-spacing: 0.12em;
+                flex: 0 0 auto;
+                font-size: 10px;
+                letter-spacing: 0.1em;
+                white-space: nowrap;
             }
 
             .consumption-chronology__meta {
+                flex: 1 1 0;
+                min-width: 0;
                 font-size: 10px;
-                letter-spacing: 0.08em;
+                letter-spacing: 0.04em;
+                white-space: nowrap;
+            }
+
+            .consumption-chronology__year {
+                flex: 0 0 auto;
+                margin-left: 0;
+                padding: 2px 24px 2px 8px;
+                min-height: 34px;
+                // 16px stops iOS Safari from zooming the page on focus.
+                font-size: 16px;
+                background-position: right 8px center;
             }
 
             .consumption-chronology__progress {
                 right: 14px;
                 left: 14px;
+            }
+
+            // The date already carries the item-type colour, so drop the
+            // redundant type prefix and give the title more room.
+            @media only screen and (max-width: 480px) {
+                .consumption-chronology__type {
+                    display: none;
+                }
             }
         }
 
@@ -536,9 +573,24 @@ html.fast-scroll #site #content .consumption-list .item.info {
     }
 }
 
-.consumption-year-jump-wrap { display: flex; align-items: center; gap: 8px; margin: 8px 0 12px; }
+.consumption-year-jump-wrap { display: flex; align-items: center; gap: 8px; margin: 8px 0 12px; flex-wrap: wrap; }
 .consumption-year-jump-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.consumption-year-jump, .consumption-chronology__year { background: rgba(16,26,36,0.9); color: var(--frost); border: 1px solid var(--line); border-radius: 2px; padding: 4px 8px; font-family: var(--font-mono); font-size: 0.75rem; }
+.consumption-year-jump, .consumption-chronology__year {
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(16,26,36,0.9);
+    color: var(--frost);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 4px 28px 4px 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238fd0e8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+    color-scheme: dark;
+}
 .consumption-chronology__year { margin-left: auto; }
 
 .item.info.is-jump-target {

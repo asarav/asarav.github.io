@@ -49,6 +49,8 @@
   --content-max: 1360px;
   --gutter: clamp(20px, 4vw, 56px);
   --nav-height: 60px;
+  // Opaque colour Safari 26 samples for the status-bar area above the nav.
+  --nav-tint: #0d2a52;
   color-scheme: dark;
 
   // One motion language: shared curves and durations keep every transition
@@ -80,6 +82,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-height) + 18px);
+  // Safari 26 samples this colour for the status-bar area; keep it opaque
+  // instead of letting the browser fall back to white.
+  background-color: var(--ink);
 }
 
 body#site {
@@ -120,7 +125,11 @@ body#site::after {
   height: 2px;
   z-index: 10001;
   pointer-events: none;
-  background: linear-gradient(90deg, var(--signal), var(--ice));
+  // Safari 26 samples the topmost fixed element for the status-bar tint.
+  // An opaque nav colour here keeps that area from turning into a window
+  // onto the page; the visible progress gradient sits on top of it.
+  background-color: var(--nav-tint);
+  background-image: linear-gradient(90deg, var(--signal), var(--ice));
   transform: scaleX(0);
   transform-origin: 0 50%;
   will-change: transform;
@@ -139,7 +148,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .skip-link {
-  position: fixed;
+  position: absolute;
   top: 14px;
   left: 14px;
   z-index: 10000;
@@ -402,13 +411,12 @@ html.fast-scroll .song {
   z-index: 1030;
   min-height: var(--nav-height);
   padding: 0 var(--gutter);
+  background-color: var(--nav-tint);
   background-image: linear-gradient(105deg, rgba(80, 105, 128, 0.98), rgba(17, 65, 138, 0.98));
   border: 0;
   border-bottom: 1px solid rgba(176, 214, 234, 0.24);
   border-radius: 0;
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.24);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
   transition: box-shadow 0.9s ease, border-color 0.9s ease, filter 0.9s ease, background-image 0.9s ease;
 
   &:hover {
