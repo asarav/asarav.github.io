@@ -94,9 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
             // Paulo Coelho
             "Quando você quer alguma coisa, todo o Universo conspira para que você realize o seu desejo. — Paulo Coelho",
             // Neal Stephenson
-            "Until a man is twenty-five, he still thinks, every so often, that under the right circumstances he could be the baddest motherfucker in the world. — Neal Stephenson",
+            "The difference between stupid and intelligent people — and this is true whether or not they are well-educated — is that intelligent people can handle subtlety. — Neal Stephenson",
             // William Butler Yeats
             "I have spread my dreams under your feet; tread softly because you tread on my dreams. — William Butler Yeats",
+            // Richard Dawkins (The Selfish Gene)
+            "We are survival machines — robot vehicles blindly programmed to preserve the selfish molecules known as genes. — Richard Dawkins",
+            // Leonardo da Vinci
+            "La semplicità è la sofisticazione suprema. — Leonardo da Vinci",
+            // Benjamin Franklin
+            "An investment in knowledge pays the best interest. — Benjamin Franklin",
+            // Warren Buffett
+            "Price is what you pay. Value is what you get. — Warren Buffett",
         ];
 
         // Guarantee every quote is shown: rotate through them in order across
