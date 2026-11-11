@@ -2,7 +2,7 @@
 	<html lang="en">
         <head>
             <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
             <meta name="color-scheme" content="dark">
             <title>{% if page.url == '/' %}{{ page.title }}{% else %}{{ page.title }} | asarav{% endif %}</title>
             <meta name="author" content="Avinash Saravanan">
@@ -118,6 +118,7 @@
         <body id="site" class="site{% if page.url == '/' %} home-page{% endif %}" data-image-root="{{ 'src/images/' | relative_url }}">
             {% include ui-icons.html %}
             <a class="skip-link" href="#content">Skip to content</a>
+            <div class="status-scrim" aria-hidden="true"></div>
 <div class="scroll-progress" aria-hidden="true"></div>
             {% include nav.html %}
             <main id="content" class="container-fluid">

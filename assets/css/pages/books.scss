@@ -67,7 +67,7 @@
 
 .book-cover-column {
     position: sticky;
-    top: calc(var(--nav-height) + 34px);
+    top: calc(var(--nav-total) + 34px);
     display: flex;
     flex-direction: column;
     align-items: center;

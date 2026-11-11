@@ -95,7 +95,7 @@ $types: (
 
         .consumption-chronology {
             position: sticky;
-            top: calc(var(--nav-height) + 2px);
+            top: calc(var(--nav-total) + 2px);
             z-index: 20;
             display: flex;
             align-items: center;
@@ -188,7 +188,7 @@ $types: (
 
         @media only screen and (max-width: 768px) {
             .consumption-chronology {
-                top: calc(var(--nav-height) + 2px);
+                top: calc(var(--nav-total) + 2px);
 
                 &[data-visible="true"] {
                     max-height: 64px;

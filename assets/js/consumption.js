@@ -11,11 +11,14 @@
         return;
     }
 
-    const navHeight = parseFloat(
-        window
-            .getComputedStyle(document.documentElement)
-            .getPropertyValue('--nav-height')
-    ) || 64;
+    const navEl = document.getElementById('navbar');
+    let navHeight = (navEl && navEl.offsetHeight) || 64;
+
+    // The nav height includes the iOS safe-area inset, which changes when the
+    // device rotates. Keep the sticky-threshold in sync.
+    window.addEventListener('resize', function () {
+        navHeight = (navEl && navEl.offsetHeight) || 64;
+    });
 
     const dateEl = chronology.querySelector('[data-chronology-date]');
     const metaEl = chronology.querySelector('[data-chronology-meta]');
@@ -490,9 +493,19 @@
             // reflected before we measure it.
             void chronology.offsetHeight;
 
-            // Position the target just below the sticky chronology rail.
+            // Position the target just below the sticky chronology rail. The
+            // rail hangs from the navbar, so its sticky offset has to be part
+            // of the calculation (it includes the iOS safe-area inset).
             var railHeight = chronology.offsetHeight || 80;
-            var top = target.getBoundingClientRect().top + window.scrollY - railHeight - 12;
+            var railTop = parseFloat(
+                window.getComputedStyle(chronology).top
+            ) || navHeight;
+            var top =
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                railTop -
+                railHeight -
+                12;
 
             window.scrollTo({
                 top: top,
