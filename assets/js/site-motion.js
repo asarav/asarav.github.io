@@ -1088,6 +1088,42 @@
         sunset: {
             hero: 'city-sunset.jpg',
             background: 'sunset-background.jpeg'
+        },
+        fog: {
+            hero: 'city-fog.jpg',
+            background: 'cloudy-background.jpeg'
+        },
+        storm: {
+            hero: 'city-storm.jpg',
+            background: 'cloudy-background.jpeg'
+        },
+        twilight: {
+            hero: 'city-twilight.jpg',
+            background: 'night-background.jpeg'
+        },
+        'cloudy-night': {
+            hero: 'city-cloudy-night.jpg',
+            background: 'night-background.jpeg'
+        },
+        'foggy-night': {
+            hero: 'city-fog-night.jpg',
+            background: 'night-background.jpeg'
+        },
+        'foggy-sunrise': {
+            hero: 'city-fog-sunrise.jpg',
+            background: 'sunrise-background.jpeg'
+        },
+        'rainy-night': {
+            hero: 'city-rain-night.jpg',
+            background: 'night-background.jpeg'
+        },
+        'snowy-night': {
+            hero: 'city-snow-night.jpg',
+            background: 'night-background.jpeg'
+        },
+        'stormy-night': {
+            hero: 'city-storm-night.jpg',
+            background: 'night-background.jpeg'
         }
     };
 
@@ -1169,13 +1205,42 @@
     function getWeatherScene(data) {
         const timeScene = getTimeScene(data);
 
-        if (timeScene === 'night') {
-            return 'night';
-        }
-
         const code = data.code;
         const condition = String(data.condition || '').toLowerCase();
 
+        // Night: let weather layer on top instead of ignoring it.
+        if (timeScene === 'night') {
+            if (/snow|sleet|blizzard|ice pellets/.test(condition) ||
+                [71, 73, 75, 77, 85, 86].indexOf(code) !== -1) {
+                return 'snowy-night';
+            }
+            if (/rain|drizzle|shower|thunder/.test(condition) ||
+                isRainCode(code)) {
+                return 'rainy-night';
+            }
+            if (/fog|mist/.test(condition) ||
+                [45, 48].indexOf(code) !== -1) {
+                return 'foggy-night';
+            }
+            if (/thunder/.test(condition) ||
+                [95, 96, 99].indexOf(code) !== -1) {
+                return 'stormy-night';
+            }
+            if (/cloud|overcast/.test(condition) ||
+                [2, 3].indexOf(code) !== -1) {
+                return 'cloudy-night';
+            }
+            return 'night';
+        }
+
+        // Sunrise + fog gets its own dedicated hero.
+        if (timeScene === 'sunrise' &&
+            (/fog|mist/.test(condition) ||
+             [45, 48].indexOf(code) !== -1)) {
+            return 'foggy-sunrise';
+        }
+
+        // Day / sunrise / sunset: weather overrides time.
         if (/snow|sleet|blizzard|ice pellets/.test(condition) ||
             [71, 73, 75, 77, 85, 86].indexOf(code) !== -1) {
             return 'snow';
@@ -1185,8 +1250,18 @@
             return 'rain';
         }
 
-        if (/cloud|overcast|fog|mist/.test(condition) ||
-            [2, 3, 45, 48].indexOf(code) !== -1) {
+        if (/fog|mist/.test(condition) ||
+            [45, 48].indexOf(code) !== -1) {
+            return 'fog';
+        }
+
+        if (/thunder/.test(condition) ||
+            [95, 96, 99].indexOf(code) !== -1) {
+            return 'storm';
+        }
+
+        if (/cloud|overcast/.test(condition) ||
+            [2, 3].indexOf(code) !== -1) {
             return 'cloudy';
         }
 
@@ -1216,7 +1291,7 @@
 
     function setWeatherScene(data) {
         const scene = getWeatherScene(data);
-        const images = sceneImages[scene];
+        const images = sceneImages[scene] || sceneImages[getTimeScene(data)];
         const imageRoot = document.body.dataset.imageRoot || '/src/images/';
         const isMobile = window.matchMedia('(max-width: 768px)').matches;
         const suffix = isMobile ? '.mobile' : '';
