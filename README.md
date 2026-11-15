@@ -56,17 +56,16 @@ Updates all gems to their latest compatible versions.
 │   │   ├── main.scss        # Global styles; emitted as main.css
 │   │   ├── pages/           # Page-specific SCSS
 │   │   └── unity-theme.css  # Theme used inside the standalone Unity builds
+│   ├── games/               # Standalone Unity game builds
 │   ├── icons/
 │   │   └── tech-sprite.svg  # Monochrome brand icons for the About stack
-│   └── js/                  # Site and page JavaScript (served at /assets/js/)
+│   ├── images/              # Site, project, and game images
+│   ├── js/                  # Site and page JavaScript
+│   ├── music/               # Audio files
+│   ├── projects/            # Downloadable/model project files and demos
+│   └── videos/              # Video files
 ├── index.html               # Home page
 ├── pages/                   # Content templates with explicit permalinks
-├── src/
-│   ├── images/              # Site, project, and game images
-│   ├── games/               # Standalone Unity game builds
-│   ├── projects/            # Downloadable/model project files
-│   ├── music/               # Audio files
-│   └── videos/              # Video files
 ├── llms.txt                 # Curated agent-readable site summary
 ├── llms-full.txt            # Long-form agent-readable site reference
 ├── projects.json            # Machine-readable index of all project records
@@ -74,10 +73,9 @@ Updates all gems to their latest compatible versions.
 ```
 
 Page templates are grouped under `pages/`; their explicit permalinks keep the
-published routes independent of their source location. The larger media files
-and standalone builds remain under `src/` because their paths are published
-URLs. Site JavaScript lives in `assets/js/` and page styles in
-`assets/css/pages/`, so Jekyll emits them at stable `/assets/...` URLs.
+published routes independent of their source location. Static media and
+standalone builds are grouped by type under `assets/`, alongside the site's
+styles, icons, and scripts. Jekyll publishes this tree under `/assets/`.
 
 ## Build notes
 
@@ -87,7 +85,7 @@ GitHub Pages supplies its own gem set at deploy time, so the pin only affects
 local builds.
 
 `bundle exec jekyll build` may print a harmless `faraday-retry` warning. If a
-build fails with `Permission denied` under `_site/src/videos/`, stop any running
+build fails with `Permission denied` under `_site/assets/videos/`, stop any running
 Jekyll server, remove `_site`, and rebuild.
 
 ## Key Technologies

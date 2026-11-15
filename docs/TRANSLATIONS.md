@@ -39,7 +39,7 @@ Support multiple languages (at minimum English + one other) without breaking the
   ```yaml
   languages: ["en", "es"]
   default_lang: "en"
-  exclude_from_localization: ["assets", "src/images", "src/games"]
+  exclude_from_localization: ["assets"]
   url: https://asarav.github.io
   ```
 - Move page files under language-aware paths or use `permalink: /:lang/...`.

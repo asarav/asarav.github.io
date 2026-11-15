@@ -15,7 +15,7 @@
 
 .log-hero {
     min-height: 430px;
-    @include page-hero('/src/images/log/log.jpg', linear-gradient(135deg, #736e6c, #c8cce3));
+    @include page-hero('/assets/images/log/log.jpg', linear-gradient(135deg, #736e6c, #c8cce3));
     background-position: center, center, center, center, center 40%, center;
 
     .log-preamble {

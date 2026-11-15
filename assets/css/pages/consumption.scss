@@ -33,7 +33,7 @@ $types: (
         color: var(--frost);
 
         .page-top {
-            @include page-hero('/src/images/media/media-top.jpg', linear-gradient(135deg, #06080b, #2e4c6c), $border-color);
+            @include page-hero('/assets/images/media/media-top.jpg', linear-gradient(135deg, #06080b, #2e4c6c), $border-color);
 
             &:not(.home-hero):not(.log-hero) .consumption-preamble h1 {
                 color: transparent;

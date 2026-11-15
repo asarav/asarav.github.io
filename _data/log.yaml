@@ -21,7 +21,7 @@
     Completed my first outdoor climbing routes with top rope at Oak park in Grand Ledge.
     Routes include Schism, Potato Chips, Karen's Direct, and Mossy Gully. The hardest route had a grade of 5.9 of the YDS USA scale.
 - date: Jun 29, 2024
-  image: src/images/log/10k certificate.jpg
+  image: assets/images/log/10k certificate.jpg
   explanation: >
     Completed my first 10k event with a 32 minute 5k. This was also in the rain.
 - date: Feb 24, 2024
@@ -31,7 +31,7 @@
   explanation: >
     Completed a V1 bouldering route. Also completed a V0 bouldering route without using legs.
 - date: Oct 14, 2023
-  image: src/images/log/Freepress 5k 2023.jpg
+  image: assets/images/log/Freepress 5k 2023.jpg
   explanation: >
     Ran my first 5k event while it was raining and cold.
 - date: Oct 5, 2023
@@ -41,12 +41,12 @@
   explanation: >
     Did my first unassisted muscle up with bad form.
 - date: Mar 2, 2023
-  image: src/images/about/writing/Medium Future Top Writer.PNG
+  image: assets/images/about/writing/Medium Future Top Writer.PNG
   explanation: >
     Was listed as a top writer in Medium for the first time.
 - date: Feb 27, 2023
-  image: src/images/log/Book Top 100.jpg
-  image2: src/images/log/Book Top 100 2.PNG
+  image: assets/images/log/Book Top 100.jpg
+  image2: assets/images/log/Book Top 100 2.PNG
   explanation: >
     A book I wrote made it to the top 100 of a category in Amazon for the first time.
 - date: Feb 14, 2023
@@ -68,12 +68,12 @@
     I was also nominated for an Outstanding Early Career Scientist Paper Award.
     This marks 3 milestones: my first full paper, my first paper as first author, and the first time I was nominated for an award based on my scientific research.
 - date: Mar 26, 2022
-  image: src/images/log/AWS Developer Learning.jpg
+  image: assets/images/log/AWS Developer Learning.jpg
   explanation: >
     Completed AWS Developer plan which contained 18 courses and required above 30 hours of time to complete.
     Topics covered provide an overview of AWS services from Fargate to Cloudwatch and the final course covers questions asked in the Developer Certification test.
 - date: Sep 30, 2021
-  image: src/images/log/Aspiring Founder Certificate.PNG
+  image: assets/images/log/Aspiring Founder Certificate.PNG
   explanation: >
     Completed YCombinator's Startup School for Aspiring Founders.
 - date: Jul 23, 2021
@@ -85,7 +85,7 @@
     Pushups were completed in 10 sets of 50 pushups each.
     This is comparable to or exceeds what military personel may experience during a day of basic training.
 - date: Jul 11, 2021
-  image: src/images/log/Periodic Table.PNG
+  image: assets/images/log/Periodic Table.PNG
   explanation: >
     Memorized entirety of periodic table.
 - date: Nov 24, 2020
@@ -149,8 +149,8 @@
     Memorization was accelerated through the use of Memrise.
     In the past, I used Anki, but Anki has limitations when trying to associate sound with a flash card.
     I can make out simple conversations, but I have trouble understanding Dutch due to my ears not being used to the speed at which people talk.
-  image: src/images/log/1000 Dutch Words 1.PNG
-  image2: src/images/log/1000 Dutch Words 2.PNG
+  image: assets/images/log/1000 Dutch Words 1.PNG
+  image2: assets/images/log/1000 Dutch Words 2.PNG
 - date: Aug 2, 2019
   explanation: >
     Left Thomson Reuters to pursue a masters degree in Computer Science at TU Delft.
@@ -182,7 +182,7 @@
 - date: May 5, 2019
   explanation: >
     Jumped out of a plane. Jumped out at 14,000 feet above ground in tandem and spent about 50 seconds in freefall before the parachute was released.
-  image: src/images/log/skydive-certificate.jpg
+  image: assets/images/log/skydive-certificate.jpg
 - date: Apr 14, 2019
   explanation: >
     Had escargot for the first time. Would like to try eating an invertebrate with an exoskeleton at some point.

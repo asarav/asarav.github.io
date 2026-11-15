@@ -117,7 +117,7 @@
         }
 
         const duration = 4500;
-        const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+        const imageRoot = document.body.dataset.imageRoot || '/assets/images/';
 
         // Put the old image on top *before* the new scene is applied, so the
         // new image never paints first (which caused a new -> old -> new flash).
@@ -1292,7 +1292,7 @@
     function setWeatherScene(data) {
         const scene = getWeatherScene(data);
         const images = sceneImages[scene] || sceneImages[getTimeScene(data)];
-        const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+        const imageRoot = document.body.dataset.imageRoot || '/assets/images/';
         const isMobile = window.matchMedia('(max-width: 768px)').matches;
         const suffix = isMobile ? '.mobile' : '';
         const heroName = insertMobileSuffix(images.hero, suffix);
@@ -1319,7 +1319,7 @@
         document.body.dataset.weatherScene = storedInitialScene.scene;
         const storedImages = sceneImages[storedInitialScene.scene];
         if (storedImages) {
-            const imageRoot = document.body.dataset.imageRoot || '/src/images/';
+            const imageRoot = document.body.dataset.imageRoot || '/assets/images/';
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
             const suffix = isMobile ? '.mobile' : '';
             document.body.style.setProperty(

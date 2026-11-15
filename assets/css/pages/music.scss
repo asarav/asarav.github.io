@@ -13,7 +13,7 @@
     color: var(--frost);
 
     .page-top {
-        @include page-hero('/src/images/music/music-top.jpg', linear-gradient(135deg, #161715, #685b4a));
+        @include page-hero('/assets/images/music/music-top.jpg', linear-gradient(135deg, #161715, #685b4a));
     }
 }
 

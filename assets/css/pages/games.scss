@@ -13,7 +13,7 @@
     color: var(--frost);
 
     .page-top {
-        @include page-hero('/src/images/games/games-top.jpg', linear-gradient(135deg, #273162, #0d1221));
+        @include page-hero('/assets/images/games/games-top.jpg', linear-gradient(135deg, #273162, #0d1221));
     }
 }
 

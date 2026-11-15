@@ -13,7 +13,7 @@
     color: var(--frost);
 
     .page-top {
-        @include page-hero('/src/images/books/books-top.jpg', linear-gradient(135deg, #333850, #946f67));
+        @include page-hero('/assets/images/books/books-top.jpg', linear-gradient(135deg, #333850, #946f67));
     }
 }
 

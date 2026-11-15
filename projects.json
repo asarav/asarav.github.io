@@ -145,9 +145,9 @@
       "url": "https://asarav.github.io/projects/#learning-ml5js",
       "links": [
         { "label": "Source code", "url": "https://github.com/asarav/Learning-ml5js" },
-        { "label": "Image classification demo", "url": "https://asarav.github.io/src/projects/Image%20Classification%20with%20Uploaded%20File/image-classification.html" },
-        { "label": "LSTM text prediction demo", "url": "https://asarav.github.io/src/projects/LSTM%20Text%20Prediction/text-prediction.html" },
-        { "label": "Guitar tuner demo", "url": "https://asarav.github.io/src/projects/Pitch%20Detection/pitch-detection.html" }
+        { "label": "Image classification demo", "url": "https://asarav.github.io/assets/projects/Image%20Classification%20with%20Uploaded%20File/image-classification.html" },
+        { "label": "LSTM text prediction demo", "url": "https://asarav.github.io/assets/projects/LSTM%20Text%20Prediction/text-prediction.html" },
+        { "label": "Guitar tuner demo", "url": "https://asarav.github.io/assets/projects/Pitch%20Detection/pitch-detection.html" }
       ]
     },
     {
@@ -373,7 +373,7 @@
       "stack": ["HTML", "JavaScript", "CSS"],
       "url": "https://asarav.github.io/projects/#conway-game-of-life",
       "links": [
-        { "label": "Live demo", "url": "https://asarav.github.io/src/projects/Conway%20Game%20of%20Life/conway.html" }
+        { "label": "Live demo", "url": "https://asarav.github.io/assets/projects/Conway%20Game%20of%20Life/conway.html" }
       ]
     },
     {

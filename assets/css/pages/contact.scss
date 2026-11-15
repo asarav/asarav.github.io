@@ -19,7 +19,7 @@
         margin-bottom: 30px;
 
         .page-top {
-            @include page-hero('/src/images/contact/contact-top.jpg', linear-gradient(135deg, #202227, #5f5e63), $border-color);
+            @include page-hero('/assets/images/contact/contact-top.jpg', linear-gradient(135deg, #202227, #5f5e63), $border-color);
         }
 
         .contact-list {

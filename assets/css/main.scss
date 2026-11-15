@@ -102,7 +102,7 @@ body#site {
   line-height: 1.65;
   color: var(--frost);
   background-color: var(--ink);
-  background-image: linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/src/images/rain-background.jpg")), linear-gradient(135deg, #1a2530, #0d1520);
+  background-image: linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/assets/images/rain-background.jpg")), linear-gradient(135deg, #1a2530, #0d1520);
   background-size: auto, auto, auto, cover, cover;
   background-position: center, center, center, center;
   background-attachment: fixed, fixed, fixed, fixed;
@@ -395,7 +395,7 @@ body.is-anniversary .page-top {
 }
 
 #site #content > .page-top.not-found-hero {
-    @include page-hero('/src/images/404.jpg', linear-gradient(135deg, #0a0a0a, #070b10));
+    @include page-hero('/assets/images/404.jpg', linear-gradient(135deg, #0a0a0a, #070b10));
 }
 
 body.is-anniversary .page-top::after {
@@ -961,7 +961,7 @@ html.js .footer-transmission {
   padding-bottom: clamp(24px, 3vh, 36px);
   background-position: 50% var(--hero-bg-pos, 50%);
   background-repeat: no-repeat;
-  background-image: linear-gradient(90deg, rgba(7, 11, 16, 0.78) 0%, rgba(7, 11, 16, 0.5) 48%, rgba(7, 11, 16, 0.72) 100%), linear-gradient(180deg, rgba(7, 11, 16, 0.34) 0%, rgba(7, 11, 16, 0.72) 100%), var(--weather-home-image, url("/src/images/city-rain.jpg")), linear-gradient(135deg, #1a2530, #0d1520);
+  background-image: linear-gradient(90deg, rgba(7, 11, 16, 0.78) 0%, rgba(7, 11, 16, 0.5) 48%, rgba(7, 11, 16, 0.72) 100%), linear-gradient(180deg, rgba(7, 11, 16, 0.34) 0%, rgba(7, 11, 16, 0.72) 100%), var(--weather-home-image, url("/assets/images/city-rain.jpg")), linear-gradient(135deg, #1a2530, #0d1520);
 
   .hero-floor--label {
     top: auto;
@@ -1518,7 +1518,7 @@ html.js .footer-transmission {
       min-height: 560px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/projects.jpg"), linear-gradient(135deg, #57aae9, #368ed7);
+        background-image: url("/assets/images/homepage_tiles/projects.jpg"), linear-gradient(135deg, #57aae9, #368ed7);
       }
     }
 
@@ -1527,7 +1527,7 @@ html.js .footer-transmission {
       min-height: 560px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/music.png"), linear-gradient(135deg, #111111, #585530);
+        background-image: url("/assets/images/homepage_tiles/music.png"), linear-gradient(135deg, #111111, #585530);
       }
     }
 
@@ -1536,7 +1536,7 @@ html.js .footer-transmission {
       min-height: 420px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/games.jpg"), linear-gradient(135deg, #026698, #03345c);
+        background-image: url("/assets/images/homepage_tiles/games.jpg"), linear-gradient(135deg, #026698, #03345c);
       }
     }
 
@@ -1545,7 +1545,7 @@ html.js .footer-transmission {
       min-height: 420px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/books.jpg"), linear-gradient(135deg, #05080b, #6cadda);
+        background-image: url("/assets/images/homepage_tiles/books.jpg"), linear-gradient(135deg, #05080b, #6cadda);
       }
     }
 
@@ -1554,7 +1554,7 @@ html.js .footer-transmission {
       min-height: 390px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/consumption.jpg"), linear-gradient(135deg, #dcd9d0, #a9a29b);
+        background-image: url("/assets/images/homepage_tiles/consumption.jpg"), linear-gradient(135deg, #dcd9d0, #a9a29b);
       }
     }
 
@@ -1563,7 +1563,7 @@ html.js .footer-transmission {
       min-height: 390px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/about-me.jpg"), linear-gradient(135deg, #161616, #1c1c1c);
+        background-image: url("/assets/images/homepage_tiles/about-me.jpg"), linear-gradient(135deg, #161616, #1c1c1c);
       }
     }
 
@@ -1572,7 +1572,7 @@ html.js .footer-transmission {
       min-height: 300px;
 
       &::before {
-        background-image: url("/src/images/homepage_tiles/contact.jpg"), linear-gradient(135deg, #3c3e47, #504e51);
+        background-image: url("/assets/images/homepage_tiles/contact.jpg"), linear-gradient(135deg, #3c3e47, #504e51);
       }
 
       .tile-content {

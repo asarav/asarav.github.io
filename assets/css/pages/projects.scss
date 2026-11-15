@@ -27,7 +27,7 @@
         counter-reset: project;
 
         .page-top {
-            @include page-hero('/src/images/projects/projects-top.jpg', linear-gradient(135deg, #248aba, #21699a), $border-color);
+            @include page-hero('/assets/images/projects/projects-top.jpg', linear-gradient(135deg, #248aba, #21699a), $border-color);
         }
 
         // Breathing room between the hero and the first project card.

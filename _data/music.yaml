@@ -1,10 +1,10 @@
 - title: Going Off 2 (2022)
-  src: src/music/Going Off 2.mp3
+  src: assets/music/Going Off 2.mp3
   explanation: > 
     4 years later, I recorded another one. This time, there are some other techniques that weren't in the first and some fun with a sustainer and a whammy bar at the end.
 
 - title: The Kid LAROI, Justin Bieber - STAY Guitar (2022)
-  src: src/music/Kidlaroi Stay.mp3
+  src: assets/music/Kidlaroi Stay.mp3
   explanation: > 
     A treatment of the The Kid Laroi song Stay with guitars.
     This included just a simple layering of guitar parts to see if I could transcribe it by ear and come up with rhythm and lead tracks.
@@ -12,13 +12,13 @@
     The left channel is guitars while the right channel is the original song.
 
 - title: Stairway to Heaven Backing Track Jam (2021)
-  src: src/music/Stairway to Heaven Backing Track Jam.mp3
+  src: assets/music/Stairway to Heaven Backing Track Jam.mp3
   explanation: > 
     I haven't recorded anything with my guitar in a long time, so I did this fairly quickly.
     Not technical and actually slower than the original solo, but fairly good from an improvisational standpoint.
 
 - title: Eternal Recurrence (2021)
-  src: src/music/Eternal Recurrence.mp3
+  src: assets/music/Eternal Recurrence.mp3
   explanation: > 
     Inspired by Strange Worlds from Manifold Garden and the work of Junkie XL.
     A relatively high tempo piece complete with orchestration and multiple sections.
@@ -26,14 +26,14 @@
     I would like to do slower pieces or noise music next with more electronic components.
 
 - title: Death Stranding Inspired Track (2019)
-  src: src/music/Death Stranding Inspired Track.mp3
+  src: assets/music/Death Stranding Inspired Track.mp3
   explanation: > 
       I've been listening to the Death Stranding soundtrack and there are some interesting things in there I wanted to try for myself.
       I threw this together in about an hour to see if I could do something similar.
       I think at this point, I can safely say that note choice and instrument structuring is not a problem for me, but I need to learn how to structure a song, handle percussion sections, and how to handle key and time signature changes if I want to make full fledged songs on the level of what would be considered professional quality.
 
 - title: Music Box (2019)
-  src: src/music/Music Box.mp3
+  src: assets/music/Music Box.mp3
   explanation: > 
       I started making this song with the intention of learning how to create dubstep before realizing halfway through that the structure of the song didn't properly create the setup for a decent bass drop.
       I originally wanted to just trash the song, but decided to at least reach something resembling completion.
@@ -41,29 +41,29 @@
       Working on this song allowed for me to learn about waves and oscillators.
 
 - title: Power Ballad Backing Track Jam (2018)
-  src: src/music/Power Ballad Backing Track Jam.mp3
+  src: assets/music/Power Ballad Backing Track Jam.mp3
   explanation: > 
       Me jamming to <a href="https://youtu.be/hgDsTS5IcTg" target="_blank">this backing track</a>. Showcases some of my improvisational ability. Added some minor mixing to allow for my guitar to stand out a little bit better.
 
 - title: Going Off (2018)
-  src: src/music/Going Off.mp3
+  src: assets/music/Going Off.mp3
   explanation: > 
       A solo that I challenged myself to come up with and record in one take. It's not very musical, but it exhibits some of my technical abilities in electric guitar.
       I imagine if I had to do a solo live in front of a large audience in a stadium, it would be very similar to this. That said, if I do make it that big, I'm sure I'll have some noise reduction pedals to clean up the static and extraneous noise.
 
 - title: Music Signature (2017)
-  src: src/music/Music Signature.mp3
+  src: assets/music/Music Signature.mp3
   explanation: >
       An audio signature to use at the beginning of videos
 
 - title: The Plains of LEO (2017)
-  src: src/music/The Plains of LEO.mp3
+  src: assets/music/The Plains of LEO.mp3
   explanation: >
       A song I created in 1 hour. The intention was to see whether I could use automation and the piano roll to quickly construct a song.
       The end result ended up sounding like program music for a concert.
 
 - title: Robocopter V1 (2016)
-  src: src/music/Robocopter v1.mp3
+  src: assets/music/Robocopter v1.mp3
   explanation: >
       The first song I ever recorded. Complete with guitars and synths.
       It's not exactly a full song, but it's long enough to be used for the the menu music of a game or the intro of a video.

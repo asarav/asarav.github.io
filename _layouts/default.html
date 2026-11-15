@@ -60,7 +60,7 @@
                 ];
             </script>
             {% if page.url == '/' %}
-            <link rel="preload" as="image" href="{{ 'src/images/homepage_tiles/projects.jpg' | relative_url }}" fetchpriority="high">
+            <link rel="preload" as="image" href="{{ 'assets/images/homepage_tiles/projects.jpg' | relative_url }}" fetchpriority="high">
             {% endif %}
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,7 +125,7 @@
 {"prefetch":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}
 </script>
         </head>
-        <body id="site" class="site{% if page.url == '/' %} home-page{% endif %}" data-image-root="{{ 'src/images/' | relative_url }}">
+        <body id="site" class="site{% if page.url == '/' %} home-page{% endif %}" data-image-root="{{ 'assets/images/' | relative_url }}">
             {% include ui-icons.html %}
             <a class="skip-link" href="#content">Skip to content</a>
             <div class="status-scrim" aria-hidden="true"></div>
