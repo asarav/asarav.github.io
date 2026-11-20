@@ -23,14 +23,24 @@ jobs:
       - name: Build site
         run: bundle exec jekyll build
 
-      - name: Check links and HTML
+      - name: Check internal links and HTML
         run: |
           gem install html-proofer --no-document
           # Rewrite absolute site URLs to root-relative so internal links are
           # checked against the build instead of the live site.
           htmlproofer ./_site \
+            --disable-external \
             --swap-urls "^https://asarav.github.io:" \
-            --ignore-status-codes "403,429,503" \
+            --allow-hash-href
+
+      # Amazon, LinkedIn, Goodreads and friends answer bots with 403/999, so a
+      # failure here is usually not a real broken link. Report it, do not fail.
+      - name: Check external links (non-blocking)
+        continue-on-error: true
+        run: |
+          htmlproofer ./_site \
+            --swap-urls "^https://asarav.github.io:" \
+            --ignore-status-codes "401,403,429,503,999" \
             --allow-hash-href
 
   lighthouse:
