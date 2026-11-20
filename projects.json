@@ -2,8 +2,8 @@
   "site": "https://asarav.github.io",
   "author": "Avinash Saravanan",
   "canonical": "https://asarav.github.io/projects/",
-  "description": "Machine-readable index of the 33 projects documented at /projects/. Each record mirrors the public write-up and links back to its section anchor.",
-  "count": 33,
+  "description": "Machine-readable index of the 34 projects documented at /projects/. Each record mirrors the public write-up and links back to its section anchor.",
+  "count": 34,
   "fields": {
     "id": "Section anchor on /projects/.",
     "order": "Position in the public project list, newest first.",
@@ -412,6 +412,18 @@
       "url": "https://asarav.github.io/projects/#learning-next-js",
       "links": [
         { "label": "Source code", "url": "https://github.com/asarav/Learning-Next" }
+      ]
+    },
+    {
+      "id": "call-audio-classifier",
+      "order": 34,
+      "title": "Emotional Tone and Background Noise Classifier",
+      "year": "2026",
+      "summary": "Command-line and Streamlit tool that listens to recorded customer calls and reports the customer's emotional tone (satisfied / neutral / upset / frustrated / distressed) with intensity and confidence, background noise type and severity, audio quality problems, long silences, and speaker overlap, keeping the evidence behind each answer. Tone combines acoustic emotion2vec with faster-whisper ASR and distilroberta text emotion; labeled batches are scored against expected answers, and all thresholds and label mappings live in config.yaml. Evaluated on three labeled calls as a tuned assessment set: tone 3/3 with macro-F1 0.60 and leave-one-call-out 2/3, intensity 3/3, noise presence and severity 3/3, speaker overlap 3/3, long silence 2/3, audio quality 2/3, noise type 1/3 exact.",
+      "stack": ["Python", "Streamlit", "PyTorch", "faster-whisper", "emotion2vec", "AudioSet AST", "distilroberta", "Silero VAD", "Plotly", "Pandas", "scikit-learn"],
+      "url": "https://asarav.github.io/projects/#call-audio-classifier",
+      "links": [
+        { "label": "Source code", "url": "https://github.com/asarav/callaudio-assessment" }
       ]
     }
   ]

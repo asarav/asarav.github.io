@@ -17,7 +17,7 @@ image: assets/images/projects/projects-top.jpg
   "description": "Software and research projects by Avinash Saravanan, including machine learning, web apps, and interactive demos.",
   "mainEntity": {
     "@type": "ItemList",
-    "numberOfItems": 33,
+    "numberOfItems": 34,
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Langchain Chains and Agents with MERN Stack Web Application", "url": "https://asarav.github.io/projects/#mern-langchain"},
       {"@type": "ListItem", "position": 2, "name": "Masters Thesis", "url": "https://asarav.github.io/projects/#MastersThesis"},
@@ -51,7 +51,8 @@ image: assets/images/projects/projects-top.jpg
       {"@type": "ListItem", "position": 30, "name": "Conway's Game of Life", "url": "https://asarav.github.io/projects/#conway-game-of-life"},
       {"@type": "ListItem", "position": 31, "name": "Dreaming of a Hopeful Death", "url": "https://asarav.github.io/projects/#dreaming-of-a-hopeful-death"},
       {"@type": "ListItem", "position": 32, "name": "Text to Video Generation", "url": "https://asarav.github.io/projects/#text-to-video"},
-      {"@type": "ListItem", "position": 33, "name": "Nextjs Frontend with Routing and APIs", "url": "https://asarav.github.io/projects/#learning-next-js"}
+      {"@type": "ListItem", "position": 33, "name": "Nextjs Frontend with Routing and APIs", "url": "https://asarav.github.io/projects/#learning-next-js"},
+      {"@type": "ListItem", "position": 34, "name": "Emotional Tone and Background Noise Classifier", "url": "https://asarav.github.io/projects/#call-audio-classifier"}
     ]
   }
 }
@@ -1049,6 +1050,66 @@ image: assets/images/projects/projects-top.jpg
                 <source src="{{ 'assets/videos/projects/learning-next/learning_next.mp4' | relative_url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+        </div>
+    </div>
+</section>
+<section id="call-audio-classifier">
+    <div class="row">
+        <h2 class="col-12">Emotional Tone and Background Noise Classifier (2026)</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Listens to a recorded customer call and reports how it went: how the customer sounded (satisfied, neutral, upset, frustrated, or distressed) and how strongly, what noise was in the background and how bad, whether the audio was usable (clipping, low volume, dropouts, long silences, weak signal against noise), and whether the speakers talked over each other. Tone is decided from both the voice and the transcript, and each result keeps the evidence behind it. Run it on one file or a folder from the command line, or upload a zipped batch to the Streamlit dashboard for a results table, CSV and JSON downloads, and accuracy scores with a confusion matrix against labeled calls. Thresholds and label mappings live in config.yaml. <a href="https://github.com/asarav/callaudio-assessment" target="_blank">The source is on GitHub.</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4>Accuracy and approach</h4>
+            <p>No model is trained or fine-tuned. The pipeline uses pretrained emotion2vec, faster-whisper, distilroberta, AST/CLAP, Silero VAD, and speakrs; only the fusion weights, label mappings, and thresholds were tuned, and they were tuned on the same three labeled calls that are then scored, so these numbers are descriptive rather than an estimate on unseen calls.</p>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Result on the three labeled calls</th>
+                </tr>
+                <tr>
+                    <td>Emotional tone (5 classes)</td>
+                    <td>3/3, macro-F1 0.60; leave-one-call-out 2/3</td>
+                </tr>
+                <tr>
+                    <td>Emotional intensity</td>
+                    <td>3/3</td>
+                </tr>
+                <tr>
+                    <td>Background noise present / severity</td>
+                    <td>3/3 / 3/3</td>
+                </tr>
+                <tr>
+                    <td>Background noise type</td>
+                    <td>1/3 exact, 2/3 fuzzy (TV vs television)</td>
+                </tr>
+                <tr>
+                    <td>Speaker overlap present</td>
+                    <td>3/3, after ignoring intersections shorter than 0.25 s</td>
+                </tr>
+                <tr>
+                    <td>Long silence present</td>
+                    <td>2/3, an 8.87 s gap against an 8 s threshold on a call labeled negative</td>
+                </tr>
+                <tr>
+                    <td>Audio quality</td>
+                    <td>2/3</td>
+                </tr>
+                <tr>
+                    <td>Speed and cost (CPU only)</td>
+                    <td>Real-time factor 0.92, about 55 s per audio minute, 782 MB peak memory, roughly $0.0006 per audio minute at $0.04/hour</td>
+                </tr>
+            </table>
+            <p>Two things stand out. The acoustic model on its own answers "neutral" for all three calls at every text-fusion weight tried, so what earns the correct tone is routing to the transcript when an escalation or appreciation phrase appears; even then the third call passes narrowly, with "satisfied" at 0.403 against a 0.40 cutoff. Overlap and silence detection also rest on tuned thresholds (0.25 s and 8 s), so both need re-checking against new annotated calls.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <img src="{{ 'assets/images/projects/call-audio-classifier/dashboard-evaluation.jpg' | relative_url }}" loading="lazy" width="1100" height="1031" alt="Streamlit evaluation section showing tone accuracy, intensity accuracy, per-field accuracy and the tone confusion matrix for labeled calls">
         </div>
     </div>
 </section>
