@@ -44,9 +44,13 @@ jobs:
           # checked against the build instead of the live site.
           # Internal links are root-relative, so no URL rewriting is needed;
           # --swap-urls splits on the first colon and mangles absolute URLs.
+          # unity3d.com is http-only inside vendored Unity builds, and
+          # ii.tudelft.nl is unreachable on both 80 and 443, so neither can
+          # satisfy the HTTPS check.
           htmlproofer ./_site \
             --disable-external \
-            --allow-hash-href 2>&1 | tee proofer.log
+            --allow-hash-href \
+            --ignore-urls "http://unity3d.com/,http://ii.tudelft.nl/genius/" 2>&1 | tee proofer.log
 
       - name: Report link failures
         if: failure()
