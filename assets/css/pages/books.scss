@@ -501,13 +501,26 @@
     }
 }
 
+// The divider is cut with a fourth-generation Cantor set: every third of the
+// rule loses its middle third, three times over. 16 hairline segments survive
+// out of 81, so the rule fades and thins at the same time.
+$cantor-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 81 1' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0 0h1v1H0z M2 0h1v1H2z M6 0h1v1H6z M8 0h1v1H8z M18 0h1v1H18z M20 0h1v1H20z M24 0h1v1H24z M26 0h1v1H26z M54 0h1v1H54z M56 0h1v1H56z M60 0h1v1H60z M62 0h1v1H62z M72 0h1v1H72z M74 0h1v1H74z M78 0h1v1H78z M80 0h1v1H80z'/%3E%3C/svg%3E");
+
 hr {
     width: calc(100% - 30px);
     max-width: 1280px;
     height: 1px;
     margin: 0 auto clamp(20px, 3vw, 32px);
     border: 0;
-    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+    // Only a fifth of the rule survives the mask, so the remaining strokes are
+    // drawn brighter than the plain line token to keep the divider readable.
+    background: linear-gradient(90deg, transparent, rgba(139, 181, 204, 0.72), transparent);
+    -webkit-mask-image: $cantor-mask;
+    mask-image: $cantor-mask;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 @media only screen and (max-width: 900px) {

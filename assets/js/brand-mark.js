@@ -60,9 +60,11 @@
         const ctx = canvas.getContext('2d', { alpha: true });
         if (!ctx) return;
 
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = SIZE * dpr;
-        canvas.height = SIZE * dpr;
+        // Match the display exactly: the mark is small, so a 3x buffer is
+        // cheap and keeps the ribbon boundary from going soft.
+        const dpr = Math.max(1, window.devicePixelRatio || 1);
+        canvas.width = Math.round(SIZE * dpr);
+        canvas.height = Math.round(SIZE * dpr);
         ctx.scale(dpr, dpr);
 
         const motion = !window.matchMedia(
@@ -89,6 +91,10 @@
         let rotX = INITIAL_X;
         let rotY = INITIAL_Y;
         let rotZ = INITIAL_Z;
+
+        // 0 is the plain mark, 1 adds the nested copy, 2 adds a third.
+        let nest = 0;
+        let nestTarget = 0;
 
         let targetX = rotX;
         let targetY = rotY;
@@ -117,9 +123,13 @@
             };
         }
 
+        // Recursion state: the mark can be drawn again at its own centre and a
+        // smaller scale, which is how a nested copy fits inside the ribbon.
+        const view = { scale: 1, dim: 1 };
+
         function project(point) {
             const focal = 48;
-            const scale = 1.45 * focal / (focal + point.z + 12);
+            const scale = view.scale * 1.45 * focal / (focal + point.z + 12);
 
             return {
                 x: SIZE / 2 + point.x * scale,
@@ -184,14 +194,13 @@
                 (colors.light[2] - colors.dark[2]) * t
             );
 
-            return `rgb(${r}, ${g}, ${b})`;
+            const dim = view.dim;
+
+            return `rgb(${Math.round(r * dim)}, ${Math.round(g * dim)}, ${Math.round(b * dim)})`;
         }
 
-        function quads() {
+        function quads(uSteps, vSteps) {
             const result = [];
-
-            const uSteps = 64;
-            const vSteps = 12;
 
             for (let ui = 0; ui < uSteps; ui++) {
                 const u0 = (ui / uSteps) * Math.PI * 2;
@@ -266,11 +275,12 @@
             return result;
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, SIZE, SIZE);
+        function drawMark(scale, dim, uSteps, vSteps, markers) {
+            view.scale = scale;
+            view.dim = dim;
 
             const color = brandColor();
-            const allQuads = quads();
+            const allQuads = quads(uSteps, vSteps);
 
             ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
@@ -325,10 +335,12 @@
             }
 
             // Show the changing orientation of the ribbon.
-            drawTwistMarker(0);
-            drawTwistMarker(Math.PI / 2);
-            drawTwistMarker(Math.PI);
-            drawTwistMarker(Math.PI * 1.5);
+            if (markers) {
+                drawTwistMarker(0);
+                drawTwistMarker(Math.PI / 2);
+                drawTwistMarker(Math.PI);
+                drawTwistMarker(Math.PI * 1.5);
+            }
 
             // Draw the continuous outer boundary.
             function drawBoundary() {
@@ -381,16 +393,43 @@
             ctx.globalAlpha = 1;
         }
 
+        // The resting state is the single band. On hover a smaller copy of the
+        // same mark appears inside the ribbon's hole, and pressing adds a third,
+        // so the mark visibly contains itself. The copies are dimmed rather than
+        // faded so they stay crisp at 58px.
+        function draw() {
+            ctx.clearRect(0, 0, SIZE, SIZE);
+
+            drawMark(1, 1, 64, 12, true);
+
+            if (nest > 0.03) {
+                drawMark(0.34, 0.52, 40, 8, false);
+            }
+
+            if (nest > 0.66) {
+                drawMark(0.115, 0.3, 24, 6, false);
+            }
+        }
+
         function animate() {
             const ease = 0.012;
 
             rotX += (targetX - rotX) * ease;
             rotY += (targetY - rotY) * ease;
             rotZ += (targetZ - rotZ) * ease;
+            nest += (nestTarget - nest) * 0.09;
 
             draw();
 
             window.requestAnimationFrame(animate);
+        }
+
+        // Without the animation loop the recursion has to be applied directly.
+        function syncNest() {
+            if (!motion) {
+                nest = nestTarget;
+                draw();
+            }
         }
 
         function enterBrand() {
@@ -399,11 +438,16 @@
             targetX = HOVER_X;
             targetY = HOVER_Y;
             targetZ = HOVER_Z;
+            nestTarget = 1;
+            syncNest();
         }
 
         function leaveBrand() {
             setBrandAttribute(brand, 'hover', false);
             setBrandAttribute(brand, 'pressed', false);
+
+            nestTarget = 0;
+            syncNest();
 
             targetX = INITIAL_X;
             targetY = INITIAL_Y;
@@ -422,14 +466,18 @@
 
         brand.addEventListener('pointerdown', function () {
             setBrandAttribute(brand, 'pressed', true);
+            nestTarget = 2;
+            syncNest();
         });
 
         brand.addEventListener('pointerup', function () {
             setBrandAttribute(brand, 'pressed', false);
+            nestTarget = 1;
         });
 
         brand.addEventListener('pointercancel', function () {
             setBrandAttribute(brand, 'pressed', false);
+            nestTarget = 1;
         });
 
         brand.addEventListener('click', function (event) {

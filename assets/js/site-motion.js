@@ -24,6 +24,8 @@
     let weatherEffectStops = [];
     let rainBoostUntil = 0;
     let matrixRainCanvas = null;
+    let cityMetro = false;
+    let cityStop = null;
     let matrixRainHeroCanvas = null;
     let matrixRainHero = null;
     let matrixRainFrame = 0;
@@ -400,7 +402,10 @@
         container.insertBefore(canvas, container.firstChild);
         canvas.style.position = isBody ? 'fixed' : 'absolute';
         canvas.style.inset = '0';
-        canvas.style.zIndex = isBody ? '-1' : '0';
+        // Behind every piece of page content: the city under the weather, the
+        // weather under the text. Hero layers stay at 0 because they sit inside
+        // the hero, above its photograph but below its copy.
+        canvas.style.zIndex = isBody ? (type === 'city' ? '-2' : '-1') : '0';
 
         const context = canvas.getContext('2d');
 
@@ -410,6 +415,21 @@
         }
 
         let particles = [];
+        // Fog and cloud banks are shapes, not particles: a slow field of soft
+        // gradients that drifts without ever leaving the frame.
+        let banks = [];
+        // Lightning state: when the next strike is due, and the one on screen.
+        let nextFlash = 0;
+        let flashStart = 0;
+        let flashX = 0.5;
+        let flashPath = [];
+        let flashBranch = [];
+        // Street lamps, only in the city ambience layer.
+        let lamps = [];
+        // And the colour of a city at night: lit windows, signs, signals.
+        let windows = [];
+        let signs = [];
+        let signals = [];
         let maxParticles = 0;
         let nextSpawn = 0;
         let frame = 0;
@@ -496,9 +516,9 @@
                 );
             } else {
                 maxParticles = Math.min(
-                    96,
-                    Math.max(4, Math.round(
-                        canvas.width / 64 * rainIntensity * rainMultiplier *
+                    140,
+                    Math.max(12, Math.round(
+                        canvas.width / 16 * rainIntensity * rainMultiplier *
                         Math.max(1, canvas.height / 320)
                     ))
                 );
@@ -516,13 +536,96 @@
                 }
             }
 
+            if (type === 'fog' || type === 'cloudy') {
+                seedBanks();
+            }
+
+            if (type === 'city') {
+                seedCity();
+            }
+
+            if (type === 'storm') {
+                // Do not open with a strike: let the page settle first.
+                nextFlash = performance.now() + 1800 + Math.random() * 5000;
+                flashStart = 0;
+            }
+
             nextSpawn = performance.now();
+        }
+
+        // Rain and snow are seeded from a fractal (value-noise fBm) density
+        // field, so the weather gathers into drifting bands instead of falling
+        // as an even curtain. Three octaves reads as texture at this scale.
+        const NOISE_CELLS = 5;
+
+        function noiseHash(ix, iy) {
+            const n = Math.sin(ix * 127.1 + iy * 311.7 + 74.7) * 43758.5453;
+            return n - Math.floor(n);
+        }
+
+        function valueNoise(px, py) {
+            const ix = Math.floor(px);
+            const iy = Math.floor(py);
+            const fx = px - ix;
+            const fy = py - iy;
+            const sx = fx * fx * (3 - 2 * fx);
+            const sy = fy * fy * (3 - 2 * fy);
+            const top = noiseHash(ix, iy) * (1 - sx) +
+                noiseHash(ix + 1, iy) * sx;
+            const bottom = noiseHash(ix, iy + 1) * (1 - sx) +
+                noiseHash(ix + 1, iy + 1) * sx;
+
+            return top * (1 - sy) + bottom * sy;
+        }
+
+        function densityAt(x, y) {
+            let value = 0;
+            let amplitude = 0.5;
+            let frequency = 1;
+
+            for (let octave = 0; octave < 3; octave++) {
+                value += amplitude * valueNoise(
+                    x * NOISE_CELLS * frequency,
+                    y * NOISE_CELLS * frequency
+                );
+                amplitude *= 0.5;
+                frequency *= 2;
+            }
+
+            return value / 0.875;
+        }
+
+        // The field drifts downwards, so the bands move with the weather.
+        function densityAtColumn(x, now) {
+            return densityAt(
+                x / Math.max(canvas.width, 1),
+                now * 0.000045
+            );
+        }
+
+        // Rejection-sample a column, biased towards the dense part of the field.
+        function pickColumn(now) {
+            let best = Math.random();
+            let bestDensity = -1;
+
+            for (let attempt = 0; attempt < 3; attempt++) {
+                const candidate = Math.random();
+                const density = densityAtColumn(candidate * canvas.width, now);
+
+                if (density > bestDensity) {
+                    bestDensity = density;
+                    best = candidate;
+                }
+            }
+
+            return { x: best * canvas.width, density: Math.max(0, bestDensity) };
         }
 
         function spawnRainBurst() {
             const boosted = performance.now() < rainBoostUntil;
-            const burstSize = 1 + Math.floor(Math.random() * Math.min(5, (boosted ? 4 : (isNight ? 3 : 2)) * rainMultiplier));
-            const baseX = Math.random() * canvas.width;
+            const burstSize = 1 + Math.floor(Math.random() * Math.min(7, (boosted ? 5 : (isNight ? 4 : 3)) * rainMultiplier));
+            const column = pickColumn(performance.now());
+            const baseX = column.x;
 
             for (let i = 0; i < burstSize; i++) {
                 if (particles.length >= maxParticles) {
@@ -534,7 +637,8 @@
                     y: -20 - Math.random() * 30,
                     length: 14 + Math.random() * 10,
                     speed: 3.5 + Math.random() * 3.5,
-                    opacity: ((boosted ? 0.26 : (isNight ? 0.18 : 0.12)) + Math.random() * (boosted ? 0.2 : (isNight ? 0.28 : 0.16))),
+                    opacity: ((boosted ? 0.26 : (isNight ? 0.18 : 0.12)) + Math.random() * (boosted ? 0.2 : (isNight ? 0.28 : 0.16))) *
+                        (0.45 + column.density),
                     drift: (Math.random() - 0.5) * 0.6
                 });
             }
@@ -542,7 +646,7 @@
 
         function spawnSnowflake(randomHeight) {
             particles.push({
-                x: Math.random() * canvas.width,
+                x: pickColumn(performance.now()).x,
                 y: randomHeight ? Math.random() * canvas.height : -4 - Math.random() * 12,
                 radius: 0.7 + Math.random() * 2.2,
                 speed: 0.35 + Math.random() * 1.25,
@@ -564,14 +668,472 @@
             });
         }
 
+        // Lamps sit at street level across the lower third.
+        function seedCity() {
+            const width = canvas.width;
+            const height = canvas.height;
+            const lampCount = isNight
+                ? Math.max(5, Math.min(11, Math.round(width / 150)))
+                : 0;
+
+            lamps = [];
+            windows = [];
+            signs = [];
+            signals = [];
+
+            for (let i = 0; i < lampCount; i += 1) {
+                lamps.push({
+                    x: (i + 0.2 + Math.random() * 0.6) / lampCount * width,
+                    y: height * (0.66 + Math.random() * 0.3),
+                    radius: height * (0.1 + Math.random() * 0.1),
+                    phase: Math.random() * Math.PI * 2,
+                    speed: 0.0007 + Math.random() * 0.0012,
+                    alpha: 0.22 + Math.random() * 0.12,
+                    // 1 is sodium amber, 0 is a cool white lamp.
+                    warmth: Math.random()
+                });
+            }
+
+            seedCityLights();
+        }
+
+        // A soft round glow, baked once: rebuilding a radial gradient for
+        // every sign on every frame was the most expensive thing in the city
+        // layer by far.
+        function glowSprite(rgb) {
+            const sprite = document.createElement('canvas');
+            const size = 64;
+            const context2 = sprite.getContext('2d');
+
+            sprite.width = size;
+            sprite.height = size;
+
+            if (!context2) {
+                return sprite;
+            }
+
+            const gradient = context2.createRadialGradient(
+                size / 2, size / 2, 0, size / 2, size / 2, size / 2
+            );
+
+            gradient.addColorStop(0, 'rgba(' + rgb[0] + ', ' + rgb[1] +
+                ', ' + rgb[2] + ', 1)');
+            gradient.addColorStop(0.4, 'rgba(' + rgb[0] + ', ' + rgb[1] +
+                ', ' + rgb[2] + ', 0.34)');
+            gradient.addColorStop(1, 'rgba(' + rgb[0] + ', ' + rgb[1] +
+                ', ' + rgb[2] + ', 0)');
+            context2.fillStyle = gradient;
+            context2.fillRect(0, 0, size, size);
+
+            return sprite;
+        }
+
+        // Skyscraper windows, neon signs and traffic lights: the colour a city
+        // adds after dark, kept to small, low-alpha marks so it stays ambience
+        // rather than becoming a scene of its own.
+        function seedCityLights() {
+            const width = canvas.width;
+            const height = canvas.height;
+            const buildings = 5 + Math.floor(Math.random() * 4);
+            const neon = [
+                [255, 96, 190],
+                [96, 226, 240],
+                [255, 110, 90],
+                [130, 240, 160],
+                [255, 190, 90]
+            ];
+
+            if (!isNight) {
+                return;
+            }
+
+            // Window grids, one loose cluster per building, some rooms dark.
+            for (let b = 0; b < buildings; b += 1) {
+                const left = (b + 0.1 + Math.random() * 0.8) /
+                    buildings * width;
+                const column = Math.max(
+                    16,
+                    width / buildings * (0.3 + Math.random() * 0.25)
+                );
+                const top = height * (0.16 + Math.random() * 0.36);
+                const cols = 2 + Math.floor(Math.random() * 3);
+                const rows = 3 + Math.floor(Math.random() * 5);
+                const warm = Math.random() < 0.62;
+
+                for (let c = 0; c < cols; c += 1) {
+                    for (let r = 0; r < rows; r += 1) {
+                        if (Math.random() < 0.3) {
+                            continue;
+                        }
+
+                        const on = Math.random() < 0.62;
+
+                        windows.push({
+                            x: left + (c + 0.25) / cols * column,
+                            y: top + (r + 0.2) / rows * height * 0.3,
+                            w: Math.max(1.4, column / cols * 0.4),
+                            h: Math.max(1.4, height * 0.012),
+                            warm: warm,
+                            alpha: 0.09 + Math.random() * 0.17,
+                            phase: Math.random() * Math.PI * 2,
+                            speed: 0.0004 + Math.random() * 0.0012,
+                            on: on,
+                            level: on ? 1 : 0,
+                            nextSwitch: performance.now() +
+                                1200 + Math.random() * 9000
+                        });
+                    }
+                }
+            }
+
+            for (let i = 0; i < 3; i += 1) {
+                const color = neon[Math.floor(Math.random() * neon.length)];
+
+                signs.push({
+                    x: (i + 0.3 + Math.random() * 0.4) / 3 * width,
+                    y: height * (0.5 + Math.random() * 0.3),
+                    w: width * (0.018 + Math.random() * 0.026),
+                    h: height * (0.01 + Math.random() * 0.013),
+                    color: color,
+                    phase: Math.random() * Math.PI * 2,
+                    speed: 0.0006 + Math.random() * 0.0009,
+                    sprite: glowSprite(color)
+                });
+            }
+
+            for (let i = 0; i < 3; i += 1) {
+                signals.push({
+                    x: (i + 0.25 + Math.random() * 0.5) / 3 * width,
+                    y: height * 0.93,
+                    phase: Math.random() * Math.PI * 2,
+                    red: glowSprite([255, 96, 84]),
+                    green: glowSprite([110, 240, 150])
+                });
+            }
+        }
+
+        // Lamp halos at night, plus the window, sign and signal light that
+        // gives the skyline its colour.
+        function drawCity(now, delta) {
+            const width = canvas.width;
+            const height = canvas.height;
+
+            if (isNight) {
+                for (let i = 0; i < windows.length; i += 1) {
+                    const lit = windows[i];
+
+                    // Rooms switch on and off rather than only breathing: most
+                    // of the light in a skyline is people coming and going.
+                    if (now >= lit.nextSwitch) {
+                        lit.on = !lit.on;
+                        lit.nextSwitch = now +
+                            1600 + Math.random() * 11000;
+                    }
+
+                    lit.level += ((lit.on ? 1 : 0) - lit.level) *
+                        Math.min(1, delta / 320);
+
+                    if (lit.level < 0.02) {
+                        continue;
+                    }
+
+                    const alpha = lit.alpha * lit.level *
+                        (0.85 + 0.15 * Math.sin(
+                            now * lit.speed + lit.phase
+                        ));
+
+                    context.fillStyle = lit.warm
+                        ? 'rgba(255, 219, 166, ' + alpha.toFixed(3) + ')'
+                        : 'rgba(188, 214, 255, ' + alpha.toFixed(3) + ')';
+                    context.fillRect(lit.x, lit.y, lit.w, lit.h);
+                }
+
+                for (let i = 0; i < signs.length; i += 1) {
+                    const sign = signs[i];
+                    const rgb = sign.color;
+                    const pulse = 0.7 + 0.3 * Math.sin(
+                        now * sign.speed + sign.phase
+                    );
+                    const reach = Math.max(sign.w, sign.h) * 2.6;
+
+                    context.globalAlpha = 0.27 * pulse;
+                    context.drawImage(
+                        sign.sprite,
+                        sign.x - reach, sign.y - reach,
+                        reach * 2, reach * 2
+                    );
+                    context.globalAlpha = 1;
+
+                    context.fillStyle = 'rgba(' + rgb[0] + ', ' +
+                        Math.min(255, rgb[1] + 30) + ', ' +
+                        Math.min(255, rgb[2] + 30) + ', ' +
+                        (0.42 * pulse).toFixed(3) + ')';
+                    context.fillRect(
+                        sign.x - sign.w / 2, sign.y - sign.h / 2,
+                        sign.w, sign.h
+                    );
+                }
+
+                for (let i = 0; i < lamps.length; i += 1) {
+                    const lamp = lamps[i];
+                    // Two beat frequencies, so a lamp stutters rather than
+                    // breathing as one smooth pulse with all the others.
+                    const flicker = 0.7 +
+                        0.3 * Math.sin(now * lamp.speed + lamp.phase) *
+                        (0.7 + 0.3 * Math.sin(
+                            now * lamp.speed * 2.3 + lamp.phase
+                        ));
+                    const alpha = lamp.alpha * flicker;
+                    const radius = lamp.radius *
+                        (0.92 + 0.08 * Math.sin(
+                            now * 0.0003 + lamp.phase
+                        ));
+                    const y = lamp.y +
+                        Math.sin(now * 0.0002 + lamp.phase) * height * 0.005;
+                    const warm = lamp.warmth;
+                    const lr = Math.round(240 + 15 * warm);
+                    const lg = Math.round(238 - 42 * warm);
+                    const lb = Math.round(225 - 105 * warm);
+
+                    context.save();
+                    context.translate(lamp.x, y);
+                    context.scale(1, 1.6);
+                    const glow = context.createRadialGradient(
+                        0, 0, 0, 0, 0, radius
+                    );
+
+                    glow.addColorStop(0, 'rgba(' + lr + ', ' + lg + ', ' +
+                        lb + ', ' + alpha.toFixed(3) + ')');
+                    glow.addColorStop(0.35, 'rgba(' + lr + ', ' +
+                        Math.max(0, lg - 22) + ', ' + Math.max(0, lb - 26) +
+                        ', ' + (alpha * 0.45).toFixed(3) + ')');
+                    glow.addColorStop(1, 'rgba(' + lr + ', ' +
+                        Math.max(0, lg - 30) + ', ' + Math.max(0, lb - 36) +
+                        ', 0)');
+                    context.fillStyle = glow;
+                    context.fillRect(-radius, -radius, radius * 2, radius * 2);
+                    context.restore();
+
+                    context.fillStyle = 'rgba(' + lr + ', ' +
+                        Math.min(255, lg + 16) + ', ' +
+                        Math.min(255, lb + 30) + ', ' +
+                        Math.min(0.7, alpha * 1.8).toFixed(3) + ')';
+                    context.beginPath();
+                    context.arc(lamp.x, y, 2, 0, Math.PI * 2);
+                    context.fill();
+                }
+
+                // Traffic lights, alternating red and green on their own slow
+                // clocks rather than in step.
+                for (let i = 0; i < signals.length; i += 1) {
+                    const signal = signals[i];
+                    const cycle = Math.sin(now * 0.00016 + signal.phase);
+                    const rgb = cycle > 0 ? [110, 240, 150] : [255, 96, 84];
+                    const alpha = 0.4 + 0.12 * Math.abs(cycle);
+
+                    context.globalAlpha = alpha * 0.5;
+                    context.drawImage(
+                        cycle > 0 ? signal.green : signal.red,
+                        signal.x - 9, signal.y - 9, 18, 18
+                    );
+                    context.globalAlpha = 1;
+
+                    context.fillStyle = 'rgba(' + rgb[0] + ', ' + rgb[1] +
+                        ', ' + rgb[2] + ', ' + alpha.toFixed(3) + ')';
+                    context.beginPath();
+                    context.arc(signal.x, signal.y, 1.8, 0, Math.PI * 2);
+                    context.fill();
+                }
+            }
+
+        }
+
+        function seedBanks() {
+            const fog = type === 'fog';
+            // Fewer, larger banks: the drift is the effect, and every extra
+            // bank is another full-frame gradient fill.
+            const count = fog ? 5 : 6;
+
+            banks = [];
+
+            for (let i = 0; i < count; i += 1) {
+                banks.push({
+                    // Spread evenly, then jittered: random placement left gaps
+                    // where the frame had no bank at all.
+                    x: (i + 0.2 + Math.random() * 0.6) / count *
+                        canvas.width,
+                    // Fog hugs the lower half; cloud masses cross the sky.
+                    y: fog
+                        ? 0.58 + Math.random() * 0.42
+                        : 0.05 + Math.random() * 0.75,
+                    radius: (fog ? 0.3 : 0.18) +
+                        Math.random() * (fog ? 0.28 : 0.16),
+                    speed: (fog ? 2.5 : 5) + Math.random() * (fog ? 4 : 9),
+                    phase: Math.random() * Math.PI * 2,
+                    alpha: (fog ? 0.18 : 0.2) +
+                        Math.random() * (fog ? 0.12 : 0.1)
+                });
+            }
+        }
+
+        // Midpoint displacement, the standard fractal model of a strike: the
+        // same channel shape the background fractal draws, at page scale.
+        function buildFlash() {
+            flashX = 0.18 + Math.random() * 0.64;
+
+            let points = [
+                [flashX, -0.04],
+                [flashX + (Math.random() - 0.5) * 0.12, 1.04]
+            ];
+
+            for (let depth = 0; depth < 5; depth += 1) {
+                const next = [points[0]];
+
+                for (let i = 1; i < points.length; i += 1) {
+                    const a = points[i - 1];
+                    const b = points[i];
+
+                    next.push([
+                        (a[0] + b[0]) / 2 +
+                            (Math.random() - 0.5) * (0.16 / (depth + 1)),
+                        (a[1] + b[1]) / 2
+                    ]);
+                    next.push(b);
+                }
+
+                points = next;
+            }
+
+            flashPath = points;
+
+            // One branch leaving the main channel, so the strike forks.
+            const origin = Math.floor(
+                points.length * (0.3 + Math.random() * 0.3)
+            );
+            let bx = points[origin][0];
+            let by = points[origin][1];
+
+            flashBranch = [points[origin]];
+
+            for (let step = 0; step < 5; step += 1) {
+                bx += (Math.random() - 0.4) * 0.1;
+                by += 0.03 + Math.random() * 0.02;
+                flashBranch.push([bx, by]);
+            }
+        }
+
+        // Sheet flash, then the channel, flickering out in under a second.
+        function drawStormFlash(now, r, g, b) {
+            if (now >= nextFlash) {
+                flashStart = now;
+                nextFlash = now + 7000 + Math.random() * 12000;
+                buildFlash();
+            }
+
+            if (!flashStart) {
+                return;
+            }
+
+            const age = now - flashStart;
+
+            if (age > 900) {
+                flashStart = 0;
+                return;
+            }
+
+            const pulse = age < 80 ? 1 :
+                age < 160 ? 0.2 :
+                    age < 240 ? 0.9 :
+                        0.9 * Math.max(0, 1 - (age - 240) / 660);
+
+            if (pulse <= 0) {
+                return;
+            }
+
+            const sheet = context.createRadialGradient(
+                flashX * canvas.width,
+                canvas.height * 0.1,
+                0,
+                flashX * canvas.width,
+                canvas.height * 0.1,
+                canvas.height * 1.1
+            );
+
+            sheet.addColorStop(0, 'rgba(' + r + ', ' + g + ', ' + b +
+                ', ' + (0.55 * pulse).toFixed(3) + ')');
+            sheet.addColorStop(0.5, 'rgba(' + r + ', ' + g + ', ' + b +
+                ', ' + (0.24 * pulse).toFixed(3) + ')');
+            sheet.addColorStop(1, 'rgba(' + r + ', ' + g + ', ' + b + ', 0)');
+            context.fillStyle = sheet;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.strokeStyle = 'rgba(240, 247, 255, ' +
+                (0.75 * pulse).toFixed(3) + ')';
+            context.lineWidth = 2;
+            context.lineJoin = 'round';
+            context.shadowColor = 'rgba(' + r + ', ' + g + ', ' + b +
+                ', ' + (0.7 * pulse).toFixed(3) + ')';
+            context.shadowBlur = 18;
+            context.beginPath();
+
+            for (let i = 0; i < flashPath.length; i += 1) {
+                const point = flashPath[i];
+                const x = point[0] * canvas.width;
+                const y = Math.max(0, point[1]) * canvas.height;
+
+                if (i === 0) {
+                    context.moveTo(x, y);
+                } else {
+                    context.lineTo(x, y);
+                }
+            }
+
+            context.stroke();
+
+            if (flashBranch.length > 1) {
+                context.strokeStyle = 'rgba(226, 238, 255, ' +
+                    (0.34 * pulse).toFixed(3) + ')';
+                context.lineWidth = 1.1;
+                context.beginPath();
+
+                for (let i = 0; i < flashBranch.length; i += 1) {
+                    const point = flashBranch[i];
+                    const x = point[0] * canvas.width;
+                    const y = Math.max(0, point[1]) * canvas.height;
+
+                    if (i === 0) {
+                        context.moveTo(x, y);
+                    } else {
+                        context.lineTo(x, y);
+                    }
+                }
+
+                context.stroke();
+            }
+
+            context.shadowBlur = 0;
+        }
+
         function draw() {
             if (!running) {
                 return;
             }
 
-            context.clearRect(0, 0, canvas.width, canvas.height);
             const now = performance.now();
-            const delta = Math.min((now - (draw.lastTime || now)) / 16.67, 2.5);
+
+            // Fog, cloud and city move slowly enough that sixty frames a
+            // second is wasted work: they repaint about twenty times instead,
+            // which takes the most expensive fields from ~4 ms a frame to
+            // ~1.5 ms without a visible change in motion.
+            if ((type === 'fog' || type === 'cloudy' || type === 'city') &&
+                now - (draw.lastPaint || 0) < 48) {
+                frame = window.requestAnimationFrame(draw);
+                return;
+            }
+
+            draw.lastPaint = now;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            const delta = Math.min((now - (draw.lastTime || now)) / 16.67, 3.5);
             draw.lastTime = now;
 
             const light = currentLight;
@@ -589,7 +1151,7 @@
             const starG = mixChannel(243, lightG, tint * 0.55);
             const starB = mixChannel(255, lightB, tint * 0.55);
 
-            if (type === 'rain') {
+            if (type === 'rain' || type === 'storm') {
                 context.lineCap = 'round';
                 context.lineWidth = 1.2;
 
@@ -597,8 +1159,8 @@
                     spawnRainBurst();
                     const boosted = now < rainBoostUntil;
                     const heightScale = Math.max(1, canvas.height / 320);
-                    nextSpawn = now + ((boosted ? 120 : (isNight ? 200 : 400)) +
-                        Math.random() * (boosted ? 200 : (isNight ? 600 : 1100))) /
+                    nextSpawn = now + ((boosted ? 25 : (isNight ? 30 : 45)) +
+                        Math.random() * (boosted ? 25 : (isNight ? 45 : 90))) /
                         (rainMultiplier * heightScale);
                 }
 
@@ -629,6 +1191,10 @@
                     if (drop.y > canvas.height + drop.length || drop.x < -10 || drop.x > canvas.width + 10) {
                         particles.splice(i, 1);
                     }
+                }
+
+                if (type === 'storm') {
+                    drawStormFlash(now, rainR, rainG, rainB);
                 }
             } else if (type === 'snow') {
                 const wind = (mouseX - 0.5) * 0.55 + Math.sin(now * 0.00035) * 0.16;
@@ -673,6 +1239,65 @@
                         particles.splice(i, 1);
                     }
                 }
+            } else if (type === 'fog') {
+                for (let i = 0; i < banks.length; i += 1) {
+                    const bank = banks[i];
+                    const radius = bank.radius * canvas.width;
+                    const span = canvas.width + radius * 2;
+                    const x = ((bank.x + now * 0.001 * bank.speed) % span +
+                        span) % span - radius;
+                    const y = bank.y * canvas.height +
+                        Math.sin(now * 0.00009 + bank.phase) *
+                        canvas.height * 0.02;
+
+                    // Flattened into banks and kept low over the photograph.
+                    context.save();
+                    context.translate(x, y);
+                    context.scale(1, 0.42);
+                    const haze = context.createRadialGradient(
+                        0, 0, 0, 0, 0, radius
+                    );
+
+                    haze.addColorStop(0, 'rgba(208, 224, 230, ' +
+                        bank.alpha.toFixed(3) + ')');
+                    haze.addColorStop(0.55, 'rgba(196, 214, 222, ' +
+                        (bank.alpha * 0.45).toFixed(3) + ')');
+                    haze.addColorStop(1, 'rgba(190, 208, 218, 0)');
+                    context.fillStyle = haze;
+                    context.fillRect(-radius, -radius, radius * 2, radius * 2);
+                    context.restore();
+                }
+            } else if (type === 'cloudy') {
+                for (let i = 0; i < banks.length; i += 1) {
+                    const bank = banks[i];
+                    const radius = bank.radius * canvas.width;
+                    const span = canvas.width + radius * 2;
+                    const x = ((bank.x + now * 0.001 * bank.speed) % span +
+                        span) % span - radius;
+                    const y = bank.y * canvas.height +
+                        Math.sin(now * 0.00006 + bank.phase) *
+                        canvas.height * 0.03;
+
+                    // Pale masses rather than shadow: the photograph is
+                    // already dark, so a darker overlay would not read at all.
+                    context.save();
+                    context.translate(x, y);
+                    context.scale(1, 0.5);
+                    const shade = context.createRadialGradient(
+                        0, 0, 0, 0, 0, radius
+                    );
+
+                    shade.addColorStop(0, 'rgba(188, 202, 214, ' +
+                        bank.alpha.toFixed(3) + ')');
+                    shade.addColorStop(0.6, 'rgba(176, 192, 206, ' +
+                        (bank.alpha * 0.4).toFixed(3) + ')');
+                    shade.addColorStop(1, 'rgba(168, 184, 200, 0)');
+                    context.fillStyle = shade;
+                    context.fillRect(-radius, -radius, radius * 2, radius * 2);
+                    context.restore();
+                }
+            } else if (type === 'city') {
+                drawCity(now, delta);
             } else {
                 particles.forEach(function (star) {
                     const twinkle = 0.25 + (Math.sin(now * star.twinkleSpeed + star.phase) + 1) * 0.36;
@@ -903,10 +1528,12 @@
 
         if (!shouldRun) {
             stopMatrixRain();
+            syncCityAmbience();
             return;
         }
 
         if (matrixRainCanvas) {
+            syncCityAmbience();
             return;
         }
 
@@ -935,6 +1562,8 @@
         if (!document.hidden) {
             matrixRainFrame = window.requestAnimationFrame(drawMatrixRain);
         }
+
+        syncCityAmbience();
     }
 
     syncMatrixRain();
@@ -942,8 +1571,8 @@
     reducedMotion.addEventListener('change', syncMatrixRain);
 
     // -----------------------------------------------------------------------
-    // Weather particles remain off until a weather response confirms rain
-    // or snow; the Konami rain surge only affects active rain.
+    // Weather effects remain off until a weather response confirms a scene;
+    // the Konami rain surge only affects active rain.
     // -----------------------------------------------------------------------
     document.body.classList.add('fast-network');
 
@@ -1214,17 +1843,17 @@
                 [71, 73, 75, 77, 85, 86].indexOf(code) !== -1) {
                 return 'snowy-night';
             }
-            if (/rain|drizzle|shower|thunder/.test(condition) ||
+            if (/thunder/.test(condition) ||
+                [95, 96, 99].indexOf(code) !== -1) {
+                return 'stormy-night';
+            }
+            if (/rain|drizzle|shower/.test(condition) ||
                 isRainCode(code)) {
                 return 'rainy-night';
             }
             if (/fog|mist/.test(condition) ||
                 [45, 48].indexOf(code) !== -1) {
                 return 'foggy-night';
-            }
-            if (/thunder/.test(condition) ||
-                [95, 96, 99].indexOf(code) !== -1) {
-                return 'stormy-night';
             }
             if (/cloud|overcast/.test(condition) ||
                 [2, 3].indexOf(code) !== -1) {
@@ -1246,18 +1875,18 @@
             return 'snow';
         }
 
-        if (/rain|drizzle|shower|thunder/.test(condition) || isRainCode(code)) {
+        if (/thunder/.test(condition) ||
+            [95, 96, 99].indexOf(code) !== -1) {
+            return 'storm';
+        }
+
+        if (/rain|drizzle|shower/.test(condition) || isRainCode(code)) {
             return 'rain';
         }
 
         if (/fog|mist/.test(condition) ||
             [45, 48].indexOf(code) !== -1) {
             return 'fog';
-        }
-
-        if (/thunder/.test(condition) ||
-            [95, 96, 99].indexOf(code) !== -1) {
-            return 'storm';
         }
 
         if (/cloud|overcast/.test(condition) ||
@@ -1277,8 +1906,24 @@
             return 'snow';
         }
 
-        if (/rain|drizzle|shower|thunder/.test(condition) || isRainCode(code)) {
+        // Thunder keeps the rain it falls with, and adds the strike.
+        if (/thunder|lightning/.test(condition) ||
+            [95, 96, 99].indexOf(code) !== -1) {
+            return 'storm';
+        }
+
+        if (/fog|mist|haze/.test(condition) ||
+            [45, 48].indexOf(code) !== -1) {
+            return 'fog';
+        }
+
+        if (/rain|drizzle|shower/.test(condition) || isRainCode(code)) {
             return 'rain';
+        }
+
+        if (/cloud|overcast/.test(condition) ||
+            [2, 3].indexOf(code) !== -1) {
+            return 'cloudy';
         }
 
         return null;
@@ -1352,7 +1997,8 @@
         weatherEffectScene = scene;
 
         if (reducedMotion.matches ||
-            (scene !== 'rain' && scene !== 'snow' && scene !== 'stars')) {
+            ['rain', 'snow', 'stars', 'fog', 'cloudy', 'storm']
+                .indexOf(scene) === -1) {
             return;
         }
 
@@ -1538,9 +2184,9 @@
         setWeatherRefreshing(false);
         updateWeatherDisplay(data, condition, temp);
 
-        if (precipitation === 'rain') {
-            rainMultiplier = 1.3;
-        }
+        // Reset on every update: a one-way boost used to leave every rain
+        // spell after the first 30% denser than it should be.
+        rainMultiplier = precipitation === 'rain' ? 1.3 : 1;
 
         function applyScene() {
             setWeatherScene(data);
@@ -1715,6 +2361,120 @@
     } else {
         fetchWttr();
     }
+
+    // -----------------------------------------------------------------------
+    // City ambience
+    // -----------------------------------------------------------------------
+    // Street lamps, for metro locations only. The weather stack
+    // gives a name (the IANA zone is a city by construction), so this asks the
+    // geocoding API behind Open-Meteo's own place names for that city's
+    // population, at most once per session, and starts nothing below
+    // CITY_POPULATION.
+    const CITY_POPULATION = 300000;
+    const CITY_CACHE_KEY = 'asarav:metro';
+
+    function readMetroCache(name) {
+        try {
+            const raw = window.sessionStorage.getItem(CITY_CACHE_KEY);
+            const cached = raw ? JSON.parse(raw) : null;
+
+            if (cached && cached.name === name &&
+                typeof cached.metro === 'boolean') {
+                return cached.metro;
+            }
+        } catch (error) {
+            return undefined;
+        }
+
+        return undefined;
+    }
+
+    function writeMetroCache(name, metro) {
+        try {
+            window.sessionStorage.setItem(CITY_CACHE_KEY, JSON.stringify({
+                name: name,
+                metro: metro
+            }));
+        } catch (error) {
+            // Private mode or a full store: the lookup simply repeats.
+        }
+    }
+
+    function isMetroPlace(name) {
+        const cached = readMetroCache(name);
+
+        if (cached !== undefined) {
+            return Promise.resolve(cached);
+        }
+
+        const url = 'https://geocoding-api.open-meteo.com/v1/search?name=' +
+            encodeURIComponent(name) + '&count=1&language=en&format=json';
+
+        return fetch(url)
+            .then(function (response) { return response.json(); })
+            .then(function (json) {
+                const place = json && json.results && json.results[0];
+                const population = place ? Number(place.population) : 0;
+                const metro = isFinite(population) &&
+                    population >= CITY_POPULATION;
+
+                writeMetroCache(name, metro);
+
+                return metro;
+            })
+            .catch(function () {
+                // Offline or blocked: no lights rather than guessed lights.
+                return false;
+            });
+    }
+
+    function startCityAmbience() {
+        const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const name = getTimezoneCity({}, zone);
+
+        if (!name || name === 'Local time' || /^Etc\//.test(zone) ||
+            !/[a-z]/i.test(name)) {
+            return;
+        }
+
+        isMetroPlace(name).then(function (metro) {
+            cityMetro = metro;
+            syncCityAmbience();
+        });
+    }
+
+    // One city layer, kept in step with the other full-screen effects: the
+    // matrix glyph field owns the screen after 23:30, reduced motion turns
+    // animation off entirely, and the weather canvases are started separately.
+    // The stop handle makes this idempotent, so a second sync cannot stack a
+    // second set of lamps on the first.
+    function syncCityAmbience() {
+        const shouldRun = cityMetro &&
+            !matrixRainCanvas &&
+            !reducedMotion.matches;
+
+        if (!shouldRun) {
+            if (cityStop) {
+                cityStop();
+                cityStop = null;
+            }
+
+            return;
+        }
+
+        if (!cityStop) {
+            cityStop = startCityCanvases();
+        }
+    }
+
+    // The page background only: a photograph is its own composition, and a
+    // skyline drawn over it reads as a stain rather than ambience. The hero
+    // keeps its picture; the city lives in the dark space around the content.
+    function startCityCanvases() {
+        return startWeatherCanvas(document.body, 'city');
+    }
+
+    startCityAmbience();
 
     // -----------------------------------------------------------------------
     // Hero shine effect

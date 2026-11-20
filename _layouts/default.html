@@ -142,6 +142,9 @@
             <script defer type="text/javascript" src="{{ 'assets/js/media-fallback.js' | relative_url }}"></script>
             <script defer type="text/javascript" src="{{ 'assets/js/hero-typed.js' | relative_url }}"></script>
             <script defer type="text/javascript" src="{{ 'assets/js/site-motion.js' | relative_url }}"></script>
+            {% unless page.background_fractal == false %}
+                <script defer type="text/javascript" src="{{ 'assets/js/background-fractal.js' | relative_url }}"></script>
+            {% endunless %}
 <script defer type="text/javascript" src="{{ 'assets/js/ambient-sound.js' | relative_url }}"></script>
             <script defer type="text/javascript" src="{{ 'assets/js/brand-mark.js' | relative_url }}"></script>
             <script>
