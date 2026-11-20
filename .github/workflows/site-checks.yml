@@ -26,7 +26,7 @@ jobs:
           bundle exec jekyll build 2>&1 | tee build.log
 
       # Public Actions logs need a signed-in session, but check-run annotations
-      # are readable through the API, so surface the error there too.
+      # are readable through the API, so surface the failures there too.
       - name: Report build failure
         if: failure()
         run: |
@@ -37,13 +37,22 @@ jobs:
 
       - name: Check internal links and HTML
         run: |
+          set -o pipefail
           gem install html-proofer --no-document
           # Rewrite absolute site URLs to root-relative so internal links are
           # checked against the build instead of the live site.
           htmlproofer ./_site \
             --disable-external \
             --swap-urls "^https://asarav.github.io:" \
-            --allow-hash-href
+            --allow-hash-href 2>&1 | tee proofer.log
+
+      - name: Report link failures
+        if: failure()
+        run: |
+          if [ -f proofer.log ]; then
+            msg=$(grep -E "^\s*[0-9]+ (internal|external|images?)|^- \./|error" proofer.log | tail -40 | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
+            echo "::error title=html-proofer failed::${msg}"
+          fi
 
       # Amazon, LinkedIn, Goodreads and friends answer bots with 403/999, so a
       # failure here is usually not a real broken link. Report it, do not fail.
@@ -85,9 +94,18 @@ jobs:
 
       - name: Run Lighthouse CI
         run: |
+          set -o pipefail
           bundle exec jekyll serve --port 4000 --detach --skip-initial-build
           npx --yes wait-on@7 http://127.0.0.1:4000/ --timeout 60000
-          npx --yes @lhci/cli@0.14.x autorun
+          npx --yes @lhci/cli@0.14.x autorun 2>&1 | tee lhci.log
+
+      - name: Report Lighthouse failure
+        if: failure()
+        run: |
+          if [ -f lhci.log ]; then
+            msg=$(grep -E "✕|failed|error|assertion" lhci.log | tail -25 | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
+            echo "::error title=Lighthouse CI failed::${msg}"
+          fi
 
       - name: Upload Lighthouse reports
         if: always()
