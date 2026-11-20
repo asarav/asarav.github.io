@@ -42,9 +42,10 @@ jobs:
           gem install html-proofer --no-document
           # Rewrite absolute site URLs to root-relative so internal links are
           # checked against the build instead of the live site.
+          # Internal links are root-relative, so no URL rewriting is needed;
+          # --swap-urls splits on the first colon and mangles absolute URLs.
           htmlproofer ./_site \
             --disable-external \
-            --swap-urls "^https://asarav.github.io:" \
             --allow-hash-href 2>&1 | tee proofer.log
 
       - name: Report link failures
@@ -61,7 +62,6 @@ jobs:
         continue-on-error: true
         run: |
           htmlproofer ./_site \
-            --swap-urls "^https://asarav.github.io:" \
             --ignore-status-codes "401,403,429,503,999" \
             --allow-hash-href
 
@@ -95,11 +95,17 @@ jobs:
           fi
 
       - name: Run Lighthouse CI
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
         run: |
           set -o pipefail
-          bundle exec jekyll serve --port 4000 --detach --skip-initial-build
+          # Keep the server off the step's stdout, otherwise the runner waits for
+          # the inherited pipe to close and the step never finishes.
+          bundle exec jekyll serve --port 4000 --skip-initial-build > /tmp/serve.log 2>&1 &
+          SERVER_PID=$!
           npx --yes wait-on@7 http://127.0.0.1:4000/ --timeout 60000
           npx --yes @lhci/cli@0.14.x autorun 2>&1 | tee lhci.log
+          kill $SERVER_PID
 
       - name: Report Lighthouse failure
         if: failure()
