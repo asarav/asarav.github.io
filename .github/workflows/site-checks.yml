@@ -12,6 +12,7 @@ jobs:
   links:
     name: Links and HTML
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -49,8 +50,8 @@ jobs:
       - name: Report link failures
         if: failure()
         run: |
-          if [ -f proofer.log ]; then
-            msg=$(grep -E "^\s*[0-9]+ (internal|external|images?)|^- \./|error" proofer.log | tail -40 | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
+          if [ -s proofer.log ]; then
+            msg=$(tail -n 45 proofer.log | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
             echo "::error title=html-proofer failed::${msg}"
           fi
 
@@ -67,6 +68,7 @@ jobs:
   lighthouse:
     name: Lighthouse
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
