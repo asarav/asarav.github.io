@@ -1,0 +1,39 @@
+# Most-read articles on Medium (https://medium.com/@asarav).
+# Ordered by lifetime views, the figures reported in Medium Stats.
+# Fields are title, url, date (YYYY-MM-DD), views, image and an optional blurb.
+# Update the figures and the order whenever the stats page shifts meaningfully.
+
+- title: "The Limitations of Chat-GPT"
+  url: "https://medium.com/@asarav/the-limitations-of-chat-gpt-8b73f5859bb4"
+  date: 2022-12-19
+  views: "57K"
+  image: "assets/images/medium/chat-gpt-limitations.png"
+  blurb: "A hands-on audit of the December 2022 model: no internet or location access, training that stops in 2021, faulty recall, no qualitative judgement, and why a chatbot is not a search engine."
+
+- title: "Chat-GPT with Image Input and Output: How Would It Work?"
+  url: "https://medium.com/@asarav/chat-gpt-with-image-input-and-output-how-would-it-work-b57e169c0348"
+  date: 2023-02-06
+  views: "25K"
+  image: "assets/images/medium/chat-gpt-images.png"
+  blurb: "A concrete pipeline for giving a text-only model sight: OCR for label-heavy images, CNN encoder plus RNN decoder for captioning, metadata tagging, and image generation."
+
+- title: "You Will Likely Be Forgotten Soon After You Die"
+  url: "https://medium.com/@asarav/you-will-likely-be-forgotten-soon-after-you-die-cbab7b7e0b85"
+  date: 2023-01-23
+  views: "8.9K"
+  image: "assets/images/medium/forgotten-after-death.jpg"
+  blurb: "A timeline of being forgotten, from the week after the funeral to two generations out, then the exceptions: inventors, leaders, dynasties that buy monuments, and dictators remembered for harm."
+
+- title: "The Food Pyramid is Completely Wrong"
+  url: "https://medium.com/@asarav/the-food-pyramid-is-completely-wrong-dd1ed36e6174"
+  date: 2023-11-06
+  views: "8.5K"
+  image: "assets/images/medium/food-pyramid.png"
+  blurb: "Why a grain-heavy base from 1992 may be driving insulin resistance and bone loss, how saturated and trans fats got conflated with sugar, and what MyPlate changed."
+
+- title: "My Experience with CofoundersLab and YCombinator Cofounder Matching: A Review"
+  url: "https://medium.com/@asarav/my-experience-with-cofounderslab-and-ycombinator-cofounder-matching-a-review-eacea0a7e2aa"
+  date: 2022-03-14
+  views: "6.5K"
+  image: "assets/images/medium/cofounderslab-review.png"
+  blurb: "Both free tiers tested: narrow skill fields, dead profiles, unmoderated forums and paywalled search, plus why the cofounder that worked came from a professor's network instead."

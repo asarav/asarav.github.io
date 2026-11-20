@@ -17,10 +17,12 @@ exclude:
   - docs/
   - .vscode/
   - .DS_Store
+  - .github/
+  - lighthouserc.json
+  - .lighthouseci/
 
 # Jekyll plugins
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
 

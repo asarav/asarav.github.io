@@ -61,3 +61,83 @@ image: assets/images/books/books-top.jpg
         <iframe class="substack" src="https://asmori.substack.com/embed" height="320" title="Substack Newsletter" frameborder="0" scrolling="no"></iframe>
     </div>
 </section>
+
+<section id="writing" class="writing-section">
+    <div class="writing-intro">
+        <p class="eyebrow">Elsewhere</p>
+        <h2 class="heading">Most-Read Essays</h2>
+        <p class="writing-note">The five pieces that found the widest audience on Medium, by lifetime views.</p>
+    </div>
+    <ol class="writing-list">
+        {% for article in site.data.medium %}
+        <li class="writing-item">
+            <a class="writing-link" href="{{ article.url }}" target="_blank" rel="noopener">
+                <span class="writing-rank" aria-hidden="true">{% assign rank = forloop.index | prepend: '0' %}{{ rank | slice: -2, 2 }}</span>
+                <span class="writing-thumb">
+                    <img src="{{ article.image | relative_url }}" alt="" loading="lazy" decoding="async">
+                </span>
+                <span class="writing-body">
+                    <span class="writing-title">{{ article.title }}</span>
+                    {% if article.blurb %}<span class="writing-blurb">{{ article.blurb }}</span>{% endif %}
+                    <span class="writing-meta">
+                        <time datetime="{{ article.date | date: '%Y-%m-%d' }}">{{ article.date | date: '%b %Y' }}</time>
+                        {% if article.views %}<span class="writing-views">{{ article.views }} views</span>{% endif %}
+                    </span>
+                </span>
+                <span class="writing-arrow" aria-hidden="true">↗</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ol>
+    <a class="writing-more" href="https://medium.com/@asarav" target="_blank" rel="noopener">All articles on Medium <span aria-hidden="true">↗</span></a>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Book",
+      "@id": "{{ page.url | absolute_url }}#dreaming-of-a-hopeful-death",
+      "name": "Dreaming of a Hopeful Death",
+      "author": {
+        "@type": "Person",
+        "name": "A. S. Mori",
+        "url": "https://www.amazon.com/author/a.s.mori"
+      },
+      "datePublished": "2023-01-30",
+      "inLanguage": "en",
+      "bookFormat": "https://schema.org/EBook",
+      "url": "https://www.amazon.com/dp/B0BT4ZYKTF",
+      "image": "{{ 'assets/images/books/Dreaming of a Hopeful Death/Front Cover.jpg' | absolute_url }}",
+      "description": "An experimental, introspective science fiction novel about humanity fused into a single being and forced to wander the universe until its heat death.",
+      "sameAs": [
+        "https://www.goodreads.com/book/show/104086124-dreaming-of-a-hopeful-death",
+        "https://a-s-mori.itch.io/dreaming-of-a-hopeful-death"
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "{{ page.url | absolute_url }}#most-read-essays",
+      "name": "Most-Read Essays",
+      "description": "The five articles by Avinash Saravanan that found the widest audience on Medium, by lifetime views.",
+      "numberOfItems": {{ site.data.medium.size }},
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "itemListElement": [
+        {% for article in site.data.medium %}{
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "item": {
+            "@type": "CreativeWork",
+            "name": {{ article.title | jsonify }},
+            "url": {{ article.url | jsonify }},
+            "datePublished": {{ article.date | date: '%Y-%m-%d' | jsonify }},
+            "image": {{ article.image | absolute_url | jsonify }},
+            "author": { "@type": "Person", "name": "Avinash Saravanan" }
+          }
+        }{% unless forloop.last %},{% endunless %}{% endfor %}
+      ]
+    }
+  ]
+}
+</script>

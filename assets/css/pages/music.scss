@@ -240,6 +240,13 @@
             cursor: pointer;
         }
 
+        // The seek slider removes the default outline, so give keyboard focus
+        // a visible ring of its own.
+        .player-seek:focus-visible {
+            outline: 2px solid var(--ice);
+            outline-offset: 4px;
+        }
+
         .player-seek::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;

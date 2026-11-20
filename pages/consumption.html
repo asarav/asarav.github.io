@@ -21,7 +21,7 @@ image: assets/images/media/media-top.jpg
 </div>
 
 <div class="consumption-body">
-    <div class="consumption-chronology" data-chronology data-visible="false" aria-hidden="true">
+    <div class="consumption-chronology" data-chronology data-visible="false">
         <div class="consumption-chronology__main">
             <span class="consumption-chronology__date" data-chronology-date>—</span>
             <span class="consumption-chronology__meta" data-chronology-meta></span>
@@ -36,7 +36,7 @@ image: assets/images/media/media-top.jpg
 
     <div class="consumption-list full-res">
         <div class="row item title">
-            <label class="col-12">Chronology · {{ site.data.consumption.size }} entries</label>
+            <span class="col-12">Chronology · {{ site.data.consumption.size }} entries</span>
             <div class="col-12 consumption-year-jump-wrap">
                 <label for="consumption-year-jump" class="consumption-year-jump-label">Jump to year</label>
                 <select id="consumption-year-jump" class="consumption-year-jump" data-year-jump>

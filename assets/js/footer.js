@@ -91,6 +91,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "Everything can be taken from a man but one thing: the last of the human freedoms — to choose one's attitude in any given set of circumstances, to choose one's own way. — Viktor Frankl",
             // Yuval Noah Harari
             "Homo sapiens rules the world because it is the only animal that can believe in things that exist purely in its own imagination. — Yuval Noah Harari",
+            // Yuval Noah Harari (קיצור תולדות האנושות, 2011)
+            "בני אדם חושבים בסיפורים, לא בעובדות ולא במספרים. — יובל נח הררי",
+            "כמו האבולוציה כך גם ההיסטוריה אדישה לאושרם של כלי המשחק שלה. — יובל נח הררי",
             // Paulo Coelho
             "Quando você quer alguma coisa, todo o Universo conspira para que você realize o seu desejo. — Paulo Coelho",
             // Neal Stephenson
@@ -105,6 +108,16 @@ document.addEventListener('DOMContentLoaded', function () {
             "An investment in knowledge pays the best interest. — Benjamin Franklin",
             // Warren Buffett
             "Price is what you pay. Value is what you get. — Warren Buffett",
+            // Laozi (道德經)
+            "道可道，非常道。 — 老子",
+            // Rumi (Divan-e Shams)
+            "بازآمدم، بازآمدم، از پیش آن یار آمدم — مولوی",
+            // Matsuo Bashō
+            "古池や 蛙飛びこむ 水の音 — 松尾芭蕉",
+            // Alan Turing (Computing Machinery and Intelligence)
+            "We can only see a short distance ahead, but we can see plenty there that needs to be done. — Alan Turing",
+            // Mary Shelley (Frankenstein)
+            "Nothing is so painful to the human mind as a great and sudden change. — Mary Shelley",
         ];
 
         // Guarantee every quote is shown: rotate through them in order across
@@ -117,6 +130,43 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isNaN(index) || index < 0 || index >= quotes.length) index = 0;
         } catch (e) {
             index = Math.floor(Date.now() / 3600000) % quotes.length;
+        }
+        // Non-Latin quotes are tagged with their script's language so a screen
+        // reader does not try to pronounce Greek, Arabic or Chinese as English.
+        // Latin-script quotes are left untagged: the script alone cannot tell
+        // Italian from Spanish, and a wrong tag is worse than none.
+        const SCRIPT_LANGS = [
+            [/[\u0370-\u03FF\u1F00-\u1FFF]/, 'el'],
+            [/[\u0400-\u04FF]/, 'ru'],
+            [/[\u0590-\u05FF]/, 'he'],
+            [/[\u3040-\u30FF]/, 'ja'],
+            [/[\uAC00-\uD7AF]/, 'ko'],
+            [/[\u3400-\u4DBF\u4E00-\u9FFF]/, 'zh'],
+            [/[\u0900-\u097F]/, 'sa'],
+            [/[\u0B80-\u0BFF]/, 'ta'],
+            [/[\u0600-\u06FF\u0750-\u077F]/, 'ar']
+        ];
+
+        function scriptLang(text) {
+            for (var i = 0; i < SCRIPT_LANGS.length; i++) {
+                if (SCRIPT_LANGS[i][0].test(text)) {
+                    // Persian shares the Arabic script but uses these letters.
+                    if (SCRIPT_LANGS[i][1] === 'ar' && /[\u067E\u0686\u0698\u06AF\u06A9]/.test(text)) {
+                        return 'fa';
+                    }
+                    return SCRIPT_LANGS[i][1];
+                }
+            }
+            return '';
+        }
+
+        // The typing effect in hero-typed.js re-renders the quote from its text,
+        // so the language goes on the element itself rather than a wrapper span.
+        const lang = scriptLang(quotes[index]);
+        if (lang) {
+            transmission.setAttribute('lang', lang);
+        } else {
+            transmission.removeAttribute('lang');
         }
         transmission.textContent = quotes[index];
         try {

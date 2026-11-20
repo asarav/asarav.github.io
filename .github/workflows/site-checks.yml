@@ -1,0 +1,66 @@
+name: Site checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    name: Links and HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build
+
+      - name: Check links and HTML
+        run: |
+          gem install html-proofer --no-document
+          # Rewrite absolute site URLs to root-relative so internal links are
+          # checked against the build instead of the live site.
+          htmlproofer ./_site \
+            --swap-urls "^https://asarav.github.io:" \
+            --ignore-status-codes "403,429,503" \
+            --allow-hash-href
+
+  lighthouse:
+    name: Lighthouse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build site
+        run: bundle exec jekyll build
+
+      - name: Run Lighthouse CI
+        run: |
+          bundle exec jekyll serve --port 4000 --detach --skip-initial-build
+          npx --yes wait-on@7 http://127.0.0.1:4000/ --timeout 60000
+          npx --yes @lhci/cli@0.14.x autorun
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          if-no-files-found: ignore
