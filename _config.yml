@@ -20,6 +20,9 @@ exclude:
   - .github/
   - lighthouserc.json
   - .lighthouseci/
+  # This list replaces Jekyll's defaults, which normally exclude bundled gems;
+  # CI installs them into vendor/bundle inside the checkout.
+  - vendor/
 
 # Jekyll plugins
 plugins:
