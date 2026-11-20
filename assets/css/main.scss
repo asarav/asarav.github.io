@@ -52,7 +52,7 @@
   --gutter: clamp(20px, 4vw, 56px);
   --nav-height: 60px;
   // Opaque colour Safari 26 samples for the status-bar area above the nav.
-  --nav-tint: #0d2a52;
+  --nav-tint: #234058;
   // Safe-area insets exist only when the viewport opts into cover mode.
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -198,7 +198,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background-color: var(--nav-tint);
   // Match the navbar so the strip does not visibly change colour when the
   // home page's in-flow navbar scrolls away.
-  background-image: linear-gradient(105deg, rgba(80, 105, 128, 0.98), rgba(17, 65, 138, 0.98));
+  background-image: linear-gradient(105deg, rgba(47, 79, 106, 0.98), rgba(31, 61, 85, 0.98));
   pointer-events: none;
 }
 
@@ -460,31 +460,48 @@ html.fast-scroll .song {
   padding-bottom: 0;
   padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
   background-color: var(--nav-tint);
-  background-image: linear-gradient(105deg, rgba(80, 105, 128, 0.98), rgba(17, 65, 138, 0.98));
+  background-image: linear-gradient(105deg, rgba(47, 79, 106, 0.98), rgba(31, 61, 85, 0.98));
   border: 0;
   border-bottom: 1px solid rgba(176, 214, 234, 0.24);
   border-radius: 0;
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.24);
-  transition: box-shadow 0.9s ease, border-color 0.9s ease, filter 0.9s ease, background-image 0.9s ease;
+  // Gradients are images and do not interpolate, so swapping background-image
+  // snaps between states. The scrolled gradient rides its own layer and
+  // cross-fades, which is what makes the change read as a transition.
+  isolation: isolate;
+  transition: box-shadow 0.45s ease, border-color 0.55s ease, filter 0.35s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(105deg, rgba(24, 49, 68, 0.99), rgba(12, 29, 43, 0.99));
+    opacity: 0;
+    transition: opacity 0.55s ease;
+    pointer-events: none;
+  }
 
   &:hover {
     border-bottom-color: rgba(176, 214, 234, 0.46);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
     filter: brightness(1.05);
-    background-image: linear-gradient(105deg, rgba(92, 120, 148, 0.98), rgba(22, 60, 120, 0.98));
   }
 
   &.is-scrolled {
-    background-image: linear-gradient(105deg, rgba(42, 58, 76, 0.99), rgba(10, 42, 90, 0.99));
-    border-bottom-color: rgba(176, 214, 234, 0.34);
+    // The bar gets darker, so the hairline has to recede with it; brightening
+    // it instead lights up the edge as soon as any content scrolls under.
+    border-bottom-color: rgba(139, 181, 204, 0.14);
     box-shadow: var(--elev-2);
+
+    &::before {
+      opacity: 1;
+    }
   }
 
   &.is-scrolled:hover {
-    border-bottom-color: rgba(176, 214, 234, 0.46);
+    border-bottom-color: rgba(139, 181, 204, 0.26);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-    filter: brightness(1.05);
-    background-image: linear-gradient(105deg, rgba(92, 120, 148, 0.98), rgba(22, 60, 120, 0.98));
   }
 
   .navbar-brand {
