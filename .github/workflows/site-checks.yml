@@ -21,7 +21,19 @@ jobs:
           bundler-cache: true
 
       - name: Build site
-        run: bundle exec jekyll build
+        run: |
+          set -o pipefail
+          bundle exec jekyll build 2>&1 | tee build.log
+
+      # Public Actions logs need a signed-in session, but check-run annotations
+      # are readable through the API, so surface the error there too.
+      - name: Report build failure
+        if: failure()
+        run: |
+          if [ -f build.log ]; then
+            msg=$(tail -n 40 build.log | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
+            echo "::error title=Jekyll build failed::${msg}"
+          fi
 
       - name: Check internal links and HTML
         run: |
@@ -59,7 +71,17 @@ jobs:
           node-version: '20'
 
       - name: Build site
-        run: bundle exec jekyll build
+        run: |
+          set -o pipefail
+          bundle exec jekyll build 2>&1 | tee build.log
+
+      - name: Report build failure
+        if: failure()
+        run: |
+          if [ -f build.log ]; then
+            msg=$(tail -n 40 build.log | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
+            echo "::error title=Jekyll build failed::${msg}"
+          fi
 
       - name: Run Lighthouse CI
         run: |
