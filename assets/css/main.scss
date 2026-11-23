@@ -3,6 +3,19 @@
 
 @import "page-hero";
 
+/* The typed line's face: White Rabbit (Matthew Welch, 1999), a monospaced
+   terminal face drawn for exactly this screen — its own specimen reads "Wake
+   up Neo. The Matrix has you." One weight, ASCII only, 13 KB, under a
+   permissive licence (assets/fonts/white-rabbit-LICENSE.txt). Loaded only when
+   a line is being typed. */
+@font-face {
+  font-family: 'White Rabbit';
+  src: url('../fonts/white-rabbit.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @view-transition {
   navigation: auto;
 }
@@ -198,6 +211,7 @@ body#site {
     opacity: 0.95;
   }
 }
+
 
 body#site::after {
   content: "";
@@ -448,6 +462,18 @@ img:hover {
   opacity: 0.3;
 }
 
+// Holiday fireworks: drawn inside the hero, above its photograph and below
+// the copy, then removed when the show ends.
+.fireworks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
 .scene-timelapse {
   position: fixed;
   inset: 0;
@@ -696,6 +722,21 @@ html.fast-scroll .song {
     color: var(--signal);
   }
 
+  // Home page: the brand is the current page. The word goes hollow here —
+  // cool outlined type, the same device as the outlined SARAVANAN in the hero —
+  // so it marks the page by drawing the letterform rather than colouring it.
+  // Guarded, because without a stroke a transparent fill would be invisible.
+  // Home page: the word sits a pixel larger than elsewhere and nothing else —
+  // no ring, no tint, no outline. The mark is the drawing; the word is just the
+  // word. Its own rule, so the scroll shrink below still applies to it.
+  .navbar-brand[aria-current="page"] .brand-word {
+    font-size: calc(1.55rem + 1px);
+  }
+
+  &.is-scrolled .navbar-brand[aria-current="page"] .brand-word {
+    font-size: calc(1.35rem + 1px);
+  }
+
   @media only screen and (min-width: 992px) {
     &.is-scrolled .nav-link {
       padding-top: 0.5rem;
@@ -840,6 +881,8 @@ body.home-page #navbar {
   position: relative;
 }
 
+
+
 // ===========================================================================
 
 // SHARED HERO
@@ -900,12 +943,12 @@ html.js .footer-transmission {
     background: radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(4, 8, 12, 0.58) 100%);
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse):not(.background-fractal) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.fireworks):not(.scene-timelapse):not(.background-fractal) {
     position: relative;
     z-index: 2;
   }
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse):not(.background-fractal) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.fireworks):not(.scene-timelapse):not(.background-fractal) {
     transform: translate3d(0, var(--hero-shift, 0px), 0);
     opacity: var(--hero-opacity, 1);
   }
@@ -1775,6 +1818,35 @@ html.js .footer-transmission {
   opacity: 1;
   transition: border-color 0.9s ease, filter 0.9s ease;
 
+  // A faint Julia field behind the footer, painted by footer-fractal.js. The
+  // intensity lives in the canvas alpha, so this only decides how present the
+  // layer is overall; it stays under the links at every width.
+  // Above the hover scrim (`&::after`, z-index 0) and below the content: the
+  // scrim is a background wash, and it used to paint over this layer exactly
+  // while the pointer was on the footer, which is when the field should drift.
+  .footer-fractal {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.6s ease;
+  }
+
+  &.is-fractal-ready .footer-fractal {
+    opacity: 0.46;
+
+    // The stacked phone footer is taller and narrower, which stretches the
+    // field across the link rows; hold it back further there.
+    @media (max-width: 700px) {
+      opacity: 0.2;
+    }
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -1793,7 +1865,7 @@ html.js .footer-transmission {
 
   .footer-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: var(--content-max);
     margin: 0 auto;
   }
@@ -1892,7 +1964,9 @@ html.js .footer-transmission {
   .footer-base {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    // Tops, not centres: a quote that wraps to a second line then grows
+    // downward instead of re-centring the whole row and nudging the link.
+    align-items: flex-start;
     justify-content: space-between;
     gap: 10px 24px;
     padding: 20px 0 26px;
@@ -1905,11 +1979,28 @@ html.js .footer-transmission {
 
     p {
       margin: 0;
+      flex: 0 0 auto;
+    }
+
+    // The quote is typed in one character at a time, so its width keeps growing
+    // while the row is on screen. It gets the spare room of the row and clips
+    // inside a column of its own: without that, a long quote widened past the
+    // row and pushed "Back to top" onto the next line or past the right edge.
+    .footer-transmission {
+      flex: 1 1 0;
+      min-width: 0;
+      margin: 0;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
 
     a {
       display: inline-flex;
       align-items: center;
+      flex: 0 0 auto;
       gap: 8px;
       color: var(--muted);
       text-decoration: none;
@@ -1981,6 +2072,15 @@ html.js .footer-transmission {
       gap: 10px;
       font-size: 0.56rem;
       letter-spacing: 0.05em;
+
+      // Three columns leave the quote a sliver on a phone, so it takes a row
+      // of its own under the copyright and the link.
+      .footer-transmission {
+        order: 3;
+        flex: 1 0 100%;
+        text-align: left;
+        -webkit-line-clamp: 3;
+      }
     }
   }
 }
@@ -2012,7 +2112,7 @@ html.js .footer-transmission {
   border-bottom: 0.5px solid var(--top-border);
   background-repeat: no-repeat;
 
-  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse):not(.background-fractal) {
+  > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.fireworks):not(.scene-timelapse):not(.background-fractal) {
     width: 100%;
     max-width: var(--content-max);
     margin-left: auto;
@@ -2241,7 +2341,7 @@ img {
     scroll-behavior: auto !important;
   }
 
-  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.scene-timelapse):not(.background-fractal) {
+  #content > .page-top > :not(.hero-frame):not(.hero-plane):not(.hero-floor):not(.page-top__shine):not(.page-top__light):not(.weather-bg):not(.matrix-rain):not(.fireworks):not(.scene-timelapse):not(.background-fractal) {
     transform: none !important;
     opacity: 1 !important;
   }
@@ -2327,14 +2427,16 @@ body.is-boosted #site {
   transform: translateX(-50%);
   z-index: 0;
   margin: 0;
-  color: transparent;
+  // A whisper of fill under the stroke: the outline alone was almost lost
+  // against the field once the field got its own edges.
+  color: rgba(139, 181, 204, 0.035);
   font-family: var(--font-display);
   font-size: clamp(4rem, 12vw, 12rem);
   font-weight: 700;
   line-height: 0.72;
   letter-spacing: -0.06em;
   white-space: nowrap;
-  -webkit-text-stroke: 1px rgba(139, 181, 204, 0.07);
+  -webkit-text-stroke: 1px rgba(139, 181, 204, 0.14);
   pointer-events: none;
   user-select: none;
 }
@@ -2423,6 +2525,10 @@ body.is-boosted #site {
   #footer::after {
     transition: none;
   }
+
+  #footer .footer-fractal {
+    transition: none;
+  }
 }
 
 /* Footer as a whole reacts on hover/focus */
@@ -2434,7 +2540,7 @@ body.is-boosted #site {
 
 #footer:hover .footer-wordmark,
 #footer:focus-within .footer-wordmark {
-  opacity: 0.12;
+  opacity: 0.2;
   transform: translateX(-50%) translateY(0) scale(1.02);
 }
 
@@ -2662,6 +2768,8 @@ body.is-boosted #site {
 }
 .hero-floor, .hero-floor--label { animation: hero-breathe 8s ease-in-out infinite alternate; }
 
+// The block cursor is the saturated end of the same green, the way a
+// terminal's cell reads brighter than the text around it.
 .hero-note__cursor {
   display: inline-block;
   margin-left: 1px;
@@ -2675,12 +2783,27 @@ body.is-boosted #site {
   to { visibility: hidden; }
 }
 
-/* While a line is being typed it reads as terminal-green; once it is
-   finished it settles back into its real color. */
+/* While a line is being typed it reads as terminal-green (#90ee90, the pale
+   green the effect was first drawn with); once it is finished it settles back
+   into its real color.
+
+   The face is the point: White Rabbit, a monospaced terminal face from 1999 —
+   flat, rounded, drawn from low-res console glyphs. Its only glyphs are the
+   96 of basic ASCII, so the fallback is Courier New, which is close in feature
+   and in advance (0.6em against White Rabbit's 0.571em): anything the face
+   lacks, like an em dash, lands within half a pixel of its cell. Text sits on
+   a fixed cell grid: no ligatures, no kerning, nothing the font does on its
+   own. */
 .is-typing {
   color: #90ee90 !important;
   background-color: rgba(0, 0, 0, 0.45) !important;
-  font-family: 'Courier New', 'Terminal', monospace !important;
+  font-family: 'White Rabbit', 'Courier New', 'DejaVu Sans Mono', monospace !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  font-variant-ligatures: none !important;
+  font-feature-settings: 'liga' 0, 'calt' 0 !important;
+  font-kerning: none !important;
   text-shadow: none !important;
+  border-radius: 0 !important;
   transition: color 0.6s ease, background-color 0.6s ease, font-family 0s, text-shadow 0.6s ease;
 }

@@ -104,30 +104,40 @@
     display: flex;
     align-items: center;
     gap: 22px;
-    margin: 44px 0 22px;
-    padding: 10px 0;
-    background: var(--ink);
-    box-shadow: 0 14px 18px rgba(7, 11, 16, 0.88);
+    margin: 34px 0 16px;
+    // The sticky header has to cover entries as they pass beneath it, but an
+    // opaque bar with a drop shadow read as a black slab. This scrim fades out
+    // at both edges and stays translucent, so the textured ground shows
+    // through instead of being cut off.
+    padding: 12px 0 18px;
+    // Card tone rather than page black: the band then reads as part of the
+    // timeline surface instead of a hole punched in the textured ground.
+    background:
+        linear-gradient(90deg, rgba(13, 21, 29, 0.6) 0%, rgba(13, 21, 29, 0.6) 86%, rgba(13, 21, 29, 0) 100%),
+        linear-gradient(180deg, rgba(13, 21, 29, 0) 0%, rgba(13, 21, 29, 0.9) 18%, rgba(13, 21, 29, 0.9) 68%, rgba(13, 21, 29, 0) 100%);
+    box-shadow: none;
 
     &:first-child {
         margin-top: 0;
     }
 
     span {
-        color: transparent;
+        // A faint fill lifts the numeral off the page tone; the softer stroke
+        // keeps it an architectural marker rather than an outlined outline.
+        color: rgba(237, 244, 247, 0.07);
         font-family: var(--font-display);
         font-size: clamp(2.6rem, 5.6vw, 4.8rem);
         font-weight: 700;
         line-height: 0.9;
         letter-spacing: -0.055em;
-        -webkit-text-stroke: 1px rgba(237, 244, 247, 0.52);
+        -webkit-text-stroke: 1px rgba(237, 244, 247, 0.34);
     }
 
     &::after {
         content: "";
         flex: 1;
         height: 1px;
-        background: linear-gradient(90deg, var(--line-strong), transparent);
+        background: linear-gradient(90deg, rgba(143, 208, 232, 0.34), transparent 78%);
     }
 
     @supports not (-webkit-text-stroke: 1px #fff) {

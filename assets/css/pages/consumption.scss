@@ -414,13 +414,17 @@ $types: (
                     justify-content: center;
                     padding: 0 4px;
 
+                    // Every card gets the same 2:3 plate, so covers of
+                    // different shapes (square albums, wide video stills)
+                    // line up instead of forming a ragged column.
                     img {
                         display: block;
-                        max-width: 100%;
-                        max-height: 220px;
-                        width: auto;
+                        width: 100%;
+                        max-width: 168px;
+                        aspect-ratio: 2 / 3;
                         height: auto;
                         object-fit: contain;
+                        background: rgba(10, 14, 20, 0.55);
                         border: 1px solid $border-color;
                         border-radius: 2px;
                         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -529,9 +533,14 @@ $types: (
                     .image {
                         margin: 14px 0;
 
+                        // Stacked cards have no column to align against, so
+                        // mobile keeps each image at its natural shape.
                         img {
-                            max-height: 300px;
+                            width: auto;
                             max-width: 100%;
+                            max-height: 300px;
+                            aspect-ratio: auto;
+                            height: auto;
                         }
                     }
 

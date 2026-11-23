@@ -1,6 +1,6 @@
 {% assign current_path = page.url | default: '/' %}
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light" aria-label="Primary">
-    <a class="navbar-brand" href="{{ '/' | relative_url }}" aria-label="asarav home">
+    <a class="navbar-brand" href="{{ '/' | relative_url }}" aria-label="asarav home"{% if current_path == '/' %} aria-current="page"{% endif %}>
         <canvas class="brand-mark" width="70" height="70" aria-hidden="true"></canvas>
         <span class="brand-word">asarav</span>
     </a>

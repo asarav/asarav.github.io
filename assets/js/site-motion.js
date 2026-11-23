@@ -414,6 +414,21 @@
             return function () {};
         }
 
+        // A hero's weather scrolls away with the hero. The frame clock
+        // keeps its place, but nothing is painted while the layer is out
+        // of the viewport — rain nobody can see is the same heat as rain
+        // behind a hidden tab. The full-page layers are fixed, so they
+        // stay on screen by definition and are left alone.
+        const screenWatcher = (typeof IntersectionObserver === 'function' && !isBody)
+            ? new IntersectionObserver(function (entries) {
+                onScreen = entries[0].isIntersecting;
+            }, { threshold: 0 })
+            : null;
+
+        if (screenWatcher) {
+            screenWatcher.observe(container);
+        }
+
         let particles = [];
         // Fog and cloud banks are shapes, not particles: a slow field of soft
         // gradients that drifts without ever leaving the frame.
@@ -434,6 +449,8 @@
         let nextSpawn = 0;
         let frame = 0;
         let running = true;
+        // False while the layer is scrolled out of the viewport.
+        let onScreen = true;
         let mouseX = 0.5;
         let scrollVelocity = 0;
         let lastScrollY = window.scrollY;
@@ -1119,6 +1136,11 @@
                 return;
             }
 
+            if (!onScreen) {
+                frame = window.requestAnimationFrame(draw);
+                return;
+            }
+
             const now = performance.now();
 
             // Fog, cloud and city move slowly enough that sixty frames a
@@ -1324,7 +1346,12 @@
         reducedMotion.addEventListener('change', onMotionPreferenceChange);
         draw();
 
-        return stop;
+        return function () {
+            if (screenWatcher) {
+                screenWatcher.disconnect();
+            }
+            stop();
+        };
     }
 
     function isMatrixRainTime() {
@@ -1435,33 +1462,34 @@
         context.textAlign = 'center';
 
         matrixRainStreams.forEach(function (group) {
-            if (!group.active) {
-                return;
+            if (group.active) {
+                group.columns.forEach(function (column) {
+                    const head = group.y + column.offset;
+
+                    for (let tail = column.length - 1; tail >= 0; tail--) {
+                        const y = head - tail * 18;
+
+                        if (y < -18 || y > matrixRainCanvas.height + 18) {
+                            continue;
+                        }
+
+                        const isHead = tail === 0;
+                        const alpha = 0.035 + (1 - tail / column.length) * 0.24;
+                        // Matrix green, with the leading glyph the pale end of
+                        // the same hue and the trail fading through opacity.
+                        context.fillStyle = isHead
+                            ? 'rgba(214, 255, 224, 0.85)'
+                            : 'rgba(0, 255, 65, ' + alpha.toFixed(3) + ')';
+                        context.fillText(column.glyphs[tail], column.x, y);
+
+                        if (Math.random() < 0.035) {
+                            column.glyphs[tail] = randomMatrixGlyph();
+                        }
+                    }
+                });
             }
 
-            group.columns.forEach(function (column) {
-                const head = group.y + column.offset;
-
-                for (let tail = column.length - 1; tail >= 0; tail--) {
-                    const y = head - tail * 18;
-
-                    if (y < -18 || y > matrixRainCanvas.height + 18) {
-                        continue;
-                    }
-
-                    const isHead = tail === 0;
-                    const alpha = 0.035 + (1 - tail / column.length) * 0.24;
-                    context.fillStyle = isHead
-                        ? 'rgba(190, 255, 190, 0.78)'
-                        : 'rgba(35, 205, 91, ' + alpha.toFixed(3) + ')';
-                    context.fillText(column.glyphs[tail], column.x, y);
-
-                    if (Math.random() < 0.035) {
-                        column.glyphs[tail] = randomMatrixGlyph();
-                    }
-                }
-            });
-
+            // Dark streams still fall, so the bottom edge re-rolls them back on.
             group.y += group.speed * delta;
 
             if (group.y - group.length * 18 > matrixRainCanvas.height) {

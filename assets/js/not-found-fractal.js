@@ -30,10 +30,12 @@
     const SETTLE = 140;
     const MOTION_INTERVAL = 45;
 
-    // A neighbourhood of the dendrite boundary for c = -0.72 + 0.19i. Moving
-    // the pointer slides the seed along it, so the figure reorganises as the
-    // cursor crosses the page.
-    const ORIGIN = { re: -0.72, im: 0.19 };
+    // A neighbourhood of the Julia boundary for c = -0.8 + 0.156i. Unlike the
+    // old dendrite seed, whose solid bulbs read as flat blocks at hero size,
+    // this one is filamentary down to the last iteration, so the figure stays
+    // detailed across the whole canvas. Moving the pointer slides the seed
+    // along the boundary, so the figure reorganises as the cursor crosses.
+    const ORIGIN = { re: -0.8, im: 0.156 };
     const DRIFT = { re: 0.055, im: 0.075 };
     const SPAN_IM = 1.45;
 
