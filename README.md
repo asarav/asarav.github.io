@@ -79,18 +79,26 @@ styles, icons, and scripts. Jekyll publishes this tree under `/assets/`.
 
 ## Build notes
 
-The `github-pages` gem is pinned to `232` in the `Gemfile`. The `233` release
-requires a native `openssl` build that does not install cleanly on Windows.
-GitHub Pages supplies its own gem set at deploy time, so the pin only affects
-local builds.
+The `Gemfile` carries Jekyll 4 and the two plugins the site loads
+(`jekyll-seo-tag`, `jekyll-sitemap`). It is the file CI and
+`.github/workflows/pages.yml` both build from, so a local build, the checks, and
+the deployed site come from one toolchain. GitHub Pages no longer builds the
+branch with its own gem set; publish from **Settings → Pages → Source: GitHub
+Actions** for the workflow to take effect.
 
-`bundle exec jekyll build` may print a harmless `faraday-retry` warning. If a
-build fails with `Permission denied` under `_site/assets/videos/`, stop any running
-Jekyll server, remove `_site`, and rebuild.
+The old `github-pages` pin to `232` existed because `233` needs a native
+`openssl` build that does not install on Windows. Jekyll 4 ships
+`sass-embedded`, which has Windows binaries, so that constraint is gone,
+along with the plugin set and `rubyzip` that came in with it.
+`sass.sourcemap: never` in `_config.yml` keeps stylesheet source maps out of
+the published site.
+
+If a build fails with `Permission denied` under `_site/assets/videos/`, stop any
+running Jekyll server, remove `_site`, and rebuild.
 
 ## Key Technologies
 
-- **Jekyll** 3.10.0 - Static site generator (GitHub Pages-compatible)
+- **Jekyll** 4.4 - Static site generator, built and deployed by GitHub Actions
 - **Bootstrap** 5.3.8 - Responsive CSS framework
 - **p5.js** 1.11.13 and **ml5.js** 0.12.2 - Legacy interactive machine-learning demos
 - **SCSS** - CSS preprocessing

@@ -47,3 +47,9 @@ defaults:
       path: "SECURITY.md"
     values:
       sitemap: false
+
+# Dart Sass emits source maps by default; they would be published next to the
+# stylesheets. The stylesheets are read as static files on this site, so the
+# maps help nobody.
+sass:
+  sourcemap: never

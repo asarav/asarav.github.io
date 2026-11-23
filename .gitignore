@@ -43,3 +43,6 @@ lhci.log
 
 # Tooling state
 .freebuff/
+
+# Jekyll 4 build cache
+.jekyll-cache/
