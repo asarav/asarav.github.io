@@ -1,7 +1,9 @@
 // Shared hero background for inner pages.
 // Usage: @include page-hero('/assets/images/...', linear-gradient(...), $border-color);
+@use "sass:string";
+
 @mixin page-hero($image, $gradient, $border: var(--top-border)) {
-    $mobile-image: str-insert($image, '.mobile', str-index($image, '.'));
+    $mobile-image: string.insert($image, '.mobile', string.index($image, '.'));
     background-image:
         var(--hero-grade),
         url($image),

@@ -6,8 +6,9 @@
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
-@import "page-palette";
-@import "page-hero";
+@use "sass:list";
+@use "page-palette" as *;
+@use "page-hero" as *;
 
 $types: (
     anime: (rgb(230, 120, 90), "Anime"),
@@ -449,7 +450,7 @@ $types: (
 
             @each $type, $config in $types {
                 .item.info.#{$type} {
-                    --type-color: #{nth($config, 1)};
+                    --type-color: #{list.nth($config, 1)};
                 }
             }
 

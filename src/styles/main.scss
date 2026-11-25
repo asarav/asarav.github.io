@@ -1,5 +1,5 @@
 
-@import "page-hero";
+@use "page-hero" as *;
 
 /* The typed line's face: White Rabbit (Matthew Welch, 1999), a monospaced
    terminal face drawn for exactly this screen — its own specimen reads "Wake

@@ -4,8 +4,8 @@
 // Loaded via the 'style' front matter variable
 // ============================================================================
 
-@import "page-palette";
-@import "page-hero";
+@use "page-palette" as *;
+@use "page-hero" as *;
 
 @keyframes project-rise {
     from {
