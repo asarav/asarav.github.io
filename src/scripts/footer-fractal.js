@@ -367,8 +367,9 @@
         },
         // A circle packing: every inversion step puts the point inside a smaller
         // tangent circle, and the gap it finally lands in is the figure. The
-        // number of tangent circles follows the phase, which re-packs the whole
-        // lattice in place instead of moving it.
+        // phase bends the disk through a Möbius map, so the three blobs come out
+        // unequal, the hole leaves the centre and the hierarchy reflows around
+        // them while every circle stays a circle and every tangency survives.
         prime: { kind: 'apollonian', scale: 1.0, cx: 0, cy: 0 },
         // A Sierpiński lattice: the cell that is cut away at each level keeps
         // its own lit rim. With the phase the hole in that cell changes radius,
@@ -401,8 +402,10 @@
             n: 6, m: 9, dn: 1.1, dm: 1.5
         },
         // A cellular tessellation: one seed per cell, each wandering inside
-        // its own cell. Cell size is set by the scale, so the band carries a
-        // mosaic rather than a single rosette in the middle of it.
+        // its own cell, and cells dividing in their own turn as the phase turns,
+        // so the mosaic changes its number of cells instead of restating the
+        // same grid. Cell size is set by the scale, so the band carries a mosaic
+        // rather than a single rosette in the middle of it.
         binary: {
             kind: 'cellular', scale: 4.4, cx: 0, cy: 0,
             reach: 0.30, swing: 0.18, turn: 1.15
@@ -686,8 +689,15 @@
     // A cellular tessellation: one seed per cell, each cell being the points
     // nearer to its own seed than to any other. Every seed wanders inside its
     // own cell, and with the phase that wander both widens and turns, so the
-    // cells are seen to change shape, split their neighbours' boundaries and
-    // trade corners — the lattice deforms in place instead of sliding.
+    // cells are seen to trade corners and reshape.
+    //
+    // The phase also makes cells divide. A second seed appears beside a cell's
+    // own and draws away from it, opening a cell of its own out of nothing, and
+    // later closing it again. Which half of the cycle each cell divides in, and
+    // how early, is hashed per cell, so the mosaic is always part split and part
+    // whole: the cells change number and size rather than only wobbling inside a
+    // fixed grid, and the tessellation never simply becomes a finer copy of
+    // itself.
     function cellularFigure(figure) {
         return [
             'vec2 shadeAt(vec2 p) {',
@@ -719,6 +729,28 @@
             '            } else {',
             '                second = min(second, dd);',
             '            }',
+            '',
+            // The cell's second seed, when this cell is dividing.
+            '            vec2 sd = vec2(',
+            '                fract(sin(dot(g, vec2(41.7, 289.3))) * 43758.5453),',
+            '                fract(sin(dot(g, vec2(157.3, 71.9))) * 43758.5453));',
+            '            float halve = fract(sd.y * 5.4) < 0.5 ? 1.0 : -1.0;',
+            '            float onset = 0.10 + 0.66 * sd.y;',
+            '            float grow = clamp((halve * mo - onset) / (1.0 - onset),',
+            '                0.0, 1.0);',
+            '',
+            '            if (grow > 0.001) {',
+            '                vec2 c2 = c + vec2(cos(6.2831853 * sd.x),',
+            '                    sin(6.2831853 * sd.x)) * (0.55 * grow);',
+            '                float dd2 = length(q - c2);',
+            '',
+            '                if (dd2 < best) {',
+            '                    second = best;',
+            '                    best = dd2;',
+            '                } else {',
+            '                    second = min(second, dd2);',
+            '                }',
+            '            }',
             '        }',
             '    }',
             '',
@@ -733,14 +765,21 @@
     // An Apollonian packing: the point is inverted through the circles of the
     // current cell until it lands in a gap. How many inversions that took says
     // how deeply it sits in the packing, and the distance to the nearest circle
-    // at that moment draws the rim. The number of tangent circles follows the
-    // phase, so the packing re-forms instead of moving.
+    // at that moment draws the rim.
+    //
+    // The ring is fixed: three circles about the hole, at the one radius that
+    // makes each tangent to the hole, to its neighbours and to the outer circle.
+    // The phase deforms the packing through a Möbius automorphism of the disk —
+    // the maps that take the disk onto itself — which is the one family of
+    // deformations under which a circle packing stays a circle packing. Every
+    // circle goes to a circle and every tangency survives, so the inversions
+    // still end in a gap, but the three blobs come out unequal, the hole drifts
+    // off centre, and every level of the hierarchy reflows around them.
     function apollonianFigure(figure) {
         return [
             'vec2 shadeAt(vec2 p) {',
             '    float mo = uMorph * 2.0 - 1.0;',
-            '    float count = 3.0 + mo * 0.60;',
-            '    float theta = 3.14159265 / count;',
+            '    float theta = 3.14159265 / 3.0;',
             '    float rb = 1.0 / cos(theta);',
             '    float side = tan(theta);',
             '    float rIn = rb - side;',
@@ -748,6 +787,18 @@
             '    float side2 = side * side;',
             '    vec2 q = p * ' + f(figure.scale) + ' + vec2(' +
                 f(figure.cx) + ', ' + f(figure.cy) + ');',
+            // A Möbius automorphism of the disk, its pole swinging round with
+            // the phase. It sends every circle to a circle and keeps every
+            // tangency, so what is drawn is still a packing — but the three
+            // blobs come out of it unequal, the hole leaves the centre, and the
+            // hierarchy above them reflows. At |a| = 0.34 the near side of the
+            // packing comes out about twice the far side, so the blobs change
+            // size and place rather than the pattern changing scale.
+            '    float amp = abs(mo) * 0.28;',
+            '    float phi = mo * 1.3;',
+            '    vec2 pole = vec2(cos(phi), sin(phi)) * amp;',
+            '    vec2 z = q / rOut;',
+            '    q = (z + pole) / (1.0 + dot(pole, z)) * rOut;',
             '    float near = 1.0e9;',
             '    float depth = 0.0;',
             '',
@@ -778,13 +829,9 @@
             '',
             // The ring of tangent circles around them.
             '        if (!hit) {',
-            '            for (int i = 0; i < 4; i += 1) {',
-            '                if (float(i) >= count) {',
-            '                    break;',
-            '                }',
-            '',
-            '                float a = 2.0 * float(i) * theta;',
-            '                vec2 c = rb * vec2(sin(a), cos(a));',
+            '            for (int i = 0; i < 3; i += 1) {',
+            '                float ang = 2.0 * float(i) * theta;',
+            '                vec2 c = rb * vec2(sin(ang), cos(ang));',
             '                vec2 d = q - c;',
             '                float d2 = max(dot(d, d), 1.0e-12);',
             '                float away = d2 - side2;',
@@ -2051,6 +2098,29 @@
                     } else {
                         second = Math.min(second, dd);
                     }
+
+                    // The cell's second seed, when this cell is dividing.
+                    const shx = fract(Math.sin(gx * 41.7 + gy * 289.3) * 43758.5453);
+                    const shy = fract(Math.sin(gx * 157.3 + gy * 71.9) * 43758.5453);
+                    const halve = fract(shy * 5.4) < 0.5 ? 1 : -1;
+                    const onset = 0.10 + 0.66 * shy;
+                    const grow = Math.min(1, Math.max(0,
+                        (halve * morphM - onset) / (1 - onset)));
+
+                    if (grow > 0.001) {
+                        const c2x = px + Math.cos(6.2831853 * shx) * (0.55 * grow);
+                        const c2y = py + Math.sin(6.2831853 * shx) * (0.55 * grow);
+                        const d2x = qx - c2x;
+                        const d2y = qy - c2y;
+                        const dd2 = Math.sqrt(d2x * d2x + d2y * d2y);
+
+                        if (dd2 < best) {
+                            second = best;
+                            best = dd2;
+                        } else {
+                            second = Math.min(second, dd2);
+                        }
+                    }
                 }
             }
 
@@ -2063,15 +2133,22 @@
         }
 
         if (figure.kind === 'apollonian') {
-            const count = 3 + morphM * 0.60;
-            const theta = Math.PI / count;
+            const theta = Math.PI / 3;
             const rb = 1 / Math.cos(theta);
             const side = Math.tan(theta);
             const rIn = rb - side;
             const rOut = rb + side;
             const side2 = side * side;
-            let px = qx;
-            let py = qy;
+            // The same Möbius automorphism the shader bends the packing with.
+            const amp = Math.abs(morphM) * 0.28;
+            const phi = morphM * 1.3;
+            const poleX = Math.cos(phi) * amp;
+            const poleY = Math.sin(phi) * amp;
+            const zx = qx / rOut;
+            const zy = qy / rOut;
+            const den = 1 + poleX * zx + poleY * zy;
+            let px = (zx + poleX) / den * rOut;
+            let py = (zy + poleY) / den * rOut;
             let near = 1e9;
             let depth = 0;
 
@@ -2102,10 +2179,10 @@
                 }
 
                 if (!moved) {
-                    for (let i = 0; i < 4 && i < count; i += 1) {
-                        const a = 2 * i * theta;
-                        const centreX = rb * Math.sin(a);
-                        const centreY = rb * Math.cos(a);
+                    for (let i = 0; i < 3; i += 1) {
+                        const ang = 2 * i * theta;
+                        const centreX = rb * Math.sin(ang);
+                        const centreY = rb * Math.cos(ang);
                         const dx = px - centreX;
                         const dy = py - centreY;
                         const dd = Math.max(dx * dx + dy * dy, 1e-12);
