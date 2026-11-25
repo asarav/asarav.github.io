@@ -24,11 +24,9 @@
 //            compared at declaration level against the expanded src/styles
 //            compile (the basis check:css uses), allowing the @font-face URL
 //            fix and the dead rules Phase 6 removed.
-//   js       byte-identical once deployed; for a pre-cutover deployment the
-//            live source is re-minified with the build's terser options first.
-//            `consumption.js` is listed as pending: this build replaces the
-//            data-* lookups with DOM derivation, so it cannot match until it
-//            ships. The shipped file must still be valid minified output.
+//   js       byte-identical to the deployed files; for a pre-cutover deployment
+//            the live source is re-minified with the build's terser options
+//            first. Every script must match — there are no permanent carve-outs.
 //   data     robots.txt and projects.json byte-identical (CRLF tolerated).
 //   sitemap  same <loc> set; <lastmod> is a build value and is ignored.
 //   sw.js    generated on purpose: reported, not compared byte-for-byte.
@@ -62,14 +60,6 @@ const ROUTES = [
   { url: '/404.html', file: '404.html' }
 ];
 const SCRIPTS = ['site-motion.js', 'consumption.js', 'background-fractal.js'];
-// Scripts whose shipped bytes intentionally differ from the deployed ones until
-// this build ships. Everything not listed here must match exactly.
-const PENDING_SCRIPTS = new Map([
-  [
-    'consumption.js',
-    'the attribute trim replaces the data-item-id/completion-date/title/type lookups with DOM derivation, so the shipped file cannot match the live one until it deploys'
-  ]
-]);
 const TERSER_OPTIONS = { compress: { passes: 2 }, mangle: false, format: { comments: false } };
 
 const failures = [];
@@ -184,6 +174,9 @@ function normaliseProjectMedia(html, side) {
 }
 
 function compareProjectMarkup(liveHtml, buildHtml) {
+  // Once the media swap is deployed the two documents are simply equal, and the
+  // token normalisation below is only needed against a pre-swap (GIF-era) site.
+  if (liveHtml === buildHtml) return null;
   const live = normaliseProjectMedia(liveHtml, 'live');
   const build = normaliseProjectMedia(buildHtml, 'build');
   if (build.mismatched.length) return `demo tile pairs the wrong poster and video: ${build.mismatched.slice(0, 3).join(', ')}`;
@@ -204,11 +197,9 @@ function compareProjectMarkup(liveHtml, buildHtml) {
 // cards (verified rendering-identical by the CDP harness), so markup cannot be
 // compared there. Instead compare what the page renders, entry by entry:
 //   * every entry the live site serves must be present, unchanged;
-//   * extra entries are allowed only if their title is listed here as pending a
-//     deploy, and they are reported by name. Delete the title from this list
-//     once that entry is live, so the build must match the site exactly again;
+//   * extra entries are not allowed: an entry the live site does not serve is a
+//     content difference, not a normalisation;
 //   * each page's "Chronology · N entries" counter must agree with its own cards.
-const PENDING_ENTRY_TITLES = ['A Room with a View'];
 
 function consumptionItems(body) {
   // The live cards carry data-* attributes after class, the build's do not;
@@ -218,6 +209,10 @@ function consumptionItems(body) {
 }
 
 function compareConsumptionBody(liveHtml, buildHtml) {
+  if (liveHtml === buildHtml) {
+    const entries = consumptionItems(buildHtml).length / 2;
+    return { entries, exact: true };
+  }
   const liveItems = consumptionItems(liveHtml);
   const buildItems = consumptionItems(buildHtml);
   if (!liveItems.length || !buildItems.length) return 'could not find any consumption entries to compare';
@@ -241,9 +236,7 @@ function compareConsumptionBody(liveHtml, buildHtml) {
   if (missing.length) return `entry changed or missing from the build (${missing.length}): "${missing[0].slice(0, 90)}"`;
   if (remaining.join('\u0000') !== liveItems.join('\u0000')) return 'entries are in a different order than the live site';
 
-  const unexpected = extras.filter((item) => !PENDING_ENTRY_TITLES.some((title) => item.includes(title)));
-  if (unexpected.length) return `unexpected new entry (${unexpected.length}): "${unexpected[0].slice(0, 90)}"`;
-  if (extras.length % 2 !== 0) return `pending entries appear ${extras.length} time(s); expected one per list`;
+  if (extras.length) return `entry the live site does not serve (${extras.length}): "${extras[0].slice(0, 90)}"`;
 
   const counter = (html) => {
     const match = html.match(/Chronology · (\d+) entries/);
@@ -254,7 +247,7 @@ function compareConsumptionBody(liveHtml, buildHtml) {
   if (liveCount !== liveItems.length / 2) return `live page says ${liveCount} entries but renders ${liveItems.length / 2}`;
   if (buildCount !== buildItems.length / 2) return `build says ${buildCount} entries but renders ${buildItems.length / 2}`;
 
-  return { pending: extras.length / 2, entries: buildCount };
+  return { entries: buildCount, exact: false };
 }
 
 /* ------------------------------------------------------------------- CSS map */
@@ -366,6 +359,7 @@ async function compareRoutes() {
     const liveBody = stripCr(bodyOf(liveComparable));
     const buildBody = stripCr(bodyOf(buildComparable));
     let consumptionFacts = null;
+    let projectsExact = false;
 
     if (route.url === '/consumption/') {
       const result = compareConsumptionBody(liveBody, buildBody);
@@ -380,6 +374,7 @@ async function compareRoutes() {
         fail(`${route.url}: ${problem}`);
         continue;
       }
+      projectsExact = liveBody === buildBody;
     } else if (liveBody !== buildBody) {
       fail(`${route.url}: ${firstDiff('body markup', liveBody, buildBody)}`);
       continue;
@@ -393,13 +388,16 @@ async function compareRoutes() {
     }
 
     if (route.url === '/consumption/') {
-      const { entries, pending } = consumptionFacts;
       pass(
-        `${route.url}: head and script order match; ${entries} entries match live's ${entries - pending}` +
-          (pending ? ` plus ${pending} pending deploy (${PENDING_ENTRY_TITLES.join(', ')})` : '')
+        `${route.url}: head and script order match; all ${consumptionFacts.entries} entries match live ` +
+          (consumptionFacts.exact ? 'with byte-identical body markup' : 'entry for entry')
       );
     } else if (route.url === '/projects/') {
-      pass(`${route.url}: head and script order match; body markup identical apart from the 20 demo media tiles (GIF → poster + video, paired by file stem)`);
+      pass(
+        projectsExact
+          ? `${route.url}: head, body markup (including all 20 demo tiles) and script order match`
+          : `${route.url}: head and script order match; body markup identical apart from the 20 demo media tiles (GIF → poster + video, paired by file stem)`
+      );
     } else {
       pass(`${route.url}: head, body markup and script order match`);
     }
@@ -444,17 +442,6 @@ async function compareAssets() {
       pass(`assets/js/${name}: byte-identical to the deployed file`);
     } else if (stripCr(result.code) === stripCr(shipped)) {
       pass(`assets/js/${name}: deployed (unminified) source re-minified with the build options matches the shipped file`);
-    } else if (PENDING_SCRIPTS.has(name)) {
-      // Named exception: the shipped file must still be a complete, minified
-      // build of its source, so a broken or half-written file cannot slip by.
-      const check = await minify(shipped, TERSER_OPTIONS);
-      if (!check.code || stripCr(check.code) !== stripCr(shipped)) {
-        fail(`assets/js/${name}: shipped file is not stable minified output`);
-        continue;
-      }
-      console.log(
-        `note  assets/js/${name}: pending deploy — ${PENDING_SCRIPTS.get(name)} (live ${result.code.length} B, build ${shipped.length} B)`
-      );
     } else {
       fail(`assets/js/${name}: neither the deployed file nor its re-minified source matches the shipped file (${result.code.length} vs ${shipped.length} B)`);
     }

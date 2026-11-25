@@ -171,7 +171,7 @@ Every baseline route now renders from Astro. `pnpm build` emits twelve HTML rout
 
 ### How each page was ported
 
-- **Literal bodies** (`/about/`, `/contact/`, `/floor-0/`, `/hidden/`, `/404.html`, `/projects/`): the Jekyll body was lifted verbatim, with the `relative_url`/`absolute_url` filters resolved to the root-absolute paths they already produced. `/projects/` keeps its embedded `CollectionPage` JSON-LD as the original text via `set:html`, so that block is byte-identical. Two unclosed `<p>` elements in the source (browsers auto-closed them) are closed properly so Astro's stricter parser accepts the page; the rendered text is unchanged. `/projects/` stopped being byte-identical to the live page on 2026-11-25, when its 20 demo GIFs became MP4s with poster stills (details in `docs/perf.md`).
+- **Literal bodies** (`/about/`, `/contact/`, `/floor-0/`, `/hidden/`, `/404.html`, `/projects/`): the Jekyll body was lifted verbatim, with the `relative_url`/`absolute_url` filters resolved to the root-absolute paths they already produced. `/projects/` keeps its embedded `CollectionPage` JSON-LD as the original text via `set:html`, so that block is byte-identical. Two unclosed `<p>` elements in the source (browsers auto-closed them) are closed properly so Astro's stricter parser accepts the page; the rendered text is unchanged. `/projects/` stopped being byte-identical to the live page on 2026-11-25, when its 20 demo GIFs became MP4s with poster stills (`docs/perf.md`), and is byte-identical again since that build deployed the same day.
 - **Data pages**: `/consumption/` renders both list views from `consumption.yaml` (then in `_data/`, now `src/data/`) (1,596 entries, 3,192 rows) through `ConsumptionItem.astro`; `/log/` groups entries by year and slugifies the anchors with the same rule Liquid used; `/music/` keeps both layouts and reproduces kramdown's `markdownify` for the descriptions (folded lines joined, straight apostrophes → typographic ones, inline HTML preserved); `/games/` keeps the per-game column width (`12 / images.length`) and `/books/` builds its schema.org graph from the same data the essay list renders.
 - **Inline HTML in data**: 18 consumption explanations, 1 game explanation and 2 log explanations contain inline `<a>` tags. Jekyll printed those fields raw, so they use `set:html`; escaping them would have changed the copy (this was caught by the body-text diff on `/consumption/`, `/log/` and `/games/` before it shipped).
 
@@ -524,7 +524,7 @@ gone.
 | `pnpm check:js` | pass — 13 scripts (151,967 B) are the minified build of `src/scripts` |
 | `pnpm check:images` | pass — 127 local images carry dimensions; 36 documented exemptions |
 | `pnpm check:links` | pass — 702 internal links resolve across 23 documents |
-| `pnpm check:live` | pass — exit 0 against `https://asarav.github.io` after the 2026-11-25 media/attribute work: 11 routes byte-identical in body markup, `/projects/` identical apart from the 20 normalised media tiles, `/consumption/` identical apart from the one pending entry, `main.css`, `robots.txt`, `projects.json`, two of the three scripts and 11 sitemap URLs exact; `consumption.js` reported as a named pending delta and `sw.js` reported, not compared (15 vs 15 precached paths). Full output and the four perturbation checks are under “Live equivalence” below |
+| `pnpm check:live` | pass — exit 0 against `https://asarav.github.io` after the 2026-11-25 deploy: all 12 route documents byte-identical in body markup (including `/projects/` and all 20 demo tiles), `main.css`, `robots.txt`, `projects.json`, all three scripts and 11 sitemap URLs exact; only `sw.js` is reported rather than compared (15 vs 15 precached paths, differing in the cache stamp). Full output and the four perturbation checks are under “Live equivalence” below |
 
 2026-11-25, after the port shipped: the 20 project demo GIFs were replaced by
 CRF-30 MP4s with lazy poster images (−21.1 MiB), and `/consumption/` stopped
@@ -554,24 +554,24 @@ node scripts/check-live-parity.mjs --live https://staging.example.com --dist dis
 
 | Compared | How, so the generator swap does not matter |
 |---|---|
-| 12 routes | `head` tags (comments, ` />` vs `>`, entity spelling, inline-JSON spacing, and the `generator` meta dropped), **body markup byte-for-byte**, and `<script src>` order. Three named normalisations: `/floor-0/`'s generated build date; `/projects/`'s 20 demo media tiles (live GIF `<img>` ↔ build poster `<img>` + `<video><source data-src>`, paired by file stem, and each tile's poster and MP4 must name the same demo); `/consumption/` compares rendered entries rather than markup, because the build deliberately drops the four `data-*` attributes the live cards repeat. |
+| 12 routes | `head` tags (comments, ` />` vs `>`, entity spelling, inline-JSON spacing, and the `generator` meta dropped), **body markup byte-for-byte**, and `<script src>` order. Two named normalisations cover a pre-cutover page: `/floor-0/`'s generated build date, and `/projects/`'s 20 demo media tiles (live GIF `<img>` ↔ build poster `<img>` + `<video><source data-src>`, paired by file stem, and each tile's poster and MP4 must name the same demo). Once the deployed page is the same build, the raw bodies must be equal and the tile rule is not applied. `/consumption/` additionally compares entry by entry when the markup differs, because a pre-trim live page repeats four `data-*` attributes on every card. |
 | `assets/css/main.css` | Byte-identical once the site serves this build. While a pre-cutover deployment is still unminified, it falls back to declaration level (media query + selector → property) against the expanded `src/styles` compile — the same basis `check:css` uses — allowing the Phase 6 dead-rule removals and the `@font-face` URL fix by name. |
-| `site-motion.js`, `consumption.js`, `background-fractal.js` | Byte-identical to the deployed files. While a pre-cutover deployment is still unminified, the live source re-minified with the build's terser options must match instead — which also proves the CRLF working copies carry no content drift. `consumption.js` is a named pending exception (see `PENDING_SCRIPTS`): this build replaces the `data-*` lookups with DOM derivation, so it cannot match until it deploys; the shipped file still has to be stable minified output. |
+| `site-motion.js`, `consumption.js`, `background-fractal.js` | Byte-identical to the deployed files, with no carve-outs. While a pre-cutover deployment is still unminified, the live source re-minified with the build's terser options must match instead — which also proves the CRLF working copies carry no content drift. |
 | `robots.txt`, `projects.json` | Byte-identical (CRLF tolerated). |
 | `sitemap.xml` | Same `<loc>` set; `<lastmod>` is a build value and is ignored. |
 | `sw.js` | Reported, never compared byte-for-byte: it is generated here, so the cache name always carries a fresh build stamp. As of the 2026-11-25 deploy the live worker is the same 15-path shell (identical apart from `asarav-shell-<timestamp>`); before that deploy it was the older 13-path `asarav-shell-v2`/`cache.addAll` version. `check:sw` and the offline service-worker checks in the harness cover the behaviour. |
 
-Result on 2026-11-25, after the `/projects/` GIF→MP4 change, on a fresh build of
-the working tree (482 files, 515,082,169 B, `dist/`). The whole output, exit 0:
+Result on 2026-11-25, after this build deployed (`3d96ab7`), so the live site is
+the Astro build it is being compared against. The whole output, exit 0:
 
 ```text
 comparing https://asarav.github.io to dist/
 ok    /: head, body markup and script order match
 ok    /about/: head, body markup and script order match
-ok    /projects/: head and script order match; body markup identical apart from the 20 demo media tiles (GIF → poster + video, paired by file stem)
+ok    /projects/: head, body markup (including all 20 demo tiles) and script order match
 ok    /games/: head, body markup and script order match
 ok    /books/: head, body markup and script order match
-ok    /consumption/: head and script order match; 1597 entries match live's 1596 plus 1 pending deploy (A Room with a View)
+ok    /consumption/: head and script order match; all 1597 entries match live with byte-identical body markup
 ok    /log/: head, body markup and script order match
 ok    /music/: head, body markup and script order match
 ok    /contact/: head, body markup and script order match
@@ -580,38 +580,39 @@ ok    /hidden/: head, body markup and script order match
 ok    /404.html: head, body markup and script order match
 ok    main.css: byte-identical to the deployed stylesheet
 ok    assets/js/site-motion.js: byte-identical to the deployed file
-note  assets/js/consumption.js: pending deploy — the attribute trim replaces the data-item-id/completion-date/title/type lookups with DOM derivation, so the shipped file cannot match the live one until it deploys (live 8750 B, build 9037 B)
+ok    assets/js/consumption.js: byte-identical to the deployed file
 ok    assets/js/background-fractal.js: byte-identical to the deployed file
 ok    robots.txt: byte-identical to the live site
 ok    projects.json: byte-identical to the live site
 ok    sitemap.xml: same 11 URLs (lastmod ignored)
-note  sw.js: generated on purpose — live precaches 15 paths, build precaches 15 (cache asarav-shell-20261125024625); install/offline behaviour is covered by scripts/check-sw-shell.mjs and the service-worker CDP checks
+note  sw.js: generated on purpose — live precaches 15 paths, build precaches 15 (cache asarav-shell-20261125025507); install/offline behaviour is covered by scripts/check-sw-shell.mjs and the service-worker CDP checks
 
 PASS: the build serves the same content as the live site (generated values and documented minification aside).
 ```
 
 What that means route by route:
 
-- **Eleven routes are byte-identical in body markup** after the documented head
-  normalisations: `/`, `/about/`, `/games/`, `/books/`, `/log/`, `/music/`,
-  `/contact/`, `/hidden/`, `/404.html`, and `/floor-0/` once its generated
-  "Last revised" date is normalised.
-- **`/projects/` is no longer byte-identical**, and the text above says exactly
-  what changed: the 20 demo tiles. Each live `<img ... .gif>` is one build
-  `<span class="gif-video"><img ... .poster.jpg><video …><source data-src="…mp4"></video></span>`,
-  paired by file stem (20 ↔ 20, `Darwin.gif` ↔ `Darwin.mp4`, …). Every other
-  byte of that document — including the 21 pre-existing `<video>` elements, the
-  tables, the JSON-LD and the copy — still has to match exactly, and the check
-  also rejects a tile whose poster and MP4 name different demos.
-- **`/consumption/`** is compared entry by entry because the build drops the
-  four `data-*` attributes on all 3,194 cards (rendering-identical, verified by
-  the CDP harness at 0.000 %). All 1,596 entries the live site renders must be
-  present unchanged and in order; the one entry the live site does not serve yet
-  is named in the output and counted, and any other added, edited, reordered or
-  missing entry fails.
+- **All twelve route documents are byte-identical in body markup** after the
+  documented head normalisations — `/floor-0/` once its generated "Last
+  revised" date is normalised, and `/projects/` including all 20 demo tiles,
+  which the live site now serves as the same poster+video markup the build
+  emits.
+- **The `/projects/` tile rule** is the only element-level tolerance, and it
+  applies only while the deployed page is the older GIF markup: a live
+  `<img ... .gif>` and a build `<span class="gif-video"><img ... .poster.jpg>
+  <video …><source data-src="…mp4"></video></span>` both become one stem token,
+  paired in order (20 ↔ 20, `Darwin.gif` ↔ `Darwin.mp4`, …). The 21 pre-existing
+  `<video>` elements, the tables, the JSON-LD and the copy are never normalised,
+  and a tile whose poster and MP4 name different demos is rejected by name.
+- **`/consumption/`** is byte-identical now; the entry-by-entry comparison stays
+  as the fallback for a pre-trim page, which repeats four `data-*` attributes on
+  all 3,194 cards. Each live entry must be present unchanged and in order,
+  extra entries fail, and every page's "Chronology · N entries" counter must
+  agree with its own cards.
 
-The gate is live, not vacuous. Four perturbations were applied to `dist/`, each
-run, then restored — every one exited 1, and a clean rebuild returned it to PASS:
+The gate is live, not vacuous. Four perturbations were applied to `dist/` against
+the pre-cutover site, each run, then restored — every one exited 1, and a clean
+rebuild returned it to PASS:
 
 | Perturbation | What the gate said |
 |---|---|
