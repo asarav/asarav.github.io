@@ -117,7 +117,10 @@ jobs:
           set -o pipefail
           # Keep the server off the step's stdout, otherwise the runner waits for
           # the inherited pipe to close and the step never finishes.
-          pnpm preview --port 4000 > /tmp/serve.log 2>&1 &
+          # --host 127.0.0.1 is required: without it the preview only answers on
+          # the IPv6 loopback, so wait-on's 127.0.0.1 probe times out and the
+          # step dies before Lighthouse runs.
+          pnpm preview --host 127.0.0.1 --port 4000 > /tmp/serve.log 2>&1 &
           SERVER_PID=$!
           npx --yes wait-on@7 http://127.0.0.1:4000/ --timeout 60000
           npx --yes @lhci/cli@0.14.x autorun 2>&1 | tee lhci.log
