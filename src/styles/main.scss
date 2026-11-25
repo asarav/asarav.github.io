@@ -1786,13 +1786,23 @@ html.js .footer-transmission {
   }
 
   &.is-fractal-ready .footer-fractal {
-    opacity: 0.46;
+    opacity: 0.62;
 
     // The stacked phone footer is taller and narrower, which stretches the
     // field across the link rows; hold it back further there.
     @media (max-width: 700px) {
-      opacity: 0.2;
+      opacity: 0.34;
     }
+  }
+
+  // While the schedule hands over to another variant, footer-fractal.js holds
+  // the canvas dim behind the rebuild so the swap is a dissolve instead of one
+  // figure replaced by another. A class rather than an inline style, so the
+  // narrow-footer opacity above still applies once the fade back in ends; the
+  // reduced-motion block below turns the transition off.
+  &.is-fractal-swapping .footer-fractal {
+    opacity: 0;
+    transition-duration: 0.45s;
   }
 
   &::after {

@@ -35,6 +35,30 @@ const DOCUMENTED_ADDITIONS = [
     sheet: 'pages/projects.css',
     selectorIncludes: '.gif-video',
     reason: 'the 20 project GIFs are now MP4s: the poster image keeps the layout box and the video overlays it, so this family of rules has no baseline counterpart'
+  },
+  {
+    sheet: 'main.css',
+    selectorIncludes: '.is-fractal-swapping',
+    reason: 'footer-fractal.js holds the canvas dim while a variant swaps, so the handover is a dissolve; no baseline rule to go stale'
+  }
+];
+
+// Values that changed on purpose after the frozen baseline. Each entry names
+// the old and the new value, so a different drift still fails the gate.
+const DOCUMENTED_VALUE_CHANGES = [
+  {
+    selector: '#footer.is-fractal-ready .footer-fractal',
+    property: 'opacity',
+    from: '0.46',
+    to: '0.62',
+    reason: 'the footer field now carries the eight morphing families, so it is lifted to the 0.62 the composited band was measured at'
+  },
+  {
+    selector: '#footer.is-fractal-ready .footer-fractal',
+    property: 'opacity',
+    from: '0.2',
+    to: '0.34',
+    reason: 'the same lift for the taller, narrower phone footer, measured at the same 0.34'
   }
 ];
 
@@ -138,7 +162,10 @@ for (const sheet of sheets) {
       }
       if (now.get(property) !== value) {
         const fontFaceFix = isMain && selector.startsWith('@font-face') && property === 'src' && value.includes('../fonts/white-rabbit.ttf') && now.get(property).includes('/assets/fonts/white-rabbit.ttf');
-        if (!fontFaceFix) failures.push(`${sheet.name}: ${selector} ${property} is "${now.get(property)}", baseline had "${value}"`);
+        const documentedChange = isMain && DOCUMENTED_VALUE_CHANGES.some(
+          (entry) => entry.selector === selector && entry.property === property && entry.from === value && entry.to === now.get(property)
+        );
+        if (!fontFaceFix && !documentedChange) failures.push(`${sheet.name}: ${selector} ${property} is "${now.get(property)}", baseline had "${value}"`);
       }
     }
     for (const property of now.keys()) {
@@ -163,4 +190,4 @@ if (failures.length) {
   process.exit(1);
 }
 const against = fs.existsSync(baselineDir) ? 'src/styles and the frozen baseline' : 'src/styles';
-console.log(`PASS: ${sheets.length} stylesheets match ${against} (${shippedBytes} bytes shipped, only the documented @font-face fix and dead-rule removals differ).`);
+console.log(`PASS: ${sheets.length} stylesheets match ${against} (${shippedBytes} bytes shipped, only the documented deltas differ).`);
