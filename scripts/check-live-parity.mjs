@@ -9,9 +9,16 @@
 // the Astro build, normalising only what each generator legitimately changes:
 //
 //   routes   head tags (comments, XHTML void tags, entities, inline JSON spacing)
-//            with the generator meta dropped; body text; script src order.
+//            with the generator meta dropped; body markup; script src order.
 //            `/floor-0/` carries a generated build date, normalised on that
-//            route only.
+//            route only. `/projects/` normalises only the 20 demo media tiles
+//            (GIF <img> on the live site, poster <img> + <video data-src> in
+//            the build), pairing them by file stem, so every other byte of that
+//            document still has to match. `/consumption/` compares rendered
+//            entries rather than markup, because the build deliberately drops
+//            the data-* attributes the live site repeats on every card; entries
+//            the live site does not serve yet are reported and counted, while any
+//            change to an entry it does serve fails.
 //   css      byte-identical once the site serves this build. A pre-cutover
 //            deployment is unminified, so for that shape the live sheet is
 //            compared at declaration level against the expanded src/styles
@@ -19,6 +26,9 @@
 //            fix and the dead rules Phase 6 removed.
 //   js       byte-identical once deployed; for a pre-cutover deployment the
 //            live source is re-minified with the build's terser options first.
+//            `consumption.js` is listed as pending: this build replaces the
+//            data-* lookups with DOM derivation, so it cannot match until it
+//            ships. The shipped file must still be valid minified output.
 //   data     robots.txt and projects.json byte-identical (CRLF tolerated).
 //   sitemap  same <loc> set; <lastmod> is a build value and is ignored.
 //   sw.js    generated on purpose: reported, not compared byte-for-byte.
@@ -52,6 +62,14 @@ const ROUTES = [
   { url: '/404.html', file: '404.html' }
 ];
 const SCRIPTS = ['site-motion.js', 'consumption.js', 'background-fractal.js'];
+// Scripts whose shipped bytes intentionally differ from the deployed ones until
+// this build ships. Everything not listed here must match exactly.
+const PENDING_SCRIPTS = new Map([
+  [
+    'consumption.js',
+    'the attribute trim replaces the data-item-id/completion-date/title/type lookups with DOM derivation, so the shipped file cannot match the live one until it deploys'
+  ]
+]);
 const TERSER_OPTIONS = { compress: { passes: 2 }, mangle: false, format: { comments: false } };
 
 const failures = [];
@@ -128,6 +146,115 @@ function scriptSrcsOf(html) {
 // `/floor-0/` prints the date it was built; that line is generated, not copy.
 function normaliseBuildDate(html) {
   return html.replace(/<dd>\s*[A-Z][a-z]+ \d{1,2}, \d{4}\s*<\/dd>/g, '<dd>BUILD_DATE</dd>');
+}
+
+function bodyOf(html) {
+  const match = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  return match ? match[1] : '';
+}
+
+function firstDiff(label, a, b) {
+  let at = 0;
+  while (at < a.length && at < b.length && a[at] === b[at]) at++;
+  return `${label} differs at character ${at} of ${a.length} vs ${b.length}: live "${a.slice(at, at + 80)}" vs build "${b.slice(at, at + 80)}"`;
+}
+
+/* -------------------------------------------------- /projects/ media swap */
+
+// /projects/ replaced its 20 demo GIFs with MP4s. Only those elements are
+// rewritten: a build tile (poster <img> + <video> + <source data-src>) and its
+// live GIF <img> both become one stem token, so (a) the pairing is checked by
+// file stem (Darwin.gif ↔ Darwin.mp4) and (b) every other byte of the document
+// — including the 21 pre-existing videos — still has to match exactly.
+const PROJECT_MEDIA_BUILD =
+  /<span class="gif-video"><img [^>]*?src="([^"]+)\.poster\.jpg"[^>]*><video [^>]*>(?:<source [^>]*?data-src="([^"]+)\.mp4"[^>]*>)?<\/video><\/span>/g;
+const PROJECT_MEDIA_LIVE = /<img [^>]*?src="([^"]+)\.gif"[^>]*>/g;
+
+function normaliseProjectMedia(html, side) {
+  const stems = [];
+  const mismatched = [];
+  const out = html.replace(side === 'live' ? PROJECT_MEDIA_LIVE : PROJECT_MEDIA_BUILD, (match, src, video) => {
+    const stem = src.split('/').pop();
+    stems.push(stem);
+    // Inside a build tile the poster and the MP4 must name the same demo.
+    if (side === 'build' && video && video.split('/').pop() !== stem) mismatched.push(`${stem} poster vs ${video.split('/').pop()} video`);
+    return `<media-demo stem="${stem}">`;
+  });
+  return { html: out, stems, count: stems.length, mismatched };
+}
+
+function compareProjectMarkup(liveHtml, buildHtml) {
+  const live = normaliseProjectMedia(liveHtml, 'live');
+  const build = normaliseProjectMedia(buildHtml, 'build');
+  if (build.mismatched.length) return `demo tile pairs the wrong poster and video: ${build.mismatched.slice(0, 3).join(', ')}`;
+  if (live.count !== build.count) {
+    return `media tile count differs: live ${live.count} demo GIF(s) vs build ${build.count} video tile(s)`;
+  }
+  if (live.stems.join('|') !== build.stems.join('|')) {
+    const at = live.stems.findIndex((stem, i) => stem !== build.stems[i]);
+    return `demo media pairing differs at tile ${at + 1}: live ${live.stems[at]} vs build ${build.stems[at]}`;
+  }
+  if (live.html !== build.html) return firstDiff('body markup', live.html, build.html);
+  return null;
+}
+
+/* ------------------------------------------- /consumption/ entry compare */
+
+// The build drops the four data-* attributes the live page repeats on all 1597
+// cards (verified rendering-identical by the CDP harness), so markup cannot be
+// compared there. Instead compare what the page renders, entry by entry:
+//   * every entry the live site serves must be present, unchanged;
+//   * extra entries are allowed only if their title is listed here as pending a
+//     deploy, and they are reported by name. Delete the title from this list
+//     once that entry is live, so the build must match the site exactly again;
+//   * each page's "Chronology · N entries" counter must agree with its own cards.
+const PENDING_ENTRY_TITLES = ['A Room with a View'];
+
+function consumptionItems(body) {
+  // The live cards carry data-* attributes after class, the build's do not;
+  // only the opening tag matters here because the payload is compared as text.
+  const parts = body.split(/(?=<div class="(?:row |mobile )?item info[^"]*"[^>]*>)/);
+  return parts.slice(1).map((chunk) => textOf(chunk));
+}
+
+function compareConsumptionBody(liveHtml, buildHtml) {
+  const liveItems = consumptionItems(liveHtml);
+  const buildItems = consumptionItems(buildHtml);
+  if (!liveItems.length || !buildItems.length) return 'could not find any consumption entries to compare';
+
+  const counts = new Map();
+  for (const item of liveItems) counts.set(item, (counts.get(item) || 0) + 1);
+
+  const remaining = [];
+  const extras = [];
+  for (const item of buildItems) {
+    const left = counts.get(item) || 0;
+    if (left > 0) {
+      counts.set(item, left - 1);
+      remaining.push(item);
+    } else {
+      extras.push(item);
+    }
+  }
+
+  const missing = [...counts.entries()].filter(([, left]) => left > 0).map(([item]) => item);
+  if (missing.length) return `entry changed or missing from the build (${missing.length}): "${missing[0].slice(0, 90)}"`;
+  if (remaining.join('\u0000') !== liveItems.join('\u0000')) return 'entries are in a different order than the live site';
+
+  const unexpected = extras.filter((item) => !PENDING_ENTRY_TITLES.some((title) => item.includes(title)));
+  if (unexpected.length) return `unexpected new entry (${unexpected.length}): "${unexpected[0].slice(0, 90)}"`;
+  if (extras.length % 2 !== 0) return `pending entries appear ${extras.length} time(s); expected one per list`;
+
+  const counter = (html) => {
+    const match = html.match(/Chronology · (\d+) entries/);
+    return match ? Number(match[1]) : NaN;
+  };
+  const liveCount = counter(liveHtml);
+  const buildCount = counter(buildHtml);
+  if (liveCount !== liveItems.length / 2) return `live page says ${liveCount} entries but renders ${liveItems.length / 2}`;
+  if (buildCount !== buildItems.length / 2) return `build says ${buildCount} entries but renders ${buildItems.length / 2}`;
+
+  return { pending: extras.length / 2, entries: buildCount };
 }
 
 /* ------------------------------------------------------------------- CSS map */
@@ -236,12 +363,25 @@ async function compareRoutes() {
       continue;
     }
 
-    const liveText = textOf(liveComparable);
-    const buildText = textOf(buildComparable);
-    if (liveText !== buildText) {
-      let at = 0;
-      while (at < liveText.length && at < buildText.length && liveText[at] === buildText[at]) at++;
-      fail(`${route.url}: body text differs at character ${at}: live "${liveText.slice(at, at + 80)}" vs build "${buildText.slice(at, at + 80)}"`);
+    const liveBody = stripCr(bodyOf(liveComparable));
+    const buildBody = stripCr(bodyOf(buildComparable));
+    let consumptionFacts = null;
+
+    if (route.url === '/consumption/') {
+      const result = compareConsumptionBody(liveBody, buildBody);
+      if (typeof result === 'string') {
+        fail(`${route.url}: ${result}`);
+        continue;
+      }
+      consumptionFacts = result;
+    } else if (route.url === '/projects/') {
+      const problem = compareProjectMarkup(liveBody, buildBody);
+      if (problem) {
+        fail(`${route.url}: ${problem}`);
+        continue;
+      }
+    } else if (liveBody !== buildBody) {
+      fail(`${route.url}: ${firstDiff('body markup', liveBody, buildBody)}`);
       continue;
     }
 
@@ -252,7 +392,17 @@ async function compareRoutes() {
       continue;
     }
 
-    pass(`${route.url}: head, body text and script order match`);
+    if (route.url === '/consumption/') {
+      const { entries, pending } = consumptionFacts;
+      pass(
+        `${route.url}: head and script order match; ${entries} entries match live's ${entries - pending}` +
+          (pending ? ` plus ${pending} pending deploy (${PENDING_ENTRY_TITLES.join(', ')})` : '')
+      );
+    } else if (route.url === '/projects/') {
+      pass(`${route.url}: head and script order match; body markup identical apart from the 20 demo media tiles (GIF → poster + video, paired by file stem)`);
+    } else {
+      pass(`${route.url}: head, body markup and script order match`);
+    }
   }
 }
 
@@ -292,10 +442,21 @@ async function compareAssets() {
     const shipped = fs.readFileSync(buildPath, 'utf8');
     if (stripCr(liveJs) === stripCr(shipped)) {
       pass(`assets/js/${name}: byte-identical to the deployed file`);
-    } else if (stripCr(result.code) !== stripCr(shipped)) {
-      fail(`assets/js/${name}: neither the deployed file nor its re-minified source matches the shipped file (${result.code.length} vs ${shipped.length} B)`);
-    } else {
+    } else if (stripCr(result.code) === stripCr(shipped)) {
       pass(`assets/js/${name}: deployed (unminified) source re-minified with the build options matches the shipped file`);
+    } else if (PENDING_SCRIPTS.has(name)) {
+      // Named exception: the shipped file must still be a complete, minified
+      // build of its source, so a broken or half-written file cannot slip by.
+      const check = await minify(shipped, TERSER_OPTIONS);
+      if (!check.code || stripCr(check.code) !== stripCr(shipped)) {
+        fail(`assets/js/${name}: shipped file is not stable minified output`);
+        continue;
+      }
+      console.log(
+        `note  assets/js/${name}: pending deploy — ${PENDING_SCRIPTS.get(name)} (live ${result.code.length} B, build ${shipped.length} B)`
+      );
+    } else {
+      fail(`assets/js/${name}: neither the deployed file nor its re-minified source matches the shipped file (${result.code.length} vs ${shipped.length} B)`);
     }
   }
 

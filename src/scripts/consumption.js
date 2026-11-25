@@ -62,14 +62,44 @@
         return value.charAt(0).toUpperCase() + value.slice(1);
     }
 
+    // The card already renders its date, title and type; read them back instead
+    // of repeating them in data attributes on all 3,192 cards (desktop + mobile),
+    // which cost ~52 KB of gzip on the 4.2 MB page.
+    const STRUCTURAL_CLASSES = [
+        'row', 'item', 'info', 'mobile',
+        'hidden', 'visible', 'is-revealed', 'will-reveal', 'is-jump-target'
+    ];
+
+    function itemType(item) {
+        for (var i = 0; i < item.classList.length; i++) {
+            if (STRUCTURAL_CLASSES.indexOf(item.classList[i]) === -1) {
+                return item.classList[i];
+            }
+        }
+
+        return '';
+    }
+
+    function itemTitle(item) {
+        var link = item.querySelector('.header a');
+
+        return link ? link.textContent.trim() : '';
+    }
+
+    function itemDate(item) {
+        var cell = item.querySelector('.date');
+
+        return cell ? cell.textContent.trim() : '';
+    }
+
     function setChronology(item) {
         if (!item || !dateEl || !metaEl) {
             return;
         }
 
-        const date = item.getAttribute('data-completion-date');
-        const title = item.getAttribute('data-title') || '';
-        const type = formatType(item.getAttribute('data-type'));
+        const date = itemDate(item);
+        const title = itemTitle(item);
+        const type = formatType(itemType(item));
         const accent = window
             .getComputedStyle(item)
             .getPropertyValue('--type-color')
@@ -440,7 +470,7 @@
         }
 
         var years = Array.from(new Set(fullItems.map(function (item) {
-            var d = item.getAttribute('data-completion-date') || '';
+            var d = itemDate(item);
             var m = d.match(/(\d{4})/);
             return m ? m[1] : null;
         }).filter(Boolean))).sort(function (a, b) {
@@ -464,7 +494,7 @@
             // the chosen year (the "first date" of that year), not just the
             // first match in DOM order.
             var matches = visibleItems.filter(function (item) {
-                var d = item.getAttribute('data-completion-date') || '';
+                var d = itemDate(item);
                 var m = d.match(/(\d{4})/);
                 return m && m[1] === y;
             });
@@ -472,7 +502,7 @@
             var target = null;
             var targetTime = 0;
             matches.forEach(function (item) {
-                var itemTime = new Date(item.getAttribute('data-completion-date') || '').getTime();
+                var itemTime = new Date(itemDate(item)).getTime();
                 if (isNaN(itemTime)) {
                     return;
                 }

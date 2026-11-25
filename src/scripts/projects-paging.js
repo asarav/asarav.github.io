@@ -84,3 +84,48 @@ document.addEventListener('DOMContentLoaded', function () {
     observer.observe(sentinel);
 });
 
+// The project demos used to be animated GIFs, which the browser only fetched
+// once they scrolled near the viewport. Videos are not lazy-loadable, so they
+// ship with preload="none" and only start (and download) when they come close.
+document.addEventListener('DOMContentLoaded', function () {
+    const videos = Array.from(document.querySelectorAll('video[data-lazy-video]'));
+    if (!videos.length) return;
+
+    // The MP4 URL lives in data-src, not src: with no source the element cannot
+    // fetch anything, no matter how the browser treats preload. The observer
+    // assigns it on approach, which is the laziness the GIFs' loading="lazy" had.
+    function start(video) {
+        const source = video.querySelector('source[data-src]');
+        if (source) {
+            source.src = source.getAttribute('data-src');
+            source.removeAttribute('data-src');
+            video.load();
+        }
+
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') attempt.catch(function () {});
+    }
+
+    if (typeof IntersectionObserver === 'undefined') {
+        videos.forEach(start);
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                // A section that is still collapsed (js-project-hidden) gives its
+                // videos a zero-area box, and Chrome reports those as intersecting
+                // with ratio 0 — playing them there would fetch every MP4 up front.
+                if (!(entry.intersectionRatio > 0)) return;
+                observer.unobserve(entry.target);
+                start(entry.target);
+            });
+        },
+        { root: null, rootMargin: '300px 0px', threshold: 0.01 }
+    );
+
+    videos.forEach(function (video) { observer.observe(video); });
+});
+

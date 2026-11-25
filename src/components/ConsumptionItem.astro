@@ -4,20 +4,13 @@ import type { ConsumptionEntry } from '../lib/site';
 interface Props {
   view?: 'mobile' | 'desktop';
   item: ConsumptionEntry;
-  index: number;
 }
 
-const { view = 'desktop', item, index } = Astro.props;
-const attrs = {
-  'data-item-id': String(index),
-  'data-completion-date': item.completionDate || '',
-  'data-title': item.title,
-  'data-type': item.type
-};
+const { view = 'desktop', item } = Astro.props;
 ---
 
 {view === 'mobile' ? (
-<div class:list={['mobile', 'item', 'info', item.type]} {...attrs}>
+<div class:list={['mobile', 'item', 'info', item.type]}>
     <div class="row">
         <div class="col-12 date text-center">{item.completionDate}</div>
     </div>
@@ -41,7 +34,7 @@ const attrs = {
     </div>
 </div>
 ) : (
-<div class:list={['row', 'item', 'info', item.type]} {...attrs}>
+<div class:list={['row', 'item', 'info', item.type]}>
     <div class="col-12 col-md-2 date text-center">{item.completionDate}</div>
     <div class="content col-12 col-md-8">
         <div class="row">

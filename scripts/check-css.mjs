@@ -28,6 +28,16 @@ const DOCUMENTED_REMOVALS = [
   { selector: '.archive-intro .archive-lede', reason: 'same block as .archive-intro' },
   { selector: '.scene-timelapse-progress', reason: 'site-motion.js only creates .scene-timelapse and .scene-timelapse--hero' }
 ];
+// Rules that arrived after the frozen baseline. Each one is deliberate and
+// named here, so an unintended new rule still fails the gate.
+const DOCUMENTED_ADDITIONS = [
+  {
+    sheet: 'pages/projects.css',
+    selectorIncludes: '.gif-video',
+    reason: 'the 20 project GIFs are now MP4s: the poster image keeps the layout box and the video overlays it, so this family of rules has no baseline counterpart'
+  }
+];
+
 const DOCUMENTED_PROPERTY_REMOVALS = [
   { selector: ':root', property: '--ink-soft', reason: 'never read by any stylesheet or script' },
   { selector: ':root', property: '--surface-raised', reason: 'never read by any stylesheet or script' },
@@ -136,7 +146,14 @@ for (const sheet of sheets) {
     }
   }
   for (const key of current.keys()) {
-    if (!baseline.has(key)) failures.push(`${sheet.name}: new rule: ${key.slice(0, 100)}`);
+    if (baseline.has(key)) continue;
+    const selector = key.slice(key.indexOf('|') + 1);
+    const documented = DOCUMENTED_ADDITIONS.some(
+      (entry) =>
+        entry.sheet === sheet.name &&
+        (entry.selector ? entry.selector === selector : entry.selectorIncludes && selector.includes(entry.selectorIncludes))
+    );
+    if (!documented) failures.push(`${sheet.name}: new rule: ${key.slice(0, 100)}`);
   }
 }
 

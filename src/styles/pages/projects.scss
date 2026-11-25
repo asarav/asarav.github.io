@@ -222,6 +222,37 @@
                 background: #000;
             }
 
+            // The 20 animated GIFs are now MP4s. The poster frame is a real
+            // <img> so the box keeps the exact size the GIF had before any
+            // video metadata arrives; the video sits on top and is only
+            // fetched when it scrolls near (projects-paging.js).
+            .gif-video {
+                position: relative;
+                display: inline-block;
+                max-width: 100%;
+                vertical-align: top;
+                /* An inline-block strut is ~2px per wrapper; the media itself
+                   is block-level, so keep the box exactly its height. */
+                line-height: 0;
+
+                > img {
+                    display: block;
+                }
+
+                > video {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    border: 0;
+                    box-shadow: none;
+                    /* Images carry a global tone filter (main.scss `img`); the
+                       video needs the same one so the swap does not show. */
+                    filter: saturate(0.86) contrast(1.06) brightness(0.94);
+                }
+            }
+
             iframe {
                 max-width: 100%;
                 border: 1px solid $border-color;

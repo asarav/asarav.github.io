@@ -35,12 +35,12 @@ Raw reports and `summary.json`: `.shots/astro-parity/perf/` (gitignored).
 
 | Change | Target | Status |
 |---|---|---|
-| `compressHTML` on `/consumption/` | ≤ 1 MB | **not met** — 4,246,842 B; see Phase 6 |
+| `compressHTML` on `/consumption/` | ≤ 1 MB | **met on the wire, not on the raw reading** — the `data-*` trim (2026-11-25) takes the page to 3,896,556 B raw and 955,463 B gzip locally; GitHub Pages served 1,044,904 B before it. See “Deferred items, measured” |
 | Image dimensions on the ~30 tags lacking them | CLS 0 | **partly met** — games/books annotated, `/about/` and `/log/` exempt; see Phase 6 |
 | CSS minification | `main.css` ≤ 50 KB | **not met** — 50,544 B (1.1 % over); a second csso pass reached 45,689 B but changed rendered pixels and was reverted; see Phase 6 |
-| JS bundling | ≤ 150 KB on `/` | deferred (post-switch) |
-| Consumption pagination | ≤ 300 KB | deferred (post-switch, needs sign-off) |
-| GIF → video | −20 MB of image weight | deferred (post-switch) |
+| JS bundling | ≤ 150 KB on `/` | **met** — 132,191 B across 9 scripts; a real bundle measures 132,183 B, so bundling is not the lever (see “Deferred items, measured”) |
+| Consumption pagination | ≤ 300 KB | **declined** (2026-11-25) — it would change the page UX; the `data-*` trim was taken instead |
+| GIF → video | −20 MB of image weight | **met** — 20 project GIFs, 25,763,575 B, became 20 MP4s + posters, 3,623,260 B (−21.1 MiB); shipped 2026-11-25 |
 
 ## Phase 2 measurements
 
@@ -334,3 +334,92 @@ experiment that was later reverted (see the CSS target above). The shipped
 stylesheet is 4,855 B larger — 0.09 % of the 5.4 MB page — so the TBT comparison
 is unaffected by that difference, and the conclusion does not depend on which of
 the two CSS builds was served.
+
+## Deferred items, measured (2026-11-25)
+
+The four items the port left open, measured against the shipped `dist/` (462
+files, 537,562,822 B). gzip is Node's zlib at level 9; the transfer figure is
+what `https://asarav.github.io` actually returns; video is ffmpeg 9 H.264.
+Sample outputs stay in `.shots/gif-sample/` (gitignored).
+
+| Item | Measured now | Verdict |
+|---|---|---|
+| JS bundling | `/` loads 9 scripts totalling **132,191 B**. Concatenating those sources in order and minifying them with the build's terser options gives **132,183 B** (gzip 42,806 B vs 45,320 B separately) | **Target already met** without bundling. A bundle saves 8 B, trades 9 requests for 1, and merges nine global scopes whose inline page scripts call into each other. Not worth it: closed |
+| `/consumption/` HTML | 4,246,842 B raw; GitHub Pages serves **1,044,904 B** gzip. Node zlib 9 gives 1,001,818 B | Not met on the raw ≤ 1 MB reading; **already under 1 MiB on the wire** (1,020 KiB), 4.5 % over 1,000,000 B |
+| Consumption `data-*` attributes | 12,768 attributes (`item-id`, `completion-date`, `title`, `type` × 3,192 cards) duplicated values already in `consumption.yaml` or in the rendered text | **Shipped 2026-11-25.** `item-id` was read by nothing; `consumption.js` now derives type from the card class, title from the header link and date from the date cell. Page: 4,246,842 → **3,896,556 B** raw, 1,047,584 → **955,463 B** gzip (CLI level 9). The `/consumption/` harness still reports details identical and **0.000 %** pixel difference against the baseline |
+| Consumption pagination | 1,596 entries, ~2,660 B of markup each. ≤ 300 KB ⇒ ~112 entries per page (15 pages); ≤ 1 MB raw ⇒ ~376 per page (5 pages) | **Declined** (2026-11-25): a visible UX change, and the attribute trim was enough for the wire target |
+| GIF → video | 20 project GIFs, 25,763,575 B. The eight largest (22,519,620 B = 87 % of the weight) transcode to 2,687,663 B MP4 at CRF 30, i.e. **11.9 %** | **Shipped 2026-11-25**: all 20 became MP4 + poster, 3,623,260 B total (−21.1 MiB). The poster `<img loading="lazy">` keeps the GIF's box and lazy fetch; the `<video preload="none">` is fetched by an IntersectionObserver only when scrolled near |
+| `main.css` | 50,544 B | Unchanged at 544 B (1.1 %) over. The 45,689 B csso pass moved 49 rule blocks between media queries and changed rendered pixels, so it was reverted. Closed as a documented miss |
+
+### What shipped (2026-11-25)
+
+Both items the user picked were implemented; pagination was declined.
+
+| Measure | Before | After |
+|---|---|---|
+| `/consumption/` HTML | 4,246,842 B | **3,896,556 B** (−350,286) |
+| `/consumption/` gzip (CLI −9) | 1,047,584 B | **955,463 B** (−92,121) |
+| Project demo media (20 GIFs) | 25,763,575 B | **3,623,260 B** in 20 MP4 (3,007,395 B) + 20 posters (615,865 B) |
+| Shipped CSS (10 sheets) | 113,461 B | 113,728 B (+267 B for the `.gif-video` poster/video rules and tone filter) |
+| JS (13 scripts) | 150,864 B | 151,967 B (+1,103 B for the lazy-play observer and the data-src swap) |
+| `dist/` | 462 files, 537,562,822 B | **482 files, 515,081,715 B** (−21.4 MiB) |
+| `/consumption/` harness | — | **pass**, details and layout identical, 0.000 % pixels on top/mid/bottom (desktop and mobile), against a control built from `HEAD` with the current `consumption.yaml` |
+| `/projects/` layout (loaded state) | — | identical — 25,495 px in both builds, no section differs |
+| `/projects/` harness | — | reports `videos: 18 != 38`, +496 px and ~20 % mid-page pixels; all three are the media swap plus the harness's own timing, see the note below |
+
+Notes:
+
+- The videos are H.264 CRF 30, even dimensions, `+faststart`, no audio track.
+  Each demo is a `.gif-video` wrapper holding the poster frame as a real
+  `<img loading="lazy">` — the old GIF's class, `width`/`height` and `alt`, so the
+  box is sized before any video metadata arrives — with `<video preload="none">`
+  absolutely overlaid. The MP4 URL sits in `source[data-src]`, not `src`: with no
+  source in the document the element cannot fetch, which is what makes the
+  download lazy regardless of how the browser treats `preload`. An
+  IntersectionObserver in `projects-paging.js` assigns the source and plays when
+  the tile scrolls near.
+- The overlaid video repeats the global `img` tone filter so the swap does not
+  change how the demos look. `check:css` gained one named `DOCUMENTED_ADDITIONS`
+  entry for the `.gif-video` rule family; any other new rule still fails.
+- Playback was observed end to end in a **visible** headless window
+  (`Page/Network/Runtime` over CDP, `--autoplay-policy=no-user-gesture-required`,
+  `visibilityState: "visible"`), scrolling with real wheel input:
+  **0** lazy MP4 requests before the first scroll and 20 after a full pass, with
+  the count growing per step (0, 3, 4, 7, 15, …, 20) as tiles approached; all 20
+  tiles played with `readyState 4`, and currentTime advanced across samples
+  (e.g. 0.28 → 1.08 s, 1.67 → 3.56 s). Seeking 0.35 s before the end wrapped and
+  kept playing (4.65 → 0.89 s, `paused: false`) on three tiles, so `loop` holds.
+  At the centre of an in-view playing tile the topmost element is the `<video>`,
+  never the poster `<img>`, so a playing tile is never covered.
+- The zero-height tiles inside a still-collapsed section report
+  `isIntersecting: true` with ratio 0; the observer ignores those, which is what
+  stops the whole page's MP4s loading up front.
+- The swap does not move anything: with both builds' images fully decoded
+  (`.shots/section-heights.mjs`, 1280×900, all paged sections revealed) the page
+  is **25,495 px in both** and not one of the 34 sections differs in height. The
+  parity harness instead reveals sections and screenshots immediately, and the
+  baseline's 1.5 MB GIFs are still 2×2 boxes at that moment while 30 KB posters
+  are already decoded — hence its +496 px and ~20 % mid-page delta. Raw video
+  frames are not comparable to GIF frames at all, so `/projects/` is no longer a
+  pixel-parity route; the geometry check above is the meaningful one.
+- Two source GIFs (`Flower Grower`, `Story Teller`) contain undecodable tail
+  frames. `Story Teller` was padded to its full 6.73 s; `Flower Grower` ends
+  0.2 s early (4.26 s vs 4.46 s) — the loop is 4.5 % shorter, nothing is missing
+  from the visible animation.
+- `/projects/` intentionally differs from the frozen Jekyll baseline (video
+  frames instead of GIF frames, 20 more `<video>` elements, posters where GIFs
+  used to paint), so the harness reports `videos: 18 != 38` and a mid-page pixel
+  delta; its layout delta is load timing, as shown above.
+
+GIF sample (CRF 30, even-dimension scale):
+
+| GIF | Original | MP4 | Ratio |
+|---|---|---|---|
+| `deep-traffic.gif` | 9,796,705 | 581,219 | 5.9 % |
+| `Spaceship Ride.gif` | 3,786,926 | 458,548 | 12.1 % |
+| `info vis.gif` | 2,903,162 | 762,035 | 26.3 % |
+| `Make it Rain.gif` | 2,255,454 | 233,713 | 10.4 % |
+| `Hoppy Beaver Extreme.gif` | 1,324,300 | 112,598 | 8.5 % |
+| `AI RL 2.gif` | 1,148,940 | 373,827 | 32.5 % |
+| `GOMEA.gif` | 686,582 | 59,175 | 8.6 % |
+| `Computational Creatures.gif` | 617,551 | 106,548 | 17.3 % |

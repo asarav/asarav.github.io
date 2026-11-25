@@ -56,11 +56,11 @@ const entries = consumptionEntries();
                 </select>
             </div>
         </div>
-        {entries.map((item, i) => <ConsumptionItem item={item} index={i + 1} view="desktop" />)}
+        {entries.map((item) => <ConsumptionItem item={item} view="desktop" />)}
     </div>
 
     <div class="consumption-list mobile-res">
-        {entries.map((item, i) => <ConsumptionItem item={item} index={i + 1} view="mobile" />)}
+        {entries.map((item) => <ConsumptionItem item={item} view="mobile" />)}
     </div>
     <div class="consumption-sentinel" data-consumption-sentinel aria-hidden="true"></div>
 </div>
