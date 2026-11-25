@@ -12,12 +12,13 @@
 //            with the generator meta dropped; body text; script src order.
 //            `/floor-0/` carries a generated build date, normalised on that
 //            route only.
-//   css      declaration-level equality against the expanded src/styles compile
-//            (the same basis check:css uses, and check:css pins dist/ to that
-//            compile), allowing the planned @font-face URL fix and the dead
-//            rules Phase 6 removed.
-//   js       the live file re-minified with the build's terser options must be
-//            byte-identical to the shipped file.
+//   css      byte-identical once the site serves this build. A pre-cutover
+//            deployment is unminified, so for that shape the live sheet is
+//            compared at declaration level against the expanded src/styles
+//            compile (the basis check:css uses), allowing the @font-face URL
+//            fix and the dead rules Phase 6 removed.
+//   js       byte-identical once deployed; for a pre-cutover deployment the
+//            live source is re-minified with the build's terser options first.
 //   data     robots.txt and projects.json byte-identical (CRLF tolerated).
 //   sitemap  same <loc> set; <lastmod> is a build value and is ignored.
 //   sw.js    generated on purpose: reported, not compared byte-for-byte.
@@ -261,12 +262,18 @@ async function compareAssets() {
   if (!fs.existsSync(buildCssPath)) {
     fail('assets/css/main.css missing from the build');
   } else {
-    const problems = compareCss(liveCss);
-    if (problems.length) {
-      for (const problem of problems.slice(0, 8)) fail(`main.css: ${problem}`);
-      if (problems.length > 8) console.error(`      ...and ${problems.length - 8} more`);
+    const shippedCss = fs.readFileSync(buildCssPath, 'utf8');
+    if (stripCr(liveCss) === stripCr(shippedCss)) {
+      pass('main.css: byte-identical to the deployed stylesheet');
     } else {
-      pass('main.css: every selector, media query and declaration matches the live stylesheet (dead-rule removals and @font-face fix aside)');
+      // Pre-cutover: live is still the expanded Sass output.
+      const problems = compareCss(liveCss);
+      if (problems.length) {
+        for (const problem of problems.slice(0, 8)) fail(`main.css: ${problem}`);
+        if (problems.length > 8) console.error(`      ...and ${problems.length - 8} more`);
+      } else {
+        pass('main.css: deployed (unminified) stylesheet matches every selector, media query and declaration of src/styles');
+      }
     }
   }
 
@@ -283,10 +290,12 @@ async function compareAssets() {
       continue;
     }
     const shipped = fs.readFileSync(buildPath, 'utf8');
-    if (stripCr(result.code) !== stripCr(shipped)) {
-      fail(`assets/js/${name}: re-minifying the live file does not match the shipped file (${result.code.length} vs ${shipped.length} B)`);
+    if (stripCr(liveJs) === stripCr(shipped)) {
+      pass(`assets/js/${name}: byte-identical to the deployed file`);
+    } else if (stripCr(result.code) !== stripCr(shipped)) {
+      fail(`assets/js/${name}: neither the deployed file nor its re-minified source matches the shipped file (${result.code.length} vs ${shipped.length} B)`);
     } else {
-      pass(`assets/js/${name}: live source re-minified with the build options matches the shipped file`);
+      pass(`assets/js/${name}: deployed (unminified) source re-minified with the build options matches the shipped file`);
     }
   }
 

@@ -542,8 +542,8 @@ node scripts/check-live-parity.mjs --live https://staging.example.com --dist dis
 | Compared | How, so the generator swap does not matter |
 |---|---|
 | 12 routes | `head` tags (comments, ` />` vs `>`, entity spelling, inline-JSON spacing, and the `generator` meta dropped), body text, and `<script src>` order. `/floor-0/` prints its build date, normalised on that route only. |
-| `assets/css/main.css` | Declaration-level: media query + selector → property, compared against the expanded `src/styles` compile. That is the same basis `check:css` uses (which separately pins `dist/` to that compile), so minification is irrelevant; the Phase 6 dead-rule removals and the `@font-face` URL fix are allowed by name. |
-| `site-motion.js`, `consumption.js`, `background-fractal.js` | The live file re-minified with the build's terser options must equal the shipped file byte-for-byte — which also proves the CRLF working copies carry no content drift. |
+| `assets/css/main.css` | Byte-identical once the site serves this build. While a pre-cutover deployment is still unminified, it falls back to declaration level (media query + selector → property) against the expanded `src/styles` compile — the same basis `check:css` uses — allowing the Phase 6 dead-rule removals and the `@font-face` URL fix by name. |
+| `site-motion.js`, `consumption.js`, `background-fractal.js` | Byte-identical to the deployed files. While a pre-cutover deployment is still unminified, the live source re-minified with the build's terser options must match instead — which also proves the CRLF working copies carry no content drift. |
 | `robots.txt`, `projects.json` | Byte-identical (CRLF tolerated). |
 | `sitemap.xml` | Same `<loc>` set; `<lastmod>` is a build value and is ignored. |
 | `sw.js` | Reported, never compared. The worker is generated here on purpose: the live site still precaches 13 paths under `asarav-shell-v2` with `cache.addAll`, while the new build precaches 15 paths under a per-build cache name with per-URL installs. `check:sw` and the offline service-worker checks in the harness cover the behaviour. |
@@ -570,3 +570,9 @@ line to `dist/robots.txt` made it exit 1 with
 `FAIL /about/: body text differs at character 14604: live "" vs build " PROBE"`
 and `FAIL robots.txt: live and build bytes differ`; restoring both files returned
 it to `PASS`.
+
+After the cutover the same gate runs against the deployed Astro site and is
+stricter, because there is no minification difference left to normalise: the
+live pages carry `<meta name="generator" content="Astro v7.4.13">`, `main.css`
+and all three scripts report `byte-identical to the deployed …`, and `sw.js`
+precaches 15 paths under a build-stamped cache name.
