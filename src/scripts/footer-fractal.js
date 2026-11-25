@@ -895,37 +895,11 @@
         ].join('\n');
     }
 
-    // The parameter plane of a rational quadratic: z -> z^2 + c + k/z, where c
-    // is the pixel and k is the pole's strength. At k = 0 this is the Mandelbrot
-    // set; as k deepens the body opens a hole and its arms re-grow around it, so
-    // the shape changes without the window moving.
-    function rationalFigure(figure) {
-        return escapeFigure(figure,
-            '    float zr = 0.0;\n    float zi = 0.0;',
-            [
-                // The pole is a complex number, and its angle turns with the
-                // phase: k/z picks up a twist that winds the body's arms one
-                // way and then the other, so the figure reshapes without the
-                // window moving.
-                '        float kk = ' + f(figure.k) + ' + mo * ' +
-                    f(figure.kSwing) + ';',
-                '        float twist = mo * ' + f(figure.twist) + ';',
-                '        float kr = kk * cos(twist);',
-                '        float ki = kk * sin(twist);',
-                '        float den = max(zr2 + zi2, 1.0e-6);',
-                '        float real = zr2 - zi2 + q.x + (kr * zr + ki * zi) / den;',
-                '        zi = 2.0 * zr * zi + q.y + (ki * zr - kr * zi) / den;',
-                '        zr = real;',
-                '        zr2 = zr * zr;',
-                '        zi2 = zi * zi;'
-            ].join('\n'));
-    }
-
     // Newton's method on z^10 - 1: ten basins meeting at the centre, their
     // walls carrying the same fractal lace as the cubic family but at tenfold
     // symmetry. The constant's angle turns with the phase, so the star of
     // basins rotates in place; a rotation keeps every basin in frame, which is
-    // what holds the band's contrast steady where the rational parameter plane
+    // what holds the band's contrast steady — the rational plane tried first
     // alternated between a lit body and an empty window. The step is also over-
     // and under-relaxed, which widens and narrows the walls where ten basins
     // meet.
@@ -1001,8 +975,6 @@
                 return apollonianFigure(figure);
             case 'lattice':
                 return latticeFigure(figure);
-            case 'rational':
-                return rationalFigure(figure);
             case 'ship':
                 // (|x| + i|y|)^2 + c: the absolute value folds the plane onto
                 // itself each step, which is what makes the ship's crags
@@ -2233,26 +2205,16 @@
         let trapRe = Infinity;
         let trapIm = Infinity;
 
+        // Only the Burning Ship reaches this loop: every other family returns
+        // from its own branch above.
         while (iter < ITERATIONS && zr2 + zi2 < BAILOUT) {
-            if (figure.kind === 'ship') {
-                const ar = Math.abs(zr);
-                const ai = Math.abs(zi);
-                const kb = morphM * figure.bend * figure.scale;
-                const nr = ar * ar - ai * ai + cx + kb * 0.45 * ar * ai;
+            const ar = Math.abs(zr);
+            const ai = Math.abs(zi);
+            const kb = morphM * figure.bend * figure.scale;
+            const nr = ar * ar - ai * ai + cx + kb * 0.45 * ar * ai;
 
-                zi = 2 * ar * ai + cy + kb * ar;
-                zr = nr;
-            } else {
-                const kk = figure.k + morphM * figure.kSwing;
-                const twist = morphM * figure.twist;
-                const kr = kk * Math.cos(twist);
-                const ki = kk * Math.sin(twist);
-                const den = Math.max(zr2 + zi2, 1e-6);
-                const real = zr2 - zi2 + cx + (kr * zr + ki * zi) / den;
-
-                zi = 2 * zr * zi + cy + (ki * zr - kr * zi) / den;
-                zr = real;
-            }
+            zi = 2 * ar * ai + cy + kb * ar;
+            zr = nr;
 
             zr2 = zr * zr;
             zi2 = zi * zi;
