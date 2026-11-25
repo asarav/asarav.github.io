@@ -1,0 +1,33 @@
+{
+  "name": "asarav-github-io",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "assets": "node scripts/build-assets.mjs",
+    "dev": "node scripts/build-assets.mjs && astro dev",
+    "build": "node scripts/build-assets.mjs && astro build",
+    "preview": "astro preview",
+    "public:manifest": "node scripts/public-manifest.mjs",
+    "public:check": "node scripts/public-manifest.mjs --check dist",
+    "check:sw": "node scripts/check-sw-shell.mjs",
+    "check:urls": "node scripts/check-relative-urls.mjs dist",
+    "check:css": "node scripts/check-css.mjs dist",
+    "check:js": "node scripts/check-js.mjs dist",
+    "check:images": "node scripts/check-image-sizes.mjs dist",
+    "check:links": "node scripts/check-links.mjs dist",
+    "check:live": "node scripts/check-live-parity.mjs dist"
+  },
+  "dependencies": {
+    "astro": "^7.4.13",
+    "sass": "^1.108.2",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "lightningcss": "1.33.0",
+    "terser": "5.51.4"
+  }
+}

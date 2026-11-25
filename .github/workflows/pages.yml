@@ -1,9 +1,9 @@
 name: Deploy site
 
-# GitHub's recommended way to run a Pages site: the workflow builds with the
-# repo's Gemfile and hands the artifact to deploy-pages, instead of Pages
-# building the branch with its own fixed gem set. Keep this in step with
-# site-checks.yml, which builds the same way on every push.
+# The workflow builds the Astro site with the repo's pinned pnpm toolchain and
+# hands dist/ to deploy-pages, instead of Pages building the branch with its own
+# fixed Jekyll gem set. Keep this in step with site-checks.yml, which runs the
+# same build (plus the gates) on every push.
 
 on:
   push:
@@ -25,26 +25,32 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ruby/setup-ruby@v1
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
         with:
-          ruby-version: '3.2'
-          bundler-cache: true
+          node-version: '22'
+          cache: pnpm
 
       - uses: actions/configure-pages@v5
         id: pages
 
-      - name: Build with Jekyll
-        env:
-          JEKYLL_ENV: production
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # astro.config.mjs sets `site` to the custom domain root, so no base path
+      # is passed in; asset URLs stay root-absolute as the service worker
+      # expects.
+      - name: Build with Astro
+        run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     name: Deploy

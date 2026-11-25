@@ -1,0 +1,62 @@
+---
+import type { ConsumptionEntry } from '../lib/site';
+
+interface Props {
+  view?: 'mobile' | 'desktop';
+  item: ConsumptionEntry;
+  index: number;
+}
+
+const { view = 'desktop', item, index } = Astro.props;
+const attrs = {
+  'data-item-id': String(index),
+  'data-completion-date': item.completionDate || '',
+  'data-title': item.title,
+  'data-type': item.type
+};
+---
+
+{view === 'mobile' ? (
+<div class:list={['mobile', 'item', 'info', item.type]} {...attrs}>
+    <div class="row">
+        <div class="col-12 date text-center">{item.completionDate}</div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 header text-center">
+            <a href={item.source} target="_blank">{item.title}</a>
+        </div>
+        <div class="col-12 text-center">
+            <sub>{item.sourceDateAndInfo}</sub>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 image text-center">
+            <img src={item.image} alt={item.title} loading="lazy" decoding="async">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 explanation" set:html={item.explanation} />
+    </div>
+</div>
+) : (
+<div class:list={['row', 'item', 'info', item.type]} {...attrs}>
+    <div class="col-12 col-md-2 date text-center">{item.completionDate}</div>
+    <div class="content col-12 col-md-8">
+        <div class="row">
+            <div class="col-12 header">
+                <a href={item.source} target="_blank">{item.title}</a>
+                <sub>{item.sourceDateAndInfo}</sub>
+            </div>
+        </div>
+        <hr>
+        <div class="row explanation">
+            <div class="col-12" set:html={item.explanation} />
+        </div>
+    </div>
+    <div class="col-12 col-md-2 image">
+        <img src={item.image} alt={item.title} loading="lazy" decoding="async">
+    </div>
+</div>
+)}

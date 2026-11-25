@@ -9,22 +9,27 @@ permissions:
   contents: read
 
 jobs:
-  links:
-    name: Links and HTML
+  checks:
+    name: Build and gates
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
+      - uses: pnpm/action-setup@v4
 
-      - name: Build site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
         run: |
           set -o pipefail
-          bundle exec jekyll build 2>&1 | tee build.log
+          pnpm build 2>&1 | tee build.log
 
       # Public Actions logs need a signed-in session, but check-run annotations
       # are readable through the API, so surface the failures there too.
@@ -33,69 +38,76 @@ jobs:
         run: |
           if [ -f build.log ]; then
             msg=$(tail -n 40 build.log | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
-            echo "::error title=Jekyll build failed::${msg}"
+            echo "::error title=Astro build failed::${msg}"
           fi
 
-      - name: Check internal links and HTML
-        run: |
-          set -o pipefail
-          gem install html-proofer --no-document
-          # Rewrite absolute site URLs to root-relative so internal links are
-          # checked against the build instead of the live site.
-          # Internal links are root-relative, so no URL rewriting is needed;
-          # --swap-urls splits on the first colon and mangles absolute URLs.
-          # unity3d.com is http-only inside vendored Unity builds, and
-          # ii.tudelft.nl is unreachable on both 80 and 443, so neither can
-          # satisfy the HTTPS check.
-          htmlproofer ./_site \
-            --disable-external \
-            --allow-hash-href \
-            --ignore-urls "http://unity3d.com/,http://ii.tudelft.nl/genius/" 2>&1 | tee proofer.log
+      # The service worker precaches a fixed list. If a rename or a dropped
+      # asset makes one entry stale, install() silently caches less than it
+      # claims and the offline shell dies with no build error.
+      - name: Check service worker shell
+        run: pnpm check:sw
 
-      - name: Report link failures
-        if: failure()
-        run: |
-          if [ -s proofer.log ]; then
-            msg=$(tail -n 45 proofer.log | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
-            echo "::error title=html-proofer failed::${msg}"
-          fi
+      # The public tree ships verbatim, so it must still hash-match its source.
+      - name: Check public tree
+        run: pnpm public:check
 
-      # Amazon, LinkedIn, Goodreads and friends answer bots with 403/999, so a
-      # failure here is usually not a real broken link. Report it, do not fail.
-      - name: Check external links (non-blocking)
-        continue-on-error: true
-        run: |
-          htmlproofer ./_site \
-            --ignore-status-codes "401,403,429,503,999" \
-            --allow-hash-href
+      # Asset URLs are root-absolute everywhere; a relative one breaks under
+      # the service worker's cached shell.
+      - name: Check root-absolute URLs
+        run: pnpm check:urls
+
+      # Stylesheets and scripts are minified at build time, so compare the
+      # shipped bytes against the minified source (and, locally, the Jekyll
+      # baseline).
+      - name: Check CSS
+        run: pnpm check:css
+
+      - name: Check scripts
+        run: pnpm check:js
+
+      - name: Check image dimensions
+        run: pnpm check:images
+
+      - name: Check internal links
+        run: pnpm check:links
+
+      - name: Upload build
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: dist
+          if-no-files-found: ignore
+          retention-days: 7
 
   lighthouse:
     name: Lighthouse
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
+      - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+          cache: pnpm
 
-      - name: Build site
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
         run: |
           set -o pipefail
-          bundle exec jekyll build 2>&1 | tee build.log
+          pnpm build 2>&1 | tee build.log
 
       - name: Report build failure
         if: failure()
         run: |
           if [ -f build.log ]; then
             msg=$(tail -n 40 build.log | awk '{ gsub(/%/, "%25"); printf "%s%%0A", $0 }' | cut -c1-1800)
-            echo "::error title=Jekyll build failed::${msg}"
+            echo "::error title=Astro build failed::${msg}"
           fi
 
       - name: Run Lighthouse CI
@@ -105,7 +117,7 @@ jobs:
           set -o pipefail
           # Keep the server off the step's stdout, otherwise the runner waits for
           # the inherited pipe to close and the step never finishes.
-          bundle exec jekyll serve --port 4000 --skip-initial-build > /tmp/serve.log 2>&1 &
+          pnpm preview --port 4000 > /tmp/serve.log 2>&1 &
           SERVER_PID=$!
           npx --yes wait-on@7 http://127.0.0.1:4000/ --timeout 60000
           npx --yes @lhci/cli@0.14.x autorun 2>&1 | tee lhci.log

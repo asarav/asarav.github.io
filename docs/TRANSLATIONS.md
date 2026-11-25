@@ -2,83 +2,111 @@
 
 ## Current state
 
-- Static Jekyll site (3.10.0) deployed to GitHub Pages via the default `github-pages` gem build.
-- No i18n infrastructure exists: no `lang` attributes, no locale data, no translation files.
-- Content lives in `_data/*.yaml` (consumption, games, music, books), `pages/*.html` (page markup), and `_includes/` (nav, footer).
-- Copy is hard-coded English in templates and data files.
+- Static Astro site built with pnpm and deployed to GitHub Pages from
+  `.github/workflows/pages.yml`.
+- No i18n infrastructure exists: no locale data, no translation files, and the
+  copy is hard-coded English.
+- Content lives in `src/data/*.yaml` (consumption, games, music, log, medium),
+  `src/pages/*.astro` (page markup), and `src/components/` (nav, footer,
+  consumption item, player).
+- `src/layouts/Base.astro` emits the document shell and `<html lang>`, and
+  `src/lib/site.ts` supplies the title/canonical/JSON-LD helpers.
 
 ## Goal
 
-Support multiple languages (at minimum English + one other) without breaking the existing build/deploy flow, while keeping URLs predictable (e.g. `/es/consumption/`).
+Support multiple languages (at minimum English + one other) without breaking the
+existing build/deploy flow or the service-worker shell, while keeping URLs
+predictable (e.g. `/es/consumption/`).
 
 ## Constraints
 
-1. GitHub Pages' default build only allows a whitelisted set of plugins. `jekyll-polyglot` is **not** in that whitelist, so it cannot be used with the default Pages builder.
-2. To use polyglot (or any non-whitelisted plugin) we must switch to a **GitHub Actions workflow** that builds Jekyll and deploys the `_site` artifact to Pages (supported since 2022).
-3. Data files (`_data/consumption.yaml` is ~18k lines) are huge; translating them fully is a large content effort, not just a code change.
+1. Routes are directory-style with a trailing slash
+   (`trailingSlash: 'always'`, `build.format: 'directory'`), and `sw.js`
+   precaches the shell by fixed path. Any locale prefix has to be a real
+   directory of pages, not a client-side switch, or the offline shell and the
+   cached CSS/JS names stop matching.
+2. Asset URLs are root-absolute everywhere, so a locale route keeps working
+   without a `<base>` tag.
+3. Data files (`src/data/consumption.yaml` is huge) are a content effort, not a
+   code change: translating them fully is far larger than wiring the UI.
+4. Astro's built-in i18n routing (`i18n` in `astro.config.mjs`) is the natural
+   mechanism; there is no Jekyll plugin or Ruby toolchain involved anymore.
 
 ## Recommended approach (phased)
 
 ### Phase 0 — Prerequisites (no code, low risk)
 
-- Add `lang="en"` to `<html>` in `_layouts/default.html` (accessibility + SEO baseline).
-- Add a language switcher placeholder in `_includes/nav.html` (disabled/English-only for now) so the UI slot exists.
-- Document supported locales in `_config.yml` (e.g. `locales: [en, es]`).
+- Keep `<html lang="en">` in `src/layouts/Base.astro` accurate (accessibility +
+  SEO baseline).
+- Add a language switcher slot in `src/components/nav.astro`
+  (disabled/English-only at first) so the UI place exists.
+- Declare the supported locales in one place, e.g. `src/lib/i18n.ts`, and read
+  them from there in the layout and the switcher.
 
-### Phase 1 — Enable custom builds (unblocks plugins)
+### Phase 1 — Route scaffolding
 
-- Add `.github/workflows/pages.yml` using `actions/jekyll-build-pages` (or `bundle exec jekyll build`) + `actions/deploy-pages`.
-- Switch Pages source from "Deploy from a branch" to "GitHub Actions".
-- Keep `github-pages` gem for local dev, but allow `jekyll-polyglot` in CI via a separate `Gemfile.ci` or by adding the gem and running `bundle exec jekyll build` in the workflow.
-- Verify the existing site builds identically before adding languages.
+- Configure `i18n` in `astro.config.mjs` (`defaultLocale: 'en'`,
+  `locales: ['en', 'es']`, `routing: { prefixDefaultLocale: false }`) so English
+  stays at the current URLs.
+- Move the existing pages under the default locale without changing their
+  published paths, then add the prefixed locale directory.
+- Extend `.github/workflows/site-checks.yml` with the route set for each locale
+  (the gates already walk `dist/`, so they pick the new pages up automatically).
+- Verify the English site is byte-identical before adding any language.
 
-### Phase 2 — Introduce jekyll-polyglot
+### Phase 2 — UI strings
 
-- Add `jekyll-polyglot` to a CI-only Gemfile.
-- Configure in `_config.yml`:
-  ```yaml
-  languages: ["en", "es"]
-  default_lang: "en"
-  exclude_from_localization: ["assets"]
-  url: https://asarav.github.io
-  ```
-- Move page files under language-aware paths or use `permalink: /:lang/...`.
-- Use polyglot's `{% I18n for lang in site.languages %}` / `{{ site.data.i18n[page.lang][key] }}` for UI strings.
-- Add `_data/i18n/en.yml` and `_data/i18n/es.yml` for nav labels, footer, button text, etc.
+- Add `src/data/i18n/en.yml` and `src/data/i18n/es.yml` for nav labels, footer,
+  button text, and explanations.
+- Load them through `src/lib/site.ts` and pass them down; do not inline strings
+  in components.
+- Add `hreflang` alternates in `Base.astro` and keep the canonical URL
+  self-referential per locale.
 
 ### Phase 3 — Translate content (largest effort)
 
-- Translate static page copy in `pages/*.html` (about, contact, projects intro, games, books, music, log).
-- For `_data` (consumption, games, music, books): either maintain parallel files per locale (`_data/es/consumption.yaml`) or keep English-only and translate only titles/explanations incrementally.
-- Add `hreflang` alternates in `<head>`.
+- Translate static page copy in `src/pages/**/*.astro` (about, contact, projects
+  intro, games, books, music, log).
+- For `src/data` (consumption, games, music, log): either maintain parallel
+  files per locale (`src/data/es/consumption.yaml`) or keep English-only and
+  translate only titles/explanations incrementally.
+- Decide whether the consumption ledger stays English-only (it is a personal
+  record; the chrome around it can still be translated).
 
 ### Phase 4 — Polish
 
-- Persist chosen language (localStorage) and redirect on first visit via a small script in `_layouts/default.html`.
-- Translate `<title>`/meta via `jekyll-seo-tag` locale support.
-- Add language switcher styling consistent with nav hover/press states.
+- Persist the chosen language (localStorage) and redirect on first visit with a
+  small script, keeping the no-JS default English.
+- Translate `<title>`/meta through the helpers in `src/lib/site.ts`.
+- Style the switcher consistently with the nav hover/press states in
+  `src/styles/main.scss`.
 
 ## Files that will need changes
 
 | File | Change |
 |---|---|
-| `_layouts/default.html` | `lang` attribute, hreflang, language switcher include |
-| `_includes/nav.html` | language switcher UI |
-| `_config.yml` | languages, polyglot config, plugins |
-| `Gemfile` / new `Gemfile.ci` | polyglot gem (CI only) |
-| `.github/workflows/pages.yml` | new — custom build + deploy |
-| `pages/*.html` | wrap copy in i18n keys or create per-locale copies |
-| `_data/i18n/*.yml` | new — UI strings |
-| `assets/css/main.scss` | switcher styling |
+| `astro.config.mjs` | `i18n` block, locale list |
+| `src/layouts/Base.astro` | `lang` attribute, hreflang, switcher slot |
+| `src/components/nav.astro` | language switcher UI |
+| `src/lib/i18n.ts` / `src/lib/site.ts` | locale helpers, string loading |
+| `src/pages/**` | per-locale route directories |
+| `src/data/i18n/*.yml` | new — UI strings |
+| `src/styles/main.scss` | switcher styling |
+| `.github/workflows/site-checks.yml` | per-locale route expectations |
 
 ## Open questions
 
 - Which languages first? (Affects scope of Phase 3.)
-- Should `_data/consumption.yaml` (18k lines) be translated at all, or stay English-only with translated chrome?
-- Keep default Pages build (English only, no plugins) vs. migrate to Actions (required for any i18n plugin)?
+- Should `src/data/consumption.yaml` be translated at all, or stay English-only
+  with translated chrome?
+- Do the locale routes need their own service-worker shell entries, or should the
+  shell list only the shared CSS/JS (current behaviour) and let each page cache
+  itself on first visit?
 
 ## Effort estimate
 
-- Phase 1–2 (infra + plugin wiring): small, ~1 day.
-- Phase 3 (content): large, depends on number of languages and how much of `_data` is translated.
-- Recommended: start with UI chrome only (Phase 2) and English + Spanish, then decide on data translation.
+- Phases 1–2 (routing + string layer): small, ~1 day.
+- Phase 3 (content): large, depends on number of languages and how much of
+  `src/data` is translated.
+- Recommended: start with UI chrome only (Phase 2) and English + Spanish, then
+  decide on data translation.

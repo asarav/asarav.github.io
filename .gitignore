@@ -46,3 +46,12 @@ lhci.log
 
 # Jekyll 4 build cache
 .jekyll-cache/
+
+# Astro
+.astro/
+dist/
+
+# Generated stylesheets and scripts (scripts/build-assets.mjs)
+/public/assets/css/
+/public/assets/js/
+/src/generated/image-sizes.json

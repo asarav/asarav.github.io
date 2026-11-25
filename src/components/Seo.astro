@@ -1,0 +1,53 @@
+---
+import { AUTHOR, SITE_NAME, absolute, canonical } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  image?: string;
+  canonicalPath?: string;
+}
+
+const { title, description, pathname, image, canonicalPath } = Astro.props;
+const url = canonical(canonicalPath ?? pathname);
+
+// jekyll-seo-tag switches to a large card and a WebPage node as soon as a page
+// declares an image; pages without one stay on the site-level WebSite node, and
+// a standalone .html page is always a WebPage.
+const isWebSite = !image && !url.endsWith('.html');
+const imageUrl = image ? absolute(image) : undefined;
+
+// Reproduces what jekyll-seo-tag emitted for these pages, in the same order,
+// including its escaped JSON-LD block. Values are HTML-escaped exactly as the
+// plugin escaped them, so a head diff shows only real changes.
+const esc = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const seoJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': isWebSite ? 'WebSite' : 'WebPage',
+  author: { '@type': 'Person', name: AUTHOR },
+  description: esc(description),
+  headline: esc(title),
+  ...(imageUrl ? { image: imageUrl } : {}),
+  ...(isWebSite ? { name: SITE_NAME } : {}),
+  url
+});
+---
+
+<meta name="generator" content="Astro v7.4.13" />
+<meta property="og:title" content={title} />
+<meta name="author" content={AUTHOR} />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content={description} />
+<meta property="og:description" content={description} />
+<link rel="canonical" href={url} />
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content={SITE_NAME} />
+{image && <meta property="og:image" content={imageUrl} />}
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+{image && <meta property="twitter:image" content={imageUrl} />}
+<meta property="twitter:title" content={title} />
+<script type="application/ld+json" is:inline set:html={seoJsonLd} />

@@ -1,110 +1,126 @@
 # Avinash Saravanan's Personal Website
 
-A Jekyll-based personal portfolio website showcasing projects, games, music, books, and media consumption.
+An Astro-based personal portfolio website showcasing projects, games, music, books, and media consumption.
 
 ## Prerequisites
 
-- **Ruby** 3.2+ (required by the current locked dependencies)
-- **Bundler** (Ruby dependency manager)
+- **Node.js** 20+ (CI uses 22)
+- **pnpm** 10 (`corepack enable` picks up the version pinned in `package.json`)
 
 ## Installation
 
-### 1. Install Ruby
-Download from [ruby-lang.org](https://www.ruby-lang.org/) or use a version manager (rbenv, RVM).
-
-### 2. Install Bundler
 ```bash
-gem install bundler
-```
-
-### 3. Install Dependencies
-```bash
-bundle install
+pnpm install
 ```
 
 ## Running the Server
 
-### Development Mode (basic)
 ```bash
-bundle exec jekyll serve
+pnpm dev
 ```
-Builds the site and serves at `http://localhost:4000`
 
-### Development Mode (with live reload)
-```bash
-bundle exec jekyll serve --livereload
-```
-Automatically reloads the page when you save changes.
+Builds the assets, then serves the site with hot reload at `http://localhost:4321`.
 
-### Update Dependencies
 ```bash
-bundle update
+pnpm build      # assets + production build into dist/
+pnpm preview    # serve dist/ locally
 ```
-Updates all gems to their latest compatible versions.
 
 ## Project Structure
 
 ```
 .
-├── _config.yml              # Jekyll configuration
-├── _data/                   # YAML data used by page templates
-├── _includes/               # Shared HTML partials and inline UI icon sprite
-├── _layouts/                # Shared page layouts
-├── _sass/                   # Shared Sass variables and partials
-├── assets/
-│   ├── css/
-│   │   ├── main.scss        # Global styles; emitted as main.css
-│   │   ├── pages/           # Page-specific SCSS
-│   │   └── unity-theme.css  # Theme used inside the standalone Unity builds
-│   ├── games/               # Standalone Unity game builds
-│   ├── icons/
-│   │   └── tech-sprite.svg  # Monochrome brand icons for the About stack
-│   ├── images/              # Site, project, and game images
-│   ├── js/                  # Site and page JavaScript
-│   ├── music/               # Audio files
-│   ├── projects/            # Downloadable/model project files and demos
-│   └── videos/              # Video files
-├── index.html               # Home page
-├── pages/                   # Content templates with explicit permalinks
-├── llms.txt                 # Curated agent-readable site summary
-├── llms-full.txt            # Long-form agent-readable site reference
-├── projects.json            # Machine-readable index of all project records
-└── _site/                   # Generated site output (git-ignored)
+├── astro.config.mjs         # Astro configuration (site, trailing slashes, sitemap)
+├── public/                  # Published verbatim at the site root
+│   ├── assets/
+│   │   ├── games/           # Standalone Unity game builds
+│   │   ├── icons/
+│   │   │   └── tech-sprite.svg  # Monochrome brand icons for the About stack
+│   │   ├── images/          # Site, project, and game images
+│   │   ├── music/           # Audio files
+│   │   ├── projects/        # Downloadable/model project files and demos
+│   │   └── videos/          # Video files
+│   ├── CHANGELOG.md         # Repository changelog, also served as /CHANGELOG.md
+│   ├── SECURITY.md          # Security policy, also served as /SECURITY.md
+│   ├── llms.txt             # Curated agent-readable site summary
+│   ├── llms-full.txt        # Long-form agent-readable site reference
+│   ├── projects.json        # Machine-readable index of all project records
+│   └── robots.txt
+├── scripts/                 # Build and gate scripts (see below)
+└── src/
+    ├── components/          # Shell pieces (nav, footer, consumption item, player)
+    ├── data/                # YAML data used by page templates
+    ├── layouts/Base.astro   # Document shell, SEO, injected page CSS/JS
+    ├── lib/site.ts          # Data loading and shared helpers
+    ├── pages/               # Routes (one file per published URL)
+    ├── scripts/             # Site and page JavaScript sources
+    └── styles/
+        ├── main.scss        # Global styles; emitted as main.css
+        ├── partials/        # Shared Sass partials
+        └── pages/           # Page-specific SCSS, one sheet per page
 ```
 
-Page templates are grouped under `pages/`; their explicit permalinks keep the
-published routes independent of their source location. Static media and
-standalone builds are grouped by type under `assets/`, alongside the site's
-styles, icons, and scripts. Jekyll publishes this tree under `/assets/`.
+Static media and standalone builds live under `public/assets/` and are published
+at `/assets/`, unchanged and unhashed: every URL in the site is root-absolute
+and `sw.js` precaches the CSS and scripts by fixed name, so the filenames are
+part of the contract.
 
 ## Build notes
 
-The `Gemfile` carries Jekyll 4 and the two plugins the site loads
-(`jekyll-seo-tag`, `jekyll-sitemap`). It is the file CI and
-`.github/workflows/pages.yml` both build from, so a local build, the checks, and
-the deployed site come from one toolchain. GitHub Pages no longer builds the
-branch with its own gem set; publish from **Settings → Pages → Source: GitHub
-Actions** for the workflow to take effect.
+`pnpm build` runs `scripts/build-assets.mjs` before Astro:
 
-The old `github-pages` pin to `232` existed because `233` needs a native
-`openssl` build that does not install on Windows. Jekyll 4 ships
-`sass-embedded`, which has Windows binaries, so that constraint is gone,
-along with the plugin set and `rubyzip` that came in with it.
-`sass.sourcemap: never` in `_config.yml` keeps stylesheet source maps out of
-the published site.
+- `src/styles/**.scss` is compiled with Dart Sass and minified with lightningcss
+  into `public/assets/css/` (git-ignored). `main.css` is the global sheet;
+  `pages/*.css` are linked only by the page that needs them.
+- `src/scripts/*.js` is minified with terser into `public/assets/js/`
+  (git-ignored). Identifiers are kept, because these classic scripts define
+  globals that inline page scripts and sibling files call.
+- `src/generated/image-sizes.json` records the intrinsic width/height of every
+  local image so pages can reserve the box before the file loads (git-ignored).
 
-If a build fails with `Permission denied` under `_site/assets/videos/`, stop any
-running Jekyll server, remove `_site`, and rebuild.
+`sw.js` is a generated route, not a static file: it lists the real CSS and
+script filenames from the build and bumps its cache name. Keep it in step with
+`src/layouts/Base.astro` when adding a shared script.
+
+## Gates
+
+```bash
+pnpm check:sw        # service worker shell entries all exist in dist/
+pnpm public:check    # dist/ public tree hash-matches source
+pnpm check:urls      # every asset URL is root-absolute
+pnpm check:css       # shipped CSS is the minified source (and matches the baseline)
+pnpm check:js        # shipped scripts are the minified build of src/scripts
+pnpm check:images    # every local <img> carries intrinsic width/height
+pnpm check:links     # every internal link resolves in the build
+pnpm check:live      # dist/ matches the deployed site (needs the network)
+```
+
+`check:live` compares the build with `https://asarav.github.io` and is the only
+gate that needs the network, so CI does not run it; run it after a build before
+shipping. `docs/astro-parity.md` records the behavioural contract the port was
+verified against and `docs/perf.md` the performance scoreboard.
 
 ## Key Technologies
 
-- **Jekyll** 4.4 - Static site generator, built and deployed by GitHub Actions
-- **Bootstrap** 5.3.8 - Responsive CSS framework
+- **Astro** 7 - Static site generator, built and deployed by GitHub Actions
+- **Bootstrap** 5.3.8 - Responsive CSS framework (CDN)
 - **p5.js** 1.11.13 and **ml5.js** 0.12.2 - Legacy interactive machine-learning demos
 - **SCSS** - CSS preprocessing
 - **Vanilla JavaScript** - ES6+ for interactivity (no jQuery)
 
 ## Recent Updates (2026)
+
+### Astro Migration
+- ✅ Pages moved from Jekyll/Liquid templates to Astro components and routes
+- ✅ Stylesheets, scripts, SEO metadata and the service worker generated by the
+  pnpm build; the Jekyll tree and Ruby toolchain are gone
+- ✅ CI builds and gates the Astro output (`site-checks.yml`) and deploys it
+  (`pages.yml`)
+
+### Performance
+- ✅ Stylesheets minified with lightningcss, scripts with terser
+- ✅ Consumption page markup compressed (`compressHTML`), local images declare
+  intrinsic width/height
 
 ### Bootstrap 5 Upgrade
 - ✅ Upgraded from Bootstrap 4.0.0 to Bootstrap 5.3.8 (CDN)
@@ -120,18 +136,6 @@ running Jekyll server, remove `_site`, and rebuild.
 - ✅ Updated tooltip initialization to vanilla JS (Bootstrap 5 API)
 - ✅ Removed unused helper functions
 
-### HTML Improvements
-- ✅ Removed duplicate footer HTML markup
-- ✅ Fixed duplicate navigation element IDs
-- ✅ Added alt text to all footer social media icons
-- ✅ Updated copyright year to dynamic
-
-### Code Quality
-- ✅ Converted all absolute image URLs to relative paths
-- ✅ Added clarifying comments to SCSS files
-- ✅ Simplified responsive design patterns
-- ✅ Enhanced `.gitignore` to exclude IDE files and build caches
-
 ## Tips & Tools
 
 ### Image Optimization
@@ -146,33 +150,27 @@ For resizing and optimizing images for web:
 
 ## Build & Deployment
 
-### Local Build
-```bash
-bundle exec jekyll build
-```
-Generates the static site in `_site/` directory.
-
-### GitHub Pages
-The site is automatically deployed to GitHub Pages when pushed to the main branch.
-
-**Note:** The repository must remain public for free GitHub Pages hosting.
+`pnpm build` generates the static site in `dist/`. Pushing to `master` runs
+`.github/workflows/pages.yml`, which installs with a frozen lockfile, builds
+with Astro, and publishes `dist/` to GitHub Pages. The repository must remain
+public for free GitHub Pages hosting; publish from **Settings → Pages → Source:
+GitHub Actions** for the workflow to take effect.
 
 ## Troubleshooting
 
-**Port already in use (4000)?**
+**Port already in use?**
 ```bash
-bundle exec jekyll serve --port 4001
+pnpm dev --port 4322
 ```
 
-**Cache issues?**
+**Stale styles or scripts?**
 ```bash
-bundle exec jekyll clean
-bundle exec jekyll serve
+rm -rf public/assets/css public/assets/js src/generated && pnpm build
 ```
 
-**Dependency conflicts?**
+**Lockfile mismatch in CI?**
 ```bash
-bundle install
+pnpm install   # updates pnpm-lock.yaml; commit it
 ```
 
 ## License

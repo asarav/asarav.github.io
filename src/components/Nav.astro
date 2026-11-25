@@ -1,0 +1,44 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const links = [
+  { href: '/projects/', label: 'Projects', id: 'projects-nav' },
+  { href: '/music/', label: 'Music', id: 'music' },
+  { href: '/games/', label: 'Games', id: 'games-nav' },
+  { href: '/books/', label: 'Books', id: 'books-nav' },
+  { href: '/consumption/', label: 'Media Consumption List', id: 'consumption-nav' },
+  { href: '/about/', label: 'About Me', id: 'about-nav' },
+  { href: '/contact/', label: 'Contact Me', id: 'contact-nav' }
+];
+
+const isHome = currentPath === '/';
+---
+
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light" aria-label="Primary">
+    <a class="navbar-brand" href="/" aria-label="asarav home" {...(isHome ? { 'aria-current': 'page' } : {})}>
+        <canvas class="brand-mark" width="70" height="70" aria-hidden="true"></canvas>
+        <span class="brand-word">asarav</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <svg class="navbar-toggler-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <use href="#ui-menu"></use>
+      </svg>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+            {links.map((link) => {
+              const active = currentPath === link.href;
+              return (
+            <li class="nav-item">
+                <a {...(active ? { class: 'nav-link active', 'aria-current': 'page' } : { class: 'nav-link' })} id={link.id} href={link.href}>{link.label}</a>
+            </li>
+              );
+            })}
+        </ul>
+    </div>
+</nav>

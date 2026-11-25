@@ -1,0 +1,468 @@
+---
+import Base from '../layouts/Base.astro';
+import { buildDateLabel } from '../lib/site';
+---
+
+<Base
+  title="About Me"
+  description="About Avinash Saravanan — education, work experience, languages, and interests."
+  styleSheet="/assets/css/pages/about-me.css"
+>
+<h1 class="visually-hidden">About Avinash Saravanan</h1>
+<div class="page-top about-hero" id="intro">
+    <span class="hero-floor" aria-hidden="true">06</span>
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading text-center"><span>Abstract</span></h2>
+            <p>American computer scientist, engineer, and writer with several areas of expertise.</p>
+            <p>Completed masters at <span class="footnote" data-note="Delft University of Technology, Netherlands.">TU Delft</span> in MSc Computer Science Program in Data Science and Technology.</p>
+            <p>Completed bachelors at University of Michigan Ann Arbor with a Bachelors of Science in Computer Science with a minor in Asian Languages and Cultures specializing in Japanese language.</p>
+            <p>Developed software in many different countries in multiple industries.</p>
+            <p>I have a variety of interests such as electric guitar, foreign cultures, <span class="footnote" data-note="A branch of philosophy (Sartre, Camus, Kierkegaard) centered on freedom, choice, and meaning.">existential philosophy</span>, dance, globalization, film, private equity trading, the commercial space industry, and AI.</p>
+        </div>
+    </div>
+ </div>
+<div class="about-shell">
+<section id="university">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://umich.edu/" target="_blank">University of Michigan Ann Arbor</a>- Bachelors</h2>
+            <p>My freshman year of undergrad, I was involved in the <a href="https://arts.umich.edu/academic-programs/lloyd-scholars-for-writing-and-the-arts/" target="_blank">Lloyd Hall Scholars program</a> so that I could focus on some of my more artistic interests.
+            I initially entered the <a href="https://michiganross.umich.edu/" target="_blank">Ross School of Business</a> with the intention of completing a BBA with a major in Computer Science and a minor in Japanese language before switching to focus mainly on Computer Science and Japanese.</p>
+            <p>During the entirety of my time as a undergraduate student, I was a member of <a href="https://www.circlek.org/" target="_blank">Circle K</a>.</p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/university/Big%20House%2020120901_205016.jpg" srcset="/assets/images/about/university/Big%20House%2020120901_205016.mobile.jpg 1200w, /assets/images/about/university/Big%20House%2020120901_205016.jpg 1920w" sizes="(max-width: 768px) 100vw, 45vw" alt="The University of Michigan Big House" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/university/Hill%20Auditorium%2020120901.jpg" srcset="/assets/images/about/university/Hill%20Auditorium%2020120901.mobile.jpg 1200w, /assets/images/about/university/Hill%20Auditorium%2020120901.jpg 1920w" sizes="(max-width: 768px) 100vw, 45vw" alt="Hill Auditorium at the University of Michigan" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/university/North%20Campus%2020130312_155952.jpg" srcset="/assets/images/about/university/North%20Campus%2020130312_155952.mobile.jpg 1200w, /assets/images/about/university/North%20Campus%2020130312_155952.jpg 1920w" sizes="(max-width: 768px) 100vw, 45vw" alt="University of Michigan North Campus" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/university/UMMA%2020121115_155130.jpg" srcset="/assets/images/about/university/UMMA%2020121115_155130.mobile.jpg 1200w, /assets/images/about/university/UMMA%2020121115_155130.jpg 1920w" sizes="(max-width: 768px) 100vw, 45vw" alt="University of Michigan Museum of Art" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="perficient">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://www.perficient.com/" target="_blank">Perficient</a></h2>
+            <p> In 2013, I completed my first internship in Chennai India at Perficient.
+            This was the first time I was exposed to global business and software development in the professional space.
+            I primarily worked on web based solutions using JSP with J2EE Java.</p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-12 col-sm-3"><img src="/assets/images/about/perficient/perficient.png" alt="Perficient office" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="nihonsoft">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://www.nihonsoft.co.jp/en/" target="_blank">日本ソフト開発</a></h2>
+            <p> In 2014, I completed an internship in Hikone, Japan through the <a href="https://jcmu.isp.msu.edu/" target="_blank">JCMU</a> program.
+                The company I worked at is known as 日本ソフト開発.
+                I spoke entirely in Japanese during this time and built cloud based products intended for Japanese consumers.
+                The product I worked on was that of <a href="https://www.nihonsoft.co.jp/en/products.html#product-01" target="_blank">Sofinet Cloud</a>.
+                Technologies used were primarily MS SQL Server, ASP.NET, and VB.NET.
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/japan%202014/Kyoto%20105-44074229636172__252x189-RGB_565-989631725.jpg" height="189" alt="Kyoto, Japan" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/japan%202014/Kyoto%20107-44073575150939__252x189-RGB_565-976831239.jpg" height="189" alt="Kyoto, Japan" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/japan%202014/Shibuya%2092-44073437663149__252x189-RGB_565-840077137.jpg" height="189" alt="Shibuya, Tokyo" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/japan%202014/Shibuya%2093-44074918333255__252x189-RGB_5651133945244.jpg" height="189" alt="Shibuya, Tokyo" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="sony">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://www.sony.com/en/" target="_blank">Sony</a></h2>
+            <p> In 2015, I completed an internship in Atsugi, Japan at Sony.
+                I spoke mainly in Japanese and worked on developing tools for cloud based video editing and transcoders.
+                The plugins that I developed were intended for use with <a href="https://www.cimediacloud.com/" target="_blank">Sony Ci</a>.
+                My previous knowledge of film turned out to be very useful during this period.
+                Technologies used were primarily Java, workflow based xml standards (BPMN 2.0), and codecs like H.265.
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-12"><img src="/assets/images/about/japan%202015/Hakone%20PANO_20150801_135144.jpg" srcset="/assets/images/about/japan%202015/Hakone%20PANO_20150801_135144.mobile.jpg 1200w, /assets/images/about/japan%202015/Hakone%20PANO_20150801_135144.jpg 2000w" sizes="(max-width: 768px) 100vw, 45vw" alt="Panorama of Hakone, Japan" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/japan%202015/Hakone%20Torii%202874-44590798902649__720x405-ARGB_8888-820301202jpg.0.jpg" alt="Torii gate in Hakone, Japan" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/japan%202015/Yoro%2044538702114967__720x405-ARGB_8888379641068jpg.0.jpg" alt="Yoro, Japan" loading="lazy" decoding="async"></div>
+        <div class="col-12 col-sm-6"><img src="/assets/images/about/japan%202015/Atsugi%20PANO_20150720_122036.jpg" srcset="/assets/images/about/japan%202015/Atsugi%20PANO_20150720_122036.mobile.jpg 1200w, /assets/images/about/japan%202015/Atsugi%20PANO_20150720_122036.jpg 2000w" sizes="(max-width: 768px) 100vw, 45vw" alt="Panorama of Atsugi, Japan" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="thomson-reuters">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://www.thomsonreuters.com/en.html" target="_blank">Thomson Reuters</a></h2>
+            <p> After graduating as an undergraduate, I started working at Thomson Reuters in the US.
+                My team was responsible for <a href="https://tax.thomsonreuters.com/us/en/onbalance/express" target="_blank">OnBalance</a> which is the company's cloud based web product for small and medium businesses.
+                This offering was tied in with functionality from <a href="https://tax.thomsonreuters.com/us/en/onvio" target="_blank">Onvio</a>.
+                We worked with developers in Argentina, Brazil, and India.
+                After working for a little more than 2 and a half years, I was promoted to Senior Software Engineer where I handled front end related matters for my team.
+                Technologies used were AngularJS, Angular, Javascript, Typescript, Javascript, PostgresSQL, TFS, and .NET C#.
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-4"><img src="/assets/images/about/Thomson%20Reuters/Ann%20Arbor%20Office.jpg" alt="Thomson Reuters Ann Arbor office" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-4"><img src="/assets/images/about/Thomson%20Reuters/3%20Years.jpg" alt="Three years at Thomson Reuters" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="masters">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://www.tudelft.nl/en/" target="_blank">TU Delft</a>- Masters</h2>
+            <p>To explore more advanced concepts like AI, ML, and to gain new experiences, I began studying at TU Delft.
+            Of the time of attending TU Delft was ranked globally in the top 60's for computer science worldwide and is the top university in the Netherlands for many technical fields.
+            This also marked my first time in Europe.
+            My thesis work focused on the use of conversational agents situated within a diet based context for patients with type II diabetes that utilizes shared experiences to enhance goal achievement.
+            The primary areas of computer science this touches upon are AI, ML, NLP, <span class="footnote" data-note="Virtual agents with a visible body that interact through speech and gesture.">Embodied Conversational Agents (CA)</span>, and <span class="footnote" data-note="Designing systems around human social and cognitive needs.">Socio-cognitive Engineering (SCE)</span>.
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/masters%20university/Tu%20Delft.jpg" alt="TU Delft campus" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/masters%20university/Delft%20Heart.jpg" alt="Delft, Netherlands" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/masters%20university/Tu%20Delft%20EEMCS.jpg" alt="TU Delft EEMCS building" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-3"><img src="/assets/images/about/masters%20university/Den%20Haag.jpg" alt="The Hague, Netherlands" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="Helios">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading">Helio/Be There</h2>
+            <p>After becoming armed with what was to be offered by the cutting edge in Computer Science, my next action was to apply these techniques in a novel way.
+            This meant taking on a role as a chief technology officer at a startup.
+            Here, I not only used my extensive experience as a developer, but also my expertise in some of what AI and ML have to offer today to create a product that brings value to customers.
+            My work involved creating a web application capable of determining the headpose of multiple individuals in a meeting room and a novel real time <span class="footnote" data-note="The process of partitioning audio into segments by speaker: who spoke when.">diarization</span> system that is able to determine who spoke when.
+            From a workload perspective, this was quite high due to the fact that my responsibilities basically encompassed what would be considered the work of 8+ people at a mature company.
+            Prior to the rebranding of the company to HelioTech, it was known as Be There Technologies.
+            Technologies used were Python, OpenCV, MediaPipe, Pytorch, Django, PostgresSQL, ReactSQL, and Heroku.
+            <a href="https://www.heliotech.io/" target="_blank">HelioTech.io</a>
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-4"><img src="/assets/images/about/helio/HelioTech.jpg" srcset="/assets/images/about/helio/HelioTech.mobile.jpg 1200w, /assets/images/about/helio/HelioTech.jpg 1650w" sizes="(max-width: 768px) 100vw, 45vw" alt="HelioTech product interface" loading="lazy" decoding="async"></div>
+        <div class="col-6">
+            <video autoplay loop muted playsinline width="65%">
+                <source src="/assets/videos/projects/heliotech/product.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</section>
+<section id="Repairify">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://repairify.com/" target="_blank">Repairify</a></h2>
+            <p>I started at Repairify as a Senior Software Engineer and after 2 years I was promoted to a Lead Software Engineer.
+            I work on the Astech product for remote diagnostics and calibrations for car repair.
+            My work is specifically related to the new <a href="https://app.astech.com/login" target="_blank">connect</a> portal that is intended to replace the previous web application that was being used by technicians and customers.
+            My work ranges from management to full stack web development to ELT to desktop app development.
+            Technologies used are Django, Flask, ReactJS, Javascript, Python, PostgresSQL, AWS, Apache Airflow, and ElectronJS.
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-4"><img src="/assets/images/about/repairify/vegas.jpg" srcset="/assets/images/about/repairify/vegas.mobile.jpg 1200w, /assets/images/about/repairify/vegas.jpg 2560w" sizes="(max-width: 768px) 100vw, 45vw" alt="Las Vegas" loading="lazy" decoding="async"></div>
+        <div class="col-6 col-sm-4"><img src="/assets/images/about/repairify/repairify%20office.jpg" alt="Repairify office" loading="lazy" decoding="async"></div>
+        <div class="col-4 col-sm-3"><img src="/assets/images/about/repairify/Astech%20repairify%20logo.svg" alt="Astech logo" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<section id="Coupa">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading"><a href="https://www.coupa.com/" target="_blank">Coupa</a></h2>
+            <p>I am currently working as a Senior Engineer with a frontend concentration.
+            I am part of the SCDP team which is responsible for supply chain related software products.
+            Technologies used are ReactJS, Typescript, GoJS, Cursor, Github Copilot, .NET, Jenkins, Kubernetes and AWS.
+            </p>
+        </div>
+    </div>
+    <div class="row images">
+        <div class="col-6 col-sm-4"><img src="/assets/images/about/coupa/coupa.svg" alt="Coupa logo" loading="lazy" decoding="async"></div>
+    </div>
+</section>
+<hr>
+<section id="publications">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading">Scientific Publications</h2>
+            Current <span class="footnote" data-note="Collaborative distance to mathematician Paul Erdős in the academic co-authorship graph.">Erdős number</span> of 4.
+            <ul>
+                <li>A. Saravanan, M. Tsafsman, M.A. Neerincx, C.R.M.M Oertel. Giving Social Robots a Conversational Memory for Motivational Experience Sharing. In <a href="https://ieeexplore.ieee.org/document/9900677" target="_blank">2022 31st IEEE International Conference on Robot and Human Interactive Communication (RO-MAN)</a>. 2022.</li>
+                <li>M. Tsfasman, A. Saravanan, D. Viner, D. Goslinga, S. de Wolf, C. Raman, C. M. Jonker, and C.R.M.M Oertel. Towards a real-time measure of the perception of anthropomorphism in human-robot interaction. In <a href="https://dl.acm.org/doi/10.1145/3475959.3485394" target="_blank">Proceedings of the ACM 2nd Workshop on Multimodal Conversational AI</a>. 2021.</li>
+                <li><b>Masters Thesis</b>: A. Saravanan. Experience Sharing Conversational Agent for Type II Diabetes. In <a href="https://resolver.tudelft.nl/uuid:8507589f-ea44-4378-a5c4-04ef80c7a3be" target="_blank">TU Delft Education Repository</a>. 2021</li>
+            </ul>                
+        </div>
+    </div>
+</section>
+<section id="computer-science">
+    <div id="software">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="heading">Computer Science</h2>
+                <p>I started programming in high school and specialized in Computer Science during my Bachelors and Masters which resulted in more than a decade of exposure.
+                I have worked at many companies, in multiple roles and programming languages, and published scientific research.
+                My current core stack:
+                </p>
+                <ul class="tech-stack" aria-label="Core technologies">
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-python"></use></svg>Python</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-typescript"></use></svg>TypeScript</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-javascript"></use></svg>JavaScript</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-react"></use></svg>React</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-angular"></use></svg>Angular</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-django"></use></svg>Django</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-flask"></use></svg>Flask</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-pandas"></use></svg>Pandas</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-numpy"></use></svg>NumPy</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-opencv"></use></svg>OpenCV</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-pytorch"></use></svg>PyTorch</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-postgresql"></use></svg>PostgreSQL</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-docker"></use></svg>Docker</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-kubernetes"></use></svg>Kubernetes</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-github"></use></svg>GitHub</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-jekyll"></use></svg>Jekyll</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-unity"></use></svg>Unity</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-langchain"></use></svg>LangChain</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-cursor"></use></svg>Cursor</li>
+                    <li><svg class="tech-mark" aria-hidden="true" focusable="false"><use href="/assets/icons/tech-sprite.svg#i-githubcopilot"></use></svg>GitHub Copilot</li>
+                </ul>
+                <p>Beyond that core, I have also worked with:</p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m5.5 3-4 5 4 5M10.5 3l4 5-4 5M9 2l-2 12"/></svg>Languages:</strong>
+                    HTML, JSON, CSS, SCSS, JSX, Java, C#, C++, SQL, VB.NET, Kotlin, R, Matlab, JSP
+                </p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2" y="2" width="12" height="4" rx="1"/><rect x="2" y="10" width="12" height="4" rx="1"/><path d="M5 6v4M11 6v4"/></svg>Frameworks and Libraries:</strong>
+                    AngularJS, Django Rest Framework, SKLearn, Matplotlib, Bootstrap, D3.js, Material UI, Axios, i18n, React Router, Electronjs, Redux, Webpack, Vite
+                </p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><ellipse cx="8" cy="3.5" rx="5.5" ry="2"/><path d="M2.5 3.5v9c0 1.1 2.5 2 5.5 2s5.5-.9 5.5-2v-9M2.5 8c0 1.1 2.5 2 5.5 2s5.5-.9 5.5-2"/></svg>Databases:</strong>
+                    SQLite, MS SQL Server, MySQL
+                </p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="4" cy="3" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="4" cy="13" r="1.5"/><path d="M4 4.5v7M12 6.5a5 5 0 0 1-5 5"/></svg>Source Control:</strong>
+                    Bitbucket, GitLab, GitHub Actions, GitLab Runners, Bitbucket Pipelines, Subversion, TFS (Team Foundation Server)/Azure DevOps
+                </p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.2a4 4 0 0 0-5.2 5.2L2 9.7 6.3 14l2.3-2.3a4 4 0 0 0 5.2-5.2l-2.3 2.3-2.6-2.6 2.3-2.3Z"/></svg>Other Tools:</strong>
+                    Heroku, AWS (ECS, S3, Cloudwatch, MWAA, SQS, SNS, Cloudfront), Jenkins, NodeJS, Yarn, Bower, Grunt, Sentry, Stackify, NHibernate, REST, SOAP, Furhat Social Robot, Gunicorn, Daphne, uWSGI, Swagger, Django Admin, Postman, Apache Airflow
+                </p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 5h10M9 2l3 3-3 3M14 11H4m3-3-3 3 3 3"/></svg>Agile Tools:</strong>
+                    Jira, Confluence, TFS/Azure DevOps
+                </p>
+                <p>
+                    <strong><svg class="technology-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m8 1 1.4 4.6L14 7l-4.6 1.4L8 13l-1.4-4.6L2 7l4.6-1.4L8 1ZM13 11l.6 1.4L15 13l-1.4.6L13 15l-.6-1.4L11 13l1.4-.6L13 11Z"/></svg>AI Tools:</strong>
+                    OpenCode, Cline, AWS Bedrock, FastMCP
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="writing">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading">Writing</h2>
+            <p>In addition to the scientific research I have completed, I am a <a href="/books/">self published novelist</a> and also <a href="https://medium.com/@asarav" target="_blank">blog</a> at a consistent rate.
+            I have made it into the top 100 listing of the Metaphysical Science Fiction eBooks category of Amazon for a short period of time and have also been listed as a top writer within the Future section of Medium.
+            </p>
+        </div>
+    </div>
+</section>
+<hr>
+<section id="interests">
+    <div id="film">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="heading">Film</h2>
+                <p> Film has always been my first love ever since high school.
+                    Although my interest has slightly waned after the death of <a href="https://en.wikipedia.org/wiki/Roger_Ebert" target="_blank">Roger Ebert</a>, I still try to stay up to date on the more popular and critically acclaimed films that are released every year.
+                    My favorite directors are <a href="https://en.wikipedia.org/wiki/Stanley_Kubrick" target="_blank">Kubrick</a>, <a href="https://en.wikipedia.org/wiki/Christopher_Nolan" target="_blank">Nolan</a>, <a href="https://en.wikipedia.org/wiki/Sergio_Leone" target="_blank">Sergio Leone</a>, and <a href="https://en.wikipedia.org/wiki/Mamoru_Oshii" target="_blank">Mamoru Oshii</a>. Recently, <a href="https://en.wikipedia.org/wiki/Denis_Villeneuve" target="_blank">Denis Villeneuve</a> has been getting close to making his way into that list.</p>
+            </div>
+        </div>
+    </div>
+    <div id="globalization">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="heading">Foreign Language</h2>
+                <p> I started learning Japanese in high school and continued during my Bachelors.
+                    I originally started because of an interest in the culture and anime, but this eventually developed into a need to understand foreign markets and global relations.
+                    After my internship in Hikone, I received N2 Certification in the JLPT which requires the ability to identify about 1000+ Chinese characters.
+                    I am capable of reading manga and light novels.
+                    Because of the nature of my previous work experiences, I sometimes find technical discussions easier to navigate than casual conversations.
+                    After completing my Bachelors, the majority of my interactions with the Japanese language stem from the consumption of media, websites, and any conversations I may have in food markets and restaurants.
+                    While at TU Delft, I learned some Dutch and am probably between A1 and A2 level.
+                    My Spanish is self taught and I have used it effectively in Mexico as well as Peru without the need for English.
+                </p>
+                <p>Levels for different languages (as of Nov 4, 2026):</p>
+                
+                <div class="language-list">
+                    <div class="language-group">
+                        <h3>Fluent/Native</h3>
+                        <ul>
+                            <li>🇺🇸 English</li>
+                            <li>🇯🇵 Japanese</li>
+                        </ul>
+                    </div>
+
+                    <div class="language-group">
+                        <h3>B1</h3>
+                        <ul>
+                            <li>🇪🇸 Spanish</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="language-group">
+                        <h3>A2</h3>
+                        <ul>
+                            <li>🇰🇷 Korean</li>
+                        </ul>
+                    </div>
+
+                    <div class="language-group">
+                        <h3>A1-A2</h3>
+                        <ul>
+                            <li>🇨🇳 Mandarin</li>
+                            <li>🇳🇱 Dutch</li>
+                            <li>🇫🇷 French</li>
+                        </ul>
+                    </div>
+
+                    <div class="language-group">
+                        <h3>A1</h3>
+                        <ul>
+                            <li>🇩🇪 German</li>
+                            <li>🇮🇹 Italian</li>
+                            <li>🇭🇰 Cantonese</li>
+                            <li>🇷🇺 Russian</li>
+                            <li>🇮🇳 Tamil</li>
+                            <li>🇳🇴 Norwegian</li>
+                        </ul>
+                    </div>
+
+                    <div class="language-group">
+                        <h3>Survival Level</h3>
+                        <ul>
+                            <li>🇹🇷 Turkish</li>
+                            <li>🇳🇬 Igbo</li>
+                            <li>📡 Morse Code</li>
+                        </ul>
+                    </div>
+
+                    <div class="language-group">
+                        <h3>A Few Words</h3>
+                        <ul>
+                            <li>🇺🇦 Ukrainian</li>
+                            <li>🇵🇭 Tagalog</li>
+                            <li>🇧🇷 Brazilian Portuguese</li>
+                            <li>🇯🇵 Ainu</li>
+                            <li>🇨🇭 Romansh</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>
+                    If I have (a lot of) time, I would like to have multi-language support on this website for all of the languages I speak well.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="guitar">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="heading">Guitar</h2>
+                <p> I started taking guitar seriously around the time when I started attending university as an undergraduate.
+                    Initially, I just wanted to be able to play  songs competently, but as I progressed and learned more advanced techniques, my approach became more technical.
+                    I play a neoclassical style and focus mainly on complex tapping licks. That said, I can also sweep and shred.
+                    For some reason, I use economy picking on the way down, and alternate picking on the way up. I'm not entirely sure when I started doing this.
+                    My main influences are <a href="https://en.wikipedia.org/wiki/Buckethead" target="_blank">Buckethead</a>, <a href="https://en.wikipedia.org/wiki/Shawn_Lane" target="_blank">Shawn Lane</a>, <a href="https://en.wikipedia.org/wiki/Paul_Gilbert" target="_blank">Paul Gilbert</a>, and <a href="https://en.wikipedia.org/wiki/Yngwie_Malmsteen" target="_blank">Yngwie Malmsteen</a>.
+                    My first guitar was a squire bullet. When I was working at Perficient I also played a squire bullet for the internship period. I then upgraded to an ESP LTD model with a floyd rose.
+                    When I was working in Hikone, I played an Aria Magna. After that, I got a used Ernie Ball John Petrucci signature series. When I was working for Sony, I played an Ibanez Gio for the internship period.
+                    In 2016, I got a Fernandes guitar with a sustainer. For my time in the Netherlands, I used a cheap squire bullet. Currently, I still own the ESP, the Ernie Ball, and the Fernandes.
+                </p>
+            </div>
+        </div>
+        <div class="row images">
+            <div class="col-12 col-sm-4"><img src="/assets/images/about/guitar/guitars.JPG" srcset="/assets/images/about/guitar/guitars.mobile.jpg 1200w, /assets/images/about/guitar/guitars.JPG 3135w" sizes="(max-width: 768px) 100vw, 45vw" alt="Collection of electric guitars" loading="lazy" decoding="async"></div>
+        </div>
+    </div>
+    <div id="dance">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="heading">Dance</h2>
+                <p> I started dancing after graduating from university. The style of dance that I focus in is hip hop and breaking.
+                    When it comes to breaking, I can currently hold a headstand and a baby freeze.
+                    Due to the COVID-19 pandemic, my skills are not quite what they used to be, but I can still do the basic freezes.
+                    Currently, I am practicing gymnastics to improve my acrobatics.
+                    My main influences are Michael Jackson, Les Twins, Lia Kim, Kinjaz and many of the Red Bull BC One All Star Members.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="visited">
+    <div class="col-12">
+        <h2 class="heading">Visited</h2>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div style="max-width:980px;margin:5px auto 10px auto;font-size:14px;">
+                    <div style="position:relative;padding: 0 0 70% 0;height:0;overflow:hidden;">
+                        <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="//www.fla-shop.com/visited-states/embed/?st=CA%2CCO%2CCT%2CDE%2CIA%2CIL%2CIN%2CKS%2CKY%2CMA%2CMD%2CME%2CMI%2CMN%2CMO%2CMT%2CND%2CNE%2CNJ%2CNM%2CNV%2CNY%2CNH%2COH%2COK%2CPA%2CRI%2CSD%2CTX%2CUT%2CVA%2CVT%2CWI%2CWV%2CWY&vc=1ca032&uc=90cfea&hc=40bfa6&bc=ffffff&sl=on" title="Map of visited US states" loading="lazy" frameborder="0" scrolling="no">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div style="max-width:980px;margin:5px auto 10px auto;font-size:14px;">
+                    <div style="position:relative;padding: 0 0 67% 0;height:0;overflow:hidden;">
+                        <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="//www.fla-shop.com/visited-countries/embed/?st=CA%2CCH%2CIN%2CIS%2CIT%2CJP%2CMX%2CNL%2CPE%2CUS&vc=1ca032&uc=b3c3ca&hc=40bfa6&bc=ffffff" title="Map of visited countries" loading="lazy" frameborder="0" scrolling="no">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="philosophy">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="heading">Philosophy</h2>
+            <p> My general approach to problems and skill acquisition can be split into 3 parts: Consumption, Incremental Progress, and Application.
+                In regards to consumption, this is simply the aggregation of as much information as possible.
+                This implies reading as much as possible, watching as many films as possible, playing as many games as possible and experiencing as much as possible.
+                This is why I maintain a media consumption list.
+                The more information you collect, the more experiences and knowledge you can draw from.
+                Naturally, since there is much that needs to be consumed, it is important to prioritize what should be consumed in what order so as to maximize the usefulness of the information that is collected.</p>
+            <p> Incremental progress is the application of my experience as a computer scientist to everything.
+                It consists of breaking down problems to manageable tasks and then optimizing the process so that the goal can be completed as quickly as possible.
+                This allows for all problems to be framed in the context of an algorithm.
+                There is also a psychological benefit that is brought by this methodology.
+                Since the algorithm effectively guides one's actions, shortcomings like temporary fear or pain can be mitigated effectively by providing a deadline for goals or a maximum cycle time for an iteration.
+                This is how I've gradually taught myself to sleep less and maximize my time during the day. (With that said, I do not recommend cutting sleep if creativity and mental acuity are priorities.)</p>
+            <p> The final step is application.
+                This is where newly developed skills are solidified and then applied to other larger goals.
+                This is very much like unit testing or validation of code.
+                If the skills that one acquires are not of a high enough proficiency or quality, the usefulness of the skill becomes highly diminished.</p>
+            <p> One final thing to note: Once a skill has been acquired, it must be maintained.
+                That said, if a skill is not maintained, reacquiring the skill is easier by an order of magnitude because you have already acquired the skill in the past.
+                Maintenance of a skill is typically easier than acquisition. The cost of maintenance can be marginalized by using the skill when pursuing a more difficult skill or goal.</p>
+            <p> My thoughts on specialization: While specialization can lead to a high level of competence in a particular area, it can also be highly limiting and create an ideological bubble.
+                Diversification of skills can lead to versatility as well as the ability to identify the intersection between different fields and areas.
+                This is usually what leads to new styles of thinking and new applications of old ideas. Simply put, too much specialization can limit innovation, creativity, and increase boredom.
+                E.g., a general purpose AI can potentially be far more useful than a specialized AI due to its ability to express itself in many different areas and the absence of the need to configure itself for different scenarios.</p>
+        </div>
+    </div>
+</section>
+<section id="log">
+    <div class="row">
+        <div class="col-12">
+            <p>For more information on goals and achievements, read my <a href="/log/">status log</a>.</p>
+        </div>
+    </div>
+</section>
+</div>
+</Base>

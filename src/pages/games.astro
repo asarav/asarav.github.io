@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { assetOrUrl, games, imageAttrs } from '../lib/site';
+
+const entries = games();
+---
+
+<Base
+  title="Games"
+  description="Browser and Unity games built by Avinash Saravanan."
+  image="/assets/images/games/games-top.jpg"
+  styleSheet="/assets/css/pages/games.css"
+>
+<div class="page-top">
+    <span class="hero-floor" aria-hidden="true">03</span>
+    <div class="games-preamble">
+        <h1 class="text-center"><span>Games</span></h1>
+    </div>
+    <div class="games-explanation">
+        <p>These are games that I created with the Unity Game engine for a games development course or as personal projects in other engines.</p>
+        <p>Note: Depending on the game, some games can take a long time to load due to the size of assets.</p>
+    </div>
+</div>
+<div class="games-list">
+    {entries.map((game) => (
+        <div class:list={['game', game.style]}>
+            <div class="row game-header-row">
+                <div class="game-header col-12 col-md-8">{game.title}</div>
+                <div class="col-auto ms-auto">
+                    <a class="play-now" href={assetOrUrl(game.link)} target="_blank">Play Now</a>
+                </div>
+            </div>
+            <div class="row screenshots">
+                {game.images.map((image) => (
+                    <div class={`col-12 col-md-${Math.floor(12 / game.images.length)}`}>
+                        <img src={assetOrUrl(image.src)} {...imageAttrs(assetOrUrl(image.src))} alt={`${game.title} screenshot`} loading="lazy">
+                    </div>
+                ))}
+            </div>
+            <div class="row explanation">
+                <div class="col-12" set:html={game.explanation} />
+            </div>
+        </div>
+    ))}
+</div>
+</Base>

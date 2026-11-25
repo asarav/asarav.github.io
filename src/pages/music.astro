@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import MusicAudioPlayer from '../components/MusicAudioPlayer.astro';
+import { markdownify, songs } from '../lib/site';
+
+const entries = songs();
+---
+
+<Base
+  title="Music"
+  description="Original music tracks and compositions by Avinash Saravanan."
+  image="/assets/images/music/music-top.jpg"
+  styleSheet="/assets/css/pages/music.css"
+  pageScript="/assets/js/music-player.js"
+>
+
+<div class="page-top">
+    <span class="hero-floor" aria-hidden="true">02</span>
+    <div class="music-preamble">
+        <h1 class="text-center"><span>Music</span></h1>
+    </div>
+    <div class="music-explanation">
+        <p>Music that I have composed in Fl Studio and other DAW's.</p>
+        <p>For browser compatibility, all tracks are in the mp3 format.</p>
+    </div>
+</div>
+<div class="music-list">
+    {entries.map((song, i) => (
+        <>
+            <div class="song full-res">
+                <div class="row audio">
+                    <div class="col-6 title">
+                        <span class="track-number">{i + 1}</span>
+                        {song.title}
+                    </div>
+                    <div class="col-6">
+                        <MusicAudioPlayer title={song.title} src={`/${song.src}`} />
+                    </div>
+                </div>
+                <div class="row song-explanation">
+                    <div class="col-12" set:html={markdownify(song.explanation)} />
+                </div>
+            </div>
+            <div class="song mobile-res">
+                <div class="row audio">
+                    <div class="col-12 title text-center">
+                        <span class="track-number">{i + 1}</span>
+                        {song.title}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <MusicAudioPlayer title={song.title} src={`/${song.src}`} />
+                    </div>
+                </div>
+                <div class="row song-explanation">
+                    <div class="col-12" set:html={markdownify(song.explanation)} />
+                </div>
+            </div>
+        </>
+    ))}
+</div>
+</Base>
