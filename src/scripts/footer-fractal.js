@@ -846,15 +846,15 @@
             '    float side2 = side * side;',
             '    vec2 q = p * ' + f(figure.scale) + ' + vec2(' +
                 f(figure.cx) + ', ' + f(figure.cy) + ');',
-            // A Möbius bend of the disk. Every circle goes to a circle and every
-            // tangency survives, so it is still the same packing — but the blobs
-            // come out unequal and the hierarchy above them reflows, and with
-            // the pole held on one direction the bend breathes in place. A pole
-            // that travelled round was what made this read as a pan.
-            '    float amp = mo * 0.28;',
-            '    vec2 pole = vec2(amp, 0.0);',
-            '    vec2 z = q / rOut;',
-            '    q = (z + pole) / (1.0 + dot(pole, z)) * rOut;',
+            // A linear map sends circles to ellipses. Shearing and stretching
+            // the plane before the inversions therefore changes the blobs' shape
+            // and the angle at which neighbours meet, which no Möbius bend can
+            // do: that map is conformal, so it keeps every circle round and every
+            // angle intact and can only re-size and shift the gasket, which reads
+            // as a pan. The bands are fixed to the axes and lean with the phase.
+            '    float shear = mo * 0.42;',
+            '    float stretch = 1.0 + mo * 0.26;',
+            '    q = vec2(q.x + shear * q.y, q.y * stretch);',
             '    float near = 1.0e9;',
             '    float depth = 0.0;',
             '',
@@ -1039,8 +1039,15 @@
             '    float Ai = sin(th);',
             '    float split = mo * 0.45;',
             '    float relax = 1.0 + mo * 0.16;',
-            '    float zr = q.x;',
-            '    float zi = q.y;',
+            // Every term sharing the tenth-turn symmetry means the picture lands
+            // on itself under a tenth of a turn, so the basins could only breathe.
+            // Skewing the plane before the iteration is not conformal: the star's
+            // arms change proportion and the walls leave their roots at different
+            // angles, while the basins keep their density.
+            '    float shear = mo * 0.22;',
+            '    float stretch = 1.0 + mo * 0.12;',
+            '    float zr = q.x + shear * q.y;',
+            '    float zi = q.y * stretch;',
             '    float iter = 0.0;',
             '    float best = 1.0e9;',
             '',
@@ -2091,8 +2098,12 @@
             const Ai = Math.sin(th);
             const split = morphM * 0.45;
             const relax = 1 + morphM * 0.16;
-            let zr = qx;
-            let zi = qy;
+            // The same phase-varying skew the shader applies: not conformal, so
+            // the star's arms and the angles of its walls change.
+            const shear = morphM * 0.22;
+            const stretch = 1 + morphM * 0.12;
+            let zr = qx + shear * qy;
+            let zi = qy * stretch;
             let iter = 0;
             let best = Infinity;
 
@@ -2233,13 +2244,13 @@
             const rIn = rb - side;
             const rOut = rb + side;
             const side2 = side * side;
-            // The same fixed-direction Möbius bend the shader applies.
-            const amp = morphM * 0.28;
-            const zx = qx / rOut;
-            const zy = qy / rOut;
-            const den = 1 + amp * zx;
-            let px = (zx + amp) / den * rOut;
-            let py = zy / den * rOut;
+            // The same shear and stretch the shader applies: a linear map sends
+            // circles to ellipses, so the blobs change shape and the angles
+            // between them change with the phase.
+            const shear = morphM * 0.42;
+            const stretch = 1 + morphM * 0.26;
+            let px = qx + shear * qy;
+            let py = qy * stretch;
             let near = 1e9;
             let depth = 0;
 
