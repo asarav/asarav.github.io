@@ -287,12 +287,12 @@
     // clusters and stalls; a flat random jitter reads as a machine.
     // Every gap below is written at a human pace, and this trims the whole
     // performance at once — pauses, corrections and backspaces included — so
-    // the rhythm and its irregularities stay the same, only quicker. 0.5 is
-    // 40% faster than the original pace, around 13 characters a second. Long
-    // paragraphs used to get an extra speed-up on top of this; that is gone,
-    // because the whole performance is quicker now and the pace for a given
-    // line should not depend on how long the copy happens to be.
-    var SPEED = 0.5;
+    // the rhythm and its irregularities stay the same, only quicker. 0.385 is
+    // 30% quicker than the 0.5 this ran at before, and about 17 characters a
+    // second. Long paragraphs used to get an extra speed-up on top of this;
+    // that is gone, because the whole performance is quicker now and the pace
+    // for a given line should not depend on how long the copy happens to be.
+    var SPEED = 0.385;
 
     // Around 8 characters a second before SPEED: a quick but ordinary typist,
     // slow enough that the eye can follow the line, the mistakes in it and the
