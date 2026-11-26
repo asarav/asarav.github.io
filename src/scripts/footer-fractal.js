@@ -169,9 +169,10 @@
     // The variants
     // -----------------------------------------------------------------
     // Each variant is a whole picture: the family it draws (FIGURES below), its
-    // fog ramp and its two rim colours. The ramps are the same dark navy family
-    // so no variant fights the footer's own gradient, and only the rim changes
-    // hue enough to name the family at a glance.
+    // fog ramp and its two rim colours. The ramps stay dark enough not to fight
+    // the footer's own gradient; the densest figures carry a `tone`, which makes
+    // each contour band turn the hue so the structure separates into coloured
+    // bands, while the rarer ones keep the older single-hue ramp.
     //
     // The ramps are long and concentrated where the field's numbers actually
     // live (the escape fraction of interest is the bottom third of the range),
@@ -246,7 +247,10 @@
                 [1, 214, 230, 216]
             ],
             edgeLow: [168, 214, 186],
-            rimHot: [224, 240, 222]
+            rimHot: [224, 240, 222],
+            // The packing is almost all rim, so its contours are the figure:
+            // more bands than the older variants carry, turned further in hue.
+            tone: { bands: 13, bandDepth: 0.50, hueCycle: 0.62, chroma: 1.9 }
         },
         // A multiple of seven: Newton's basin boundaries for z^3 - 1, three
         // lobes of lace, with the warm brass rim.
@@ -284,7 +288,8 @@
                 [1, 210, 212, 232]
             ],
             edgeLow: [156, 186, 232],
-            rimHot: [216, 224, 246]
+            rimHot: [216, 224, 246],
+            tone: { bands: 14, bandDepth: 0.50, hueCycle: 0.64, chroma: 1.9 }
         },
         // A perfect-square minute: a Sierpiński lattice whose holes breathe, in
         // the Matrix green of the footer's first figures.
@@ -303,7 +308,8 @@
                 [1, 206, 224, 198]
             ],
             edgeLow: [124, 206, 150],
-            rimHot: [200, 236, 196]
+            rimHot: [200, 236, 196],
+            tone: { bands: 15, bandDepth: 0.50, hueCycle: 0.60, chroma: 1.9 }
         },
         // A power of ten: Newton's tenth-power basins, whose ten walls gather
         // and split as one coefficient sweeps, in indigo with a silver rim.
@@ -322,8 +328,12 @@
                 [0.75, 158, 158, 186],
                 [1, 220, 220, 236]
             ],
-            edgeLow: [222, 222, 232],
-            rimHot: [246, 246, 252]
+            // A chromatic pair rather than near-white: with a hue that turns by
+            // depth, the walls of the ten basins read in different colours, which
+            // a silver rim could not do.
+            edgeLow: [176, 198, 244],
+            rimHot: [238, 242, 252],
+            tone: { bands: 16, bandDepth: 0.52, hueCycle: 0.66, chroma: 1.9 }
         },
         // A power of two: a cellular tessellation, every cell a lit pane with
         // its own glowing wall, in cold cyan with an ice-blue rim.
@@ -342,7 +352,8 @@
                 [1, 214, 232, 242]
             ],
             edgeLow: [172, 214, 240],
-            rimHot: [226, 242, 252]
+            rimHot: [226, 242, 252],
+            tone: { bands: 14, bandDepth: 0.50, hueCycle: 0.60, chroma: 1.9 }
         }
     };
 
@@ -370,17 +381,17 @@
         // phase bends the disk through a Möbius map held on one direction, so
         // the blobs come out unequal and the hierarchy reflows in place; a pole
         // that swung round the disk was what made this read as a pan.
-        prime: { kind: 'apollonian', scale: 1.0, cx: 0, cy: 0 },
+        prime: { kind: 'apollonian', scale: 1.0, cx: 0, cy: 0, rimTurn: 3.0 },
         // A Sierpiński lattice: the cell that is cut away at each level keeps
         // its own lit rim. With the phase the hole in that cell changes radius,
         // its corners round off, the cut's own ratio widens and tightens, the
         // hole drifts away from its cell's centre, and every level's grid is
         // sheared against the level that spawned it, so the hierarchy fans into
         // rhombi instead of only breathing. The window never moves.
-        square: { kind: 'lattice', scale: 0.95, cx: 0.5, cy: 0.5 },
+        square: { kind: 'lattice', scale: 0.95, cx: 0.5, cy: 0.5, rimTurn: 2.7 },
         // A tenth-power Newton star: ten basins meeting at the centre, framed
         // off-centre on the lace of their walls rather than on one flat basin.
-        decade: { kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62 },
+        decade: { kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62, rimTurn: 3.2 },
         // Families whose own dynamics change shape inside a fixed frame: the
         // parameter lives in the map, not in the window, so nothing has to
         // move across the plane for the geometry to change.
@@ -403,7 +414,7 @@
         // second solution swings geometrically as well, so the cells between
         // the curves merge and split as the plate turns over.
         quintile: {
-            kind: 'nodal', scale: 0.95, cx: 0, cy: 0,
+            kind: 'nodal', scale: 0.95, cx: 0, cy: 0, rimTurn: 2.9,
             n: 6, m: 9, dn: 2.2, dm: -2.2, n2: 11, m2: 5, sway: 0.85
         },
         // A cellular tessellation: one seed per cell, each wandering inside its
@@ -417,7 +428,7 @@
         // by the scale, so the band carries a mosaic rather than a single
         // rosette in the middle of it.
         binary: {
-            kind: 'cellular', scale: 3.8, cx: 0, cy: 0,
+            kind: 'cellular', scale: 3.8, cx: 0, cy: 0, rimTurn: 2.8,
             reach: 0.32, swing: -0.22, turn: 2.20
         }
     };
@@ -1293,10 +1304,49 @@
         }).join(', ') + ')';
     }
 
+    // A hue rotation in YIQ, the same matrix CSS `hue-rotate` uses. The ramp is
+    // built from it, so the shader and the ImageData fallback both get the same
+    // colours from the same bytes.
+    function rotateHue(r, g, b, turn) {
+        const a = turn * Math.PI * 2;
+        const cs = Math.cos(a);
+        const sn = Math.sin(a);
+
+        return [
+            r * (0.213 + cs * 0.787 - sn * 0.213) +
+                g * (0.715 - cs * 0.715 - sn * 0.715) +
+                b * (0.072 - cs * 0.072 + sn * 0.928),
+            r * (0.213 - cs * 0.213 + sn * 0.143) +
+                g * (0.715 + cs * 0.285 + sn * 0.140) +
+                b * (0.072 - cs * 0.072 - sn * 0.283),
+            r * (0.213 - cs * 0.213 - sn * 0.787) +
+                g * (0.715 - cs * 0.715 + sn * 0.715) +
+                b * (0.072 + cs * 0.928 + sn * 0.072)
+        ];
+    }
+
+    function pushChroma(rgb, push) {
+        const lum = 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2];
+
+        return rgb.map(function (channel) {
+            return Math.max(0, lum + (channel - lum) * push);
+        });
+    }
+
     // The fog ramp for one variant: 256 samples of its stops, as the 0..255
     // bytes both the fallback's ImageData and the shader's texture need.
-    function buildRamp(stops) {
+    //
+    // `tone` decides how many contour bands the ramp carries, how hard the band
+    // steps cut, and how far each band turns the hue. A ramp with a hue turn per
+    // band does not just lighten and darken along the field's values: neighbouring
+    // contours arrive in different hues, so a dense figure separates into bands
+    // the eye can count instead of one wash of a single colour.
+    function buildRamp(stops, tone) {
         const ramp = new Uint8ClampedArray(256 * 3);
+        const bands = (tone && tone.bands) || 9;
+        const depth = (tone && tone.bandDepth) || 0.42;
+        const hueCycle = (tone && tone.hueCycle) || 0;
+        const chroma = (tone && tone.chroma) || 1;
 
         for (let i = 0; i < 256; i += 1) {
             const t = i / 255;
@@ -1323,11 +1373,33 @@
             // and the rim are told apart by brightness as well as by hue: a
             // monotone ramp makes a fractal's interior one flat wash, while a
             // banded one gives it the contour structure of a printed plate.
-            const band = 0.74 + 0.42 * (0.5 + 0.5 * Math.cos(t * Math.PI * 2 * 9));
+            const band = 0.95 - depth * 0.5 +
+                depth * (0.5 + 0.5 * Math.cos(t * Math.PI * 2 * bands));
+            const r = (low[1] + (high[1] - low[1]) * k) * 1.16 + 7;
+            const g = (low[2] + (high[2] - low[2]) * k) * 1.16 + 7;
+            const b = (low[3] + (high[3] - low[3]) * k) * 1.16 + 7;
+            let turned = hueCycle > 0
+                ? rotateHue(r, g, b, hueCycle * ((t * bands) % 1))
+                : [r, g, b];
 
-            ramp[i * 3] = Math.min(255, ((low[1] + (high[1] - low[1]) * k) * 1.16 + 7) * band);
-            ramp[i * 3 + 1] = Math.min(255, ((low[2] + (high[2] - low[2]) * k) * 1.16 + 7) * band);
-            ramp[i * 3 + 2] = Math.min(255, ((low[3] + (high[3] - low[3]) * k) * 1.16 + 7) * band);
+            // These ramps are dark by design, and a dark colour is almost grey:
+            // rotating its hue on its own barely moves a byte. Pulling the
+            // result away from its own luma, rather than brightening it, gives
+            // the bands separate colours without lifting the field off the
+            // footer's gradient.
+            if (chroma > 1) {
+                const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+
+                turned = [
+                    Math.max(0, lum + (turned[0] - lum) * chroma),
+                    Math.max(0, lum + (turned[1] - lum) * chroma),
+                    Math.max(0, lum + (turned[2] - lum) * chroma)
+                ];
+            }
+
+            ramp[i * 3] = Math.min(255, turned[0] * band);
+            ramp[i * 3 + 1] = Math.min(255, turned[1] * band);
+            ramp[i * 3 + 2] = Math.min(255, turned[2] * band);
         }
 
         return ramp;
@@ -1377,11 +1449,43 @@
             'const float ITERATIONS = ' + f(ITERATIONS) + ';',
             'const vec3 EDGE_LOW = ' + glsl3(edgeLow) + ';',
             'const vec3 RIM_HOT = ' + glsl3(rimHot) + ';',
+            // How far the rim's hue turns across the field, in radians. Zero on
+            // the older variants, which keep their one rim colour.
+            'const float TINT = ' + f(figure.rimTurn || 0) + ';',
             '',
             // Screen blending, per channel: the fog and the edges each keep
             // their own weight where two layers cross.
             'vec2 screen(vec2 base, vec2 top) {',
             '    return base + top - base * top;',
+            '}',
+            '',
+            // A hue rotation in YIQ, the matrix CSS `hue-rotate` uses, so the
+            // rims can carry several hues without leaving the footer's tones.
+            'mat3 hueTurn(float a) {',
+            '    float cs = cos(a);',
+            '    float sn = sin(a);',
+            '    return mat3(',
+            '        0.213 + cs * 0.787 - sn * 0.213,',
+            '        0.213 - cs * 0.213 + sn * 0.143,',
+            '        0.213 - cs * 0.213 - sn * 0.787,',
+            '        0.715 - cs * 0.715 - sn * 0.715,',
+            '        0.715 + cs * 0.285 + sn * 0.140,',
+            '        0.715 - cs * 0.715 + sn * 0.715,',
+            '        0.072 - cs * 0.072 + sn * 0.928,',
+            '        0.072 - cs * 0.072 - sn * 0.283,',
+            '        0.072 + cs * 0.928 + sn * 0.072);',
+            '}',
+            '',
+            // The rims are pale by design, and a pale colour has little chroma to
+            // turn: rotating it on its own lands on another nearly-grey tone. The
+            // turn therefore comes with a chroma push away from the colour's own
+            // luma, which is what makes the different depths arrive in different
+            // hues at the same weight of ink.
+            'vec3 tinted(vec3 c, float turn) {',
+            '    vec3 t = hueTurn(turn) * c;',
+            '    float lum = dot(t, vec3(0.299, 0.587, 0.114));',
+            '    float push = 1.0 + TINT * 0.80;',
+            '    return max(vec3(0.0), lum + (t - lum) * push);',
             '}',
             '',
             // The active variant's own figure: fog in x, rim in y.
@@ -1439,11 +1543,16 @@
             '    float alpha = max(pow(mask, 0.92), rim * 0.92) * vFade * vFadeLate * hFade;',
             '    float index = floor(clamp(fog, 0.0, 1.0) * 255.0 + 0.5);',
             '    vec3 color = texture2D(uRamp, vec2((index + 0.5) / 256.0, 0.5)).rgb;',
-            '    color = mix(color, EDGE_LOW, clamp(rim * 8.0, 0.0, 1.0));',
+            // The rim's own hue turns with the field's value and, a little,
+            // across the band: a filament at one depth arrives in a different
+            // colour from the filament beside it, so the structure separates
+            // into hues the eye can follow instead of one flat tint.
+            '    float turn = (fog - 0.25) * TINT + (uv.x - 0.5) * TINT * 0.35;',
+            '    color = mix(color, tinted(EDGE_LOW, turn), clamp(rim * 8.0, 0.0, 1.0));',
             // The crest of the rim lifts towards a pale version of its own hue,
             // the way the reference plates carry a white-hot core along every
             // filament: the band stays a mid tone and only its spine goes light.
-            '    color = mix(color, RIM_HOT, smoothstep(0.55, 1.0, rim));',
+            '    color = mix(color, tinted(RIM_HOT, turn * 0.55), smoothstep(0.55, 1.0, rim));',
             '    gl_FragColor = vec4(color, alpha);',
             '}'
         ].join('\n');
@@ -1523,7 +1632,7 @@
             variant: variant,
             figure: figure,
             nudge: seedNudge(schedule.n),
-            ramp: buildRamp(variant.stops)
+            ramp: buildRamp(variant.stops, variant.tone)
         };
 
         footer.setAttribute('data-fractal-variant', active.id);
@@ -2470,6 +2579,7 @@
         const ramp = active.ramp;
         const edgeLow = active.variant.edgeLow;
         const rimHot = active.variant.rimHot;
+        const rimTurn = active.figure.rimTurn || 0;
 
         for (let x = 0; x < width; x += 1) {
             const u = x * invW;
@@ -2491,12 +2601,25 @@
             // The same two-step colour the shader applies: the rim's mid tone
             // first, then the pale core at the crest of the rim.
             const hot = smoothstep(0.55, 1.0, rim);
+            // The shader's hue turn, on the same two rim colours.
+            const turn = (fog - 0.25) * rimTurn + (u - 0.5) * rimTurn * 0.35;
+            // Rotate, then push away from the colour's own luma, as `tinted`
+            // does in the shader.
+            const push = 1 + rimTurn * 0.80;
+            const edgeTint = rimTurn
+                ? pushChroma(rotateHue(edgeLow[0], edgeLow[1], edgeLow[2],
+                    turn / (2 * Math.PI)), push)
+                : edgeLow;
+            const hotTint = rimTurn
+                ? pushChroma(rotateHue(rimHot[0], rimHot[1], rimHot[2],
+                    turn * 0.55 / (2 * Math.PI)), push)
+                : rimHot;
 
             for (let c = 0; c < 3; c += 1) {
                 const mid = ramp[index + c] +
-                    (edgeLow[c] - ramp[index + c]) * blend;
+                    (edgeTint[c] - ramp[index + c]) * blend;
 
-                data[offset + c] = mid + (rimHot[c] - mid) * hot;
+                data[offset + c] = mid + (hotTint[c] - mid) * hot;
             }
 
             data[offset + 3] = mask * 255 * vFade * vFadeLate * hFade;
