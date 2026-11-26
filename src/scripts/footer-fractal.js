@@ -406,16 +406,19 @@
             kind: 'nodal', scale: 0.62, cx: 0, cy: 0,
             n: 6, m: 9, dn: 2.2, dm: -2.2, n2: 11, m2: 5, sway: 0.85
         },
-        // A cellular tessellation: one seed per cell, each wandering inside
-        // its own cell, and cells dividing in their own turn as the phase turns,
-        // so the mosaic changes its number of cells instead of restating the
-        // same grid. Every cell carries its own tone, hashed from the cell that
-        // won it, so the mosaic reads as panes of different glass rather than
-        // one flat wash. Cell size is set by the scale, so the band carries a
-        // mosaic rather than a single rosette in the middle of it.
+        // A cellular tessellation: one seed per cell, each wandering inside its
+        // own cell, and cells dividing in their own turn as the phase turns, so
+        // the mosaic changes its number of cells instead of restating the same
+        // grid. The wander is widest at the end of the cycle where the cells are
+        // whole, so that half is a loose, traded tessellation rather than a
+        // clean grid, and it tightens as the cells split. Every cell carries its
+        // own tone, hashed from the cell that won it, so the mosaic reads as
+        // panes of different glass rather than one flat wash. Cell size is set
+        // by the scale, so the band carries a mosaic rather than a single
+        // rosette in the middle of it.
         binary: {
             kind: 'cellular', scale: 3.8, cx: 0, cy: 0,
-            reach: 0.32, swing: 0.34, turn: 2.20
+            reach: 0.32, swing: -0.22, turn: 2.20
         }
     };
         // The escape-time sets are framed into their boundary detail, not on
