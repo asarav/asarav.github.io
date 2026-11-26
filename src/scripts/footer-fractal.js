@@ -425,7 +425,11 @@
         // A tenth-power Newton star: ten basins meeting at the centre, framed
         // off-centre on the lace of their walls rather than on one flat basin.
         decade: {
-            kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62, rimTurn: 3.2
+            kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62,
+            // A wide arc, with its own chroma push so the width does not turn
+            // into saturation, and a turn keyed to the rim's strength so the
+            // basins differ from one another and not only left to right.
+            rimTurn: 5.4, rimPush: 2.6, rimWobble: 2.8
         },
         // Families whose own dynamics change shape inside a fixed frame: the
         // parameter lives in the map, not in the window, so nothing has to
@@ -1516,6 +1520,10 @@
             // dark-to-pale journey; more than one cycles the palette, which is
             // what gives the escape-time sets their bands of separate hues.
             'const float CYCLES = ' + f(figure.cycles || 1) + ';',
+            // A turn keyed to the rim's own strength, for a family whose field
+            // value barely varies: it gives the hues a structure to follow that
+            // is not just a gradient across the band.
+            'const float RIM_WOBBLE = ' + f(figure.rimWobble || 0) + ';',
             '',
             // Screen blending, per channel: the fog and the edges each keep
             // their own weight where two layers cross.
@@ -1612,7 +1620,8 @@
             // across the band: a filament at one depth arrives in a different
             // colour from the filament beside it, so the structure separates
             // into hues the eye can follow instead of one flat tint.
-            '    float turn = (fog - 0.25) * TINT + (uv.x - 0.5) * TINT * 0.35;',
+            '    float turn = (fog - 0.25) * TINT + (uv.x - 0.5) * TINT * 0.35',
+            '        + (rim - 0.5) * RIM_WOBBLE;',
             '    color = mix(color, tinted(EDGE_LOW, turn), clamp(rim * 8.0, 0.0, 1.0));',
             // The crest of the rim lifts towards a pale version of its own hue,
             // the way the reference plates carry a white-hot core along every
@@ -2654,6 +2663,7 @@
         const rimHot = active.rimHot;
         const rimTurn = active.figure.rimTurn || 0;
         const cycles = active.figure.cycles || 1;
+        const rimWobble = active.figure.rimWobble || 0;
 
         for (let x = 0; x < width; x += 1) {
             const u = x * invW;
@@ -2677,7 +2687,8 @@
             // first, then the pale core at the crest of the rim.
             const hot = smoothstep(0.55, 1.0, rim);
             // The shader's hue turn, on the same two rim colours.
-            const turn = (fog - 0.25) * rimTurn + (u - 0.5) * rimTurn * 0.35;
+            const turn = (fog - 0.25) * rimTurn + (u - 0.5) * rimTurn * 0.35 +
+                (rim - 0.5) * rimWobble;
             // Rotate, then push away from the colour's own luma, as `tinted`
             // does in the shader.
             const push = rimPushFor(active.figure);
