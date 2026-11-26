@@ -64,7 +64,7 @@ const DOCUMENTED_VALUE_CHANGES = [
     selector: 'body#site',
     property: 'background-image',
     from: 'linear-gradient(180deg, rgba(7, 11, 16, 0.58) 0%, rgba(7, 11, 16, 0.86) 42%, rgba(7, 11, 16, 0.98) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/assets/images/rain-background.jpg")), linear-gradient(135deg, #1a2530, #0d1520)',
-    to: 'linear-gradient(180deg, rgba(7, 11, 16, 0.34) 0%, rgba(7, 11, 16, 0.6) 42%, rgba(7, 11, 16, 0.82) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/assets/images/rain-background.jpg")), linear-gradient(135deg, #1a2530, #0d1520)',
+    to: 'linear-gradient(180deg, rgba(7, 11, 16, 0.22) 0%, rgba(7, 11, 16, 0.45) 42%, rgba(7, 11, 16, 0.66) 100%), radial-gradient(ellipse at 78% 0%, rgba(71, 111, 142, 0.26), transparent 52%), radial-gradient(ellipse at 8% 30%, rgba(38, 62, 82, 0.2), transparent 50%), var(--weather-background-image, url("/assets/images/rain-background.jpg")), linear-gradient(135deg, #1a2530, #0d1520)',
     reason: 'the page photograph was 98% veiled at the foot of the viewport, so it read as a flat black field; the ramp stops at 0.82 and a third of the image shows through there'
   },
   {
