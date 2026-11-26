@@ -209,7 +209,10 @@
                 [1, 224, 214, 198]
             ],
             edgeLow: [208, 160, 124],
-            rimHot: [242, 226, 198]
+            rimHot: [242, 226, 198],
+            // The copper rim and its slate fog are the footer's oldest look, and
+            // full strength reads as too rich at the band's opacity.
+            tone: { sat: 0.72 }
         },
         // The ordinary odd minute: the Burning Ship's crags, in the cool
         // slate-and-steel palette.
@@ -228,7 +231,8 @@
                 [1, 208, 220, 234]
             ],
             edgeLow: [150, 178, 196],
-            rimHot: [214, 232, 244]
+            rimHot: [214, 232, 244],
+            tone: { sat: 0.72 }
         },
         // A prime minute: an Apollonian packing, circles inside circles, with
         // the only mint rim in the set.
@@ -1347,6 +1351,7 @@
         const depth = (tone && tone.bandDepth) || 0.42;
         const hueCycle = (tone && tone.hueCycle) || 0;
         const chroma = (tone && tone.chroma) || 1;
+        const sat = (tone && tone.sat) || 1;
 
         for (let i = 0; i < 256; i += 1) {
             const t = i / 255;
@@ -1375,9 +1380,22 @@
             // banded one gives it the contour structure of a printed plate.
             const band = 0.95 - depth * 0.5 +
                 depth * (0.5 + 0.5 * Math.cos(t * Math.PI * 2 * bands));
-            const r = (low[1] + (high[1] - low[1]) * k) * 1.16 + 7;
-            const g = (low[2] + (high[2] - low[2]) * k) * 1.16 + 7;
-            const b = (low[3] + (high[3] - low[3]) * k) * 1.16 + 7;
+            let base = [
+                (low[1] + (high[1] - low[1]) * k) * 1.16 + 7,
+                (low[2] + (high[2] - low[2]) * k) * 1.16 + 7,
+                (low[3] + (high[3] - low[3]) * k) * 1.16 + 7
+            ];
+
+            // A variant can ask for its ramp to sit closer to grey; the two
+            // escape-time sets read as too rich against the footer, and the
+            // adjustment belongs with the ramp rather than in eleven stops.
+            if (sat !== 1) {
+                base = pushChroma(base, sat);
+            }
+
+            const r = base[0];
+            const g = base[1];
+            const b = base[2];
             let turned = hueCycle > 0
                 ? rotateHue(r, g, b, hueCycle * ((t * bands) % 1))
                 : [r, g, b];
@@ -1632,7 +1650,16 @@
             variant: variant,
             figure: figure,
             nudge: seedNudge(schedule.n),
-            ramp: buildRamp(variant.stops, variant.tone)
+            ramp: buildRamp(variant.stops, variant.tone),
+            // The rim colours take the variant's saturation as well, so a ramp
+            // pulled towards grey does not leave its rims as the one rich thing
+            // in the picture.
+            edgeLow: variant.tone && variant.tone.sat
+                ? pushChroma(variant.edgeLow, variant.tone.sat)
+                : variant.edgeLow,
+            rimHot: variant.tone && variant.tone.sat
+                ? pushChroma(variant.rimHot, variant.tone.sat)
+                : variant.rimHot
         };
 
         footer.setAttribute('data-fractal-variant', active.id);
@@ -1681,8 +1708,7 @@
             // framebuffer survive that swap.
             renderer.setup = function () {
                 const program = buildProgram(gl, active.figure,
-                    active.variant.layers, active.variant.edgeLow,
-                    active.variant.rimHot);
+                    active.variant.layers, active.edgeLow, active.rimHot);
 
                 if (!program) {
                     return false;
@@ -2577,8 +2603,8 @@
         const sinView = fallbackView.sin;
         const viewScale = fallbackView.scale;
         const ramp = active.ramp;
-        const edgeLow = active.variant.edgeLow;
-        const rimHot = active.variant.rimHot;
+        const edgeLow = active.edgeLow;
+        const rimHot = active.rimHot;
         const rimTurn = active.figure.rimTurn || 0;
 
         for (let x = 0; x < width; x += 1) {
