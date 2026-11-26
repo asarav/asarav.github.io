@@ -24,7 +24,9 @@
     let weatherEffectStops = [];
     let rainBoostUntil = 0;
     let matrixRainCanvas = null;
-    let cityMetro = false;
+    // null until the population lookup answers. Unknown is not the same as
+    // "not a city", and the two have opposite consequences now.
+    let cityMetro = null;
     let cityStop = null;
     let matrixRainHeroCanvas = null;
     let matrixRainHero = null;
@@ -2393,11 +2395,13 @@
     // -----------------------------------------------------------------------
     // City ambience
     // -----------------------------------------------------------------------
-    // Street lamps, for metro locations only. The weather stack
-    // gives a name (the IANA zone is a city by construction), so this asks the
-    // geocoding API behind Open-Meteo's own place names for that city's
-    // population, at most once per session, and starts nothing below
-    // CITY_POPULATION.
+    // Street lamps for everywhere except a city. The weather stack gives a
+    // place name (the IANA zone is a city by construction), so this asks the
+    // geocoding API behind Open-Meteo's own place names for its population, at
+    // most once per session, and lights the field only below CITY_POPULATION:
+    // drawing a skyline for someone already sitting in one is scenery they can
+    // look up and see. The lights are the escape, so they belong to the quiet
+    // places, and a metro gets the page's own darks instead.
     const CITY_POPULATION = 300000;
     const CITY_CACHE_KEY = 'asarav:metro';
 
@@ -2442,9 +2446,16 @@
             .then(function (response) { return response.json(); })
             .then(function (json) {
                 const place = json && json.results && json.results[0];
-                const population = place ? Number(place.population) : 0;
-                const metro = isFinite(population) &&
-                    population >= CITY_POPULATION;
+                const population = place ? Number(place.population) : NaN;
+
+                if (!isFinite(population)) {
+                    // A name the gazetteer cannot match: not known to be a city,
+                    // but not known to be a village either, so nothing is drawn
+                    // and the lookup is left uncached to be retried.
+                    return null;
+                }
+
+                const metro = population >= CITY_POPULATION;
 
                 writeMetroCache(name, metro);
 
@@ -2452,7 +2463,7 @@
             })
             .catch(function () {
                 // Offline or blocked: no lights rather than guessed lights.
-                return false;
+                return null;
             });
     }
 
@@ -2477,7 +2488,10 @@
     // The stop handle makes this idempotent, so a second sync cannot stack a
     // second set of lamps on the first.
     function syncCityAmbience() {
-        const shouldRun = cityMetro &&
+        // Strictly `false`: a failed lookup leaves cityMetro null, and lighting
+        // the field for a place we could not identify is exactly what this must
+        // not do when the unknown might be a city.
+        const shouldRun = cityMetro === false &&
             !matrixRainCanvas &&
             !reducedMotion.matches;
 
