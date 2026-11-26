@@ -414,8 +414,8 @@
         // one flat wash. Cell size is set by the scale, so the band carries a
         // mosaic rather than a single rosette in the middle of it.
         binary: {
-            kind: 'cellular', scale: 4.4, cx: 0, cy: 0,
-            reach: 0.30, swing: 0.24, turn: 1.60
+            kind: 'cellular', scale: 3.8, cx: 0, cy: 0,
+            reach: 0.32, swing: 0.34, turn: 2.20
         }
     };
         // The escape-time sets are framed into their boundary detail, not on
@@ -721,13 +721,14 @@
     // own cell, and with the phase that wander both widens and turns, so the
     // cells are seen to trade corners and reshape.
     //
-    // The phase also makes cells divide. A second seed appears beside a cell's
-    // own and draws away from it, opening a cell of its own out of nothing, and
-    // later closing it again. Which half of the cycle each cell divides in, and
-    // how early, is hashed per cell, so the mosaic is always part split and part
-    // whole: the cells change number and size rather than only wobbling inside a
-    // fixed grid, and the tessellation never simply becomes a finer copy of
-    // itself.
+    // The phase also makes cells divide. Up to three extra seeds appear beside a
+    // cell's own and draw away from it, each on its own hashed threshold, so a
+    // cell splits once, twice or three times over the cycle and the mosaic's
+    // cell size moves in whole steps. Which half of the cycle each cell divides
+    // in, and how early, is hashed per cell, so the mosaic is always part split
+    // and part whole: the cells change number and size rather than only wobbling
+    // inside a fixed grid, and the tessellation never simply becomes a finer
+    // copy of itself.
     function cellularFigure(figure) {
         return [
             'vec2 shadeAt(vec2 p) {',
@@ -764,25 +765,34 @@
             '                second = min(second, dd);',
             '            }',
             '',
-            // The cell's second seed, when this cell is dividing.
-            '            vec2 sd = vec2(',
-            '                fract(sin(dot(g, vec2(41.7, 289.3))) * 43758.5453),',
-            '                fract(sin(dot(g, vec2(157.3, 71.9))) * 43758.5453));',
-            '            float halve = fract(sd.y * 5.4) < 0.5 ? 1.0 : -1.0;',
-            '            float onset = 0.10 + 0.66 * sd.y;',
-            '            float grow = clamp((halve * mo - onset) / (1.0 - onset),',
-            '                0.0, 1.0);',
+            // Up to three extra seeds, each with its own hashed direction and
+            // its own threshold, all keyed off the signed phase: one end of the
+            // cycle is a coarse tessellation of whole cells and the other is the
+            // same mosaic refined, cells having split once, twice or three times
+            // on the way. That gives the band a size of cell you can see change,
+            // not cells that are always half-split.
+            '            for (int k = 0; k < 3; k += 1) {',
+            '                vec2 gk = g + float(k) * 17.3;',
+            '                vec2 hk = vec2(',
+            '                    fract(sin(dot(gk, vec2(41.7, 289.3))) *',
+            '                        43758.5453),',
+            '                    fract(sin(dot(gk, vec2(157.3, 71.9))) *',
+            '                        43758.5453));',
+            '                float onset = 0.06 + 0.22 * float(k) + 0.12 * hk.y;',
+            '                float grow = clamp((mo - onset) /',
+            '                    (1.0 - onset), 0.0, 1.0);',
             '',
-            '            if (grow > 0.001) {',
-            '                vec2 c2 = c + vec2(cos(6.2831853 * sd.x),',
-            '                    sin(6.2831853 * sd.x)) * (0.55 * grow);',
-            '                float dd2 = length(q - c2);',
+            '                if (grow > 0.001) {',
+            '                    vec2 c2 = c + vec2(cos(6.2831853 * hk.x),',
+            '                        sin(6.2831853 * hk.x)) * (0.5 * grow);',
+            '                    float dd2 = length(q - c2);',
             '',
-            '                if (dd2 < best) {',
-            '                    second = best;',
-            '                    best = dd2;',
-            '                } else {',
-            '                    second = min(second, dd2);',
+            '                    if (dd2 < best) {',
+            '                        second = best;',
+            '                        best = dd2;',
+            '                    } else {',
+            '                        second = min(second, dd2);',
+            '                    }',
             '                }',
             '            }',
             '        }',
@@ -795,9 +805,9 @@
             // seams stay the brightest thing in it.
             '    float tone = fract(sin(dot(win, vec2(12.9898, 78.233))) *',
             '        43758.5453);',
-            '    float body = glow * glow * (0.55 + 0.55 * tone);',
-            '    return vec2(0.03 + 0.34 * body + 0.11 * glow,',
-            '                max(wall * 0.92, glow * 0.20));',
+            '    float body = glow * glow * (0.42 + 0.78 * tone);',
+            '    return vec2(0.02 + 0.36 * body + 0.12 * glow,',
+            '                max(wall * 0.95, glow * 0.18));',
             '}'
         ].join('\n');
     }
@@ -2171,26 +2181,35 @@
                         second = Math.min(second, dd);
                     }
 
-                    // The cell's second seed, when this cell is dividing.
-                    const shx = fract(Math.sin(gx * 41.7 + gy * 289.3) * 43758.5453);
-                    const shy = fract(Math.sin(gx * 157.3 + gy * 71.9) * 43758.5453);
-                    const halve = fract(shy * 5.4) < 0.5 ? 1 : -1;
-                    const onset = 0.10 + 0.66 * shy;
-                    const grow = Math.min(1, Math.max(0,
-                        (halve * morphM - onset) / (1 - onset)));
+                    // Up to three extra seeds per cell, each on its own
+                    // hashed threshold keyed off the signed phase; see the
+                    // shader for the same loop.
+                    for (let k = 0; k < 3; k += 1) {
+                        const gkx = gx + k * 17.3;
+                        const gky = gy + k * 17.3;
+                        const hkx = fract(Math.sin(gkx * 41.7 + gky * 289.3) *
+                            43758.5453);
+                        const hky = fract(Math.sin(gkx * 157.3 + gky * 71.9) *
+                            43758.5453);
+                        const onset = 0.06 + 0.22 * k + 0.12 * hky;
+                        const grow = Math.min(1, Math.max(0,
+                            (morphM - onset) / (1 - onset)));
 
-                    if (grow > 0.001) {
-                        const c2x = px + Math.cos(6.2831853 * shx) * (0.55 * grow);
-                        const c2y = py + Math.sin(6.2831853 * shx) * (0.55 * grow);
-                        const d2x = qx - c2x;
-                        const d2y = qy - c2y;
-                        const dd2 = Math.sqrt(d2x * d2x + d2y * d2y);
+                        if (grow > 0.001) {
+                            const c2x = px + Math.cos(6.2831853 * hkx) *
+                                (0.5 * grow);
+                            const c2y = py + Math.sin(6.2831853 * hkx) *
+                                (0.5 * grow);
+                            const d2x = qx - c2x;
+                            const d2y = qy - c2y;
+                            const dd2 = Math.sqrt(d2x * d2x + d2y * d2y);
 
-                        if (dd2 < best) {
-                            second = best;
-                            best = dd2;
-                        } else {
-                            second = Math.min(second, dd2);
+                            if (dd2 < best) {
+                                second = best;
+                                best = dd2;
+                            } else {
+                                second = Math.min(second, dd2);
+                            }
                         }
                     }
                 }
@@ -2200,11 +2219,11 @@
             const wall = 1 - smoothstep(0, 0.07, second - best);
             const tone = fract(Math.sin(winX * 12.9898 + winY * 78.233) *
                 43758.5453);
-            const body = glow * glow * (0.55 + 0.55 * tone);
+            const body = glow * glow * (0.42 + 0.78 * tone);
 
-            edgeOf = Math.max(wall * 0.92, glow * 0.20);
+            edgeOf = Math.max(wall * 0.95, glow * 0.18);
 
-            return 0.03 + 0.34 * body + 0.11 * glow;
+            return 0.02 + 0.36 * body + 0.12 * glow;
         }
 
         if (figure.kind === 'apollonian') {
