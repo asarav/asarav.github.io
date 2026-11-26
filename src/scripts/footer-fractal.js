@@ -339,6 +339,12 @@
         // and split as one coefficient sweeps, in indigo with a silver rim.
         // Four minutes a day, so it is rare and meant to be noticed.
         decade: {
+            // A cyclic palette does not suit this family: its basins all converge
+            // in very nearly the same number of steps, so the field hardly moves
+            // across the ramp and a traverse paints the whole figure one colour
+            // (measured: the palette version read as flat grey). The colour here
+            // comes from the rim's hue turning with depth instead, over a ramp
+            // held in the indigo family.
             stops: [
                 [0, 8, 8, 16],
                 [0.02, 12, 12, 26],
@@ -349,10 +355,6 @@
                 [0.28, 74, 74, 120],
                 [0.4, 52, 52, 86],
                 [0.55, 96, 106, 152],
-                // The top of this ramp is where a point that never converges
-                // lands, and a near-white there paints whole regions as one
-                // bright wash. Held to a blue it stays a bright region with a
-                // colour in it, and the hue turn above it has something to act on.
                 [0.75, 132, 146, 196],
                 [1, 158, 178, 224]
             ],
@@ -422,7 +424,9 @@
         square: { kind: 'lattice', scale: 0.95, cx: 0.5, cy: 0.5, rimTurn: 2.7 },
         // A tenth-power Newton star: ten basins meeting at the centre, framed
         // off-centre on the lace of their walls rather than on one flat basin.
-        decade: { kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62, rimTurn: 3.2 },
+        decade: {
+            kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62, rimTurn: 3.2
+        },
         // Families whose own dynamics change shape inside a fixed frame: the
         // parameter lives in the map, not in the window, so nothing has to
         // move across the plane for the geometry to change.
