@@ -52,6 +52,11 @@
   --signal: #d14949;
   --amber: #f0a64a;
   --ice: #8fd0e8;
+  // The outline that keeps the footer's type legible over the fractal field.
+  // Dark, and close to the field's own darks, so it reads as an edge rather
+  // than as a second colour on the page.
+  --footer-halo: rgba(4, 7, 11, 0.9);
+  --footer-halo-soft: rgba(4, 7, 11, 0.72);
   --font-display: 'Syne', sans-serif;
   --font-body: 'Instrument Sans', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
@@ -1766,6 +1771,29 @@ html.js .footer-transmission {
   opacity: 1;
   transition: border-color 0.9s ease, filter 0.9s ease;
 
+  // Every glyph in the footer carries a dark outline, so the links keep an edge
+  // whatever colour the field behind them has reached. Under no circumstances
+  // is the type resized, reweighted or tracked out to compensate, and that is
+  // deliberate: shadows draw only outside the letterforms, where a stroke
+  // (or a smaller, bolder cut) would eat into them. All the outlined text sits
+  // inside this element, so the shadow is set once and inherited.
+  // Eight hard offsets draw the edge itself, then two soft passes fill the gap
+  // between letter and field. The field's brightest bands are a pale cream, and
+  // an edge alone disappears into them at these sizes, so the halo carries as
+  // much of the separation as the outline does.
+  text-shadow:
+    -1px 0 0 var(--footer-halo),
+    1px 0 0 var(--footer-halo),
+    0 -1px 0 var(--footer-halo),
+    0 1px 0 var(--footer-halo),
+    -1px -1px 0 var(--footer-halo),
+    1px -1px 0 var(--footer-halo),
+    -1px 1px 0 var(--footer-halo),
+    1px 1px 0 var(--footer-halo),
+    0 0 2px var(--footer-halo),
+    0 0 5px var(--footer-halo),
+    0 0 10px var(--footer-halo-soft);
+
   // A faint Julia field behind the footer, painted by footer-fractal.js. The
   // intensity lives in the canvas alpha, so this only decides how present the
   // layer is overall; it stays under the links at every width.
@@ -2379,6 +2407,9 @@ body.is-boosted #site {
 }
 
 .footer-wordmark {
+  // The watermark is its own stroke, drawn in the field's own colour: a dark
+  // halo under it would only thicken a mark that is meant to be a ghost.
+  text-shadow: none;
   position: absolute;
   left: 50%;
   bottom: -0.12em;

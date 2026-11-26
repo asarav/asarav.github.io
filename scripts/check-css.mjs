@@ -62,6 +62,31 @@ const DOCUMENTED_VALUE_CHANGES = [
   }
 ];
 
+// Properties that arrived on a rule the baseline already had. Each one is a
+// deliberate addition, so an accidental new declaration still fails the gate.
+const DOCUMENTED_PROPERTY_ADDITIONS = [
+  {
+    selector: ':root',
+    property: '--footer-halo',
+    reason: 'the footer type carries a dark outline over the fractal field; the colour is a token so the outline is set in one place'
+  },
+  {
+    selector: ':root',
+    property: '--footer-halo-soft',
+    reason: 'the soft outer pass of the same footer outline, held apart from the hard edge'
+  },
+  {
+    selector: '#footer',
+    property: 'text-shadow',
+    reason: 'the footer links must stay legible over any of the nine families, so every glyph is given a dark outline; shadows only, since a stroke would thin the letterforms'
+  },
+  {
+    selector: '.footer-wordmark',
+    property: 'text-shadow',
+    reason: 'the watermark opts out of the footer outline: it is a ghost stroke in the field colour and a dark halo would thicken it'
+  }
+];
+
 const DOCUMENTED_PROPERTY_REMOVALS = [
   { selector: ':root', property: '--ink-soft', reason: 'never read by any stylesheet or script' },
   { selector: ':root', property: '--surface-raised', reason: 'never read by any stylesheet or script' },
@@ -169,7 +194,11 @@ for (const sheet of sheets) {
       }
     }
     for (const property of now.keys()) {
-      if (!props.has(property)) failures.push(`${sheet.name}: ${selector} gained ${property}: ${now.get(property)}`);
+      if (props.has(property)) continue;
+      const documentedAddition = isMain && DOCUMENTED_PROPERTY_ADDITIONS.some(
+        (entry) => entry.selector === selector && entry.property === property
+      );
+      if (!documentedAddition) failures.push(`${sheet.name}: ${selector} gained ${property}: ${now.get(property)}`);
     }
   }
   for (const key of current.keys()) {
