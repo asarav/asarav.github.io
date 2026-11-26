@@ -711,11 +711,13 @@
             // the same field, softened over about a pixel so the seam stays a
             // seam.
             '    float plate = smoothstep(-0.04, 0.04, s);',
-            '    float disc = (1.0 - smoothstep(0.93, 1.0, abs(q.x))) *',
-            '                 (1.0 - smoothstep(0.93, 1.0, abs(q.y)));',
-            '    return vec2((0.05 + 0.20 * plate + 0.16 * wash +',
-            '                0.26 * node) * disc,',
-            '                max(node * 0.80, plate * 0.20) * disc);',
+            // No plate mask: the wave is periodic, so it can run off the edges
+            // of the band and read as a surface rather than as a rectangle of
+            // one cropped inside it, which is what a masked plate looked like
+            // once the framing was tightened.
+            '    return vec2(0.05 + 0.20 * plate + 0.16 * wash +',
+            '                0.26 * node,',
+            '                max(node * 0.80, plate * 0.20));',
             '}'
         ].join('\n');
     }
@@ -2146,12 +2148,9 @@
             const node = 1 / (1 + v * 130);
             const wash = 1 / (1 + v * 6.0);
             const plate = smoothstep(-0.04, 0.04, s);
-            const disc = (1 - smoothstep(0.93, 1, Math.abs(qx))) *
-                (1 - smoothstep(0.93, 1, Math.abs(qy)));
+            edgeOf = Math.max(node * 0.80, plate * 0.20);
 
-            edgeOf = Math.max(node * 0.80, plate * 0.20) * disc;
-
-            return (0.05 + 0.20 * plate + 0.16 * wash + 0.26 * node) * disc;
+            return 0.05 + 0.20 * plate + 0.16 * wash + 0.26 * node;
         }
 
         if (figure.kind === 'cellular') {
