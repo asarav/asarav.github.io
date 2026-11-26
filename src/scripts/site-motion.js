@@ -21,6 +21,7 @@
     }];
     let rainMultiplier = 1;
     let weatherEffectScene = null;
+    let weatherEffectStarDensity = 0;
     let weatherEffectStops = [];
     let rainBoostUntil = 0;
     let matrixRainCanvas = null;
@@ -391,10 +392,17 @@
         );
     }
 
-    function startWeatherCanvas(container, type) {
+    function startWeatherCanvas(container, type, options) {
         if (reducedMotion.matches) {
             return function () {};
         }
+
+        // How full the layer is drawn, 0 to 1. Only stars use it: the sky is
+        // painted at its full count under a clear night and thinned out as
+        // cloud and falling weather take it over, rather than switched off.
+        const density = options && typeof options.density === 'number'
+            ? Math.max(0, Math.min(1, options.density))
+            : 1;
 
         const isBody = container === document.body;
         const canvas = document.createElement('canvas');
@@ -529,10 +537,15 @@
                     ))
                 );
             } else if (type === 'stars') {
-                maxParticles = Math.min(
+                const sky = Math.min(
                     360,
                     Math.max(35, Math.round(canvas.width * canvas.height / 4000))
                 );
+
+                // Two stars survive the heaviest sky: a covered night is still
+                // a night, and the layer should read as cloud moving over
+                // stars rather than as a field that failed to load.
+                maxParticles = Math.max(2, Math.round(sky * density));
             } else {
                 maxParticles = Math.min(
                     140,
@@ -2012,10 +2025,33 @@
         setWeatherScene({ code: null });
     }
 
-    function setWeatherEffect(scene) {
+    // How much of the starfield each sky leaves. Clear keeps all of it, cloud
+    // takes most of it, and falling weather leaves a token few: the stars are
+    // there to say it is night, so they thin out instead of switching off.
+    const STAR_DENSITY = {
+        storm: 0.03,
+        rain: 0.04,
+        snow: 0.05,
+        fog: 0.1,
+        cloudy: 0.3
+    };
+
+    function starDensityFor(effectScene) {
+        if (!effectScene) {
+            return 1;
+        }
+
+        const density = STAR_DENSITY[effectScene];
+
+        return typeof density === 'number' ? density : 0.06;
+    }
+
+    function setWeatherEffect(scene, starDensity) {
         const pageHero = document.querySelector('#content > .page-top');
+        const stars = starDensity || 0;
 
         if (weatherEffectScene === scene &&
+            weatherEffectStarDensity === stars &&
             weatherEffectStops.length > 0) {
             return;
         }
@@ -2025,19 +2061,40 @@
         });
         weatherEffectStops = [];
         weatherEffectScene = scene;
+        weatherEffectStarDensity = stars;
 
-        if (reducedMotion.matches ||
-            ['rain', 'snow', 'stars', 'fog', 'cloudy', 'storm']
-                .indexOf(scene) === -1) {
+        if (reducedMotion.matches) {
             return;
         }
 
-        weatherEffectStops.push(startWeatherCanvas(document.body, scene));
-
-        if (pageHero &&
+        const heroEffects = pageHero &&
             (pageHero.classList.contains('home-hero') ||
-                pageHero.classList.contains('about-hero'))) {
-            weatherEffectStops.push(startWeatherCanvas(pageHero, scene));
+                pageHero.classList.contains('about-hero'));
+
+        if (['rain', 'snow', 'fog', 'cloudy', 'storm']
+            .indexOf(scene) !== -1) {
+            weatherEffectStops.push(startWeatherCanvas(document.body, scene));
+
+            if (heroEffects) {
+                weatherEffectStops.push(startWeatherCanvas(pageHero, scene));
+            }
+        }
+
+        // Stars last, and deliberately: each canvas is inserted at the front of
+        // its container, so the one started later ends up earlier in the DOM
+        // and, at the same z-index, paints underneath. That is the order the
+        // sky has — the rain and the cloud pass over the stars, never the other
+        // way round.
+        if (stars > 0) {
+            weatherEffectStops.push(startWeatherCanvas(
+                document.body, 'stars', { density: stars }
+            ));
+
+            if (heroEffects) {
+                weatherEffectStops.push(startWeatherCanvas(
+                    pageHero, 'stars', { density: stars }
+                ));
+            }
         }
     }
 
@@ -2047,8 +2104,8 @@
                 stop();
             });
             weatherEffectStops = [];
-        } else if (weatherEffectScene) {
-            setWeatherEffect(weatherEffectScene);
+        } else if (weatherEffectScene || weatherEffectStarDensity > 0) {
+            setWeatherEffect(weatherEffectScene, weatherEffectStarDensity);
         }
     });
 
@@ -2209,7 +2266,13 @@
         const scene = getWeatherScene(data);
         const currentTimeScene = getTimeScene(data);
         const precipitation = getWeatherEffectScene(data);
-        const effectScene = precipitation || (scene === 'night' ? 'stars' : null);
+        // Stars are no longer a scene of their own: on a night the sky is
+        // always drawn, and the weather above it decides how much of it
+        // survives rather than replacing the whole field.
+        const effectScene = precipitation;
+        const starDensity = currentTimeScene === 'night'
+            ? starDensityFor(precipitation)
+            : 0;
 
         setWeatherRefreshing(false);
         updateWeatherDisplay(data, condition, temp);
@@ -2230,11 +2293,11 @@
             // during the transition, and defer the new canvas until it ends.
             setWeatherEffect(null);
             runTimelapse(previousScene, applyScene).then(function () {
-                setWeatherEffect(effectScene);
+                setWeatherEffect(effectScene, starDensity);
             });
         } else {
             applyScene();
-            setWeatherEffect(effectScene);
+            setWeatherEffect(effectScene, starDensity);
         }
 
         storeScene(scene, window.location.pathname || '/', currentTimeScene);
