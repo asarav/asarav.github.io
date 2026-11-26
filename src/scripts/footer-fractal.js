@@ -211,8 +211,9 @@
             edgeLow: [208, 160, 124],
             rimHot: [242, 226, 198],
             // The copper rim and its slate fog are the footer's oldest look, and
-            // full strength reads as too rich at the band's opacity.
-            tone: { sat: 0.72 }
+            // full strength reads as too rich at the band's opacity: the ramp is
+            // eased towards grey, then turned in hue band by band.
+            tone: { bands: 12, bandDepth: 0.46, hueCycle: 0.30, chroma: 1.22, sat: 0.72 }
         },
         // The ordinary odd minute: the Burning Ship's crags, in the cool
         // slate-and-steel palette.
@@ -232,7 +233,7 @@
             ],
             edgeLow: [150, 178, 196],
             rimHot: [214, 232, 244],
-            tone: { sat: 0.72 }
+            tone: { bands: 12, bandDepth: 0.46, hueCycle: 0.30, chroma: 1.22, sat: 0.72 }
         },
         // A prime minute: an Apollonian packing, circles inside circles, with
         // the only mint rim in the set.
@@ -378,7 +379,10 @@
     const FIGURES = {
         even: {
             kind: 'julia', floor: 0.10,
-            lift: [0.996, -0.036, 0.126, -0.017]
+            lift: [0.996, -0.036, 0.126, -0.017],
+            // A long hue turn paired with a gentle push: the interference lace
+            // arrives in several hues at a muted chroma, rather than one copper.
+            rimTurn: 1.0, rimPush: 1.55
         },
         // A circle packing: every inversion step puts the point inside a smaller
         // tangent circle, and the gap it finally lands in is the figure. The
@@ -406,7 +410,8 @@
         odd: {
             kind: 'ship', scale: 0.042, cx: -1.755, cy: -0.028,
             tail: 90, bend: 0.18, stretch: 0.06, hinge: 0, inner: 0.34,
-            floor: 0.10, lift: [1.073, 0.103, 0.018, -0.010]
+            floor: 0.10, lift: [1.073, 0.103, 0.018, -0.010],
+            rimTurn: 0.9, rimPush: 1.55
         },
         septile: { kind: 'newton', scale: 0.8, cx: 0, cy: 0 },
         // A standing wave on a square plate: the bright curves are the nodal
@@ -1329,6 +1334,12 @@
         ];
     }
 
+    // The chroma a variant's turned rim is pushed by: the older arrangement
+    // tied it to the turn, and a variant may now name its own.
+    function rimPushFor(figure) {
+        return figure.rimPush || 1 + (figure.rimTurn || 0) * 0.80;
+    }
+
     function pushChroma(rgb, push) {
         const lum = 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2];
 
@@ -1470,6 +1481,10 @@
             // How far the rim's hue turns across the field, in radians. Zero on
             // the older variants, which keep their one rim colour.
             'const float TINT = ' + f(figure.rimTurn || 0) + ';',
+            // How hard the turned rim is pushed away from grey. Held apart from
+            // the turn itself, so a variant can carry many hues while staying
+            // muted: the two escape-time sets want variety, not saturation.
+            'const float TINT_PUSH = ' + f(rimPushFor(figure)) + ';',
             '',
             // Screen blending, per channel: the fog and the edges each keep
             // their own weight where two layers cross.
@@ -1502,7 +1517,7 @@
             'vec3 tinted(vec3 c, float turn) {',
             '    vec3 t = hueTurn(turn) * c;',
             '    float lum = dot(t, vec3(0.299, 0.587, 0.114));',
-            '    float push = 1.0 + TINT * 0.80;',
+            '    float push = TINT_PUSH;',
             '    return max(vec3(0.0), lum + (t - lum) * push);',
             '}',
             '',
@@ -2631,7 +2646,7 @@
             const turn = (fog - 0.25) * rimTurn + (u - 0.5) * rimTurn * 0.35;
             // Rotate, then push away from the colour's own luma, as `tinted`
             // does in the shader.
-            const push = 1 + rimTurn * 0.80;
+            const push = rimPushFor(active.figure);
             const edgeTint = rimTurn
                 ? pushChroma(rotateHue(edgeLow[0], edgeLow[1], edgeLow[2],
                     turn / (2 * Math.PI)), push)
