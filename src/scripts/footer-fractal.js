@@ -182,8 +182,34 @@
     // The iteration depth is shared, so the pixel budget and the cadence guard
     // below carry over unchanged.
     const VARIANTS = {
-        // The ordinary even minute, and the look the footer has always had:
-        // two different Julia seeds interfering, slate fog, copper rim.
+        // The footer's original field, before the eight families existed: the
+        // same two Julia seeds, the four-stop navy fog and the single copper rim,
+        // with no morph at all. Its motion is the camera's — the slow turn and
+        // breathe the later families gave up — and its palette is the one this
+        // site shipped with, so it reads as the old footer rather than as a
+        // recoloured `even`.
+        primal: {
+            layers: [
+                {
+                    cx: -0.74543, cy: 0.11301,
+                    rot: -0.16, zoom: 0.22, ox: 0, oy: 0.03
+                },
+                {
+                    cx: -0.39054, cy: -0.58679,
+                    rot: 0.75, zoom: 0.6, ox: 0.1, oy: -0.07
+                }
+            ],
+            stops: [
+                [0, 11, 15, 21],
+                [0.35, 23, 31, 41],
+                [0.7, 41, 54, 68],
+                [1, 70, 92, 112]
+            ],
+            edgeLow: [208, 160, 124],
+            rimHot: [208, 160, 124]
+        },
+        // The ordinary even minute: the same two Julia seeds, now morphing, on
+        // a palette that cycles through maroon, gold, ice and blue.
         even: {
             layers: [
                 {
@@ -417,6 +443,14 @@
         // the blobs come out unequal and the hierarchy reflows in place; a pole
         // that swung round the disk was what made this read as a pan.
         prime: { kind: 'apollonian', scale: 1.0, cx: 0, cy: 0, rimTurn: 3.0 },
+        // The original figure: the Julia interference of the footer's first
+        // build, held still in its own geometry and moved only by the camera.
+        primal: {
+            kind: 'julia', floor: 0.10, static: true,
+            lift: [0.996, -0.036, 0.126, -0.017],
+            viewTurn: { angle: 0.16, period: 150000 },
+            viewBreathe: { scale: 0.10, period: 210000 }
+        },
         // A Sierpiński lattice: the cell that is cut away at each level keeps
         // its own lit rim. With the phase the hole in that cell changes radius,
         // its corners round off, the cut's own ratio widens and tightens, the
@@ -1266,6 +1300,11 @@
         { id: 'quintile', test: function (n) { return n > 0 && n % 5 === 0; } },
         { id: 'square', test: isSquare },
         { id: 'even', test: function (n) { return n % 2 === 0; } },
+        // The original figure's class: an odd third. It comes after the rarer
+        // classes and after `even`, so it takes no minute from any family that
+        // already had one — a third of the odd minutes is about a twelfth of the
+        // day, rare enough to be a sighting and often enough to be met.
+        { id: 'primal', test: function (n) { return n > 0 && n % 3 === 0; } },
         { id: 'odd', test: function () { return true; } }
     ];
 
@@ -2016,16 +2055,32 @@
         return p < 0.5 ? 0.5 + 2 * p : 1.5 - 2 * p;
     }
 
+    // A family may bring its own camera motion. The eight that morph hold the
+    // window still, because a turning window makes their geometry unreadable;
+    // the original figure is static, so its own slow turn and breathe are what
+    // make it move, and they are what `primal` asks for here.
     function viewAt(now) {
+        const figure = active ? active.figure : null;
+        const turn = (figure && figure.viewTurn) || VIEW_TURN;
+        const breathe = (figure && figure.viewBreathe) || VIEW_BREATHE;
         const angle = VIEW_ORIGIN.angle +
-            VIEW_TURN.angle * Math.sin(now / VIEW_TURN.period * TAU);
+            turn.angle * Math.sin(now / turn.period * TAU);
 
         return {
             cos: Math.cos(angle),
             sin: Math.sin(angle),
-            scale: VIEW_ORIGIN.scale * (1 + VIEW_BREATHE.scale *
-                Math.cos(now / VIEW_BREATHE.period * TAU))
+            scale: VIEW_ORIGIN.scale * (1 + breathe.scale *
+                Math.cos(now / breathe.period * TAU))
         };
+    }
+
+    // The phase a family should be drawn at. A static family is pinned to the
+    // undeformed middle of the cycle, so the morph never touches it and all the
+    // motion it has is the camera's.
+    function morphFor(now) {
+        return active && active.figure && active.figure.static
+            ? 0.5
+            : morphAt(now);
     }
 
     function markReady() {
@@ -2048,13 +2103,13 @@
 
     function draw(now) {
         if (!gpu.target) {
-            gpu.direct(driftAt(now), viewAt(now), morphAt(now));
+            gpu.direct(driftAt(now), viewAt(now), morphFor(now));
             markReady();
 
             return;
         }
 
-        gpu.field(driftAt(now), viewAt(now), primed ? FIELD_WEIGHT : 1, morphAt(now));
+        gpu.field(driftAt(now), viewAt(now), primed ? FIELD_WEIGHT : 1, morphFor(now));
         gpu.present();
         primed = true;
         markReady();
@@ -2729,7 +2784,7 @@
 
         stop();
         fallbackDrift = driftAt(performance.now());
-        fallbackMorph = morphAt(performance.now());
+        fallbackMorph = morphFor(performance.now());
         fallbackView = viewAt(performance.now());
         fallbackPixel = (SPAN_X * (height / width)) / height /
             fallbackView.scale;
