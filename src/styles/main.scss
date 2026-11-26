@@ -1780,22 +1780,21 @@ html.js .footer-transmission {
   // deliberate: shadows draw only outside the letterforms, where a stroke
   // (or a smaller, bolder cut) would eat into them. All the outlined text sits
   // inside this element, so the shadow is set once and inherited.
-  // Eight hard offsets draw the edge itself, then two soft passes fill the gap
-  // between letter and field. The field's brightest bands are a pale cream, and
-  // an edge alone disappears into them at these sizes, so the halo carries as
-  // much of the separation as the outline does.
+  // The thinnest edge the renderer can draw: half-pixel offsets, which is a
+  // hairline on a 2x screen and rounds to a single pixel otherwise. Anything
+  // finer is rounded out of existence, so this is the floor rather than a
+  // preference. One soft pass at 1.5px remains so the edge does not simply
+  // vanish on a 1x display.
   text-shadow:
-    -1px 0 0 var(--footer-halo),
-    1px 0 0 var(--footer-halo),
-    0 -1px 0 var(--footer-halo),
-    0 1px 0 var(--footer-halo),
-    -1px -1px 0 var(--footer-halo),
-    1px -1px 0 var(--footer-halo),
-    -1px 1px 0 var(--footer-halo),
-    1px 1px 0 var(--footer-halo),
-    0 0 2px var(--footer-halo),
-    0 0 5px var(--footer-halo),
-    0 0 10px var(--footer-halo-soft);
+    -0.5px 0 0 var(--footer-halo),
+    0.5px 0 0 var(--footer-halo),
+    0 -0.5px 0 var(--footer-halo),
+    0 0.5px 0 var(--footer-halo),
+    -0.5px -0.5px 0 var(--footer-halo),
+    0.5px -0.5px 0 var(--footer-halo),
+    -0.5px 0.5px 0 var(--footer-halo),
+    0.5px 0.5px 0 var(--footer-halo),
+    0 0 1.5px var(--footer-halo-soft);
 
   // A faint Julia field behind the footer, painted by footer-fractal.js. The
   // intensity lives in the canvas alpha, so this only decides how present the
