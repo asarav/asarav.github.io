@@ -55,8 +55,11 @@
   // The outline that keeps the footer's type legible over the fractal field.
   // Dark, and close to the field's own darks, so it reads as an edge rather
   // than as a second colour on the page.
-  --footer-halo: rgba(4, 7, 11, 0.9);
-  --footer-halo-soft: rgba(4, 7, 11, 0.72);
+  // Subtle on purpose: the outline is there to keep the type off the field's
+  // brightest bands, not to draw attention to itself, so both passes sit well
+  // under half opacity and the edge reads as a shadow the letters cast.
+  --footer-halo: rgba(4, 7, 11, 0.42);
+  --footer-halo-soft: rgba(4, 7, 11, 0.26);
   --font-display: 'Syne', sans-serif;
   --font-body: 'Instrument Sans', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
