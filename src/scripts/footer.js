@@ -118,6 +118,42 @@ document.addEventListener('DOMContentLoaded', function () {
             "We can only see a short distance ahead, but we can see plenty there that needs to be done. — Alan Turing",
             // Mary Shelley (Frankenstein)
             "Nothing is so painful to the human mind as a great and sudden change. — Mary Shelley",
+            // Heraclitus (Fragment 119)
+            "ἦθος ἀνθρώπῳ δαίμων. — Ἡράκλειτος",
+            // Aristotle (Metaphysics I.1)
+            "Πάντες ἄνθρωποι τοῦ εἰδέναι ὀρέγονται φύσει. — Ἀριστοτέλης",
+            // Spinoza (Tractatus Politicus I.4)
+            "Non ridere, non lugere, neque detestari, sed intelligere. — Spinoza",
+            // Hegel (Philosophy of Right, preface)
+            "Die Eule der Minerva beginnt erst mit der einbrechenden Dämmerung ihren Flug. — Hegel",
+            // Wittgenstein (Tractatus Logico-Philosophicus 5.6)
+            "Die Grenzen meiner Sprache bedeuten die Grenzen meiner Welt. — Wittgenstein",
+            // Vladimir Nabokov (Speak, Memory)
+            "The cradle rocks above an abyss, and common sense tells us that our existence is but a brief crack of light between two eternities of darkness. — Vladimir Nabokov",
+            // Rainer Maria Rilke (Duino Elegies, the First)
+            "Denn das Schöne ist nichts als des Schrecklichen Anfang. — Rainer Maria Rilke",
+            // Samuel Beckett (Worstward Ho)
+            "Try again. Fail again. Fail better. — Samuel Beckett",
+            // Fernando Pessoa (Tabacaria)
+            "Não sou nada. Nunca serei nada. Não posso querer ser nada. À parte isso, tenho em mim todos os sonhos do mundo. — Fernando Pessoa",
+            // Herman Melville (Moby-Dick)
+            "It is not down in any map; true places never are. — Herman Melville",
+            // Isaac Newton (letter to Robert Hooke, 1675)
+            "If I have seen further it is by standing on the shoulders of Giants. — Isaac Newton",
+            // Richard Feynman (Cargo Cult Science, 1974)
+            "The first principle is that you must not fool yourself — and you are the easiest person to fool. — Richard Feynman",
+            // Henri Poincaré (Science and Hypothesis)
+            "Science is built up with facts, as a house is with stones. But a collection of facts is no more a science than a heap of stones is a house. — Henri Poincaré",
+            // Arthur Eddington (The Nature of the Physical World)
+            "Something unknown is doing we don't know what. — Arthur Eddington",
+            // Wang Yangming (傳習錄)
+            "知是行之始，行是知之成。 — 王陽明",
+            // Pierre-Simon de Laplace (Essai philosophique sur les probabilités)
+            "La théorie des probabilités n'est au fond que le bon sens réduit au calcul. — Pierre-Simon de Laplace",
+            // Emil Cioran (De l'inconvénient d'être né)
+            "La lucidité est la blessure la plus rapprochée du soleil. — Emil Cioran",
+            // Marcel Proust (Le Temps retrouvé)
+            "Les vrais paradis sont les paradis qu'on a perdus. — Marcel Proust",
         ];
 
         // Guarantee every quote is shown: rotate through them in order across
