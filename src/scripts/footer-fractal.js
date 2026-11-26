@@ -329,16 +329,20 @@
                 [0.2, 54, 54, 96],
                 [0.28, 74, 74, 120],
                 [0.4, 52, 52, 86],
-                [0.55, 104, 104, 138],
-                [0.75, 158, 158, 186],
-                [1, 220, 220, 236]
+                [0.55, 96, 106, 152],
+                // The top of this ramp is where a point that never converges
+                // lands, and a near-white there paints whole regions as one
+                // bright wash. Held to a blue it stays a bright region with a
+                // colour in it, and the hue turn above it has something to act on.
+                [0.75, 132, 146, 196],
+                [1, 158, 178, 224]
             ],
             // A chromatic pair rather than near-white: with a hue that turns by
             // depth, the walls of the ten basins read in different colours, which
             // a silver rim could not do.
             edgeLow: [176, 198, 244],
-            rimHot: [238, 242, 252],
-            tone: { bands: 16, bandDepth: 0.52, hueCycle: 0.66, chroma: 1.9 }
+            rimHot: [198, 214, 250],
+            tone: { bands: 16, bandDepth: 0.52, hueCycle: 0.46, chroma: 1.55 }
         },
         // A power of two: a cellular tessellation, every cell a lit pane with
         // its own glowing wall, in cold cyan with an ice-blue rim.
