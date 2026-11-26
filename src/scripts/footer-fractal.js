@@ -373,9 +373,10 @@
         prime: { kind: 'apollonian', scale: 1.0, cx: 0, cy: 0 },
         // A Sierpiński lattice: the cell that is cut away at each level keeps
         // its own lit rim. With the phase the hole in that cell changes radius,
-        // its corners round off, and the cut's own ratio widens and tightens,
-        // so every rim in the hierarchy re-spaces and re-shapes without the
-        // window moving.
+        // its corners round off, the cut's own ratio widens and tightens, the
+        // hole drifts away from its cell's centre, and every level's grid is
+        // sheared against the level that spawned it, so the hierarchy fans into
+        // rhombi instead of only breathing. The window never moves.
         square: { kind: 'lattice', scale: 0.95, cx: 0.5, cy: 0.5 },
         // A tenth-power Newton star: ten basins meeting at the centre, framed
         // off-centre on the lace of their walls rather than on one flat basin.
@@ -394,21 +395,27 @@
         },
         septile: { kind: 'newton', scale: 0.8, cx: 0, cy: 0 },
         // A standing wave on a square plate: the bright curves are the nodal
-        // lines, where the two modal solutions cancel. Both mode numbers are
-        // real and drift with the phase, so the whole figure of curves is seen
-        // to flow and re-cross rather than to slide.
+        // lines, where the two modal solutions cancel, and the plates either
+        // side of them are lit apart. The two mode numbers move in opposite
+        // directions with the phase, so the plate changes proportion — cells
+        // that were tall become wide — rather than only changing scale, which
+        // is all that equal-step drift ever amounted to. The weight of the
+        // second solution swings geometrically as well, so the cells between
+        // the curves merge and split as the plate turns over.
         quintile: {
             kind: 'nodal', scale: 0.62, cx: 0, cy: 0,
-            n: 6, m: 9, dn: 1.1, dm: 1.5
+            n: 6, m: 9, dn: 2.2, dm: -2.2, n2: 11, m2: 5, sway: 0.85
         },
         // A cellular tessellation: one seed per cell, each wandering inside
         // its own cell, and cells dividing in their own turn as the phase turns,
         // so the mosaic changes its number of cells instead of restating the
-        // same grid. Cell size is set by the scale, so the band carries a mosaic
-        // rather than a single rosette in the middle of it.
+        // same grid. Every cell carries its own tone, hashed from the cell that
+        // won it, so the mosaic reads as panes of different glass rather than
+        // one flat wash. Cell size is set by the scale, so the band carries a
+        // mosaic rather than a single rosette in the middle of it.
         binary: {
             kind: 'cellular', scale: 4.4, cx: 0, cy: 0,
-            reach: 0.30, swing: 0.18, turn: 1.15
+            reach: 0.30, swing: 0.24, turn: 1.60
         }
     };
         // The escape-time sets are framed into their boundary detail, not on
@@ -670,18 +677,41 @@
                 f(figure.cx) + ', ' + f(figure.cy) + ');',
             '    float n = ' + f(figure.n) + ' + mo * ' + f(figure.dn) + ';',
             '    float m = ' + f(figure.m) + ' + mo * ' + f(figure.dm) + ';',
+            // The second modal solution is mixed in with a weight that swings
+            // geometrically with the phase, so the plate spends as long growing
+            // one set of cells as the other and never parks at an end. At equal
+            // weight this is the symmetric plate; as one side gains, the nodal
+            // curves sweep across and the cells between them merge and split, so
+            // the plate changes its number and size of cells instead of only
+            // sliding. The field is scaled by the peak the weight allows, so the
+            // band keeps its brightness across the swing.
+            '    float weight = exp(mo * ' + f(figure.sway) + ');',
+            // The second plate is a different mode, not the first one with its
+            // axes exchanged: a transposed pair lets both ends of the cycle
+            // settle onto the same grid, which is why the figure used to read as
+            // static. Two incommensurate grids beat against each other instead,
+            // so every weight in the swing gives a different set of cells.
             '    float a = cos(n * 3.14159265 * q.x) * cos(m * 3.14159265 * q.y);',
-            '    float b = cos(m * 3.14159265 * q.x) * cos(n * 3.14159265 * q.y);',
-            '    float v = abs(a - b);',
+            '    float b = cos(' + f(figure.n2) + ' * 3.14159265 * q.x) *',
+            '        cos(' + f(figure.m2) + ' * 3.14159265 * q.y);',
+            '    float s = a - b * weight;',
+            '    float v = abs(s) * (2.0 / (1.0 + weight));',
             // The line itself, and the glow that falls away from it: the plate
             // is glass, so the nodal curve reads as an etched edge against a
             // faintly lit cell rather than as a hard stroke.
             '    float node = 1.0 / (1.0 + v * 70.0);',
             '    float wash = 1.0 / (1.0 + v * 5.0);',
+            // The two sides of the plate are lit apart and the nodal curve
+            // between them glows, so this reads as a plate of cells changing
+            // hands, not as a drawing of lines on glass. `plate` is the sign of
+            // the same field, softened over about a pixel so the seam stays a
+            // seam.
+            '    float plate = smoothstep(-0.04, 0.04, s);',
             '    float disc = (1.0 - smoothstep(0.93, 1.0, abs(q.x))) *',
             '                 (1.0 - smoothstep(0.93, 1.0, abs(q.y)));',
-            '    return vec2((0.06 + 0.30 * wash + 0.30 * node) * disc,',
-            '                max(node * 0.75, wash * 0.18) * disc);',
+            '    return vec2((0.05 + 0.17 * plate + 0.16 * wash +',
+            '                0.26 * node) * disc,',
+            '                max(node * 0.80, plate * 0.20) * disc);',
             '}'
         ].join('\n');
     }
@@ -711,6 +741,9 @@
                 f(figure.swing) + ';',
             '    float best = 1.0e9;',
             '    float second = 1.0e9;',
+            // The cell that wins the point, so the pane can be given a tone of
+            // its own rather than the whole mosaic sharing one ramp.
+            '    vec2 win = vec2(0.0);',
             '',
             '    for (int y = -1; y <= 1; y += 1) {',
             '        for (int x = -1; x <= 1; x += 1) {',
@@ -726,6 +759,7 @@
             '            if (dd < best) {',
             '                second = best;',
             '                best = dd;',
+            '                win = g;',
             '            } else {',
             '                second = min(second, dd);',
             '            }',
@@ -755,9 +789,15 @@
             '    }',
             '',
             '    float glow = 1.0 - smoothstep(0.05, 0.72, best);',
-            '    float wall = 1.0 - smoothstep(0.0, 0.09, second - best);',
-            '    return vec2(0.04 + 0.40 * glow * glow + 0.10 * glow,',
-            '                max(wall * 0.85, glow * 0.22));',
+            '    float wall = 1.0 - smoothstep(0.0, 0.07, second - best);',
+            // Panes of different glass: the tone is hashed from the winning
+            // cell, so the body of the mosaic varies cell to cell while the
+            // seams stay the brightest thing in it.
+            '    float tone = fract(sin(dot(win, vec2(12.9898, 78.233))) *',
+            '        43758.5453);',
+            '    float body = glow * glow * (0.55 + 0.55 * tone);',
+            '    return vec2(0.03 + 0.34 * body + 0.11 * glow,',
+            '                max(wall * 0.92, glow * 0.20));',
             '}'
         ].join('\n');
     }
@@ -868,23 +908,28 @@
 
     // A Sierpiński lattice: at every level the middle cell of the three-by-three
     // is cut away, and the hole inside that cell is what the phase opens and
-    // closes. The phase also moves the cut itself, so the three-by-three becomes
-    // a tighter or wider grid, and it takes the hole's corners off, so every rim
-    // in the hierarchy re-spaces and re-shapes rather than only the top-level
-    // hole changing size. Every cut cell keeps a lit rim, so the hierarchy reads
-    // as nested rectangles at every scale. The recursion stops at the scale the
+    // closes. The cut cell's centre drifts with the phase, so the hole leaves
+    // the middle of its cell; the grid the cut re-spaces to tightens and widens;
+    // the hole's corners come off and grow back; and each level's grid is
+    // sheared against the level that spawned it, so the hierarchy fans into
+    // rhombi rather than only breathing. Every cut cell keeps a lit rim, so the
+    // hierarchy reads as nested rectangles at every scale. The recursion stops
+    // at the scale the
     // bitmap can resolve, so the fine levels never alias into a shimmer.
     function latticeFigure(figure) {
         return [
             'vec2 shadeAt(vec2 p) {',
             '    float mo = uMorph * 2.0 - 1.0;',
-            // Three things follow the phase, so the lattice changes shape and
+            // Five things follow the phase, so the lattice changes shape and
             // not only its light: the grid the cut re-spaces to, the radius of
-            // the hole inside each cut cell, and how far that hole's corners
-            // are taken off.
-            '    float hole = 0.52 - mo * 0.18;',
-            '    float grid = 3.0 + mo * 0.16;',
+            // the hole inside each cut cell, how far that hole's corners are
+            // taken off, how far the hole sits from its cell's centre, and how
+            // far each level's grid is sheared against its parent's.
+            '    float hole = 0.62 - mo * 0.16;',
+            '    float grid = 3.0 + mo * 0.30;',
             '    float reach = hole * 0.5;',
+            '    float shear = mo * 0.20;',
+            '    float drift = mo * 0.07;',
             // Plane units per screen pixel: a rim stays a rim, not a shimmer.
             '    float pixel = uSpanY / uSize.y / uView.z;',
             '    vec2 u = p * ' + f(figure.scale) + ' + vec2(' +
@@ -902,6 +947,11 @@
             '        }',
             '',
             '        float width = clamp(1.3 / cellPixels, 0.014, 0.34);',
+            // The hole wanders off its cell's centre, and the sign of that
+            // wander flips level by level, so neighbouring rungs of the
+            // hierarchy lean opposite ways.
+            '        vec2 off = vec2(drift, -drift) *',
+            '            (mod(float(i), 2.0) * 2.0 - 1.0);',
             '',
             '        if (cell.x == 1.0 && cell.y == 1.0) {',
             // The hole's outline: a superellipse about the cell centre, whose
@@ -911,7 +961,7 @@
             // just inside the outline, so it rounds with it. A corner term
             // subtracted from the Chebyshev radius was tried first and pulled
             // the sides inward as well, pinching the hole into a star.
-            '            vec2 d = abs(local - 0.5);',
+            '            vec2 d = abs(local - 0.5 - off);',
             // Named for the outline, not for p: the sample point this function
             // is given is already called p, and a local p would shadow it for
             // the rest of the block, so a later read of the coordinate would
@@ -935,6 +985,12 @@
             '',
             '        u = local * grid;',
             '        cells *= grid;',
+            // Each level's grid is sheared a little against its parent, so the
+            // squares below become rhombi and the hierarchy fans instead of
+            // restacking itself. A shear keeps every cell edge a straight line
+            // and every cut cell inside its parent — a rotation was tried here
+            // and broke the nesting into loose chips.
+            '        u.x += shear * u.y;',
             '    }',
             '',
             '    return vec2(0.12, 0.30);',
@@ -1727,11 +1783,19 @@
     // Where the view is at this moment: how far the plane is turned and how
     // much it is breathed in or out.
     // The shape's own phase, separate from the drift: 0..1 and back over
-    // MORPH_PERIOD, so the geometry deforms in place.
+    // MORPH_PERIOD, so the geometry deforms in place. See morphAt for why the
+    // traversal is linear in time.
     const MORPH_PERIOD = 72000;
 
     function morphAt(now) {
-        return 0.5 + 0.5 * Math.sin(now / MORPH_PERIOD * TAU);
+        // A triangle, not a sine. The figure passes through the same shapes and
+        // still reaches its ends at 18 s and 54 s, but the parameter moves at
+        // one speed the whole way: with a sine it spends most of the cycle
+        // dawdling near each end, where the shape hardly differs from second to
+        // second, and the footer reads as still.
+        const p = (now / MORPH_PERIOD) % 1;
+
+        return p < 0.5 ? 0.5 + 2 * p : 1.5 - 2 * p;
     }
 
     function viewAt(now) {
@@ -2058,17 +2122,21 @@
         if (figure.kind === 'nodal') {
             const n = figure.n + morphM * figure.dn;
             const m = figure.m + morphM * figure.dm;
+            const weight = Math.exp(morphM * figure.sway);
             const a = Math.cos(n * Math.PI * qx) * Math.cos(m * Math.PI * qy);
-            const b = Math.cos(m * Math.PI * qx) * Math.cos(n * Math.PI * qy);
-            const v = Math.abs(a - b);
+            const b = Math.cos(figure.n2 * Math.PI * qx) *
+                Math.cos(figure.m2 * Math.PI * qy);
+            const s = a - b * weight;
+            const v = Math.abs(s) * (2 / (1 + weight));
             const node = 1 / (1 + v * 70);
             const wash = 1 / (1 + v * 5);
+            const plate = smoothstep(-0.04, 0.04, s);
             const disc = (1 - smoothstep(0.93, 1, Math.abs(qx))) *
                 (1 - smoothstep(0.93, 1, Math.abs(qy)));
 
-            edgeOf = Math.max(node * 0.75, wash * 0.18) * disc;
+            edgeOf = Math.max(node * 0.80, plate * 0.20) * disc;
 
-            return (0.06 + 0.30 * wash + 0.30 * node) * disc;
+            return (0.05 + 0.17 * plate + 0.16 * wash + 0.26 * node) * disc;
         }
 
         if (figure.kind === 'cellular') {
@@ -2080,6 +2148,8 @@
             const reach = figure.reach + morphM * figure.swing;
             let best = Infinity;
             let second = Infinity;
+            let winX = 0;
+            let winY = 0;
 
             for (let y = -1; y <= 1; y += 1) {
                 for (let x = -1; x <= 1; x += 1) {
@@ -2095,6 +2165,8 @@
                     if (dd < best) {
                         second = best;
                         best = dd;
+                        winX = gx;
+                        winY = gy;
                     } else {
                         second = Math.min(second, dd);
                     }
@@ -2125,11 +2197,14 @@
             }
 
             const glow = 1 - smoothstep(0.05, 0.72, best);
-            const wall = 1 - smoothstep(0, 0.09, second - best);
+            const wall = 1 - smoothstep(0, 0.07, second - best);
+            const tone = fract(Math.sin(winX * 12.9898 + winY * 78.233) *
+                43758.5453);
+            const body = glow * glow * (0.55 + 0.55 * tone);
 
-            edgeOf = Math.max(wall * 0.85, glow * 0.22);
+            edgeOf = Math.max(wall * 0.92, glow * 0.20);
 
-            return 0.04 + 0.40 * glow * glow + 0.10 * glow;
+            return 0.03 + 0.34 * body + 0.11 * glow;
         }
 
         if (figure.kind === 'apollonian') {
@@ -2217,10 +2292,12 @@
         }
 
         if (figure.kind === 'lattice') {
-            const hole = 0.52 - morphM * 0.18;
-            const grid = 3 + morphM * 0.16;
+            const hole = 0.62 - morphM * 0.16;
+            const grid = 3 + morphM * 0.30;
             const reach = hole * 0.5;
             const shape = 6 - morphM * 4;
+            const shear = morphM * 0.20;
+            const drift = morphM * 0.07;
             let ux = qx;
             let uy = qy;
             let cells = 1;
@@ -2239,10 +2316,13 @@
                 }
 
                 const width = Math.min(0.34, Math.max(0.014, 1.3 / cellPixels));
+                const lean = (i % 2) * 2 - 1;
+                const offX = drift * lean;
+                const offY = -offX;
 
                 if (cellX === 1 && cellY === 1) {
-                    const dx = Math.abs(localX - 0.5);
-                    const dy = Math.abs(localY - 0.5);
+                    const dx = Math.abs(localX - 0.5 - offX);
+                    const dy = Math.abs(localY - 0.5 - offY);
                     const band = Math.pow(
                         Math.pow(dx, shape) + Math.pow(dy, shape), 1 / shape);
 
@@ -2263,6 +2343,8 @@
                 ux = localX * grid;
                 uy = localY * grid;
                 cells *= grid;
+
+                ux += shear * uy;
             }
 
             edgeOf = 0.30;
