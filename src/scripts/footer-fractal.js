@@ -195,45 +195,64 @@
                     rot: 0.75, zoom: 0.6, ox: 0.1, oy: -0.07
                 }
             ],
+            // One turn of the palette, cycled by `cycles` above: black through
+            // maroon, rust and gold, up through ice, then back down the blues to
+            // indigo and maroon. A cyclic palette is what separates the escape
+            // bands into distinct hues instead of one dark-to-pale hue.
             stops: [
-                [0, 10, 15, 22],
-                [0.02, 16, 24, 32],
-                [0.05, 26, 40, 52],
-                [0.09, 40, 62, 80],
-                [0.14, 58, 94, 116],
-                [0.2, 88, 130, 152],
-                [0.28, 126, 160, 178],
-                [0.4, 92, 118, 132],
-                [0.55, 140, 150, 150],
-                [0.75, 190, 190, 186],
-                [1, 224, 214, 198]
+                [0, 34, 20, 30],
+                [0.06, 54, 30, 44],
+                [0.12, 96, 40, 50],
+                [0.15, 118, 48, 44],
+                [0.18, 138, 58, 42],
+                [0.24, 208, 104, 34],
+                [0.3, 244, 170, 56],
+                [0.36, 250, 226, 158],
+                [0.43, 226, 240, 244],
+                [0.5, 152, 210, 238],
+                [0.57, 74, 148, 216],
+                [0.64, 36, 76, 168],
+                [0.72, 30, 34, 104],
+                [0.8, 58, 26, 76],
+                [0.88, 104, 34, 58],
+                [0.94, 170, 74, 42],
+                [1, 226, 132, 46]
             ],
-            edgeLow: [208, 160, 124],
-            rimHot: [242, 226, 198],
-            // The copper rim and its slate fog are the footer's oldest look, and
-            // full strength reads as too rich at the band's opacity: the ramp is
-            // eased towards grey, then turned in hue band by band.
-            tone: { bands: 12, bandDepth: 0.46, hueCycle: 0.30, chroma: 1.22, sat: 0.72 }
+            // The rim is the pale crest of the palette, as the plates carry a
+            // white-hot spine along every filament, while the hue work is the
+            // palette's own cycling rather than a turn of the rim colour.
+            edgeLow: [250, 232, 180],
+            rimHot: [252, 250, 240],
+            // The palette supplies the banding, so the ramp needs no extra bands
+            // or hue step of its own.
+            tone: { bands: 1, bandDepth: 0.06 }
         },
         // The ordinary odd minute: the Burning Ship's crags, in the cool
         // slate-and-steel palette.
         odd: {
+            // The same cycle in the cool family: deep water, steel, ice, then
+            // violet and rust before it comes back around.
             stops: [
-                [0, 9, 13, 20],
-                [0.02, 14, 20, 30],
-                [0.05, 22, 30, 46],
-                [0.09, 32, 44, 68],
-                [0.14, 46, 62, 92],
-                [0.2, 64, 84, 118],
-                [0.28, 92, 110, 142],
-                [0.4, 66, 78, 104],
-                [0.55, 116, 130, 158],
-                [0.75, 168, 182, 204],
-                [1, 208, 220, 234]
+                [0, 24, 30, 44],
+                [0.06, 32, 48, 68],
+                [0.12, 42, 82, 100],
+                [0.18, 38, 100, 120],
+                [0.24, 84, 166, 176],
+                [0.3, 168, 224, 220],
+                [0.37, 240, 250, 252],
+                [0.45, 176, 200, 244],
+                [0.53, 96, 108, 190],
+                [0.61, 62, 52, 128],
+                [0.69, 30, 26, 72],
+                [0.77, 74, 28, 62],
+                [0.85, 140, 52, 54],
+                [0.92, 206, 116, 54],
+                [0.97, 236, 176, 78],
+                [1, 244, 214, 150]
             ],
-            edgeLow: [150, 178, 196],
-            rimHot: [214, 232, 244],
-            tone: { bands: 12, bandDepth: 0.46, hueCycle: 0.30, chroma: 1.22, sat: 0.72 }
+            edgeLow: [214, 240, 250],
+            rimHot: [246, 252, 255],
+            tone: { bands: 1, bandDepth: 0.06 }
         },
         // A prime minute: an Apollonian packing, circles inside circles, with
         // the only mint rim in the set.
@@ -384,9 +403,9 @@
         even: {
             kind: 'julia', floor: 0.10,
             lift: [0.996, -0.036, 0.126, -0.017],
-            // A long hue turn paired with a gentle push: the interference lace
-            // arrives in several hues at a muted chroma, rather than one copper.
-            rimTurn: 1.0, rimPush: 1.55
+            // The palette is traversed once, so depth reads as the reference
+            // plates do: dark, then maroon, gold, ice, and back down the blues.
+            cycles: 1
         },
         // A circle packing: every inversion step puts the point inside a smaller
         // tangent circle, and the gap it finally lands in is the figure. The
@@ -415,7 +434,7 @@
             kind: 'ship', scale: 0.042, cx: -1.755, cy: -0.028,
             tail: 90, bend: 0.18, stretch: 0.06, hinge: 0, inner: 0.34,
             floor: 0.10, lift: [1.073, 0.103, 0.018, -0.010],
-            rimTurn: 0.9, rimPush: 1.55
+            cycles: 1
         },
         septile: { kind: 'newton', scale: 0.8, cx: 0, cy: 0 },
         // A standing wave on a square plate: the bright curves are the nodal
@@ -1489,6 +1508,10 @@
             // the turn itself, so a variant can carry many hues while staying
             // muted: the two escape-time sets want variety, not saturation.
             'const float TINT_PUSH = ' + f(rimPushFor(figure)) + ';',
+            // How many times the ramp repeats across the field. One is a single
+            // dark-to-pale journey; more than one cycles the palette, which is
+            // what gives the escape-time sets their bands of separate hues.
+            'const float CYCLES = ' + f(figure.cycles || 1) + ';',
             '',
             // Screen blending, per channel: the fog and the edges each keep
             // their own weight where two layers cross.
@@ -1578,7 +1601,8 @@
             // rather than as a thin tint of the blue beside it.
             '    float mask = clamp(fog * 0.62 + rim * 1.25, 0.0, 1.0);',
             '    float alpha = max(pow(mask, 0.92), rim * 0.92) * vFade * vFadeLate * hFade;',
-            '    float index = floor(clamp(fog, 0.0, 1.0) * 255.0 + 0.5);',
+            '    float cycleAt = clamp(fog, 0.0, 1.0) * CYCLES;',
+            '    float index = floor((cycleAt - floor(cycleAt)) * 255.0 + 0.5);',
             '    vec3 color = texture2D(uRamp, vec2((index + 0.5) / 256.0, 0.5)).rgb;',
             // The rim's own hue turns with the field's value and, a little,
             // across the band: a filament at one depth arrives in a different
@@ -2625,6 +2649,7 @@
         const edgeLow = active.edgeLow;
         const rimHot = active.rimHot;
         const rimTurn = active.figure.rimTurn || 0;
+        const cycles = active.figure.cycles || 1;
 
         for (let x = 0; x < width; x += 1) {
             const u = x * invW;
@@ -2636,7 +2661,8 @@
             const edge = edgeOf;
 
             const hFade = Math.min(1, u / 0.14, (1 - u) / 0.14);
-            const index = Math.round(Math.min(1, fog) * 255) * 3;
+            const cycleAt = Math.min(1, fog) * cycles;
+            const index = Math.round((cycleAt - Math.floor(cycleAt)) * 255) * 3;
             const offset = (offsetY + x) * 4;
             const rim = edge;
             const mask = Math.max(
