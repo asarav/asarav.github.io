@@ -354,15 +354,17 @@
                 [0.2, 54, 54, 96],
                 [0.28, 74, 74, 120],
                 [0.4, 52, 52, 86],
-                [0.55, 96, 106, 152],
-                [0.75, 132, 146, 196],
-                [1, 158, 178, 224]
+                [0.55, 104, 116, 164],
+                [0.75, 150, 166, 212],
+                [1, 182, 200, 240]
             ],
             // A chromatic pair rather than near-white: with a hue that turns by
             // depth, the walls of the ten basins read in different colours, which
             // a silver rim could not do.
-            edgeLow: [176, 198, 244],
-            rimHot: [198, 214, 250],
+            // Lifted, because a wide chroma push clips the darker of the turned
+            // hues and the picture reads dimmer than its measured luma.
+            edgeLow: [206, 226, 252],
+            rimHot: [222, 236, 254],
             tone: { bands: 16, bandDepth: 0.52, hueCycle: 0.46, chroma: 1.55 }
         },
         // A power of two: a cellular tessellation, every cell a lit pane with
@@ -429,7 +431,7 @@
             // A wide arc, with its own chroma push so the width does not turn
             // into saturation, and a turn keyed to the rim's strength so the
             // basins differ from one another and not only left to right.
-            rimTurn: 5.4, rimPush: 2.6, rimWobble: 2.8
+            rimTurn: 5.4, rimPush: 2.2, rimWobble: 2.8
         },
         // Families whose own dynamics change shape inside a fixed frame: the
         // parameter lives in the map, not in the window, so nothing has to
