@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Aristotle (Metaphysics I.1)
             "Πάντες ἄνθρωποι τοῦ εἰδέναι ὀρέγονται φύσει. — Ἀριστοτέλης",
             // Spinoza (Tractatus Politicus I.4)
-            "Non ridere, non lugere, neque detestari, sed intelligere. — Spinoza",
+            "Humanas actiones non ridere, non lugere, neque detestari, sed intelligere. — Spinoza",
             // Hegel (Philosophy of Right, preface)
             "Die Eule der Minerva beginnt erst mit der einbrechenden Dämmerung ihren Flug. — Hegel",
             // Wittgenstein (Tractatus Logico-Philosophicus 5.6)
@@ -131,12 +131,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Vladimir Nabokov (Speak, Memory)
             "The cradle rocks above an abyss, and common sense tells us that our existence is but a brief crack of light between two eternities of darkness. — Vladimir Nabokov",
             // Rainer Maria Rilke (Duino Elegies, the First)
-            "Denn das Schöne ist nichts als des Schrecklichen Anfang. — Rainer Maria Rilke",
+            "Denn das Schöne ist nichts als des Schrecklichen Anfang, den wir noch grade ertragen. — Rainer Maria Rilke",
             // Samuel Beckett (Worstward Ho)
             "Try again. Fail again. Fail better. — Samuel Beckett",
             // Fernando Pessoa (Tabacaria)
             "Não sou nada. Nunca serei nada. Não posso querer ser nada. À parte isso, tenho em mim todos os sonhos do mundo. — Fernando Pessoa",
-            // Herman Melville (Moby-Dick)
+            // Herman Melville (Moby-Dick, chapter 12)
             "It is not down in any map; true places never are. — Herman Melville",
             // Isaac Newton (letter to Robert Hooke, 1675)
             "If I have seen further it is by standing on the shoulders of Giants. — Isaac Newton",
@@ -150,8 +150,10 @@ document.addEventListener('DOMContentLoaded', function () {
             "知是行之始，行是知之成。 — 王陽明",
             // Pierre-Simon de Laplace (Essai philosophique sur les probabilités)
             "La théorie des probabilités n'est au fond que le bon sens réduit au calcul. — Pierre-Simon de Laplace",
-            // Emil Cioran (De l'inconvénient d'être né)
-            "La lucidité est la blessure la plus rapprochée du soleil. — Emil Cioran",
+            // René Char (Feuillets d'Hypnos)
+            "La lucidité est la blessure la plus rapprochée du soleil. — René Char",
+            // Emil Cioran (Aveux et anathèmes)
+            "On n'habite pas un pays, on habite une langue. Une patrie, c'est cela et rien d'autre. — Emil Cioran",
             // Marcel Proust (Le Temps retrouvé)
             "Les vrais paradis sont les paradis qu'on a perdus. — Marcel Proust",
         ];
