@@ -367,9 +367,9 @@
         },
         // A circle packing: every inversion step puts the point inside a smaller
         // tangent circle, and the gap it finally lands in is the figure. The
-        // phase bends the disk through a Möbius map, so the three blobs come out
-        // unequal, the hole leaves the centre and the hierarchy reflows around
-        // them while every circle stays a circle and every tangency survives.
+        // phase bends the disk through a Möbius map held on one direction, so
+        // the blobs come out unequal and the hierarchy reflows in place; a pole
+        // that swung round the disk was what made this read as a pan.
         prime: { kind: 'apollonian', scale: 1.0, cx: 0, cy: 0 },
         // A Sierpiński lattice: the cell that is cut away at each level keeps
         // its own lit rim. With the phase the hole in that cell changes radius,
@@ -823,18 +823,21 @@
     // how deeply it sits in the packing, and the distance to the nearest circle
     // at that moment draws the rim.
     //
-    // The ring is fixed: three circles about the hole, at the one radius that
-    // makes each tangent to the hole, to its neighbours and to the outer circle.
-    // The phase deforms the packing through a Möbius automorphism of the disk —
-    // the maps that take the disk onto itself — which is the one family of
-    // deformations under which a circle packing stays a circle packing. Every
-    // circle goes to a circle and every tangency survives, so the inversions
-    // still end in a gap, but the three blobs come out unequal, the hole drifts
-    // off centre, and every level of the hierarchy reflows around them.
+    // Three circles sit about the hole, at the radius that makes each tangent to
+    // the hole, to its neighbours and to the outer circle; the inversions
+    // through them and through the disk are what draw the hierarchy. That ring is
+    // rigid — three circles tangent to a common hole and to the disk can only be
+    // equal — so the phase cannot re-proportion it without breaking tangency, and
+    // the morph is a Möbius bend of the disk, which keeps every tangency and
+    // reflows the sizes. The bend's pole is held on one direction: a pole that
+    // travelled round the disk was the pan.
     function apollonianFigure(figure) {
         return [
             'vec2 shadeAt(vec2 p) {',
             '    float mo = uMorph * 2.0 - 1.0;',
+            // Three equal circles sit about the hole at the radius that makes
+            // each tangent to the hole, to its neighbours and to the disk; the
+            // inversions through them and the disk are what draw the hierarchy.
             '    float theta = 3.14159265 / 3.0;',
             '    float rb = 1.0 / cos(theta);',
             '    float side = tan(theta);',
@@ -843,16 +846,13 @@
             '    float side2 = side * side;',
             '    vec2 q = p * ' + f(figure.scale) + ' + vec2(' +
                 f(figure.cx) + ', ' + f(figure.cy) + ');',
-            // A Möbius automorphism of the disk, its pole swinging round with
-            // the phase. It sends every circle to a circle and keeps every
-            // tangency, so what is drawn is still a packing — but the three
-            // blobs come out of it unequal, the hole leaves the centre, and the
-            // hierarchy above them reflows. At |a| = 0.34 the near side of the
-            // packing comes out about twice the far side, so the blobs change
-            // size and place rather than the pattern changing scale.
-            '    float amp = abs(mo) * 0.28;',
-            '    float phi = mo * 1.3;',
-            '    vec2 pole = vec2(cos(phi), sin(phi)) * amp;',
+            // A Möbius bend of the disk. Every circle goes to a circle and every
+            // tangency survives, so it is still the same packing — but the blobs
+            // come out unequal and the hierarchy above them reflows, and with
+            // the pole held on one direction the bend breathes in place. A pole
+            // that travelled round was what made this read as a pan.
+            '    float amp = mo * 0.28;',
+            '    vec2 pole = vec2(amp, 0.0);',
             '    vec2 z = q / rOut;',
             '    q = (z + pole) / (1.0 + dot(pole, z)) * rOut;',
             '    float near = 1.0e9;',
@@ -864,7 +864,6 @@
             '        float p2 = max(dot(q, q), 1.0e-12);',
             '        float dev = p2 - rIn * rIn;',
             '',
-            // The two coaxial circles of the cell.
             '        if (dev > 0.0) {',
             '            level = min(level, abs(dev) / (2.0 * rIn));',
             '        } else {',
@@ -883,7 +882,6 @@
             '            }',
             '        }',
             '',
-            // The ring of tangent circles around them.
             '        if (!hit) {',
             '            for (int i = 0; i < 3; i += 1) {',
             '                float ang = 2.0 * float(i) * theta;',
@@ -902,8 +900,6 @@
             '            }',
             '        }',
             '',
-            // The first level with no circle to invert through is the gap the
-            // point occupies: its distance to the nearest circle draws the rim.
             '        near = level;',
             '',
             '        if (!hit) {',
@@ -2237,16 +2233,13 @@
             const rIn = rb - side;
             const rOut = rb + side;
             const side2 = side * side;
-            // The same Möbius automorphism the shader bends the packing with.
-            const amp = Math.abs(morphM) * 0.28;
-            const phi = morphM * 1.3;
-            const poleX = Math.cos(phi) * amp;
-            const poleY = Math.sin(phi) * amp;
+            // The same fixed-direction Möbius bend the shader applies.
+            const amp = morphM * 0.28;
             const zx = qx / rOut;
             const zy = qy / rOut;
-            const den = 1 + poleX * zx + poleY * zy;
-            let px = (zx + poleX) / den * rOut;
-            let py = (zy + poleY) / den * rOut;
+            const den = 1 + amp * zx;
+            let px = (zx + amp) / den * rOut;
+            let py = zy / den * rOut;
             let near = 1e9;
             let depth = 0;
 
