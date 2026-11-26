@@ -403,7 +403,7 @@
         // second solution swings geometrically as well, so the cells between
         // the curves merge and split as the plate turns over.
         quintile: {
-            kind: 'nodal', scale: 0.62, cx: 0, cy: 0,
+            kind: 'nodal', scale: 0.95, cx: 0, cy: 0,
             n: 6, m: 9, dn: 2.2, dm: -2.2, n2: 11, m2: 5, sway: 0.85
         },
         // A cellular tessellation: one seed per cell, each wandering inside its
@@ -699,11 +699,12 @@
             '        cos(' + f(figure.m2) + ' * 3.14159265 * q.y);',
             '    float s = a - b * weight;',
             '    float v = abs(s) * (2.0 / (1.0 + weight));',
+
             // The line itself, and the glow that falls away from it: the plate
             // is glass, so the nodal curve reads as an etched edge against a
             // faintly lit cell rather than as a hard stroke.
-            '    float node = 1.0 / (1.0 + v * 70.0);',
-            '    float wash = 1.0 / (1.0 + v * 5.0);',
+            '    float node = 1.0 / (1.0 + v * 130.0);',
+            '    float wash = 1.0 / (1.0 + v * 6.0);',
             // The two sides of the plate are lit apart and the nodal curve
             // between them glows, so this reads as a plate of cells changing
             // hands, not as a drawing of lines on glass. `plate` is the sign of
@@ -712,7 +713,7 @@
             '    float plate = smoothstep(-0.04, 0.04, s);',
             '    float disc = (1.0 - smoothstep(0.93, 1.0, abs(q.x))) *',
             '                 (1.0 - smoothstep(0.93, 1.0, abs(q.y)));',
-            '    return vec2((0.05 + 0.17 * plate + 0.16 * wash +',
+            '    return vec2((0.05 + 0.20 * plate + 0.16 * wash +',
             '                0.26 * node) * disc,',
             '                max(node * 0.80, plate * 0.20) * disc);',
             '}'
@@ -955,11 +956,11 @@
             '        float cellPixels = 1.0 / (pixel * ' + f(figure.scale) +
                 ' * cells);',
             '',
-                            '        if (cellPixels < 4.0) {',
+                            '        if (cellPixels < 3.0) {',
             '            return vec2(0.10, 0.0);',
             '        }',
             '',
-            '        float width = clamp(1.3 / cellPixels, 0.014, 0.34);',
+            '        float width = clamp(1.1 / cellPixels, 0.012, 0.32);',
             // The hole wanders off its cell's centre, and the sign of that
             // wander flips level by level, so neighbouring rungs of the
             // hierarchy lean opposite ways.
@@ -2141,15 +2142,16 @@
                 Math.cos(figure.m2 * Math.PI * qy);
             const s = a - b * weight;
             const v = Math.abs(s) * (2 / (1 + weight));
-            const node = 1 / (1 + v * 70);
-            const wash = 1 / (1 + v * 5);
+
+            const node = 1 / (1 + v * 130);
+            const wash = 1 / (1 + v * 6.0);
             const plate = smoothstep(-0.04, 0.04, s);
             const disc = (1 - smoothstep(0.93, 1, Math.abs(qx))) *
                 (1 - smoothstep(0.93, 1, Math.abs(qy)));
 
             edgeOf = Math.max(node * 0.80, plate * 0.20) * disc;
 
-            return (0.05 + 0.17 * plate + 0.16 * wash + 0.26 * node) * disc;
+            return (0.05 + 0.20 * plate + 0.16 * wash + 0.26 * node) * disc;
         }
 
         if (figure.kind === 'cellular') {
@@ -2331,13 +2333,13 @@
                 const localY = uy - cellY;
                 const cellPixels = 1 / (fallbackPixel * figure.scale * cells);
 
-                if (cellPixels < 4) {
+                if (cellPixels < 3) {
                     edgeOf = 0;
 
                     return 0.10;
                 }
 
-                const width = Math.min(0.34, Math.max(0.014, 1.3 / cellPixels));
+                const width = Math.min(0.32, Math.max(0.012, 1.1 / cellPixels));
                 const lean = (i % 2) * 2 - 1;
                 const offX = drift * lean;
                 const offY = -offX;
