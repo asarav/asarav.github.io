@@ -427,7 +427,13 @@
         // A tenth-power Newton star: ten basins meeting at the centre, framed
         // off-centre on the lace of their walls rather than on one flat basin.
         decade: {
-            kind: 'newton10', scale: 0.72, cx: 0.05, cy: 0.62,
+            // Framed into the ring of walls rather than on the strip above them:
+            // at the old offset the band's lower half was empty sky, which reads as
+            // a dark figure no matter how its colour is tuned. The framing was
+            // chosen by scoring candidate crops for the share of the band taken by
+            // walls that crawl and still converge, so it fills with lace and not
+            // with the haze of points that never settle.
+            kind: 'newton10', scale: 0.5, cx: 0.05, cy: 0.6,
             // A wide arc, with its own chroma push so the width does not turn
             // into saturation, and a turn keyed to the rim's strength so the
             // basins differ from one another and not only left to right.
